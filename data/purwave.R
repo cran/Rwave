@@ -1,0 +1,1 @@
+purwave <- scan("pure.dat")

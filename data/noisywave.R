@@ -1,0 +1,1 @@
+noisywave <- scan("noisy.dat")

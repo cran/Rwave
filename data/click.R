@@ -1,0 +1,1 @@
+click <- scan("click.asc")

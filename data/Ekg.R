@@ -1,0 +1,1 @@
+Ekg <- scan("HeartRate")

@@ -1,0 +1,1 @@
+HOWAREYOU <- scan("HOWAREYOU")

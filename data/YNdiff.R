@@ -1,0 +1,1 @@
+YNdiff <- scan("YenDiff")
