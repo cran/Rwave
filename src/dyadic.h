@@ -8,11 +8,6 @@
 ****************************************************************/
 
 
-
-
-
-
-
 /****************************************************************
 * Type Definition           
 ****************************************************************/
@@ -33,9 +28,6 @@ typedef struct
   float W1f; /* W1f */
   float W2f; /* W2f */
 } image_ext;
-
-
-
 
 
 /* in mw.c
@@ -139,7 +131,7 @@ void extrema_reconst(char *filtername, float *f, float *extrema,
 /* in dualwavelet.c
    ---------------- */
 void signal_W_tilda(float ***W_tilda, float **W, float **K,
-  int max_resoln, int np);
+		    int max_resoln, int np);
 
 void signal_W_tilda_input(float ***W_tilda, int max_resoln, int np);
 

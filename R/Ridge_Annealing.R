@@ -77,12 +77,13 @@ corona <- function(tfrep, guess, tfspec = numeric(dim(tfrep)[2]),
 
 
   z <- .C("Smodulus_smoothing",
-        as.double(modulus),
-        smodulus = as.double(smodulus),
-	as.integer(sigsize),
-        smodsize = as.integer(smodsize),            
-        as.integer(nscale),
-        as.integer(subrate))
+          as.double(modulus),
+          smodulus = as.double(smodulus),
+          as.integer(sigsize),
+          smodsize = as.integer(smodsize),            
+          as.integer(nscale),
+          as.integer(subrate),
+           PACKAGE="Rwave")
 
   smodulus <- z$smodulus
   smodsize <- z$smodsize
@@ -95,21 +96,22 @@ corona <- function(tfrep, guess, tfspec = numeric(dim(tfrep)[2]),
   cat("dimension of smodulus",dim(smodulus),"\n")
 
    z <- .C("Sridge_annealing",
-	cost = as.single(cost),
-	as.double(smodulus),
-	phi = as.single(phi),
-	as.single(lambda),
-	as.single(mu),
-	as.single(temprate),
-	as.integer(sigsize),
-	as.integer(nscale),
-	as.integer(iteration),
-	as.integer(stagnant),
-	as.integer(seed),
-	nb = as.integer(count),
-	as.integer(subrate),
-	as.integer(costsub),
-        as.integer(smodsize))
+           cost = as.single(cost),
+           as.double(smodulus),
+           phi = as.single(phi),
+           as.single(lambda),
+           as.single(mu),
+           as.single(temprate),
+           as.integer(sigsize),
+           as.integer(nscale),
+           as.integer(iteration),
+           as.integer(stagnant),
+           as.integer(seed),
+           nb = as.integer(count),
+           as.integer(subrate),
+           as.integer(costsub),
+           as.integer(smodsize),
+           PACKAGE="Rwave")
 
   count <- z$nb
   cat("Number of iterations:",(count-1)*costsub,"(stagnant=",stagnant,")\n")
@@ -191,7 +193,8 @@ coronoid <- function(tfrep, guess, tfspec = numeric(dim(tfrep)[2]),
 	as.integer(sigsize),
         smodsize = as.integer(smodsize),            
         as.integer(nscale),
-        as.integer(subrate))
+        as.integer(subrate),
+           PACKAGE="Rwave")
 
   smodulus <- z$smodulus
   smodsize <- z$smodsize
@@ -217,7 +220,8 @@ coronoid <- function(tfrep, guess, tfspec = numeric(dim(tfrep)[2]),
 	nb = as.integer(count),
         as.integer(subrate),
 	as.integer(costsub),
-        as.integer(smodsize))
+        as.integer(smodsize),
+           PACKAGE="Rwave")
 
   count <- z$nb
   cat("Number of iterations:",(count-1)*costsub,"(stagnant=",stagnant,")\n")

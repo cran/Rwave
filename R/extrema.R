@@ -44,10 +44,11 @@ ext <- function(wt, scale=FALSE, plot=TRUE)
   dim(wt$Wf) <- c(length(wt$Wf), 1)
 
   z <- .C("modulus_maxima", 
-	a=as.single(extrema),
-	as.single(wt$Wf),
-	as.integer(maxresoln), 
-	as.integer(np) )
+          a=as.single(extrema),
+          as.single(wt$Wf),
+          as.integer(maxresoln), 
+          as.integer(np),
+           PACKAGE="Rwave")
 
   extrema <- t(z$a)
   dim(extrema) <- c(np, maxresoln)

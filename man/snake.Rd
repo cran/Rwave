@@ -11,7 +11,7 @@ snake method.
 snake(tfrep, guessA, guessB, snakesize=length(guessB),
 tfspec=numeric(dim(modulus)[2]), subrate=1, temprate=3, muA=1,
 muB=muA, lambdaB=2 * muB, lambdaA=2 * muA, iteration=1000000,
-seed=-7, costsub=1, stagnant=20000, plot=T)
+seed=-7, costsub=1, stagnant=20000, plot=TRUE)
 }
 \arguments{
 \item{tfrep}{

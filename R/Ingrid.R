@@ -36,7 +36,8 @@ dw <- function(inputdata, maxresoln, scale=FALSE, NW=6, plot=TRUE)
           as.single(s),
           as.integer(NW),
           as.integer(maxresoln),
-          as.integer(np))
+          as.integer(np),
+           PACKAGE="Rwave")
   
   ## Convert vectors into original matrices
   phi <- t(z$phi)
@@ -57,7 +58,7 @@ ddw <- function(inputdata, maxresoln, scale=FALSE, NW=6)
 # resolution 1 to the given maximum resolution.  
 #*********************************************************************#
 {
-  if(! ((NW > 1) && (NW <11)))
+  if(! ((NW > 1) && (NW < 11)))
     stop("NW has to be between 2 and 10")
 
   x <- adjust.length(inputdata)
@@ -79,7 +80,8 @@ ddw <- function(inputdata, maxresoln, scale=FALSE, NW=6)
           as.single(s),
           as.integer(maxresoln),
           as.integer(np),
-          as.integer(NW))
+          as.integer(NW),
+           PACKAGE="Rwave")
   
   ## Convert vectors into original matrices
   phi <- t(z$phi)

@@ -49,7 +49,8 @@ tfgmax <- function(input, plot = TRUE)
            output = as.double(output),
            as.integer(sigsize),
            as.integer(pp),
-           pos = as.integer(posvector))
+           pos = as.integer(posvector),
+           PACKAGE="Rwave")
 
   output <- z$output
   pos <- z$pos
@@ -94,7 +95,8 @@ tflmax <- function(input, plot = TRUE)
            as.double(input1),
            output = as.double(output),
            as.integer(sigsize),
-           as.integer(pp))
+           as.integer(pp),
+           PACKAGE="Rwave")
 
   output <- z$output
   dim(output) <- c(sigsize, pp)

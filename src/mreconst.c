@@ -11,8 +11,6 @@
 #include "Swave.h"
 #include "dyadic.h"
 
-
-
 /****************************************************************
 *  Function: signal_penalty_function:
 *  ----------------------------------
@@ -183,36 +181,37 @@ void extrema_reconst(char *filtername, float *f, float *extrema,
   float *lambda;
   int num_of_extrema, j;
   
-  signal_W_S(&W,&S,max_resoln,np); 
-
+  signal_W_S(&W, &S, max_resoln, np); 
+  
   if(!readfileflag) {
-    signal_K_compute(&K,W,max_resoln,np); 
+    signal_K_compute(&K, W, max_resoln, np); 
     printf("K "); 
     signal_W_tilda(&W_tilda, W, K, max_resoln,np);    
     printf("W ");
   }
   else {
-    signal_W_tilda_input(&W_tilda,max_resoln,np);   
+    signal_W_tilda_input(&W_tilda, max_resoln, np);   
   }
-
+  
   extrema_input(extrema,max_resoln,np,&ext,&num_of_extrema); 
-  signal_position(filtername,&lambda,ext,W_tilda,W,num_of_extrema,max_resoln,np);   
-
-  signal_penalty_function(f,lambda,W_tilda,ext,num_of_extrema,np );    
+  signal_position(filtername,&lambda,ext,W_tilda,W,num_of_extrema,
+		  max_resoln,np);   
+  
+  signal_penalty_function(f,lambda,W_tilda,ext,num_of_extrema,np);    
 
   free( lambda );
   free( ext );
-/*
-  for ( j = 0; j <= max_resoln; j++ )  {
+  /*
+    for ( j = 0; j <= max_resoln; j++ )  {
     free( W[j] );
     free S[j] );
     free( W_tilda[j] );
-  }
-  free( W );
-  free( S );
-  free( W_tilda );
-  return;
-*/
+    }
+    free( W );
+    free( S );
+    free( W_tilda );
+    return;
+  */
 }
 
 

@@ -52,7 +52,8 @@ smoothwt <- function(modulus, subrate, flag = FALSE)
           as.integer(sigsize),
           as.integer(nscale),
           as.integer(subrate),
-          as.integer(flag))
+          as.integer(flag),
+          PACKAGE="Rwave")
 
   if(flag)
    dim(z$sm) <- c(sigsize, nscale)
@@ -84,7 +85,8 @@ smoothts <- function(ts, windowsize)
            as.integer(sigsize),
            stssize = as.integer(stssize),            
            as.integer(nscale),
-           as.integer(subrate))
+           as.integer(subrate),
+           PACKAGE="Rwave")
 
   sts <- z$sts
   sts

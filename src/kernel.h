@@ -15,32 +15,30 @@
 #include <string.h>
 #include <stdlib.h>
 #include <math.h>
+
+#ifndef Macintosh
 #include <sys/file.h>
 #include <sys/types.h>
+#endif
+
 #include <time.h>
+
+#ifndef Macintosh
 #include <sys/time.h>
 #include <malloc.h>
+#endif
 
 #define YES 1
 #define NO 0
 
-
 #define MAX( a, b ) 	( (a) > (b) ? (a) : (b) )
 #define MIN( a, b ) 	( (a) < (b) ? (a) : (b) )
 
-
 #define STRING_SIZE 256
-
-
-
-
 
 /**************************************************************************
 Function declarations:
 **************************************************************************/
-
-
-
 
 /* In kernel.c
    ----------*/
@@ -70,8 +68,6 @@ fcomplex psi(double x,double w0);
 
 fcomplex psiprime(double x,double w0);
 
-
-
 /* In gkernel.c
    -----------*/
 double gintegrand(double b,int x,int y,double *p2,double *nodes,
@@ -92,19 +88,15 @@ void ghermite_sym(double *ker,int lng);
 double  gprime(double x,double scale);
 
 
-
 /* In splint2.c
    ------------*/
 void splint2(double xa[], double ya[], double y2a[], int n, 
 	     double x, double *y, double *yp);
 
-
 /* In spline.c
    -----------*/
 void spline(double x[], double y[], int n, double yp1, double ypn,
 	    double y2[]);
-
-
 
 /* In compinteg.c
    --------------*/
@@ -130,8 +122,3 @@ double gtrapzdmod(int x, int y, double *p2, double *nodes, double *phi_nodes,
 		  int n);
 
 void polint(double xa[], double ya[], int n, double x, double *y, double *dy);
-
-
-
-
-

@@ -59,7 +59,8 @@ cgt <- function(input, nvoice, freqstep = (1/nvoice),
             as.integer(nvoice),
 	    as.single(freqstep),
             as.integer(newsize),
-            as.single(scale))
+            as.single(scale),
+           PACKAGE="Rwave")
 
    Routput <- z$Rtmp
    Ioutput <- z$Itmp
@@ -117,7 +118,8 @@ vgt <- function(input, frequency, scale, plot = FALSE)
             Itmp = as.double(Ioutput),
             as.single(frequency),
             as.integer(newsize),
-            as.single(scale))
+            as.single(scale),
+           PACKAGE="Rwave")
 
    Routput <- z$Rtmp
    Ioutput <- z$Itmp
@@ -162,7 +164,8 @@ gabor <- function(sigsize, location, frequency, scale)
             as.integer(location),
             gabor.r = as.double(gabor.r),
             gabor.i = as.double(gabor.i),
-            as.integer(sigsize))
+            as.integer(sigsize),
+           PACKAGE="Rwave")
 
    i <- sqrt(as.complex(-1))
 
@@ -199,13 +202,14 @@ vecgabor <- function(sigsize, nbnodes, location, frequency, scale)
 
 
    z <- .C("vgabor_time",
-            as.single(frequency),
-            as.single(scale),
-            as.integer(location),
-            gabor.r = as.double(gabor.r),
-            gabor.i = as.double(gabor.i),
-            as.integer(sigsize),
-            as.integer(nbnodes))
+           as.single(frequency),
+           as.single(scale),
+           as.integer(location),
+           gabor.r = as.double(gabor.r),
+           gabor.i = as.double(gabor.i),
+           as.integer(sigsize),
+           as.integer(nbnodes),
+           PACKAGE="Rwave")
 
    i <- sqrt(as.complex(-1))
 

@@ -100,20 +100,21 @@ pcacrc <- function(tfrep, tfspec = numeric(dim(tfrep)[2]), grida = 10,
    dim(sqmodulus) <- c(sigsize * nscale, 1)
 
    z <- .C("Spointmap",
-	as.double(sqmodulus),
-        as.integer(sigsize),
-	as.integer(nscale),
-	as.integer(gridb),
-	as.integer(grida),
-	as.integer(nbblock),
-	as.integer(nbpoint),
-        pointmap = as.integer(pointmap),
-	tst =as.single(tst),
-	as.integer(tstsize),
-	as.integer(count),
-	as.integer(seed),
-        as.integer(flag.cwt),
-        as.integer(nvoice))
+           as.double(sqmodulus),
+           as.integer(sigsize),
+           as.integer(nscale),
+           as.integer(gridb),
+           as.integer(grida),
+           as.integer(nbblock),
+           as.integer(nbpoint),
+           pointmap = as.integer(pointmap),
+           tst = as.single(tst),
+           as.integer(tstsize),
+           as.integer(count),
+           as.integer(seed),
+           as.integer(flag.cwt),
+           as.integer(nvoice),
+           PACKAGE="Rwave")
   
    pointmap <- z$pointmap
    tst <- z$tst
@@ -278,19 +279,20 @@ pcacrc <- function(tfrep, tfspec = numeric(dim(tfrep)[2]), grida = 10,
    dim(pcamap) <- c(nscale * sigsize, 1)
      
    z <- .C("Spca_annealing",
-        as.double(sqmodulus),
-        beemap= as.double(beemap),
-	as.integer(pcamap),
-        as.single(rate),
-	as.integer(sigsize),
-        as.integer(nscale),
-        as.integer(iteration),
-	as.integer(seed),
-        as.integer(bstep),
-        as.integer(nbclimb),
-	as.integer(flag.int),
-	as.integer(chain),
-	as.integer(flag.temp))
+           as.double(sqmodulus),
+           beemap= as.double(beemap),
+           as.integer(pcamap),
+           as.single(rate),
+           as.integer(sigsize),
+           as.integer(nscale),
+           as.integer(iteration),
+           as.integer(seed),
+           as.integer(bstep),
+           as.integer(nbclimb),
+           as.integer(flag.int),
+           as.integer(chain),
+           as.integer(flag.temp),
+           PACKAGE="Rwave")
 
    beemap <- z$beemap
    dim(beemap) <- c(sigsize, nscale)
@@ -346,16 +348,17 @@ pcafamily <-function(pcaridge,orientmap,
 	
    
    z <- .C("Spca_family",
-        as.double(pcaridge),
-        as.integer(orientmap),
-        orderedmap = as.single(orderedmap),
-	chain = as.integer(chain),
-	chainnb = as.integer(nbchain),
-	as.integer(sigsize),
-        as.integer(nscale),
-        as.integer(bstep),
-	as.single(threshold),
-	as.integer(maxchnlng))
+           as.double(pcaridge),
+           as.integer(orientmap),
+           orderedmap = as.single(orderedmap),
+           chain = as.integer(chain),
+           chainnb = as.integer(nbchain),
+           as.integer(sigsize),
+           as.integer(nscale),
+           as.integer(bstep),
+           as.single(threshold),
+           as.integer(maxchnlng),
+           PACKAGE="Rwave")
 	
    orderedmap <- z$orderedmap
    chain <- z$chain
@@ -382,11 +385,12 @@ pcamaxima <- function(beemap,orientmap)
    dim(tfmaxima) <- c(nscale * sigsize, 1)   
 
    z <- .C("Stf_pcaridge",
-        as.double(beemap),
-        tfmaxima = as.double(tfmaxima),
-	as.integer(sigsize),
-        as.integer(nscale),
-        as.integer(orientmap))
+           as.double(beemap),
+           tfmaxima = as.double(tfmaxima),
+           as.integer(sigsize),
+           as.integer(nscale),
+           as.integer(orientmap),
+           PACKAGE="Rwave")
 	
    tfmaxima <- z$tfmaxima
    dim(tfmaxima) <- c(sigsize,nscale)   

@@ -60,12 +60,13 @@ icm <- function(modulus, guess, tfspec = numeric(dim(modulus)[2]),
 
   if (subrate != 1){
   z <- .C("Smodulus_smoothing",
-        as.double(modulus),
-        smodulus = as.double(smodulus),
-	as.integer(sigsize),
-        smodsize = as.integer(smodsize),            
-        as.integer(nscale),
-        as.integer(subrate))
+          as.double(modulus),
+          smodulus = as.double(smodulus),
+          as.integer(sigsize),
+          smodsize = as.integer(smodsize),            
+          as.integer(nscale),
+          as.integer(subrate),
+           PACKAGE="Rwave")
   
   smodulus <- z$smodulus
   smodsize <- z$smodsize
@@ -78,17 +79,18 @@ icm <- function(modulus, guess, tfspec = numeric(dim(modulus)[2]),
   dim(smodulus) <- c(smodsize * nscale, 1)
 
   z <- .C("Sridge_icm",
-        cost = as.single(cost),
-        as.double(smodulus),
-        phi = as.single(phi),
-        as.single(lambda),
-	as.single(mu),
-	as.integer(sigsize),
-        as.integer(nscale),
-        as.integer(iteration),
-	nb = as.integer(count),
-        as.integer(subrate),
-        as.integer(smodsize))
+          cost = as.single(cost),
+          as.double(smodulus),
+          phi = as.single(phi),
+          as.single(lambda),
+          as.single(mu),
+          as.integer(sigsize),
+          as.integer(nscale),
+          as.integer(iteration),
+          nb = as.integer(count),
+          as.integer(subrate),
+          as.integer(smodsize),
+           PACKAGE="Rwave")
 
   count <- z$nb
   cat("Number of iterations:",count,"\n")

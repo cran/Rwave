@@ -1,1 +1,1 @@
-YNdiff <- scan("YenDiff", quiet=TRUE)
+YNdiff <- scan("yendiff", quiet=TRUE)

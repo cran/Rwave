@@ -65,7 +65,7 @@ mw <- function(inputdata,maxresoln,filtername="Gaussian1",scale=FALSE,
   Sf <- matrix(0, nrow=(maxresoln+1), ncol=np)
   Wf <- matrix(0, nrow=maxresoln, ncol=np)  
 
-  # Convert a matrix maxresoln by np matrix into a vector
+  ## Convert a matrix maxresoln by np matrix into a vector
   Sf <- t(Sf)
   dim(Sf) <- c(length(Sf),1)
   Wf <- t(Wf)
@@ -76,19 +76,21 @@ mw <- function(inputdata,maxresoln,filtername="Gaussian1",scale=FALSE,
 	as.single(s), 
 	as.integer(maxresoln), 
 	as.integer(np),
-	as.character(filtername))
+	as.character(filtername),
+           PACKAGE="Rwave")
 
   z <- .C("Wf_compute",
 	Wf=as.single(Wf),
 	as.single(y$Sf),
 	as.integer(maxresoln),
 	as.integer(np),
-	as.character(filtername))
+	as.character(filtername),
+           PACKAGE="Rwave")
 
-  # Convert the vectors into the original matrix
+  ## Convert the vectors into the original matrix
   Sf <- t(y$Sf)
 
-  Sf <- Sf[(maxresoln*np+1): ((maxresoln+1)*np)]
+  Sf <- Sf[(maxresoln*np+1):((maxresoln+1)*np)]
 
   Wf <- t(z$Wf)
   dim(Wf) <- c(np, maxresoln)

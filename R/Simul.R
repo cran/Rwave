@@ -23,12 +23,13 @@ mnpval <- function(inputdata, maxresoln, wl=128, scale=FALSE)
   dim(pval) <- c(length(pval), 1)
 
   z <- .C("normal_pval_compute",
-	a=as.single(pval),
-	as.single(s),
-	as.integer(maxresoln),
-	as.integer(np),
-	as.integer(num.of.windows),
-	as.integer(wl) )
+          a=as.single(pval),
+          as.single(s),
+          as.integer(maxresoln),
+          as.integer(np),
+          as.integer(num.of.windows),
+          as.integer(wl),
+           PACKAGE="Rwave")
 
   pval <- t(z$a)
   dim(pval) <- c(np, maxresoln)
@@ -58,7 +59,8 @@ mbpval <- function(inputdata, maxresoln, wl=128, scale=FALSE)
 	as.integer(maxresoln),
 	as.integer(np),
 	as.integer(num.of.windows),
-	as.integer(wl) )
+	as.integer(wl),
+           PACKAGE="Rwave")
 
   pval <- t(z$a)
   dim(pval) <- c(np, maxresoln)
@@ -86,7 +88,8 @@ mntrim <- function(extrema, scale=FALSE, prct=.95)
 	as.single(s),
 	as.integer(maxresoln),
 	as.integer(sample.size),
-	as.double(prct) )
+	as.double(prct),
+           PACKAGE="Rwave")
 
   nthresh <- z$a
 
@@ -124,7 +127,8 @@ mbtrim <- function(extrema, scale=FALSE, prct=.95)
 	as.single(s),
 	as.integer(maxresoln),
 	as.integer(sample.size),
-	as.double(prct) )
+	as.double(prct),
+           PACKAGE="Rwave")
 
   bthresh <- z$a
 

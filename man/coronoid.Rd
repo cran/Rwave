@@ -10,7 +10,7 @@ modified corona method (modified cost function).
 \usage{
 coronoid(tfrep, guess, tfspec=numeric(dim(tfrep)[2]), subrate=1,
 temprate=3, mu=1, lambda=2 * mu, iteration=1000000, seed=-7,
-stagnant=20000, costsub=1, plot=T)
+stagnant=20000, costsub=1, plot=TRUE)
 }
 \arguments{
 \item{tfrep}{

@@ -85,7 +85,8 @@ snake <- function(tfrep, guessA, guessB, snakesize = length(guessB),
 	as.integer(sigsize),
         smodsize = as.integer(smodsize),            
         as.integer(nscale),
-        as.integer(subrate))
+        as.integer(subrate),
+           PACKAGE="Rwave")
 
   smodulus <- z$smodulus
   smodsize <- z$smodsize
@@ -115,7 +116,8 @@ snake <- function(tfrep, guessA, guessB, snakesize = length(guessB),
 	nb = as.integer(count),
         as.integer(subrate),
 	as.integer(costsub),
-        as.integer(smodsize))
+        as.integer(smodsize),
+           PACKAGE="Rwave")
 
   count <- z$nb
   cat("Number of moves:",count,"(",stagnant," still steps)\n")
@@ -194,7 +196,8 @@ snakoid <- function(modulus, guessA, guessB, snakesize = length(guessB),
 	as.integer(sigsize),
         smodsize = as.integer(smodsize),            
         as.integer(nscale),
-        as.single(subrate))
+        as.single(subrate),
+           PACKAGE="Rwave")
 
   smodulus <- z$smodulus
   smodsize <- z$smodsize
@@ -224,7 +227,8 @@ snakoid <- function(modulus, guessA, guessB, snakesize = length(guessB),
 	nb = as.integer(count),
         as.integer(subrate),
 	as.integer(costsub),
-        as.integer(smodsize))
+        as.integer(smodsize),
+           PACKAGE="Rwave")
 
   count <- z$nb
   cat("Number of moves:",count,"(",stagnant," still steps)\n")

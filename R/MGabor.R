@@ -79,13 +79,14 @@ mcgt <- function(input, nvoice, freqstep = (1/nvoice), nscales = 10,
 # Compute Gabor transform
 # -----------------------
       z <- .C("Sgabor",
-            as.single(input),
-            Rtmp = as.double(Routput),
-            Itmp = as.double(Ioutput),
-            as.integer(nvoice),
-	    as.single(freqstep),
-            as.integer(newsize),
-            as.single(sca))
+              as.single(input),
+              Rtmp = as.double(Routput),
+              Itmp = as.double(Ioutput),
+              as.integer(nvoice),
+              as.single(freqstep),
+              as.integer(newsize),
+              as.single(sca),
+              PACKAGE="Rwave")
 
       Routput <- z$Rtmp
       Ioutput <- z$Itmp
@@ -96,28 +97,30 @@ mcgt <- function(input, nvoice, freqstep = (1/nvoice), nscales = 10,
 # ----------------------------------
       pexp <- as.double(2)
       z <- .C("Lpnorm",
-            ltwonorm = as.double(norm),
-	    as.double(pexp),
-            as.double(Routput),
-            as.double(Ioutput),
-            as.integer(newsize),
-            as.integer(nvoice))
-#    cat("l2 norm=",z$ltwonorm,"\n")
+              ltwonorm = as.double(norm),
+              as.double(pexp),
+              as.double(Routput),
+              as.double(Ioutput),
+              as.integer(newsize),
+              as.integer(nvoice),
+              PACKAGE="Rwave")
+      ## cat("l2 norm=",z$ltwonorm,"\n")
 
 # Normalize
 # ---------
       Routput <- Routput/z$ltwonorm
       Ioutput <- Ioutput/z$ltwonorm
 
-      if (crit == 0){
+      if(crit == 0) {
          z <- .C("entropy",
-            lpnorm = as.double(norm),
-            as.double(Routput),
-            as.double(Ioutput),
-            as.integer(newsize),
-            as.integer(nvoice))
-         if(tchatche){
-            cat("     scale=",sca,"; entropy=",z$lpnorm,"\n")
+                 lpnorm = as.double(norm),
+                 as.double(Routput),
+                 as.double(Ioutput),
+                 as.integer(newsize),
+                 as.integer(nvoice),
+                 PACKAGE="Rwave")
+         if(tchatche) {
+            cat("     scale=", sca, "; entropy=", z$lpnorm, "\n")
          }
 
          if (z$lpnorm < entoptnorm){
@@ -130,38 +133,36 @@ mcgt <- function(input, nvoice, freqstep = (1/nvoice), nscales = 10,
 
       else {
 
-# Compute L^p norm
-# ----------------
-         pexp <- as.double(crit)
-         z <- .C("Lpnorm",
-            lpnorm = as.double(norm),
-	    as.double(pexp),
-            as.double(Routput),
-            as.double(Ioutput),
-            as.integer(newsize),
-            as.integer(nvoice))
-         if(tchatche){
-            cat("     scale=",sca,"; l",pexp," norm=",z$lpnorm,"\n")
-         }
-
-         if (z$lpnorm > lpoptnorm){
-            lpoptnorm <- z$lpnorm
-            optsca <- sca
-            output <- Routput[1:isize,] + Ioutput[1:isize,] * i
-         }
-      optnorm <- lpoptnorm
+        ## Compute L^p norm
+        ## ----------------
+        pexp <- as.double(crit)
+        z <- .C("Lpnorm",
+                lpnorm = as.double(norm),
+                as.double(pexp),
+                as.double(Routput),
+                as.double(Ioutput),
+                as.integer(newsize),
+                as.integer(nvoice),
+                PACKAGE="Rwave")
+        if(tchatche) {
+          cat("     scale=", sca,"; l", pexp," norm=", z$lpnorm, "\n")
+        }
+        
+        if(z$lpnorm > lpoptnorm) {
+          lpoptnorm <- z$lpnorm
+          optsca <- sca
+          output <- Routput[1:isize,] + Ioutput[1:isize,] * i
+        }
+        optnorm <- lpoptnorm
       }
-   }
-
-   cat("   Optimal scale: ",optsca,"\n")
-
+    }
+   
+   cat("   Optimal scale: ", optsca, "\n")
+   
    if(plot) {
-      image(Mod(output),xlab="Time",ylab="Frequency")
-      title("Gabor Transform Modulus")
+     image(Mod(output), xlab="Time", ylab="Frequency")
+     title("Gabor Transform Modulus")
    }
-
+   
    output
-
 }
-
-

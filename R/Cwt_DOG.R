@@ -58,7 +58,8 @@ DOG <- function(input, noctave, nvoice = 1, moments, twoD = TRUE, plot = TRUE)
           as.integer(noctave),
           as.integer(nvoice),
           as.integer(newsize),
-          as.integer(moments))
+          as.integer(moments),
+           PACKAGE="Rwave")
   
   Routput <- z$Rtmp
   Ioutput <- z$Itmp
@@ -120,7 +121,8 @@ vDOG <- function(input, scale, moments)
           Itmp = as.double(Ioutput),
           as.single(scale),
           as.integer(newsize),
-          as.integer(moments))
+          as.integer(moments),
+           PACKAGE="Rwave")
   
   Routput <- z$Rtmp
   Ioutput <- z$Itmp

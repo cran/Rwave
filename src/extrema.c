@@ -11,8 +11,6 @@
 #include "Swave.h"
 #include "dyadic.h"
 
-
-
 /****************************************************************
 *  Function: modulus_maxima:
 *  -------------------------
@@ -58,8 +56,6 @@ void modulus_maxima(float *extrema, float *wt, int *resoln_ptr,
   }
   free( abs );
 }
-
-
 
 /****************************************************************
 *  Function: extrema_input:

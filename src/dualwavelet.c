@@ -10,8 +10,6 @@
 #include "Swave.h"
 #include "dyadic.h"
 
-
-
 /****************************************************************
 *  Function: signal_W_tilda:
 *  -------------------------
@@ -27,7 +25,7 @@
 
 
 void signal_W_tilda(float ***W_tilda, float **W, float **K,
-  int max_resoln, int np)
+		    int max_resoln, int np)
 {
   float *p, *b;
   int t, i, j;
@@ -88,12 +86,12 @@ void signal_W_tilda_input(float ***W_tilda, int max_resoln, int np)
 
 
   for(j = 1; j <= max_resoln; j++) {
-    filename_given(filename,"signal_W_tilda");
-    filename_inc(filename,j);
-    signal_tilda_adjust(&((*W_tilda)[j]),np,filename,4096);
+    filename_given(filename, "signal_W_tilda");
+    filename_inc(filename, j);
+    signal_tilda_adjust(&((*W_tilda)[j]), np, filename, 4096);
 
-    filename_given(filename,"W_tilda");
-    filename_inc(filename,j);
+    filename_given(filename, "W_tilda");
+    filename_inc(filename, j);
     output_signal((*W_tilda)[j], np, filename);
   }
 }

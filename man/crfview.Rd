@@ -7,7 +7,7 @@ Display chained ridges
 displays a family of chained ridges, output of \code{\link{cfamily}}.
 }
 \usage{
-crfview(beemap, twod=T)
+crfview(beemap, twod=TRUE)
 }
 \arguments{
 \item{beemap}{

@@ -56,14 +56,15 @@ cwtTh <- function(input, noctave, nvoice = 1, moments,
    dim(input) <- c(newsize,1)
 
    z <- .C("Scwt_thierry",
-            as.single(Re(input)),
-            as.single(Im(input)),
-            Rtmp = as.double(Routput),
-            Itmp = as.double(Ioutput),
-            as.integer(noctave),
-            as.integer(nvoice),
-            as.integer(newsize),
-            as.integer(moments))
+           as.single(Re(input)),
+           as.single(Im(input)),
+           Rtmp = as.double(Routput),
+           Itmp = as.double(Ioutput),
+           as.integer(noctave),
+           as.integer(nvoice),
+           as.integer(newsize),
+           as.integer(moments),
+           PACKAGE="Rwave")
 
    Routput <- z$Rtmp
    Ioutput <- z$Itmp
@@ -122,13 +123,14 @@ vwtTh <- function(input, scale, moments)
    dim(input) <- c(newsize,1)
 
    z <- .C("Svwt_Thierry",
-            as.single(Re(input)),
-            as.single(Im(input)),
-            Rtmp = as.double(Routput),
-            Itmp = as.double(Ioutput),
-            as.single(scale),
-            as.integer(newsize),
-            as.integer(moments))
+           as.single(Re(input)),
+           as.single(Im(input)),
+           Rtmp = as.double(Routput),
+           Itmp = as.double(Ioutput),
+           as.single(scale),
+           as.integer(newsize),
+           as.integer(moments),
+           PACKAGE="Rwave")
 
    Routput <- z$Rtmp
    Ioutput <- z$Itmp

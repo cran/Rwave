@@ -62,7 +62,8 @@ crc <- function(tfrep, tfspec = numeric(dim(tfrep)[2]), bstep = 3,
           as.integer(nbclimb),
           as.integer(flag.int),
           as.integer(chain),
-          as.integer(flag.temp))
+          as.integer(flag.temp),
+          PACKAGE="Rwave")
   
   beemap <- z$beemap
   dim(beemap) <- c(sigsize,nscale)   
@@ -116,7 +117,8 @@ cfamily <- function(ccridge, bstep = 1, nbchain = 100, ptile = 0.05)
           as.integer(sigsize),
           as.integer(nscale),
           as.integer(bstep),
-          as.single(threshold))
+          as.single(threshold),
+          PACKAGE="Rwave")
 	
   orderedmap <- z$orderedmap
   chain <- z$chain

@@ -99,9 +99,11 @@ cat("node at = ", node, "\n")
        Q2 <- 0
     else {
        if (fast == FALSE)
-         Q2 <- rkernel(node, phinode, nvoice, x.min = x.min,x.max = x.max,w0 = w0)
+         Q2 <- rkernel(node, phinode, nvoice, x.min = x.min,
+                       x.max = x.max,w0 = w0)
        else
-	 Q2 <- fastkernel(node, phinode, nvoice, x.min = x.min,x.max = x.max,w0 = w0)
+	 Q2 <- fastkernel(node, phinode, nvoice, x.min = x.min,
+                          x.max = x.max,w0 = w0)
      }
     cat(" kernel; ")
 
@@ -126,7 +128,7 @@ cat("node at = ", node, "\n")
      }
 
     tmp2 <- ridrec(cwtinput, node, phinode, noct, nvoice, Qinv,
-                            epsilon, np, w0 = w0, check = check, real = real)
+                   epsilon, np, w0 = w0, check = check, real = real)
 
 # 
 # Now perform the irregular sampling 
@@ -170,9 +172,11 @@ cat("node at = ", node, "\n")
        Q2 <- 0
     else {
        if (fast == FALSE)
-         Q2 <- rkernel(node, phinode, nvoice, x.min = x.min,x.max = x.max,w0 = w0)
+         Q2 <- rkernel(node, phinode, nvoice, x.min = x.min,
+                       x.max = x.max,w0 = w0)
        else
-	 Q2 <- fastkernel(node, phinode, nvoice, x.min = x.min,x.max = x.max,w0 = w0)
+	 Q2 <- fastkernel(node, phinode, nvoice, x.min = x.min,
+                          x.max = x.max,w0 = w0)
      }
     cat(" kernel; ")
 

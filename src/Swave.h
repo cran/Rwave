@@ -1,4 +1,3 @@
-
 /***********************************/
 /* Swave.h Some Basic include file */
 /***********************************/
@@ -8,10 +7,18 @@
 #include <string.h>
 #include <stdlib.h>
 #include <math.h>
+
+#ifndef Macintosh
 #include <sys/file.h>
 #include <sys/types.h>
+#endif
+
 #include <time.h>
+
+#ifndef Macintosh
 #include <sys/time.h>
+#endif
+
 /* #include <malloc.h> */
 
 #define YES 1
@@ -23,7 +30,6 @@
 #define max( a, b ) 	( (a) > (b) ? (a) : (b) )
 #define min( a, b ) 	( (a) < (b) ? (a) : (b) )
 #define inrange(inf,x,sup) ((inf) <= (x) && (x) <= (sup))
-
 
 /*****************************/
 /* Type Definition           */
@@ -37,6 +43,7 @@ typedef struct
 } bound;
 
 */
+
 /* structure of an image extrema used in point reconst */
 
 /* typedef struct
@@ -46,8 +53,8 @@ typedef struct
   int y; 
   float W1f; 
   float W2f; 
-} image_ext;*/
-
+} image_ext;
+*/
 
 extern double my_exp2();
 extern double my_log2();
@@ -60,11 +67,3 @@ extern int find2power();
 
 /* uniform random number generator */
 extern double urand_();
-
-
-
-
-
-
-
-

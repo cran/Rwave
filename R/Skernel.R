@@ -79,7 +79,8 @@ cat("x.inc = ",x.inc,"\n")
         as.integer(nbnode),
         as.double(w0),
         as.double(b.start),
-        as.double(b.end))
+        as.double(b.end),
+           PACKAGE="Rwave")
 
 
   ker.r <- z$ker.r
@@ -146,7 +147,8 @@ rkernel <- function(node, phinode, nvoice, x.inc = 1, x.min = node[1],
         as.integer(nbnode),
         as.double(w0),
         as.double(b.start),
-        as.double(b.end))
+        as.double(b.end),
+           PACKAGE="Rwave")
 
   ker <- z$ker
   dim(ker) <- c(lng, lng)
@@ -211,7 +213,8 @@ fastkernel <- function(node, phinode, nvoice, x.inc = 1, x.min = node[1],
         as.integer(nbnode),
         as.double(w0),
         as.double(b.start),
-        as.double(b.end))
+        as.double(b.end),
+           PACKAGE="Rwave")
 
 
   ker.r <- z$ker.r
@@ -306,7 +309,8 @@ gkernel <- function(node, phinode, freqstep, scale, x.inc = 1,
         as.integer(nbnode),
         as.double(scale),
         as.double(b.start),
-        as.double(b.end))
+        as.double(b.end),
+           PACKAGE="Rwave")
 
 
   ker <- z$ker
@@ -371,7 +375,8 @@ fastgkernel <- function(node, phinode, freqstep, scale, x.inc = 1,
         as.integer(nbnode),
         as.double(scale),
         as.double(b.start),
-        as.double(b.end))
+        as.double(b.end),
+           PACKAGE="Rwave")
 
 
   ker <- z$ker
