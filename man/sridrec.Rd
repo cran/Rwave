@@ -29,4 +29,3 @@ See discussions in the text of ``Practical Time-Frequency Analysis''.
 \code{\link{ridrec}}, \code{\link{gridrec}}.
 }
 \keyword{ts}
-\examples{

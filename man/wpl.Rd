@@ -24,4 +24,3 @@ dyadic wavelet transform (output of \code{\link{mw}}).
 \code{\link{mw}}, \code{\link{ext}},\code{\link{epl}}.
 }
 \keyword{ts}
-\examples{

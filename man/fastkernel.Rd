@@ -54,8 +54,7 @@ See discussions in the text of ``Practical Time-Frequency Analysis''.
 \keyword{ts}
 \examples{
 # The function is currently defined as
-function(node, phinode, nvoice, x.inc = 1, x.min = node[1], x.max = node[length(
-	node)], w0 = 2 * pi, plot = F)
+function(node, phinode, nvoice, x.inc = 1, x.min = node[1], x.max = node[length(node)], w0 = 2 * pi, plot = F)
 {
 #########################################################################
 #     fastkernel:   
@@ -88,7 +87,7 @@ function(node, phinode, nvoice, x.inc = 1, x.min = node[1], x.max = node[length(
 	dim(ker.r) <- c(lng * lng, 1)
 	dim(ker.i) <- c(lng * lng, 1)
 	phinode <- 2 * 2^(phinode/nvoice)
-	z <- .C(\code{\link{fastkernel},
+	z <- .C(fastkernel,
 		ker.r = as.double(ker.r),
 		ker.i = as.double(ker.i),
 		as.integer(x.min),
@@ -114,7 +113,6 @@ function(node, phinode, nvoice, x.inc = 1, x.min = node[1], x.max = node[length(
 		title("Matrix of the reconstructing kernel (modulus)")
 	}
 	ker
-}
-}
+}}
 %\keyword{~keyword}
 % Converted by Sd2Rd version 1.21.

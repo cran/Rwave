@@ -1,22 +1,22 @@
-A0		Transient signal
-A4		Transient signal
-amber7		Pixel from amber camara
-amber8		Pixel from amber camara
-amber9		Pixel from amber camara
-B0		Transient signal
-B4		Transient signal
-back1.000	Acoustic returns from natural underwater clutter
-back1.180	Acoustic returns from ...
-back1.220	Acoustic returns from an underwater metallic object
-C0		Transient signal
-C4		Transient signal
-ch		Chen's chirp
-click		Dolphin click data
-D0		Transient signal
-D4		Transient signal
-Ekg		Successive beat-to-beat intervals for a normal patient
-HOWAREYOU	Example of speech signal
-noisywave	Noisy gravitational wave
-purwave		Pure gravitational wave
-YN		Logarithms of the prices of a contract of Japanese yen
-YNdiff		Daily differences of YN
+A0                       Transient Signal
+A4                       Transient Signal
+B0                       Transient Signal
+B4                       Transient Signal
+C0                       Transient Signal
+C4                       Transient Signal
+D0                       Transient Signal
+D4                       Transient Signal
+Ekg                      Heart Rate Data
+HOWAREYOU                How Are You?
+YN                       Logarithms of the Prices of Japanese Yen
+YNdiff                   Daily differences of Japanese Yen
+amber7                   Pixel from Amber Camara
+amber8                   Pixel from Amber Camara
+amber9                   Pixel from Amber Camara
+back1.000                Acoustic Returns
+back1.180                Acoustic Returns
+back1.220                Acoustic Returns
+ch                       Chen's Chirp
+click                    Dolphin Click Data
+noisywave                Noisy Gravitational Wave
+purwave                  Pure Gravitational Wave

@@ -25,9 +25,9 @@ diagonal of the ``sampled'' \eqn{Q_1} term (1D vector)
 \details{
 }
 \references{
-See discussions in the text of "Time-Frequency Analysis''.
+See discussions in the text of ``Time-Frequency Analysis''.
 }
 \seealso{
-\code{\link{kernel}}, \code{\link{gkernel}.
+\code{\link{kernel}}, \code{\link{gkernel}}.
 }
 \keyword{ts}

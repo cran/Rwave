@@ -35,10 +35,9 @@ scale.
 \details{
 }
 \references{
-See discussions in the text of "Time-Frequency Analysis''.
+See discussions in the text of ``Time-Frequency Analysis''.
 }
 \seealso{
 \code{\link{plot.result}}, \code{\link{epl}}, \code{\link{wpl}}.
 }
 \keyword{ts}
-\examples{

@@ -28,4 +28,3 @@ See discussions in the text of ``Practical Time-Frequency Analysis''.
 \code{\link{mw}}, \code{\link{mrecons}}.
 }
 \keyword{ts}
-\examples{

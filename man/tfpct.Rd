@@ -33,4 +33,3 @@ See discussions in the text of ``Practical Time-Frequency Analysis''.
 \code{\link{tfmean}},\code{\link{tfvar}}.
 }
 \keyword{ts}
-\examples{

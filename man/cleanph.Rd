@@ -32,4 +32,3 @@ See discussion in text of ``Practical Time-Frequency Analysis''.
 \seealso{
 }
 \keyword{ts}
-\examples{

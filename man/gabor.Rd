@@ -34,4 +34,3 @@ See discussions in the text of ``Practical Time-Frequency Analysis''.
 \code{\link{morlet}}.
 }
 \keyword{ts}
-\examples{

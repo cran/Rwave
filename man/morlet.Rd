@@ -40,4 +40,3 @@ See discussions in the text of ``Practical Time-Frequency Analysis''.
 \code{\link{gabor}}.
 }
 \keyword{ts}
-\examples{

@@ -23,4 +23,3 @@ number of plots.
 \seealso{
 }
 \keyword{ts}
-\examples{

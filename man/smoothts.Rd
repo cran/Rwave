@@ -22,9 +22,8 @@ Smoothed time series (1D array).
 \details{
 }
 \references{
-See discussions in the text of "Time-Frequency Analysis''.
+See discussions in the text of ``Time-Frequency Analysis''.
 }
 \seealso{
 }
 \keyword{ts}
-\examples{

@@ -56,4 +56,3 @@ See discussions in the text of ``Practical Time-Frequency Analysis''.
 \code{\link{dwinverse}}, \code{\link{mrecons}}, \code{\link{ext}}.
 }
 \keyword{ts}
-\examples{

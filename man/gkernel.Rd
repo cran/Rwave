@@ -42,10 +42,10 @@ matrix of the \eqn{Q_2} kernel
 \details{
 }
 \references{
-See discussions in the text of "Time-Frequency Analysis''.
+See discussions in the text of ``Time-Frequency Analysis''.
 }
 \seealso{
 \code{\link{fastgkernel}}, \code{\link{kernel}}, \code{\link{rkernel}},
-\code{\link{fastkernel}, \code{\link{zerokernel}}.
+\code{\link{fastkernel}}, \code{\link{zerokernel}}.
 }
 \keyword{ts}

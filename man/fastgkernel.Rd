@@ -45,11 +45,10 @@ Uses trapezoidal rule (instead of Romberg's method) to evaluate
 the kernel.
 }
 \references{
-See discussions in the text of "Time-Frequency  Analysis''.
+See discussions in the text of ``Time-Frequency  Analysis''.
 }
 \seealso{
 \code{\link{gkernel}}, \code{\link{fastkernel}}, \code{\link{rkernel}},
-\code{\link{zerokernel}}.
-}
+\code{\link{zerokernel}}. 
+} 
 \keyword{ts}
-\examples{

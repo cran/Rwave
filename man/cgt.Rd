@@ -47,4 +47,3 @@ See discussion in text of ``Practical Time-Frequency Analysis''.
 freqstep must be less than 1/nvoice to avoid aliasing. freqstep=1/nvoice
 corresponds to the Nyquist limit.
 }
-\examples{

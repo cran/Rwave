@@ -29,4 +29,3 @@ See discussions in the text of ``Practical Time-Frequency Analysis''.
 \code{\link{crc}},\code{\link{cfamily}} for crazy climbers and corresponding chaining algorithms.
 }
 \keyword{ts}
-\examples{
