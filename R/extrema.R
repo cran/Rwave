@@ -54,7 +54,7 @@ ext <- function(wt, scale=FALSE, plot=TRUE)
   
   cat("number of extrema =", sum(extrema!=0), "\n")
 
-  if(plot)  plot.result(extrema, s, maxresoln, scale)
+  if(plot)  plotResult(extrema, s, maxresoln, scale)
 
     list(original=s,extrema=extrema,Sf=wt$Sf,maxresoln=maxresoln,np=np)
 }

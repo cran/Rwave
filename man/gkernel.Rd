@@ -9,7 +9,7 @@ and the matrix used in the reconstruction of the original signal.
 }
 \usage{
 gkernel(node, phinode, freqstep, scale, x.inc=1, x.min=node[1],
-x.max=node[length(node)], plot=F)
+x.max=node[length(node)], plot=FALSE)
 }
 \arguments{
 \item{node}{

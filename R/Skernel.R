@@ -18,7 +18,7 @@
 
 
 kernel <- function(node, phinode, nvoice, x.inc = 1, x.min = node[1],
-	x.max = node[length(node)], w0 = 2*pi, plot = F)
+	x.max = node[length(node)], w0 = 2*pi, plot = FALSE)
 #########################################################################
 #     kernel:   
 #     ------
@@ -90,7 +90,7 @@ cat("x.inc = ",x.inc,"\n")
   i <- sqrt(as.complex(-1))
   ker <- ker.r + i * ker.i  
 
-  if(plot == T){
+  if(plot == TRUE){
      par(mfrow=c(1,1))
      image(Mod(ker))
      title("Matrix of the reconstructing kernel (modulus)")
@@ -100,7 +100,7 @@ cat("x.inc = ",x.inc,"\n")
 }
 
 rkernel <- function(node, phinode, nvoice, x.inc = 1, x.min = node[1],
-	x.max = node[length(node)], w0 = 2*pi, plot = F)
+	x.max = node[length(node)], w0 = 2*pi, plot = FALSE)
 #########################################################################
 #     rkernel:   
 #     -------
@@ -151,7 +151,7 @@ rkernel <- function(node, phinode, nvoice, x.inc = 1, x.min = node[1],
   ker <- z$ker
   dim(ker) <- c(lng, lng)
 
-  if(plot == T){
+  if(plot == TRUE){
      par(mfrow=c(1,1))
      image(Mod(ker))
      title("Matrix of the Q2 kernel (modulus)")
@@ -163,7 +163,7 @@ rkernel <- function(node, phinode, nvoice, x.inc = 1, x.min = node[1],
 
 
 fastkernel <- function(node, phinode, nvoice, x.inc = 1, x.min = node[1],
-	x.max = node[length(node)], w0 = 2*pi, plot = F)
+	x.max = node[length(node)], w0 = 2*pi, plot = FALSE)
 #########################################################################
 #     fastkernel:   
 #     -----------
@@ -222,7 +222,7 @@ fastkernel <- function(node, phinode, nvoice, x.inc = 1, x.min = node[1],
   i <- sqrt(as.complex(-1))
   ker <- ker.r + i * ker.i  
 
-  if(plot == T){
+  if(plot == TRUE){
      par(mfrow=c(1,1))
      image(Mod(ker))
      title("Matrix of the reconstructing kernel (modulus)")
@@ -262,7 +262,7 @@ zerokernel <- function(x.inc = 1, x.min,x.max)
 
 
 gkernel <- function(node, phinode, freqstep, scale, x.inc = 1,
-	x.min = node[1], x.max = node[length(node)], plot = F)
+	x.min = node[1], x.max = node[length(node)], plot = FALSE)
 #########################################################################
 #     gkernel:   
 #     -------
@@ -312,7 +312,7 @@ gkernel <- function(node, phinode, freqstep, scale, x.inc = 1,
   ker <- z$ker
   dim(ker) <- c(lng, lng)
 
-  if(plot == T){
+  if(plot == TRUE){
      par(mfrow=c(1,1))
      image(Mod(ker))
      title("Matrix of the reconstructing kernel (modulus)")
@@ -324,7 +324,7 @@ gkernel <- function(node, phinode, freqstep, scale, x.inc = 1,
 
 
 fastgkernel <- function(node, phinode, freqstep, scale, x.inc = 1,
-	x.min = node[1], x.max = node[length(node)], plot = F)
+	x.min = node[1], x.max = node[length(node)], plot = FALSE)
 #########################################################################
 #     fastgkernel:   
 #     ------------
@@ -377,7 +377,7 @@ fastgkernel <- function(node, phinode, freqstep, scale, x.inc = 1,
   ker <- z$ker
   dim(ker) <- c(lng, lng)
 
-  if(plot == T){
+  if(plot == TRUE){
      par(mfrow=c(1,1))
      image(Mod(ker))
      title("Matrix of the reconstructing kernel (modulus)")

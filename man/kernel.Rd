@@ -9,7 +9,7 @@ and the matrix used in the reconstruction of the original signal
 }
 \usage{
 kernel(node, phinode, nvoice, x.inc=1, x.min=node[1],
-x.max=node[length(node)], w0=2 * pi, plot=F)
+x.max=node[length(node)], w0=2 * pi, plot=FALSE)
 }
 \arguments{
 \item{node}{
@@ -34,7 +34,7 @@ maximal value of x for the computation of \eqn{Q_2}.
 central frequency of the wavelet.
 }
 \item{plot}{
-if set to T, displays the modulus of the matrix of \eqn{Q_2}.
+if set to TRUE, displays the modulus of the matrix of \eqn{Q_2}.
 }}
 \value{
 matrix of the \eqn{Q_2} kernel
@@ -43,7 +43,7 @@ matrix of the \eqn{Q_2} kernel
 The kernel is evaluated using Romberg's method.
 }
 \references{
-See discussions in the text of "Time-Frequency Analysis''.
+See discussions in the text of "Time-Frequency Analysis".
 }
 \seealso{
 \code{\link{gkernel}}, \code{\link{rkernel}}, \code{\link{zerokernel}}.

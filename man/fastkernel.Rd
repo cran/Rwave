@@ -10,7 +10,7 @@ using simple trapezoidal rule for integrals.
 }
 \usage{
 fastkernel(node, phinode, nvoice, x.inc=1, x.min=node[1],
-x.max=node[length(node)], w0=2 * pi, plot=F)
+x.max=node[length(node)], w0=2 * pi, plot=FALSE)
 }
 \arguments{
 \item{node}{

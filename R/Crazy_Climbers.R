@@ -9,14 +9,9 @@
 #                  All right reserved                           
 #########################################################################
 
-
-
-
-
-
 crc <- function(tfrep, tfspec = numeric(dim(tfrep)[2]), bstep = 3,
-	iteration = 10000, rate = .001, seed = -7, nbclimb=10,
-	flag.int = TRUE, chain = TRUE, flag.temp = FALSE)
+                iteration = 10000, rate = .001, seed = -7, nbclimb=10,
+                flag.int = TRUE, chain = TRUE, flag.temp = FALSE)
 #########################################################################
 #  crc:   Time-frequency multiple ridge estimation (crazy climbers)
 #  ----
@@ -43,43 +38,37 @@ crc <- function(tfrep, tfspec = numeric(dim(tfrep)[2]), bstep = 3,
 #
 #########################################################################
 {
+  tfspectrum <- tfspec 
+  
+  d <- dim(tfrep)
+  sigsize <- d[1]
+  nscale <- d[2]
+  beemap <- matrix(0,sigsize,nscale)
+  sqmodulus <- Re(tfrep*Conj(tfrep))
+  for (k in 1:nscale)
+    sqmodulus[,k] <- sqmodulus[,k] - tfspectrum[k]
+  dim(beemap) <- c(nscale * sigsize, 1)
+  dim(sqmodulus) <- c(nscale * sigsize, 1)
 
-   tfspectrum <- tfspec 
-
-   d <- dim(tfrep)
-   sigsize <- d[1]
-   nscale <- d[2]
-   beemap <- matrix(0,sigsize,nscale)
-   sqmodulus <- Re(tfrep*Conj(tfrep))
-   for (k in 1:nscale)
-     sqmodulus[,k] <- sqmodulus[,k] - tfspectrum[k]
-   dim(beemap) <- c(nscale * sigsize, 1)
-   dim(sqmodulus) <- c(nscale * sigsize, 1)
-	
-   
-   z <- .C("Sbee_annealing",
-        as.double(sqmodulus),
-        beemap= as.double(beemap),
-        as.single(rate),
-	as.integer(sigsize),
-        as.integer(nscale),
-        as.integer(iteration),
-	as.integer(seed),
-        as.integer(bstep),
-        as.integer(nbclimb),
-	as.integer(flag.int),
-	as.integer(chain),
-	as.integer(flag.temp))
-
-   beemap <- z$beemap
-   dim(beemap) <- c(sigsize,nscale)   
-   if(dev.set() != 1) image(beemap)
-   beemap
+  z <- .C("Sbee_annealing",
+          as.double(sqmodulus),
+          beemap= as.double(beemap),
+          as.single(rate),
+          as.integer(sigsize),
+          as.integer(nscale),
+          as.integer(iteration),
+          as.integer(seed),
+          as.integer(bstep),
+          as.integer(nbclimb),
+          as.integer(flag.int),
+          as.integer(chain),
+          as.integer(flag.temp))
+  
+  beemap <- z$beemap
+  dim(beemap) <- c(sigsize,nscale)   
+  if(dev.set() != 1) image(beemap)
+  beemap
 }
-
-
-
-
 
 cfamily <- function(ccridge, bstep = 1, nbchain = 100, ptile = 0.05)
 #########################################################################
@@ -107,44 +96,41 @@ cfamily <- function(ccridge, bstep = 1, nbchain = 100, ptile = 0.05)
 #
 #########################################################################
 {
-   d <- dim(ccridge)
-   sigsize <- d[1]
-   nscale <- d[2]
-   threshold <- range(ccridge)[2] * ptile
-   sz <- sigsize + 2   	
-   chain <- matrix(-1,nbchain,sz)
-   orderedmap <- matrix(0,sigsize,nscale)	
-
-   dim(chain) <- c(nbchain * sz, 1)
-   dim(ccridge) <- c(nscale * sigsize, 1)
-   dim(orderedmap) <- c(nscale * sigsize, 1)
-	
-
+  d <- dim(ccridge)
+  sigsize <- d[1]
+  nscale <- d[2]
+  threshold <- range(ccridge)[2] * ptile
+  sz <- sigsize + 2   	
+  chain <- matrix(-1,nbchain,sz)
+  orderedmap <- matrix(0,sigsize,nscale)	
+  
+  dim(chain) <- c(nbchain * sz, 1)
+  dim(ccridge) <- c(nscale * sigsize, 1)
+  dim(orderedmap) <- c(nscale * sigsize, 1)
    
-   z <- .C("Scrazy_family",
-        as.double(ccridge),
-        orderedmap = as.single(orderedmap),
-	chain = as.integer(chain),
-	chainnb = as.integer(nbchain),
-	as.integer(sigsize),
-        as.integer(nscale),
-        as.integer(bstep),
-	as.single(threshold))
+  z <- .C("Scrazy_family",
+          as.double(ccridge),
+          orderedmap = as.single(orderedmap),
+          chain = as.integer(chain),
+          chainnb = as.integer(nbchain),
+          as.integer(sigsize),
+          as.integer(nscale),
+          as.integer(bstep),
+          as.single(threshold))
 	
-   orderedmap <- z$orderedmap
-   chain <- z$chain
+  orderedmap <- z$orderedmap
+  chain <- z$chain
 
-   dim(orderedmap) <- c(sigsize,nscale)   
-   dim(chain) <- c(nbchain,sz)   
-   nbchain <- z$chainnb
-   chain <- chain +1
-   chain[,2] <- chain[,2]-1
-
-   list(ordered = orderedmap, chain = chain, nbchain=nbchain)
+  dim(orderedmap) <- c(sigsize,nscale)   
+  dim(chain) <- c(nbchain,sz)   
+  nbchain <- z$chainnb
+  chain <- chain +1
+  chain[,2] <- chain[,2]-1
+  
+  list(ordered = orderedmap, chain = chain, nbchain=nbchain)
 }   
 
-
-crfview <- function(beemap,twod=T)
+crfview <- function(beemap, twod=TRUE)
 #########################################################################
 #     crfview:
 #     --------
@@ -162,10 +148,9 @@ crfview <- function(beemap,twod=T)
     for (k in 1:beemap$nbchain){
       start <- beemap$chain[k,1]
       end <- start + beemap$chain[k,2]  
-      lines(start:(end-1),beemap$chain[k,3:(end-start+2)],type="l")
+      lines(start:(end-1), beemap$chain[k,3:(end-start+2)], type="l")
     }
   }
   title(" Chained Ridges")
   cat("")
 }
-

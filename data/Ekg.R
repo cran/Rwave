@@ -1,1 +1,1 @@
-Ekg <- scan("HeartRate")
+Ekg <- scan("HeartRate", quiet=TRUE)

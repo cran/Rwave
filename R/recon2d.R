@@ -1,6 +1,3 @@
-
-
-
 #shift fft 1D data
 #-----------------
 
@@ -13,8 +10,8 @@ fftshift <- function(x) {
 }
 
 
-#b727 <- matrix(scan("b727s.dat"),ncol=512,byrow=T)
-#b727 <- matrix(scan("b727r.dat"),ncol=256,byrow=T)
+#b727 <- matrix(scan("b727s.dat"),ncol=512,byrow=TRUE)
+#b727 <- matrix(scan("b727r.dat"),ncol=256,byrow=TRUE)
 
 #ncol <- dim(b727)[2]/2
 #b727r<- b727[,-1+2*(1:ncol)]   
@@ -46,15 +43,15 @@ fftshift <- function(x) {
 #BB727 <- B727
 #cgt727 <- array(0+0i,c(ncol,nrow,gtime))
 #for(k in 1:ncol) cgt727[k,,] <-
-#cgt(Re(BB727[,k]),gtime,2/gtime,scale,plot=F)+i*(cgt(Im(BB727[,k]),gtime,2/gtime,scale,plot=F))
+#cgt(Re(BB727[,k]),gtime,2/gtime,scale,plot=FALSE)+i*(cgt(Im(BB727[,k]),gtime,2/gtime,scale,plot=FALSE))
 
 #image(apply(apply(Mod(cgt727),c(1,3),mean),1,fftshift))
 
 
 #* The following tow S-routine concludes our Radar experiments
 #-------------------------------------------------------------
-#b727 <- matrix(scan("b727s.dat"),ncol=512,byrow=T)
-#b727 <- matrix(scan("b727r.dat"),ncol=256,byrow=T)
+#b727 <- matrix(scan("b727s.dat"),ncol=512,byrow=TRUE)
+#b727 <- matrix(scan("b727r.dat"),ncol=256,byrow=TRUE)
 
 #Generating the original image
 #-----------------------------
@@ -89,7 +86,7 @@ showRadar<- function(x) {
 #     b727i<- b727[,2*(1:ncol)]       
 
 #     b727 <- t(Conj(b727r + i*b727i))
-#     B727 <- cgtRadar(b727,gtime,scale,flag=F)
+#     B727 <- cgtRadar(b727,gtime,scale,flag=FALSE)
 
 cgtRadar <- function(x,gtime,scale,flag=TRUE) {
 
@@ -106,7 +103,9 @@ cgtRadar <- function(x,gtime,scale,flag=TRUE) {
    nrow <- dim(y)[1]
    ncol <- dim(y)[2]
    cgty <- array(0+0i,c(ncol,nrow,gtime))
-   for(k in 1:ncol) cgty[k,,] <- cgt(Re(y[,k]),gtime,2/gtime,scale,plot=F)+i*(cgt(Im(y[,k]),gtime,2/gtime,scale,plot=F))
+   for(k in 1:ncol) cgty[k,,] <-
+     cgt(Re(y[,k]),gtime,2/gtime,scale,plot=FALSE) + i *
+       (cgt(Im(y[,k]),gtime,2/gtime,scale,plot=FALSE))
 
    oy <- apply(apply(Mod(cgty),c(1,3),mean),1,fftshift)
    for(k in 1:nrow) cgty[,k,] <- apply(cgty[,k,],1,fftshift)

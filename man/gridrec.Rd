@@ -8,7 +8,7 @@ Reconstructs signal from sample of a ridge, in the Gabor case.
 }
 \usage{
 gridrec(gtinput, node, phinode, nvoice, freqstep, scale, Qinv,
-epsilon, np, real=F, check=F)
+epsilon, np, real=FALSE, check=FALSE)
 }
 \arguments{
 \item{gtinput}{
@@ -39,11 +39,11 @@ coefficient of the \eqn{Q_2} term in reconstruction kernel
 number of samples of the reconstructed signal.
 }
 \item{real}{
-if set to T, uses only constraints on the real part
+if set to TRUE, uses only constraints on the real part
 of the transform.
 }
 \item{check}{
-if set to T, computes \code{\link{cgt}} of
+if set to TRUE, computes \code{\link{cgt}} of
 reconstructed signal.
 }}
 \value{

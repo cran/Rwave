@@ -47,12 +47,12 @@ smoothwt <- function(modulus, subrate, flag = FALSE)
   dim(modulus) <- c(sigsize * nscale, 1)
 
   z <- .C("Ssmoothwt",
-        sm = as.double(smodulus),
-        as.double(modulus),
-        as.integer(sigsize),
-        as.integer(nscale),
-        as.integer(subrate),
-	as.integer(flag))
+          sm = as.double(smodulus),
+          as.double(modulus),
+          as.integer(sigsize),
+          as.integer(nscale),
+          as.integer(subrate),
+          as.integer(flag))
 
   if(flag)
    dim(z$sm) <- c(sigsize, nscale)
@@ -60,9 +60,6 @@ smoothwt <- function(modulus, subrate, flag = FALSE)
    dim(z$sm) <- c(modsize, nscale)
   z$sm
 }
-
-
-
 
 smoothts <- function(ts, windowsize)
 #########################################################################
@@ -82,12 +79,12 @@ smoothts <- function(ts, windowsize)
    subrate <- 1
    
    z <- .C("Smodulus_smoothing",
-        as.double(ts),
-        sts = as.double(sts),
-	as.integer(sigsize),
-        stssize = as.integer(stssize),            
-        as.integer(nscale),
-        as.integer(subrate))
+           as.double(ts),
+           sts = as.double(sts),
+           as.integer(sigsize),
+           stssize = as.integer(stssize),            
+           as.integer(nscale),
+           as.integer(subrate))
 
   sts <- z$sts
   sts
@@ -109,25 +106,21 @@ adjust.length <- function(inputdata)
   else
     s <- inputdata
   np <- length(s)
-
+  
   pow <- 1
   while ( 2*pow < np )
     pow <- 2*pow
   new.np <- 2*pow
-
+  
   if ( np == new.np )
     list( signal=s, length=np )
-  else
-  {
+  else {
     new.s <- 1:new.np
     new.s[1:new.np] <- 0
     new.s[1:np] <- s
-
     list( signal=new.s, length=new.np )
   }
 }
-
-
 
 #########################################################################
 #      npl:
@@ -141,11 +134,9 @@ adjust.length <- function(inputdata)
 #########################################################################
 npl <- function(nbrow)
 {
-        par(mfrow = c(nbrow, 1))
-        cat("")
+  par(mfrow = c(nbrow, 1))
+  cat("")
 }
-
-
 
 #########################################################################
 #      SpecGen:
@@ -159,16 +150,14 @@ npl <- function(nbrow)
 #        taper: relative size of tapering window (cosine taper).
 #
 #########################################################################
-SpecGen <- function(input,spans = 9,taper = 0.2)
+SpecGen <- function(input, spans = 9, taper = 0.2)
 {
-   tmp <- spec.pgram(input,spans,taper)
-   tmp1 <- tmp$spec
-   tmp <- 10^(tmp1/10)
-   spec <- tmp
-   spec
+  tmp <- spec.pgram(input,spans,taper)
+  tmp1 <- tmp$spec
+  tmp <- 10^(tmp1/10)
+  spec <- tmp
+  spec
 }
-
-
 
 #########################################################################
 #      SampleGen:
@@ -182,36 +171,34 @@ SpecGen <- function(input,spans = 9,taper = 0.2)
 #########################################################################
 SampleGen <- function(spec)
 {
-   sqspec <- sqrt(spec)
-   d <- length(sqspec)
-   size <- d 
-   tmp <- rnorm(2 * size)
-    real <- numeric(size)
-   imag <- numeric(size)
-   real <- tmp[1:size]
-   a <- size+1
-   b <- 2 * size
-   imag <- tmp[a:b]
-   real1 <- real * sqspec[1:size]
-   imag1 <- imag * sqspec[1:size]
-   real2 <- numeric(2 * size)
-   imag2 <- numeric(2 * size)
-   real2[1:size] <- real1
-   imag2[1:size] <- imag1
-   for(i in 2:size) {
-      real2[b-i+2] <- real1[i]
-      imag2[b-i+2] <- -imag1[i]
-   }	
-   imag2[1] <- 0
-   i <- sqrt(as.complex(-1))
-   tmp1 <-  fft(real2 + imag2 * i, inverse=T)
-   sample <- Re(tmp1)/sqrt((2*size))
-   sample
+  sqspec <- sqrt(spec)
+  d <- length(sqspec)
+  size <- d 
+  tmp <- rnorm(2 * size)
+  real <- numeric(size)
+  imag <- numeric(size)
+  real <- tmp[1:size]
+  a <- size+1
+  b <- 2 * size
+  imag <- tmp[a:b]
+  real1 <- real * sqspec[1:size]
+  imag1 <- imag * sqspec[1:size]
+  real2 <- numeric(2 * size)
+  imag2 <- numeric(2 * size)
+  real2[1:size] <- real1
+  imag2[1:size] <- imag1
+  for(i in 2:size) {
+    real2[b-i+2] <- real1[i]
+    imag2[b-i+2] <- -imag1[i]
+  }	
+  imag2[1] <- 0
+  i <- sqrt(as.complex(-1))
+  tmp1 <-  fft(real2 + imag2 * i, inverse=TRUE)
+  sample <- Re(tmp1)/sqrt((2*size))
+  sample
 }
 
-
-
-hurst.est <- function(wspec,range,nvoice,plot=T)
+hurst.est <- function(wspec, range, nvoice, plot=TRUE)
 #########################################################################
 #      hurst.est:   
 #      ----------
@@ -221,7 +208,7 @@ hurst.est <- function(wspec,range,nvoice,plot=T)
 #       ------
 #	 wspec: wavelet spectrum.
 #	 nvoice: number of voices.
-#	 plot: if set to T, displays regression line on current plot.
+#	 plot: if set to TRUE, displays regression line on current plot.
 #
 #       output:
 #       -------
@@ -234,10 +221,7 @@ hurst.est <- function(wspec,range,nvoice,plot=T)
   loctmp$coef
 }
 
-
-
-
-wspec.pl <- function(wspec,nvoice)
+wspec.pl <- function(wspec, nvoice)
 #########################################################################
 #      wspec.pl
 #      ----------
@@ -250,15 +234,7 @@ wspec.pl <- function(wspec,nvoice)
 #
 #########################################################################
 {
-  plot.ts(log(wspec,base=2^(2/nvoice)))
+  plot.ts(log(wspec, base=2^(2/nvoice)))
   title("log(wavelet spectrum)", xlab="log(scale)", ylab="V(a)")
   cat(" ")
 }
-
-
-
-
-
-
-
-

@@ -9,7 +9,7 @@ in the wavelet case.
 }
 \usage{
 ridrec(cwtinput, node, phinode, noct, nvoice, Qinv, epsilon, np,
-w0=2 * pi, check=F, real=F)
+w0=2 * pi, check=FALSE, real=FALSE)
 }
 \arguments{
 \item{cwtinput}{
@@ -40,10 +40,10 @@ number of samples of the reconstructed signal.
 central frequency of Morlet wavelet.
 }
 \item{check}{
-if set to T, computes \code{\link{cwt}} of reconstructed signal.
+if set to TRUE, computes \code{\link{cwt}} of reconstructed signal.
 }
 \item{real}{
-if set to T, uses only constraints on the real part of the transform.
+if set to TRUE, uses only constraints on the real part of the transform.
 }}
 \value{
 Returns a list containing the reconstructed signal and the chained ridges.

@@ -1,99 +1,101 @@
-A0                       Transient Signal
-A4                       Transient Signal
-B0                       Transient Signal
-B4                       Transient Signal
-C0                       Transient Signal
-C4                       Transient Signal
-D0                       Transient Signal
-D4                       Transient Signal
-DOG                      Continuous Wavelet Transform with derivative of
-                         Gaussian
-Ekg                      Heart Rate Data
-HOWAREYOU                How Are You?
-RidgeSampling            Sampling Gabor Ridge
-SVD                      Singular Value Decomposition
-YN                       Logarithms of the Prices of Japanese Yen
-YNdiff                   Daily differences of Japanese Yen
-adjust.length            Zero Padding
-amber7                   Pixel from Amber Camara
-amber8                   Pixel from Amber Camara
-amber9                   Pixel from Amber Camara
-back1.000                Acoustic Returns
-back1.180                Acoustic Returns
-back1.220                Acoustic Returns
-cfamily                  Ridge Chaining Procedure
-cgt                      Continuous Gabor Transform
-ch                       Chen's Chirp
-check.maxresoln          Verify Maximum Resolution
-cleanph                  Threshold Phase based on Modulus
-click                    Dolphin Click Data
-corona                   Ridge Estimation by Corona Method
-coronoid                 Ridge Estimation by Modified Corona Method
-crc                      Ridge Extraction by Crazy Climbers
-crcrec                   Crazy Climbers Reconstruction by Penalization
-crfview                  Display chained ridges
-cwt                      Continuous Wavelet Transform
-cwtTh                    Cauchy's wavelet transform
-cwtimage                 Continuous Wavelet Transform Display
-cwtp                     Continuous Wavelet Transform with Phase
-                         Derivative
-cwtpolar                 Conversion to Polar Coordinates
-cwtsquiz                 Squeezed Continuous Wavelet Transform
-dwinverse                Inverse Dyadic Wavelet Transform
-epl                      Plot Dyadic Wavelet Transform Extrema
-ext                      Extrema of Dyadic Wavelet Transform
-fastgkernel              Kernel for Reconstruction from Gabor Ridges
-fastkernel               Kernel for Reconstruction from Wavelet Ridges
-gabor                    Generate Gabor function
-gcrcrec                  Crazy Climbers Reconstruction by Penalization
-gkernel                  Kernel for Reconstruction from Gabor Ridges
-gregrec                  Reconstruction from a Ridge
-gridrec                  Reconstruction from a Ridge
-gsampleone               Sampled Identity
-gwave                    Gabor Functions on a Ridge
-gwave2                   Real Gabor Functions on a Ridge
-hurst.est                Estimate Hurst Exponent
-icm                      Ridge Estimation by ICM Method
-kernel                   Kernel for Reconstruction from Wavelet Ridges
-mbtrim                   Trim Dyadic Wavelet Transform Extrema
-mntrim                   Trim Dyadic Wavelet Transform Extrema
-morlet                   Morlet Wavelets
-morwave                  Ridge Morvelets
-morwave2                 Real Ridge Morvelets
-mrecons                  Reconstruct from Dyadic Wavelet Transform
-                         Extrema
-mw                       Dyadic Wavelet Transform
-noisywave                Noisy Gravitational Wave
-npl                      Prepare Graphics Environment
-plot.result              Plot Dyadic Wavelet Transform Extrema
-plotwt                   Plot Dyadic Wavelet Transform
-purwave                  Pure Gravitational Wave
-regrec                   Reconstruction from a Ridge
-regrec2                  Reconstruction from a Ridge
-ridrec                   Reconstruction from a Ridge
-rkernel                  Kernel for Reconstruction from Wavelet Ridges
-scrcrec                  Simple Reconstruction from Crazy Climbers Ridges
-skeleton                 Reconstruction from Dual Wavelets
-skeleton2                Reconstruction from Dual Wavelet
-smoothts                 Smoothing Time Series
-smoothwt                 Smoothing and Time Frequency Representation
-snake                    Ridge Estimation by Snake Method
-snakeview                Restriction to a Snake
-snakoid                  Modified Snake Method
-sridrec                  Simple Reconstruction from Ridge
-tfgmax                   Time-Frequency Transform Global Maxima
-tflmax                   Time-Frequency Transform Local Maxima
-tfmean                   Average frequency by frequency
-tfpct                    Percentile frequency by frequency
-tfvar                    Variance frequency by frequency
-vDOG                     DOG Wavelet Transform on one Voice
-vecgabor                 Gabor Functions on a Ridge
-vecmorlet                Morlet Wavelets on a Ridge
-vgt                      Gabor Transform on one Voice
-vwt                      Voice Wavelet Transform
-wRidgeSampling           Sampling wavelet Ridge
-wpl                      Plot Dyadic Wavelet Transform.
-wspec.pl                 Log of Wavelet Spectrum Plot
-zerokernel               Reconstruction from Wavelet Ridges
-zeroskeleton             Reconstruction from Dual Wavelets
-zeroskeleton2            Reconstruction from Dual Wavelets
+A0                      Transient Signal
+A4                      Transient Signal
+B0                      Transient Signal
+B4                      Transient Signal
+C0                      Transient Signal
+C4                      Transient Signal
+D0                      Transient Signal
+D4                      Transient Signal
+DOG                     Continuous Wavelet Transform with derivative of
+                        Gaussian 
+Ekg                     Heart Rate Data
+HOWAREYOU               How Are You?
+RidgeSampling           Sampling Gabor Ridge 
+SVD                     Singular Value Decomposition 
+WV                      Wigner-Ville function 
+YN                      Logarithms of the Prices of Japanese Yen
+YNdiff                  Daily differences of Japanese Yen
+adjust.length           Zero Padding 
+amber7                  Pixel from Amber Camara
+amber8                  Pixel from Amber Camara
+amber9                  Pixel from Amber Camara
+back1.000               Acoustic Returns
+back1.180               Acoustic Returns
+back1.220               Acoustic Returns
+cfamily                 Ridge Chaining Procedure 
+cgt                     Continuous Gabor Transform 
+ch                      Chen's Chirp
+check.maxresoln         Verify Maximum Resolution 
+cleanph                 Threshold Phase based on Modulus 
+click                   Dolphin Click Data
+corona                  Ridge Estimation by Corona Method 
+coronoid                Ridge Estimation by Modified Corona Method 
+crc                     Ridge Extraction by Crazy Climbers 
+crcrec                  Crazy Climbers Reconstruction by Penalization 
+crfview                 Display chained ridges 
+cwt                     Continuous Wavelet Transform 
+cwtTh                   Cauchy's wavelet transform
+cwtimage                Continuous Wavelet Transform Display 
+cwtp                    Continuous Wavelet Transform with Phase
+                        Derivative 
+cwtpolar                Conversion to Polar Coordinates 
+cwtsquiz                Squeezed Continuous Wavelet Transform 
+dwinverse               Inverse Dyadic Wavelet Transform 
+epl                     Plot Dyadic Wavelet Transform Extrema 
+ext                     Extrema of Dyadic Wavelet Transform 
+fastgkernel             Kernel for Reconstruction from Gabor Ridges 
+fastkernel              Kernel for Reconstruction from Wavelet Ridges 
+gabor                   Generate Gabor function 
+gcrcrec                 Crazy Climbers Reconstruction by Penalization 
+gkernel                 Kernel for Reconstruction from Gabor Ridges 
+gregrec                 Reconstruction from a Ridge 
+gridrec                 Reconstruction from a Ridge 
+gsampleOne              Sampled Identity 
+gwave                   Gabor Functions on a Ridge 
+gwave2                  Real Gabor Functions on a Ridge 
+hurst.est               Estimate Hurst Exponent 
+icm                     Ridge Estimation by ICM Method 
+kernel                  Kernel for Reconstruction from Wavelet Ridges 
+mbtrim                  Trim Dyadic Wavelet Transform Extrema 
+mntrim                  Trim Dyadic Wavelet Transform Extrema 
+morlet                  Morlet Wavelets 
+morwave                 Ridge Morvelets 
+morwave2                Real Ridge Morvelets 
+mrecons                 Reconstruct from Dyadic Wavelet Transform
+                        Extrema 
+mw                      Dyadic Wavelet Transform 
+noisywave               Noisy Gravitational Wave
+npl                     Prepare Graphics Environment 
+plot.result             Plot Dyadic Wavelet Transform Extrema 
+plotwt                  Plot Dyadic Wavelet Transform 
+purwave                 Pure Gravitational Wave
+regrec                  Reconstruction from a Ridge 
+regrec2                 Reconstruction from a Ridge 
+ridrec                  Reconstruction from a Ridge 
+rkernel                 Kernel for Reconstruction from Wavelet Ridges 
+scrcrec                 Simple Reconstruction from Crazy Climbers
+                        Ridges 
+skeleton                Reconstruction from Dual Wavelets 
+skeleton2               Reconstruction from Dual Wavelet 
+smoothts                Smoothing Time Series 
+smoothwt                Smoothing and Time Frequency Representation 
+snake                   Ridge Estimation by Snake Method 
+snakeview               Restriction to a Snake 
+snakoid                 Modified Snake Method 
+sridrec                 Simple Reconstruction from Ridge 
+tfgmax                  Time-Frequency Transform Global Maxima 
+tflmax                  Time-Frequency Transform Local Maxima 
+tfmean                  Average frequency by frequency 
+tfpct                   Percentile frequency by frequency 
+tfvar                   Variance frequency by frequency 
+vDOG                    DOG Wavelet Transform on one Voice 
+vecgabor                Gabor Functions on a Ridge 
+vecmorlet               Morlet Wavelets on a Ridge 
+vgt                     Gabor Transform on one Voice 
+vwt                     Voice Wavelet Transform 
+wRidgeSampling          Sampling wavelet Ridge 
+wpl                     Plot Dyadic Wavelet Transform. 
+wspec.pl                Log of Wavelet Spectrum Plot
+zerokernel              Reconstruction from Wavelet Ridges 
+zeroskeleton            Reconstruction from Dual Wavelets 
+zeroskeleton2           Reconstruction from Dual Wavelets 

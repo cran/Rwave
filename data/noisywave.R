@@ -1,1 +1,1 @@
-noisywave <- scan("noisy.dat")
+noisywave <- scan("noisy.dat", quiet=TRUE)

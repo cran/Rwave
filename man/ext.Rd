@@ -18,7 +18,7 @@ flag indicating if the extrema at each
 resolution will be plotted at the same scale.
 }
 \item{plot}{
-if set to T, displays the transform on the graphics device.
+if set to TRUE, displays the transform on the graphics device.
 }}
 \value{
 Structure containing:

@@ -17,12 +17,10 @@
 #
 #########################################################################
 
-
-
-
 crcrec <- function(siginput, inputwt, beemap, noct, nvoice, compr,
-	minnbnodes = 2, w0 = 2*pi, bstep = 5,ptile = .01,
-	epsilon = 0, fast = F, para = 5, real = F, plot=2)
+                   minnbnodes = 2, w0 = 2*pi, bstep = 5, ptile = 0.01,
+                   epsilon = 0, fast = FALSE, para = 5, real = FALSE,
+                   plot = 2)
 #########################################################################
 #     crcrec:
 #     -------
@@ -53,105 +51,92 @@ crcrec <- function(siginput, inputwt, beemap, noct, nvoice, compr,
 #
 #########################################################################
 {
-
-   tmp <- cfamily(beemap,bstep,ptile=ptile)
-   chain <- tmp$chain
-   nbchain <- tmp$nbchain
-   ordered <- tmp$ordered
-   sigsize <- length(siginput)
-   rec <- numeric(sigsize)
-   plnb <- 0
-
-   if(plot != F){
-     par(mfrow=c(2,1))
-     plot.ts(siginput)
-     title("Original signal")
-     image(tmp$ordered)
-     title("Chained Ridges")
-   }
-
-   tmp <- matrix(0,nbchain,length(siginput))
-
-   totnbnodes <- 0
-   idx <- numeric(nbchain)	
-   p <- 0
-
-   for (j in 1:nbchain){
-      phi.x.min <- 2 * 2^(chain[j,3]/nvoice)
-      if (chain[j,2] > (para*phi.x.min) ){ 
-
-         cat("Chain number",j)
-
-         phi.x.max <- 2 * 2^(chain[j,(2+chain[j,2])]/nvoice)
-         x.min <- chain[j,1]
-         x.max <- chain[j,1] + chain[j,2] - 1
-         x.min <- x.min - round(para * phi.x.min)
-         x.max <- x.max + round(para * phi.x.max)
-
-         tmp2 <- regrec(siginput[chain[j,1]:(chain[j,1]+chain[j,2]-1)],
-            inputwt[chain[j,1]:(chain[j,1]+chain[j,2]-1),],
-            chain[j,3:(chain[j,2]+2)], compr,noct,nvoice,
-            epsilon, w0 = w0 ,fast = fast, para = para,
-            minnbnodes = minnbnodes, real = real);
-
-
-         if(is.list(tmp2)==T) {
-         totnbnodes <- totnbnodes + tmp2$nbnodes
-
-         np <- length(tmp2$sol)
-         start <- max(1,x.min)
-         end <- min(sigsize,x.min+np-1)
-         start1 <- max(1,2-x.min)
-         end1 <- min(np, sigsize +1 - x.min)
-         end <- end1 - start1 + start
-         rec[start:end] <- rec[start:end]+tmp2$sol[start1:end1]
-
-         tmp[j,start:end] <- Re(tmp2$sol[start1:end1])
-         }
-         plnb <- plnb + 1
-         p <- p + 1
-         idx[p] <- j
+  tmp <- cfamily(beemap,bstep,ptile=ptile)
+  chain <- tmp$chain
+  nbchain <- tmp$nbchain
+  ordered <- tmp$ordered
+  sigsize <- length(siginput)
+  rec <- numeric(sigsize)
+  plnb <- 0
   
-       }
-   }
-
-   if(plot == 1){
-      par(mfrow=c(2,1))
-      par(cex=1.1)
-      plot.ts(siginput)
-      title("Original signal")
-      plot.ts(Re(rec))
-	
-      title("Reconstructed signal")
-   }
-   else if (plot == 2){
+  if(plot != FALSE) {
+    par(mfrow=c(2,1))
+    plot.ts(siginput, main="Original signal")
+    image(tmp$ordered, main="Chained Ridges")
+  }
+  
+  tmp <- matrix(0,nbchain,length(siginput))
+  
+  totnbnodes <- 0
+  idx <- numeric(nbchain)	
+  p <- 0
+  
+  for(j in 1:nbchain) {
+    phi.x.min <- 2 * 2^(chain[j,3]/nvoice)
+    if(chain[j,2] > (para*phi.x.min)) { 
+      
+      cat("Chain number",j)
+      
+      phi.x.max <- 2 * 2^(chain[j,(2+chain[j,2])]/nvoice)
+      x.min <- chain[j,1]
+      x.max <- chain[j,1] + chain[j,2] - 1
+      x.min <- x.min - round(para * phi.x.min)
+      x.max <- x.max + round(para * phi.x.max)
+      
+      tmp2 <- regrec(siginput[chain[j,1]:(chain[j,1]+chain[j,2]-1)],
+                     inputwt[chain[j,1]:(chain[j,1]+chain[j,2]-1),],
+                     chain[j,3:(chain[j,2]+2)], compr,noct,nvoice,
+                     epsilon, w0 = w0 ,fast = fast, para = para,
+                     minnbnodes = minnbnodes, real = real)
+      
+      if(is.list(tmp2)==TRUE) {
+        totnbnodes <- totnbnodes + tmp2$nbnodes
+        
+        np <- length(tmp2$sol)
+        start <- max(1,x.min)
+        end <- min(sigsize,x.min+np-1)
+        start1 <- max(1,2-x.min)
+        end1 <- min(np, sigsize +1 - x.min)
+        end <- end1 - start1 + start
+        rec[start:end] <- rec[start:end] + tmp2$sol[start1:end1]
+        
+        tmp[j,start:end] <- Re(tmp2$sol[start1:end1])
+      }
+      plnb <- plnb + 1
+      p <- p + 1
+      idx[p] <- j
+    }
+  }
+  
+  if(plot == 1) {
+    par(mfrow=c(2,1))
+    par(cex=1.1)
+    plot.ts(siginput, main="Original signal")
+    plot.ts(Re(rec), main="Reconstructed signal")
+  }
+  else {
+    if(plot == 2) {
       par(mfrow=c(plnb+2,1))
-      par(mar=c(2,4,4,4))
+      par(mar=c(2,0,0,0))
       par(cex=1.1)
       par(err=-1)
-      plot.ts(siginput)
-      title("Original signal")
-
+      plot.ts(siginput, main="Original signal")
+      
       for (j in 1:p)
-         plot.ts(tmp[idx[j],]);
-      plot.ts(Re(rec))	
-      title("Reconstructed signal")
-
-
-   }
-
-   cat("Total number of ridge samples used: ",totnbnodes,"\n")
-
-   par(mfrow=c(1,1))
-
-   list(rec=rec, ordered=ordered,chain = chain, comp=tmp)
+        plot.ts(tmp[idx[j],])
+      plot.ts(Re(rec), main="Reconstructed signal")
+    }
+  }
+  
+  cat("Total number of ridge samples used: ", totnbnodes, "\n")
+  par(mfrow=c(1,1))
+  list(rec=rec, ordered = ordered, chain = chain, comp = tmp)
 }
 
-
-
 gcrcrec <- function(siginput, inputgt, beemap, nvoice, freqstep, scale,
-	compr, bstep = 5, ptile = .01, epsilon = 0, fast = T, para = 5,
-	minnbnodes=3, hflag = F, real= F, plot = 2)
+                    compr, bstep = 5, ptile = .01, epsilon = 0,
+                    fast = TRUE, para = 5, minnbnodes = 3,
+                    hflag = FALSE, real= FALSE, plot = 2)
 #########################################################################
 #     gcrcrec:
 #     -------
@@ -190,97 +175,86 @@ gcrcrec <- function(siginput, inputgt, beemap, nvoice, freqstep, scale,
 #
 #########################################################################
 {
-   tmp <- cfamily(beemap,bstep,ptile=ptile)
-   chain <- tmp$chain
-   nbchain <- tmp$nbchain
-   ordered <- tmp$ordered
-   sigsize <- length(siginput)
-   rec <- numeric(sigsize)
-   plnb <- 0
+  tmp <- cfamily(beemap,bstep,ptile=ptile)
+  chain <- tmp$chain
+  nbchain <- tmp$nbchain
+  ordered <- tmp$ordered
+  sigsize <- length(siginput)
+  rec <- numeric(sigsize)
+  plnb <- 0
+  
+  if(plot != FALSE) {
+    par(mfrow=c(2,1))
+    plot.ts(siginput, main="Original signal")
+    image(tmp$ordered, main="Chained Ridges")
+  }
+  
+  totnbnodes <- 0
+  tmp <- matrix(0,nbchain,length(siginput))
+  for(j in 1:nbchain) {
+    if(chain[j,2] > scale) {
+      nbnodes <- round(chain[j,2]/compr)
+      if(nbnodes < minnbnodes)
+        nbnodes <- minnbnodes
+      
+      totnbnodes <- totnbnodes + nbnodes
+      
+      cat("Chain number",j)
+      
+      phi.x.min <- scale
+      phi.x.max <- scale
+      x.min <- chain[j,1]
+      x.max <- chain[j,1] + chain[j,2] - 1
+      x.min <- x.min - round(para * phi.x.min)
+      x.max <- x.max + round(para * phi.x.max)
+      x.inc <- 1
+      np <- as.integer((x.max-x.min)/x.inc) + 1
+      
+      tmp2 <- gregrec(siginput[chain[j,1]:(chain[j,1]+chain[j,2]-1)],
+                      inputgt[chain[j,1]:(chain[j,1]+chain[j,2]-1),],
+                      chain[j,3:(chain[j,2]+2)], nbnodes, nvoice,
+                      freqstep, scale, epsilon, fast, para = para,
+                      hflag = hflag, real = real)
 
-   if(plot != F){
-     par(mfrow=c(2,1))
-     plot.ts(siginput)
-     title("Original signal")
-     image(tmp$ordered)
-     title("Chained Ridges")
-   }
-
-   totnbnodes <- 0
-   tmp <- matrix(0,nbchain,length(siginput))
-   for (j in 1:nbchain){
-      if (chain[j,2] > scale){
-         nbnodes <- round(chain[j,2]/compr);
-         if(nbnodes < minnbnodes)
-            nbnodes <- minnbnodes
-
-         totnbnodes <- totnbnodes + nbnodes
-
-         cat("Chain number",j)
-
-         phi.x.min <- scale
-         phi.x.max <- scale
-         x.min <- chain[j,1]
-         x.max <- chain[j,1] + chain[j,2] - 1
-         x.min <- x.min - round(para * phi.x.min)
-         x.max <- x.max + round(para * phi.x.max)
-         x.inc <- 1
-         np <- as.integer((x.max-x.min)/x.inc) + 1
-
-         tmp2 <- gregrec(siginput[chain[j,1]:(chain[j,1]+chain[j,2]-1)],
-            inputgt[chain[j,1]:(chain[j,1]+chain[j,2]-1),],
-            chain[j,3:(chain[j,2]+2)], nbnodes,nvoice,freqstep,scale,
-            epsilon,fast,para=para, hflag = hflag, real = real);
-
-
-         start <- max(1,x.min)
-         end <- min(sigsize,x.min+np-1)
-         start1 <- max(1,2-x.min)
-         end1 <- min(np, sigsize +1 - x.min)
-         end <- end1 - start1 + start
-         rec[start:end] <- rec[start:end]+tmp2$sol[start1:end1]
-         tmp[j,start:end] <- tmp2$sol[start1:end1]
-
-         plnb <- plnb + 1
-         plot.ts(tmp[j,]);
-      }
-
-   }
-
-   if(plot == 1){
-      par(mfrow=c(2,1))
-      par(cex=1.1)
-      plot.ts(siginput)
-      title("Original signal")
-      plot.ts(rec)
-      title("Reconstructed signal")
-   }
-   else if (plot == 2){
-      par(mfrow=c(plnb+2,1))
-      par(mar=c(2,4,4,4))
-      par(cex=1.1)
-      par(err=-1)
-      plot.ts(siginput)
-      title("Original signal")
-
-      for (j in 1:nbchain)
-         plot.ts(tmp[j,]);
-        
-      plot.ts(rec)
-      title("Reconstructed signal")
-   }
-
-   cat("Total number of ridge samples used: ",totnbnodes,"\n")
-
-   par(mfrow=c(1,1))
-   list(rec=rec, ordered=ordered,chain = chain, comp=tmp)
+      start <- max(1,x.min)
+      end <- min(sigsize,x.min+np-1)
+      start1 <- max(1,2-x.min)
+      end1 <- min(np, sigsize +1 - x.min)
+      end <- end1 - start1 + start
+      rec[start:end] <- rec[start:end] + tmp2$sol[start1:end1]
+      tmp[j,start:end] <- tmp2$sol[start1:end1]
+      
+      plnb <- plnb + 1
+      plot.ts(tmp[j,])
+    }
+    
+  }
+  
+  if(plot == 1) {
+    par(mfrow=c(2,1))
+    par(cex=1.1)
+    plot.ts(siginput, main="Original signal")
+    plot.ts(rec, main="Reconstructed signal")
+  }
+  else if (plot == 2) {
+    par(mfrow=c(plnb+2,1))
+    par(mar=c(2,4,4,4))
+    par(cex=1.1)
+    par(err=-1)
+    plot.ts(siginput, main="Original signal")
+    
+    for (j in 1:nbchain)
+      plot.ts(tmp[j,])
+    plot.ts(rec, main="Reconstructed signal")
+  }
+  
+  cat("Total number of ridge samples used: ", totnbnodes, "\n")
+  par(mfrow=c(1,1))
+  list(rec = rec, ordered = ordered, chain = chain, comp = tmp)
 }
 
-
-
-
-scrcrec <- function(siginput, tfinput, beemap, bstep = 5,
-	ptile = .01, plot = 2)
+scrcrec <- function(siginput, tfinput, beemap, bstep = 5, ptile = 0.01,
+                    plot = 2)
 #########################################################################
 #     scrcrec:
 #     --------
@@ -307,69 +281,48 @@ scrcrec <- function(siginput, tfinput, beemap, bstep = 5,
 #
 #########################################################################
 {
-   tmp <- cfamily(beemap,bstep,ptile=ptile)
-   chain <- tmp$chain
-   nbchain <- tmp$nbchain
-   rec <- numeric(length(siginput))
-
-   if(plot != F){
-     par(mfrow=c(2,1))
-     plot.ts(siginput)
-     title("Original signal")
-     image(tmp$ordered)
-     title("Chained Ridges")
-   }
-
-   npl(1)
-
-   tmp3 <- matrix(0,nbchain,length(siginput))
-
-   rdg <- numeric(dim(tfinput)[1])
-   
-   for (j in 1:nbchain){
-       bnext <- chain[j,1]
-     for(k in 1:chain[j,2]) {
-       rdg[bnext] <- chain[j,2+k]
-       bnext <- bnext + 1
-     }
-     tmp3[j,] <- sridrec(tfinput,rdg)
-     rec <- rec + tmp3[j,]
-     rdg[] <- 0
-     plot.ts(tmp3[j,]);
-   }
-
-   if(plot == 1){
-      par(mfrow=c(2,1))
-      par(cex=1.1)
-      plot.ts(siginput)
-      title("Original signal")
-      plot.ts(rec)
-      title("Reconstructed signal")
-   }
-   else if (plot == 2){
-      par(mfrow=c(nbchain+2,1))
-      par(mar=c(2,4,4,4))
-      par(cex=1.1)
-      par(err=-1)
-      plot.ts(siginput)
-      title("Original signal")
-
-      for (j in 1:nbchain)
-         plot.ts(tmp3[j,]);
-        
-      plot.ts(rec)
-      title("Reconstructed signal")
-   }
-   list(rec=rec, ordered=tmp$ordered,chain = tmp$chain, comp=tmp3)
+  tmp <- cfamily(beemap,bstep, ptile=ptile)
+  chain <- tmp$chain
+  nbchain <- tmp$nbchain
+  rec <- numeric(length(siginput))
+  
+  if(plot != FALSE) {
+    par(mfrow=c(2,1))
+    plot.ts(siginput, main="Original signal")
+    image(tmp$ordered, main="Chained Ridges")
+  }
+  
+  npl(1)
+  tmp3 <- matrix(0,nbchain,length(siginput))
+  rdg <- numeric(dim(tfinput)[1])
+  
+  for (j in 1:nbchain) {
+    bnext <- chain[j,1]
+    for(k in 1:chain[j,2]) {
+      rdg[bnext] <- chain[j,2+k]
+      bnext <- bnext + 1
+    }
+    tmp3[j,] <- sridrec(tfinput,rdg)
+    rec <- rec + tmp3[j,]
+    rdg[] <- 0
+    ## plot.ts(tmp3[j,])
+  }
+  
+  if(plot <= 2) {
+    par(mfrow=c(2,1))
+    plot.ts(siginput, main="Original signal")
+    plot.ts(rec, main="Reconstructed signal")
+  }
+  else {
+    par(mfrow=c(nbchain+2,1))
+    par(mar=rep(2,4))
+    par(err=-1)
+    plot.ts(siginput, main="Original signal")
+    
+    for(j in 1:nbchain)
+      plot.ts(tmp3[j,],main=j)
+      
+    plot.ts(rec, main="Reconstructed signal")
+  }
+  list(rec=rec, ordered=tmp$ordered, chain=tmp$chain, comp=tmp3)
 }
-
-
-
-
-
-
-
-
-
-
-

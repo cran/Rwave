@@ -14,8 +14,8 @@
 
 pcacrc <- function(tfrep, tfspec = numeric(dim(tfrep)[2]), grida = 10,
 	gridb = 20, pct = 0.1, count = 10000, bstep = 3, iteration = 10000,
-	rate = .001, seed = -7, nbclimb = 10, flag.int = TRUE, chain= TRUE,
-	flag.temp=FALSE,lineflag=F,flag.cwt=F)
+	rate = .001, seed = -7, nbclimb = 10, flag.int = TRUE, chain = TRUE,
+	flag.temp = FALSE, lineflag = FALSE, flag.cwt = FALSE)
 #########################################################################
 #  pcacrc:   Time-frequency multiple ridge estimation (pca climbers)
 #  ------
@@ -299,7 +299,9 @@ pcacrc <- function(tfrep, tfspec = numeric(dim(tfrep)[2]), grida = 10,
    
 
 
-pcafamily <-function(pcaridge,orientmap,maxchnlng=as.numeric(dim(pcaridge)[1])+10,bstep= 1, nbchain = 100, ptile = 0.05)
+pcafamily <-function(pcaridge, orientmap,
+                     maxchnlng=as.numeric(dim(pcaridge)[1])+10,
+                     bstep = 1, nbchain = 100, ptile = 0.05)
 #########################################################################
 #     pcafamily:
 #     ---------
@@ -390,7 +392,7 @@ pcamaxima <- function(beemap,orientmap)
 
 
 simplepcarec <- function(siginput, tfinput, beemap, orientmap, bstep = 5,
-	ptile = .01, plot = 2)
+                         ptile = .01, plot = 2)
 #########################################################################
 #     simplepcarec:
 #     -------------
@@ -423,7 +425,7 @@ simplepcarec <- function(siginput, tfinput, beemap, orientmap, bstep = 5,
    nbchain <- tmp$nbchain
    rec <- numeric(length(siginput))
 
-   if(plot != F){
+   if(plot != FALSE){
      par(mfrow=c(2,1))
      plot.ts(siginput)
      title("Original signal")
@@ -472,8 +474,3 @@ simplepcarec <- function(siginput, tfinput, beemap, orientmap, bstep = 5,
    }
    list(rec=rec, ordered=tmp$ordered,chain = tmp$chain, comp=tmp3)
 }
-
-
-
-
-

@@ -36,13 +36,13 @@ initial value of the random number generator.
 number of crazy climbers.
 }
 \item{flag.int}{
-if set to T, the weighted occupation measure is computed.
+if set to TRUE, the weighted occupation measure is computed.
 }
 \item{chain}{
-if set to T, chaining of the ridges is done.
+if set to TRUE, chaining of the ridges is done.
 }
 \item{flag.temp}{
-if set to T: constant temperature.
+if set to TRUE: constant temperature.
 }}
 \value{
 Returns a 2D array called beemap containing the (weighted or unweighted)

@@ -1,22 +1,22 @@
-A0                       Transient Signal
-A4                       Transient Signal
-B0                       Transient Signal
-B4                       Transient Signal
-C0                       Transient Signal
-C4                       Transient Signal
-D0                       Transient Signal
-D4                       Transient Signal
-Ekg                      Heart Rate Data
-HOWAREYOU                How Are You?
-YN                       Logarithms of the Prices of Japanese Yen
-YNdiff                   Daily differences of Japanese Yen
-amber7                   Pixel from Amber Camara
-amber8                   Pixel from Amber Camara
-amber9                   Pixel from Amber Camara
-back1.000                Acoustic Returns
-back1.180                Acoustic Returns
-back1.220                Acoustic Returns
-ch                       Chen's Chirp
-click                    Dolphin Click Data
-noisywave                Noisy Gravitational Wave
-purwave                  Pure Gravitational Wave
+A0                      Transient Signal
+A4                      Transient Signal
+B0                      Transient Signal
+B4                      Transient Signal
+C0                      Transient Signal
+C4                      Transient Signal
+D0                      Transient Signal
+D4                      Transient Signal
+Ekg                     Heart Rate Data
+HOWAREYOU               How Are You?
+YN                      Logarithms of the Prices of Japanese Yen
+YNdiff                  Daily differences of Japanese Yen
+amber7                  Pixel from Amber Camara
+amber8                  Pixel from Amber Camara
+amber9                  Pixel from Amber Camara
+back1.000               Acoustic Returns
+back1.180               Acoustic Returns
+back1.220               Acoustic Returns
+ch                      Chen's Chirp
+click                   Dolphin Click Data
+noisywave               Noisy Gravitational Wave
+purwave                 Pure Gravitational Wave

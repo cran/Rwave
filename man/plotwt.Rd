@@ -7,7 +7,7 @@ Plot Dyadic Wavelet Transform
 Plot dyadic wavelet transform.
 }
 \usage{
-plotwt(original, psi, phi, maxresoln, scale=F, yaxtype="s")
+plotwt(original, psi, phi, maxresoln, scale=FALSE, yaxtype="s")
 }
 \arguments{
 \item{original}{
@@ -38,6 +38,6 @@ scale.
 See discussions in the text of ``Time-Frequency Analysis''.
 }
 \seealso{
-\code{\link{plot.result}}, \code{\link{epl}}, \code{\link{wpl}}.
+\code{\link{plotResult}}, \code{\link{epl}}, \code{\link{wpl}}.
 }
 \keyword{ts}

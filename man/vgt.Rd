@@ -7,7 +7,7 @@ Gabor Transform on one Voice
 Compute Gabor transform for fixed frequency.
 }
 \usage{
-vgt(input, frequency, scale, plot=F)
+vgt(input, frequency, scale, plot=FALSE)
 }
 \arguments{
 \item{input}{
@@ -20,7 +20,7 @@ frequency at which the Gabor transform is to be computed.
 frequency at which the Gabor transform is to be computed.
 }
 \item{plot}{
-if set to T, plots the real part of cgt on the graphic device.
+if set to TRUE, plots the real part of cgt on the graphic device.
 }}
 \value{
 1D (complex) array containing Gabor transform at specified frequency.

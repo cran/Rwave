@@ -51,7 +51,7 @@ The format of the output can be
 3D array (signal\_size x noctave x nvoice) 
 }
 \references{
-See discussions in the text of ``Practical Time-Frequency Analysis''.
+  See discussions in the text of ``Practical Time-Frequency Analysis''.
 }
 \seealso{
 \code{\link{cwt}}, \code{\link{cwtp}}, \code{\link{cwtsquiz}},

@@ -17,7 +17,7 @@ Time-Frequency representation (real valued).
 Length of smoothing window.
 }
 \item{flag}{
-If set to T, subsample the representation.
+If set to TRUE, subsample the representation.
 }}
 \value{
 2D array containing the smoothed transform.

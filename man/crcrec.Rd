@@ -9,7 +9,7 @@ Reconstructs a real valued signal from the output of \code{\link{crc}}
 }
 \usage{
 crcrec(siginput, inputwt, beemap, noct, nvoice, compr, minnbnodes=2,
-w0=2 * pi, bstep=5, ptile=0.01, epsilon=0, fast=F, para=5, real=F,
+w0=2 * pi, bstep=5, ptile=0.01, epsilon=0, fast=FALSE, para=5, real=FALSE,
 plot=2)
 }
 \arguments{
@@ -47,7 +47,7 @@ relative threshold of occupation measure.
 constant in front of the smoothness term in penalty function.
 }
 \item{fast}{
-if set to T, uses trapezoidal rule to evaluate $Q_2$.
+if set to TRUE, uses trapezoidal rule to evaluate $Q_2$.
 }
 \item{para}{
 scale parameter for extrapolating the ridges.

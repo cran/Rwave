@@ -8,7 +8,7 @@
 ########################################################################
 
 
-plotwt <- function(original, psi, phi, maxresoln, scale=F, yaxtype="s")
+plotwt <- function(original, psi, phi, maxresoln, scale=FALSE, yaxtype="s")
 #*********************************************************************#
 # plotwt
 # ------
@@ -18,9 +18,12 @@ plotwt <- function(original, psi, phi, maxresoln, scale=F, yaxtype="s")
 # Used by mw and dw
 #*********************************************************************#
 {
-  par.orig <- par()  # Save the original plot parameters
+  par.orig <- par(no.readonly = TRUE)  # Save the original plot parameters
 
   par(mfrow = c((maxresoln+2), 1))
+  par(mar=c(2.0, 2.0, 0.5, 0.5))
+  par(oma=c(1,0,0,0)) # Change 1 to a larger number to allow a larger
+		      # bottom margin 
 
   if ( !scale )
   {
@@ -31,20 +34,20 @@ plotwt <- function(original, psi, phi, maxresoln, scale=F, yaxtype="s")
   }
   else
   {
-    limit <- c(min(original, psi, phi), max(original, psi, phi))
+    limit <- range(original, psi, phi)
     plot.ts(original, ylim=limit, bty="n",yaxt=yaxtype)
     for (j in 1:maxresoln)
       plot.ts(psi[,j], ylim=limit, bty="n",yaxt=yaxtype)
     plot.ts(phi, ylim=limit, bty="n",yaxt=yaxtype)
   }
 
-  par(par.orig)  
+  par(par.orig)
 }
 
 
-plot.result <- function(result, original, maxresoln, scale=F, yaxtype="s")
+plotResult <- function(result, original, maxresoln, scale=FALSE, yaxtype="s")
 #*********************************************************************#
-# Plot.result
+# plotResult
 # -----------
 #    function for the output of the following S functions:
 # 	dnpval, dbpval, region, dntrim
@@ -52,7 +55,7 @@ plot.result <- function(result, original, maxresoln, scale=F, yaxtype="s")
 #*********************************************************************#
 
 {
-  par.orig <- par()  # Save the original plot parameters
+  par.orig <- par(no.readonly = TRUE)  # Save the original plot parameters
   par(mar=c(2.0, 2.0, 0.5, 0.5))
   par(oma=c(1,0,0,0)) # Change 1 to a larger number to allow a larger
 		      # bottom margin 
@@ -100,7 +103,7 @@ epl <- function(dwext)
 #*********************************************************************#
 {
   maxresoln <- dwext$maxresoln
-  plot.result(dwext$extrema, dwext$original, maxresoln)
+  plotResult(dwext$extrema, dwext$original, maxresoln)
   cat("")
 }
 

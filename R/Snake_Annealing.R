@@ -16,9 +16,10 @@
 
 
 snake <- function(tfrep, guessA, guessB, snakesize = length(guessB),
-	tfspec = numeric(dim(modulus)[2]), subrate = 1, temprate = 3,
-	muA = 1, muB = muA, lambdaB = 2*muB, lambdaA = 2*muA,
-	iteration = 1000000, seed = -7, costsub = 1, stagnant = 20000,plot=T)
+                  tfspec = numeric(dim(modulus)[2]), subrate = 1,
+                  temprate = 3, muA = 1, muB = muA, lambdaB = 2*muB,
+                  lambdaA = 2*muA, iteration = 1000000, seed = -7,
+                  costsub = 1, stagnant = 20000, plot = TRUE)
 #########################################################################
 #     snake:   
 #     ------
@@ -67,7 +68,7 @@ snake <- function(tfrep, guessA, guessB, snakesize = length(guessB),
   count <- 0	
   dim(phi) <- c(length(phi),1)	
   dim(rho) <- c(length(rho),1)	
-  if(plot== T)  image(modulus)
+  if(plot== TRUE)  image(modulus)
   dim(modulus) <- c(sigsize * nscale, 1)
 
 
@@ -118,7 +119,7 @@ snake <- function(tfrep, guessA, guessB, snakesize = length(guessB),
 
   count <- z$nb
   cat("Number of moves:",count,"(",stagnant," still steps)\n")
-  if(plot==T) lines(z$rho+1, z$phi+1)
+  if(plot==TRUE) lines(z$rho+1, z$phi+1)
   list(A = z$phi+1, B = z$rho+1, cost = z$cost[1:count])
 
 }
@@ -129,7 +130,7 @@ snake <- function(tfrep, guessA, guessB, snakesize = length(guessB),
 snakoid <- function(modulus, guessA, guessB, snakesize = length(guessB),
 	tfspec = numeric(dim(modulus)[2]), subrate = 1, temprate = 3,
 	muA = 1, muB = muA, lambdaB = 2*muB, lambdaA = 2*muA,
-	iteration = 1000000, seed = -7, costsub = 1, stagnant = 20000,plot=T)
+	iteration = 1000000, seed = -7, costsub = 1, stagnant = 20000,plot=TRUE)
 #########################################################################
 #     snakoid:   
 #     ----------
@@ -176,7 +177,7 @@ snakoid <- function(modulus, guessA, guessB, snakesize = length(guessB),
   count <- 0	
   dim(phi) <- c(length(phi),1)	
   dim(rho) <- c(length(rho),1)
-  if(plot== T)  image(modulus)	
+  if(plot== TRUE)  image(modulus)	
   dim(modulus) <- c(sigsize * nscale, 1)
 
 
@@ -227,7 +228,7 @@ snakoid <- function(modulus, guessA, guessB, snakesize = length(guessB),
 
   count <- z$nb
   cat("Number of moves:",count,"(",stagnant," still steps)\n")
-  if(plot== T)  lines(z$rho+1, z$phi+1) 
+  if(plot== TRUE)  lines(z$rho+1, z$phi+1) 
   list(A = z$phi+1, B = z$rho+1, cost = z$cost[1:count])
 
 }

@@ -19,8 +19,9 @@
 
 
 irregrec <- function(siginput, cwtinput,phi,compr,noct,nvoice,
-	epsilon = 0.5, w0 = 2*pi, prob = 0.8, fast = F, plot = F, para = 0,
-        hflag = F, check = F, minnbnodes = 2, real = F)
+                     epsilon = 0.5, w0 = 2*pi, prob = 0.8, fast = FALSE,
+                     plot = FALSE, para = 0, hflag = FALSE, check = FALSE,
+                     minnbnodes = 2, real = FALSE)
 #########################################################################
 #     irregrec:
 #     ---------
@@ -97,7 +98,7 @@ cat("node at = ", node, "\n")
     if(epsilon == 0)
        Q2 <- 0
     else {
-       if (fast == F)
+       if (fast == FALSE)
          Q2 <- rkernel(node, phinode, nvoice, x.min = x.min,x.max = x.max,w0 = w0)
        else
 	 Q2 <- fastkernel(node, phinode, nvoice, x.min = x.min,x.max = x.max,w0 = w0)
@@ -105,7 +106,7 @@ cat("node at = ", node, "\n")
     cat(" kernel; ")
 
     # Generating the Q1 term in reconstruction kernel
-    if (hflag == T){
+    if (hflag == TRUE){
        one <- numeric(np)
        one[] <- 1
      }
@@ -168,7 +169,7 @@ cat("node at = ", node, "\n")
     if(epsilon == 0)
        Q2 <- 0
     else {
-       if (fast == F)
+       if (fast == FALSE)
          Q2 <- rkernel(node, phinode, nvoice, x.min = x.min,x.max = x.max,w0 = w0)
        else
 	 Q2 <- fastkernel(node, phinode, nvoice, x.min = x.min,x.max = x.max,w0 = w0)
@@ -176,7 +177,7 @@ cat("node at = ", node, "\n")
     cat(" kernel; ")
 
     # Generating the Q1 term in reconstruction kernel
-    if (hflag == T){
+    if (hflag == TRUE){
        one <- numeric(np)
        one[] <- 1
      }
@@ -200,7 +201,7 @@ cat("node at = ", node, "\n")
                    epsilon, np, w0 = w0, check = check, real = real)
 
 
-    if(plot == T){
+    if(plot == TRUE){
        par(mfrow=c(2,1))
        plot.ts(Re(siginput))
        title("Original signal")

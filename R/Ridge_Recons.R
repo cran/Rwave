@@ -13,9 +13,10 @@
 
 
 
-regrec <- function(siginput, cwtinput,phi,compr,noct,nvoice,
-	epsilon = 0, w0 = 2*pi, fast = F, plot = F, para = 0,
-        hflag = F, check = F, minnbnodes = 2, real = F)
+regrec <- function(siginput, cwtinput, phi, compr, noct, nvoice,
+                   epsilon = 0, w0 = 2*pi, fast = FALSE, plot = FALSE,
+                   para = 0, hflag = FALSE, check = FALSE, minnbnodes = 2,
+                   real = FALSE)
 #########################################################################
 #     regrec:
 #     -------
@@ -57,7 +58,7 @@ regrec <- function(siginput, cwtinput,phi,compr,noct,nvoice,
 #
 ##########################################################################
 {
-#  Generate Sampled ridge
+   ## Generate Sampled ridge
 
    tmp <- wRidgeSampling(phi,compr,nvoice)
 
@@ -67,8 +68,8 @@ regrec <- function(siginput, cwtinput,phi,compr,noct,nvoice,
    phinode <- as.integer(phinode)	
 
    if(nbnodes < minnbnodes){
-      cat(" Chain too small\n")
-      NULL
+     cat(" Chain too small\n")
+     NULL
    }
    else {
    phi.x.min <- 2 * 2^(phinode[1]/nvoice)
@@ -84,70 +85,71 @@ regrec <- function(siginput, cwtinput,phi,compr,noct,nvoice,
    np <- as.integer((x.max - x.min)/x.inc) +1
    cat("(size:",np,",",nbnodes,"nodes):")
 
-   fast <- F
+   fast <- FALSE
 
-    # Generating the Q2 term in reconstruction kernel
-    if(epsilon == 0)
-       Q2 <- 0
-    else {
-       if (fast == F)
-         Q2 <- rkernel(node, phinode, nvoice, x.min = x.min,x.max = x.max,w0 = w0)
-       else
-	 Q2 <- fastkernel(node, phinode, nvoice, x.min = x.min,x.max = x.max,w0 = w0)
-    }
-	
-    # Generating the Q1 term in reconstruction kernel
-    if (hflag == T){
-       one <- numeric(np)
-       one[] <- 1
-     }
-    else{
-       one <- numeric(np)
-       one[] <- 1
-    }
-
-     if (epsilon !=0 ){
-        Q <-  epsilon * Q2
-        for(j in 1:np)
-            Q[j,j] <- Q[j,j] + one[j]
-           Qinv <- solve(Q)
-     }
-     else{
-        Qinv <-  1/one
-      }
-
-   tmp2 <- ridrec(cwtinput,node,phinode,noct,nvoice,
-             Qinv,epsilon,np, w0=w0, check=check,real=real)
-
-    if(plot == T){
-       par(mfrow=c(2,1))
-       plot.ts(Re(siginput))
-       title("Original signal")
-       plot.ts(Re(tmp2$sol))
-       title("Reconstructed signal")
-    }
-    npl(2)
-    lam <- tmp2$lam
-    if(plot==T) {
-       plot.ts(lam,xlab="Number",ylab="Lambda Value")
-       title("Lambda Profile")
-     }
-    N <- length(lam)/2
-    mlam <- numeric(N)
-    for(j in 1:N)
-       mlam[j] <- Mod(lam[j] + lam[N + j]*(1i))
-    if(plot==T) plot.ts(sort(mlam))
-
-    list(sol = tmp2$sol, A = tmp2$A, lam = tmp2$lam, dualwave = tmp2$dualwave,
-	  morvelets = tmp2$morvelets, solskel = tmp2$solskel,
-          inputskel = tmp2$inputskel, Q2 = Q2, nbnodes = nbnodes)
-	}
-	
+   ## Generating the Q2 term in reconstruction kernel
+   if(epsilon == 0)
+     Q2 <- 0
+   else {
+     if (fast == FALSE)
+       Q2 <- rkernel(node, phinode, nvoice, x.min = x.min, x.max = x.max,
+                     w0 = w0)
+     else
+       Q2 <- fastkernel(node, phinode, nvoice, x.min = x.min,
+                        x.max = x.max, w0 = w0)
+   }
+   
+   ## Generating the Q1 term in reconstruction kernel
+   if (hflag == TRUE){
+     one <- numeric(np)
+     one[] <- 1
+   }
+   else{
+     one <- numeric(np)
+     one[] <- 1
+   }
+   
+   if (epsilon !=0 ){
+     Q <-  epsilon * Q2
+     for(j in 1:np)
+       Q[j,j] <- Q[j,j] + one[j]
+     Qinv <- solve(Q)
+   }
+   else{
+     Qinv <-  1/one
+   }
+   
+   tmp2 <- ridrec(cwtinput, node, phinode, noct, nvoice,
+                  Qinv, epsilon, np, w0=w0, check=check, real=real)
+   
+   if(plot == TRUE) {
+     par(mfrow=c(2,1))
+     plot.ts(Re(siginput))
+     title("Original signal")
+     plot.ts(Re(tmp2$sol))
+     title("Reconstructed signal")
+   }
+   npl(2)
+   lam <- tmp2$lam
+   if(plot == TRUE) {
+     plot.ts(lam,xlab="Number",ylab="Lambda Value")
+     title("Lambda Profile")
+   }
+   N <- length(lam)/2
+   mlam <- numeric(N)
+   for(j in 1:N)
+     mlam[j] <- Mod(lam[j] + lam[N + j]*(1i))
+   if(plot == TRUE) plot.ts(sort(mlam))
+   
+   list(sol = tmp2$sol, A = tmp2$A, lam = tmp2$lam, dualwave = tmp2$dualwave,
+        morvelets = tmp2$morvelets, solskel = tmp2$solskel,
+        inputskel = tmp2$inputskel, Q2 = Q2, nbnodes = nbnodes)
+ }
 }
 
 
 ridrec <- function(cwtinput, node, phinode, noct, nvoice,
-	Qinv, epsilon, np, w0 = 2*pi, check = F, real = F)
+	Qinv, epsilon, np, w0 = 2*pi, check = FALSE, real = FALSE)
 #########################################################################
 #     ridrec:
 #     ------
@@ -187,7 +189,7 @@ ridrec <- function(cwtinput, node, phinode, noct, nvoice,
    aridge <- phinode
    bridge <- node
 
-   if (real == T)
+   if (real == TRUE)
       morvelets <- morwave2(bridge,aridge,nvoice,np,N)
    else
       morvelets <- morwave(bridge,aridge,nvoice,np,N)
@@ -196,13 +198,13 @@ ridrec <- function(cwtinput, node, phinode, noct, nvoice,
 
 
    if( epsilon == 0){
-      if (real == T)
+      if (real == TRUE)
          sk <- zeroskeleton2(cwtinput,Qinv,morvelets,bridge,aridge,N)
       else
          sk <- zeroskeleton(cwtinput,Qinv,morvelets,bridge,aridge,N)      
    }
    else { 
-      if(real == T) 
+      if(real == TRUE) 
          sk <- skeleton2(cwtinput,Qinv,morvelets,bridge,aridge,N)
       else
          sk <- skeleton(cwtinput,Qinv,morvelets,bridge,aridge,N)
@@ -212,7 +214,7 @@ ridrec <- function(cwtinput, node, phinode, noct, nvoice,
    solskel <- 0 #not needed if check not done
    inputskel <- 0 #not needed if check not done
 
-   if(check == T){
+   if(check == TRUE){
       wtsol <- cwt(Re(sk$sol),noct,nvoice)
       solskel <- complex(N)
       for(j in 1:N) solskel[j] <- wtsol[bridge[j],aridge[j]]
@@ -536,7 +538,7 @@ zeroskeleton2 <- function(cwtinput, Qinv, morvelets, bridge, aridge, N)
 
 
 regrec2 <- function(siginput, cwtinput, phi, nbnodes, noct, nvoice, Q2,
-	epsilon = 0.5, w0 = 2*pi , plot = F)
+	epsilon = 0.5, w0 = 2*pi , plot = FALSE)
 #########################################################################
 #     regrec2:
 #     -------
@@ -583,7 +585,7 @@ regrec2 <- function(siginput, cwtinput, phi, nbnodes, noct, nvoice, Q2,
 
    tmp2 <- ridrec(cwtinput,node,phinode,noct,nvoice,Qinv,epsilon,np)
 
-   if(plot == T){
+   if(plot == TRUE){
       par(mfrow=c(2,1))
       plot.ts(Re(siginput))
       title("Original signal")

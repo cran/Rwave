@@ -19,8 +19,8 @@
 
 
 gregrec <- function(siginput, gtinput, phi, nbnodes, nvoice,
-	freqstep, scale, epsilon = 0, fast = F, plot = F,
-	para = 0, hflag = F, real = F, check = F)
+	freqstep, scale, epsilon = 0, fast = FALSE, plot = FALSE,
+	para = 0, hflag = FALSE, real = FALSE, check = FALSE)
 #########################################################################
 #     gregrec:
 #     -------
@@ -40,7 +40,7 @@ gregrec <- function(siginput, gtinput, phi, nbnodes, nvoice,
 #           sums instead of Romberg's quadrature
 #      plot: if set to TRUE, displays original and reconstructed signals
 #      para: scale parameter for extrapolating the ridges.
-#      hflag:if set to T, uses $Q_1$ as first term in the kernel.
+#      hflag:if set to TRUE, uses $Q_1$ as first term in the kernel.
 #      real: if set to TRUE, only uses constraints on the real part
 #            of the transform for the reconstruction.
 #      check: if set to TRUE, computes the wavelet transform of the
@@ -80,7 +80,7 @@ gregrec <- function(siginput, gtinput, phi, nbnodes, nvoice,
    if(epsilon == 0)
        Q2 <- 0
    else {
-      if (fast == F)
+      if (fast == FALSE)
 	Q2 <- gkernel(node,phinode,freqstep,scale,x.min = x.min, x.max = x.max)
       else
 	Q2 <- fastgkernel(node,phinode,freqstep,scale,x.min = x.min,
@@ -89,7 +89,7 @@ gregrec <- function(siginput, gtinput, phi, nbnodes, nvoice,
    cat(" kernel;")
 
 # Generating the Q1 term in reconstruction kernel
-   if (hflag == T)
+   if (hflag == TRUE)
       one <- gsampleOne(node,scale,np)
    else{
       one <- numeric(np)
@@ -110,7 +110,7 @@ gregrec <- function(siginput, gtinput, phi, nbnodes, nvoice,
    tmp2 <- gridrec(gtinput,node,phinode,nvoice,
 	freqstep,scale,Qinv,epsilon,np, real = real, check = check)
 
-   if(plot == T){
+   if(plot == TRUE){
       par(mfrow=c(2,1))
       plot.ts(Re(siginput))
       title("Original signal")
@@ -138,7 +138,7 @@ plot.ts(sort(mlam))
 
 
 gridrec <- function(gtinput, node, phinode, nvoice,
-	freqstep, scale, Qinv, epsilon, np, real = F, check = F)
+	freqstep, scale, Qinv, epsilon, np, real = FALSE, check = FALSE)
 #########################################################################
 #     gridrec:
 #     --------
@@ -177,7 +177,7 @@ gridrec <- function(gtinput, node, phinode, nvoice,
 
    omegaridge <- phinode
    bridge <- node
-   if(real == T)
+   if(real == TRUE)
       gaborets <- gwave2(bridge,omegaridge,nvoice,freqstep,scale,np,N)
    else
       gaborets <- gwave(bridge,omegaridge,nvoice,freqstep,scale,np,N)
@@ -185,7 +185,7 @@ gridrec <- function(gtinput, node, phinode, nvoice,
    cat("gaborets;")
 
    if(epsilon == 0){
-      if(real == T)
+      if(real == TRUE)
          sk <- zeroskeleton2(gtinput,Qinv,gaborets,bridge,omegaridge,N)
       else
          sk <- zeroskeleton(gtinput,Qinv,gaborets,bridge,omegaridge,N)
@@ -199,10 +199,10 @@ gridrec <- function(gtinput, node, phinode, nvoice,
    solskel <- 0 #not needed if check not done
    inputskel <- 0 #not needed if check not done
 
-   if(check == T){
+   if(check == TRUE){
       solskel <- complex(N)
       inputskel <- complex(N)
-      gtsol <- cgt(sk$sol,nvoice,freqstep,plot=F)
+      gtsol <- cgt(sk$sol,nvoice,freqstep,plot=FALSE)
       for(j in 1:N) solskel[j] <- gtsol[bridge[j],omegaridge[j]]
 
       for (j in 1:N)
@@ -261,7 +261,7 @@ gwave <- function(bridge,omegaridge,nvoice,freqstep,scale,np,N)
 #   for(k in 1:N)  {
 #      dirac[bridge[k]] <- 1.0;
 #      omega <- omegaridge[k]*freqstep;
-#      gtdirac <- vgt(dirac,omega,scale,open=FALSE,plot=F);
+#      gtdirac <- vgt(dirac,omega,scale,open=FALSE,plot=FALSE);
 #      gaborets[,k] <- Re(gtdirac);
 #      gaborets[,k+N] <- Im(gtdirac);
 #      dirac[] <- 0

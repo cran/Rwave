@@ -7,7 +7,7 @@ Estimate Hurst Exponent
 Estimates Hurst exponent from a wavelet transform.
 }
 \usage{
-hurst.est(wspec, range, nvoice, plot=T)
+hurst.est(wspec, range, nvoice, plot=TRUE)
 }
 \arguments{
 \item{wspec}{
@@ -20,7 +20,7 @@ range of scales from which estimate the exponent.
 number of scales per octave of the wavelet transform.
 }
 \item{plot}{
-if set to \code{T}, displays regression line on current plot.
+if set to \code{TRUE}, displays regression line on current plot.
 }}
 \value{
 complex 1D array of size sigsize.
@@ -49,10 +49,10 @@ spwnoise <- spwnoise*spwnoise
 plot(spwnoise[1:4096], log="xy", type="l")
 lswnoise <- lsfit(log10(1:4096), log10(spwnoise[1:4096]))
 abline(lswnoise$coef)
-cwtwnoise <- DOG(wnoise, 10, 5, 1, plot=F)
+cwtwnoise <- DOG(wnoise, 10, 5, 1, plot=FALSE)
 mcwtwnoise <- Mod(cwtwnoise)
 mcwtwnoise <- mcwtwnoise*mcwtwnoise
-wspwnoise <- tfmean(mcwtwnoise, plot=F)
+wspwnoise <- tfmean(mcwtwnoise, plot=FALSE)
 wspec.pl(wspwnoise, 5)
 hurst.est(wspwnoise, 1:50, 5)
 }

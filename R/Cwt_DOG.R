@@ -9,12 +9,7 @@
 #                  All right reserved                           
 #########################################################################
 
-
-
-
-
-DOG <- function(input, noctave, nvoice = 1, moments,
-	twoD = TRUE, plot = TRUE)
+DOG <- function(input, noctave, nvoice = 1, moments, twoD = TRUE, plot = TRUE)
 #########################################################################
 #       DOG: Derivative of Gaussian  
 #       ----
@@ -40,54 +35,52 @@ DOG <- function(input, noctave, nvoice = 1, moments,
 #
 #########################################################################
 {
-   oldinput <- input
-   isize <- length(oldinput)
-
-   tmp <- adjust.length(oldinput)
-   input <- tmp$signal
-   newsize <- length(input)
-
-   pp <- noctave * nvoice
-   Routput <- matrix(0,newsize,pp)
-   Ioutput <- matrix(0,newsize,pp)
-   output <- matrix(0,newsize,pp)
-   dim(Routput) <- c(pp * newsize,1)
-   dim(Ioutput) <- c(pp * newsize,1)
-   dim(input) <- c(newsize,1)
-
-   z <- .C("Scwt_DOG",
-            as.single(Re(input)),
-            as.single(Im(input)),
-            Rtmp = as.double(Routput),
-            Itmp = as.double(Ioutput),
-            as.integer(noctave),
-            as.integer(nvoice),
-            as.integer(newsize),
-            as.integer(moments))
-
-   Routput <- z$Rtmp
-   Ioutput <- z$Itmp
-   dim(Routput) <- c(newsize,pp)
-   dim(Ioutput) <- c(newsize,pp)
-   i <- sqrt(as.complex(-1))
-   if(twoD) {
-     output <- Routput[1:isize,] + Ioutput[1:isize,] * i
-     if(plot) image(Mod(output))
-     output
-   } 
-   else {
-     Rtmp <- array(0,c(isize,noctave,nvoice))
-     Itmp <- array(0,c(isize,noctave,nvoice))
-     for(i in 1:noctave)
-       for(j in 1:nvoice) {
-         Rtmp[,i,j] <- Routput[1:isize,(i-1)*nvoice+j]
-         Itmp[,i,j] <- Ioutput[1:isize,(i-1)*nvoice+j]
+  oldinput <- input
+  isize <- length(oldinput)
+  
+  tmp <- adjust.length(oldinput)
+  input <- tmp$signal
+  newsize <- length(input)
+  
+  pp <- noctave * nvoice
+  Routput <- matrix(0,newsize,pp)
+  Ioutput <- matrix(0,newsize,pp)
+  output <- matrix(0,newsize,pp)
+  dim(Routput) <- c(pp * newsize,1)
+  dim(Ioutput) <- c(pp * newsize,1)
+  dim(input) <- c(newsize,1)
+  
+  z <- .C("Scwt_DOG",
+          as.single(Re(input)),
+          as.single(Im(input)),
+          Rtmp = as.double(Routput),
+          Itmp = as.double(Ioutput),
+          as.integer(noctave),
+          as.integer(nvoice),
+          as.integer(newsize),
+          as.integer(moments))
+  
+  Routput <- z$Rtmp
+  Ioutput <- z$Itmp
+  dim(Routput) <- c(newsize,pp)
+  dim(Ioutput) <- c(newsize,pp)
+  i <- sqrt(as.complex(-1))
+  if(twoD) {
+    output <- Routput[1:isize,] + Ioutput[1:isize,] * i
+    if(plot) image(Mod(output))
+    output
+  } 
+  else {
+    Rtmp <- array(0,c(isize,noctave,nvoice))
+    Itmp <- array(0,c(isize,noctave,nvoice))
+    for(i in 1:noctave)
+      for(j in 1:nvoice) {
+        Rtmp[,i,j] <- Routput[1:isize,(i-1)*nvoice+j]
+        Itmp[,i,j] <- Ioutput[1:isize,(i-1)*nvoice+j]
       }
-     Rtmp + Itmp * i
-   }
+    Rtmp + Itmp * i
+  }
 }
-
-
 
 vDOG <- function(input, scale, moments)
 #########################################################################
@@ -109,35 +102,29 @@ vDOG <- function(input, scale, moments)
 #
 #########################################################################
 {
-   oldinput <- input
-   isize <- length(oldinput)
-
-   tmp <- adjust.length(oldinput)
-   input <- tmp$signal
-   newsize <- length(input)
-
-   Routput <- numeric(newsize)
-   Ioutput <- numeric(newsize)
-   dim(input) <- c(newsize,1)
-
-   z <- .C("Svwt_DOG",
-            as.single(Re(input)),
-            as.single(Im(input)),
-            Rtmp = as.double(Routput),
-            Itmp = as.double(Ioutput),
-            as.single(scale),
-            as.integer(newsize),
-            as.integer(moments))
-
-   Routput <- z$Rtmp
-   Ioutput <- z$Itmp
-   i <- sqrt(as.complex(-1))
-
-   Routput[1:isize] + Ioutput[1:isize] * i
+  oldinput <- input
+  isize <- length(oldinput)
+  
+  tmp <- adjust.length(oldinput)
+  input <- tmp$signal
+  newsize <- length(input)
+  
+  Routput <- numeric(newsize)
+  Ioutput <- numeric(newsize)
+  dim(input) <- c(newsize,1)
+  
+  z <- .C("Svwt_DOG",
+          as.single(Re(input)),
+          as.single(Im(input)),
+          Rtmp = as.double(Routput),
+          Itmp = as.double(Ioutput),
+          as.single(scale),
+          as.integer(newsize),
+          as.integer(moments))
+  
+  Routput <- z$Rtmp
+  Ioutput <- z$Itmp
+  i <- sqrt(as.complex(-1))
+  
+  Routput[1:isize] + Ioutput[1:isize] * i
 }
-
-
-
-
-
-

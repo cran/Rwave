@@ -33,7 +33,7 @@ mnpval <- function(inputdata, maxresoln, wl=128, scale=FALSE)
   pval <- t(z$a)
   dim(pval) <- c(np, maxresoln)
 
-  plot.result(pval, s, maxresoln, scale)
+  plotResult(pval, s, maxresoln, scale)
   list( original=s, pval=pval, maxresoln=maxresoln, np=np )
 }
 
@@ -63,7 +63,7 @@ mbpval <- function(inputdata, maxresoln, wl=128, scale=FALSE)
   pval <- t(z$a)
   dim(pval) <- c(np, maxresoln)
 
-  plot.result(pval, s, maxresoln, scale)
+  plotResult(pval, s, maxresoln, scale)
   list( original=s, pval=pval, maxresoln=maxresoln, np=np )
 }
 
@@ -101,7 +101,7 @@ mntrim <- function(extrema, scale=FALSE, prct=.95)
 
   cat("number of extrema left =", sum(trim!=0), "\n")
 
-  plot.result(trim, s, maxresoln, scale)
+  plotResult(trim, s, maxresoln, scale)
   list( original=s, extrema=trim, Sf=extrema$Sf, maxresoln=maxresoln, np=np )
 }
 
@@ -138,7 +138,7 @@ mbtrim <- function(extrema, scale=FALSE, prct=.95)
 
   cat("number of extrema left =", sum(trim!=0), "\n")
 
-  plot.result(trim, s, maxresoln, scale)
+  plotResult(trim, s, maxresoln, scale)
   list( original=s, extrema=trim, Sf=extrema$Sf, maxresoln=maxresoln, np=np )
 }
 

@@ -1,5 +1,5 @@
-\name{gsampleone}
-\alias{gsampleone}
+\name{gsampleOne}
+\alias{gsampleOne}
 \title{
 Sampled Identity
 }
@@ -7,7 +7,7 @@ Sampled Identity
 Generate a sampled identity matrix.
 }
 \usage{
-gsampleone(node, scale, np)
+gsampleOne(node, scale, np)
 }
 \arguments{
 \item{node}{

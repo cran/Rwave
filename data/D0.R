@@ -1,1 +1,1 @@
-D0 <- scan("D0")
+D0 <- scan("D0", quiet=TRUE)

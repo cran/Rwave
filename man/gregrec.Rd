@@ -8,7 +8,8 @@ Reconstructs signal from a ``regularly sampled'' ridge, in the Gabor case.
 }
 \usage{
 gregrec(siginput, gtinput, phi, nbnodes, nvoice, freqstep, scale,
-epsilon=0, fast=F, plot=F, para=0, hflag=F, real=F, check=F)
+epsilon=0, fast=FALSE, plot=FALSE, para=0, hflag=FALSE, real=FALSE,
+check=FALSE)
 }
 \arguments{
 \item{siginput}{
@@ -39,19 +40,19 @@ coefficient of the \eqn{Q_2} term in reconstruction kernel
 if set to T, the kernel is computed using trapezoidal rule.
 }
 \item{plot}{
-if set to T, displays original and reconstructed signals
+if set to TRUE, displays original and reconstructed signals
 }
 \item{para}{
 scale parameter for extrapolating the ridges.
 }
 \item{hflag}{
-if set to T, uses \eqn{Q_1} as first term in the kernel.
+if set to TRUE, uses \eqn{Q_1} as first term in the kernel.
 }
 \item{real}{
-if set to T, uses only real constraints on the transform.
+if set to TRUE, uses only real constraints on the transform.
 }
 \item{check}{
-if set to T, computes \code{\link{cwt}} of
+if set to TRUE, computes \code{\link{cwt}} of
 reconstructed signal.
 }}
 \value{

@@ -18,8 +18,8 @@
 
 
 girregrec <- function(siginput, gtinput, phi, nbnodes, nvoice,
-	freqstep, scale, epsilon = 0.5,fast = F, prob= 0.8, plot = F,
-	para = 0, hflag = F, real = F, check = F)
+	freqstep, scale, epsilon = 0.5,fast = FALSE, prob= 0.8, plot = FALSE,
+	para = 0, hflag = FALSE, real = FALSE, check = FALSE)
 #########################################################################
 #     girregrec:
 #     ---------
@@ -87,7 +87,7 @@ girregrec <- function(siginput, gtinput, phi, nbnodes, nvoice,
    if(epsilon == 0)
        Q2 <- 0
    else {
-      if (fast == F)
+      if (fast == FALSE)
 	Q2 <- gkernel(node,phinode,freqstep,scale,x.min = x.min, x.max = x.max)
       else
 	Q2 <- fastgkernel(node,phinode,freqstep,scale,x.min = x.min,
@@ -96,7 +96,7 @@ girregrec <- function(siginput, gtinput, phi, nbnodes, nvoice,
    cat(" kernel;")
 
 # Generating the Q1 term in reconstruction kernel
-   if (hflag == T)
+   if (hflag == TRUE)
       one <- gsampleOne(node,scale,np)
    else{
       one <- numeric(np)
@@ -143,7 +143,7 @@ girregrec <- function(siginput, gtinput, phi, nbnodes, nvoice,
    if(epsilon == 0)
        Q2 <- 0
    else {
-      if (fast == F)
+      if (fast == FALSE)
 	Q2 <- gkernel(node,phinode,freqstep,scale,x.min = x.min, x.max = x.max)
       else
 	Q2 <- fastgkernel(node,phinode,freqstep,scale,x.min = x.min,
@@ -152,7 +152,7 @@ girregrec <- function(siginput, gtinput, phi, nbnodes, nvoice,
    cat(" kernel;")
 
 # Generating the Q1 term in reconstruction kernel
-   if (hflag == T)
+   if (hflag == TRUE)
       one <- gsampleOne(node,scale,np)
    else{
       one <- numeric(np)
@@ -174,7 +174,7 @@ girregrec <- function(siginput, gtinput, phi, nbnodes, nvoice,
 	freqstep,scale,Qinv,epsilon,np, real = real, check = check)
 
 
-   if(plot == T){
+   if(plot == TRUE){
       par(mfrow=c(2,1))
       plot.ts(Re(siginput))
       title("Original signal")

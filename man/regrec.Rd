@@ -9,8 +9,8 @@ case.
 }
 \usage{
 regrec(siginput, cwtinput, phi, compr, noct, nvoice, epsilon=0,
-w0=2 * pi, fast=F, plot=F, para=0, hflag=F, check=F, minnbnodes=2,
-real=F)
+w0=2 * pi, fast=FALSE, plot=FALSE, para=0, hflag=FALSE,
+check=FALSE, minnbnodes=2, real=FALSE)
 }
 \arguments{
 \item{siginput}{
@@ -38,25 +38,25 @@ coefficient of the \eqn{Q_2} term in reconstruction kernel
 central frequency of Morlet wavelet
 }
 \item{fast}{
-if set to T, the kernel is computed using trapezoidal rule.
+if set to TRUE, the kernel is computed using trapezoidal rule.
 }
 \item{plot}{
-if set to T, displays original and reconstructed signals
+if set to TRUE, displays original and reconstructed signals
 }
 \item{para}{
 scale parameter for extrapolating the ridges.
 }
 \item{hflag}{
-if set to T, uses \eqn{Q_1} as first term in the kernel.
+if set to TRUE, uses \eqn{Q_1} as first term in the kernel.
 }
 \item{check}{
-if set to T, computes \code{\link{cwt}} of reconstructed signal.
+if set to TRUE, computes \code{\link{cwt}} of reconstructed signal.
 }
 \item{minnbnodes}{
 minimum number of nodes for the reconstruction.
 }
 \item{real}{
-if set to T, uses only real constraints on the transform.
+if set to TRUE, uses only real constraints on the transform.
 }}
 \value{
 Returns a list containing:

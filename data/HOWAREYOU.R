@@ -1,1 +1,1 @@
-HOWAREYOU <- scan("HOWAREYOU")
+HOWAREYOU <- scan("HOWAREYOU", quiet=TRUE)

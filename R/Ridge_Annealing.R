@@ -14,8 +14,9 @@
 
 
 corona <- function(tfrep, guess, tfspec = numeric(dim(tfrep)[2]),
-	subrate = 1, temprate = 3, mu = 1, lambda = 2*mu,
-	iteration = 1000000, seed = -7, stagnant = 20000, costsub = 1,plot=T)
+                   subrate = 1, temprate = 3, mu = 1, lambda = 2*mu,
+                   iteration = 1000000, seed = -7, stagnant = 20000,
+                   costsub = 1, plot = TRUE)
 #########################################################################
 #       corona:
 #       -------
@@ -112,7 +113,7 @@ corona <- function(tfrep, guess, tfspec = numeric(dim(tfrep)[2]),
 
   count <- z$nb
   cat("Number of iterations:",(count-1)*costsub,"(stagnant=",stagnant,")\n")
-  if(plot == T) {
+  if(plot == TRUE) {
    image(Mod(tfrep))
    lines(z$phi+1)
   }	
@@ -125,7 +126,7 @@ corona <- function(tfrep, guess, tfspec = numeric(dim(tfrep)[2]),
 coronoid <- function(tfrep, guess, tfspec = numeric(dim(tfrep)[2]),
 	subrate = 1, temprate = 3, mu = 1, lambda = 2*mu,
 	iteration = 1000000, seed = -7, stagnant = 20000,
-	costsub = 1,plot=T)
+	costsub = 1,plot=TRUE)
 #########################################################################
 #       coronoid:   
 #       ----------
@@ -220,7 +221,7 @@ coronoid <- function(tfrep, guess, tfspec = numeric(dim(tfrep)[2]),
 
   count <- z$nb
   cat("Number of iterations:",(count-1)*costsub,"(stagnant=",stagnant,")\n")
-  if(plot == T) {	
+  if(plot == TRUE) {	
     image(Mod(tfrep))
     lines(z$phi+1)
   }

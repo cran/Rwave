@@ -9,8 +9,8 @@
 #                  All right reserved                           
 #########################################################################
 
-cwt <- function(input, noctave, nvoice = 1, w0 = 2*pi,
-	twoD = TRUE, plot = TRUE)
+cwt <- function(input, noctave, nvoice = 1, w0 = 2*pi, twoD = TRUE,
+                plot = TRUE)
 #########################################################################
 #      cwt:
 #      ---
@@ -36,60 +36,57 @@ cwt <- function(input, noctave, nvoice = 1, w0 = 2*pi,
 #
 #########################################################################
 {
-   oldinput <- input
-   isize <- length(oldinput)
-
-   tmp <- adjust.length(oldinput)
-   input <- tmp$signal
-   newsize <- length(input)
-
-   pp <- noctave * nvoice
-   Routput <- matrix(0,newsize,pp)
-   Ioutput <- matrix(0,newsize,pp)
-   output <- matrix(0,newsize,pp)
-   dim(Routput) <- c(pp * newsize,1)
-   dim(Ioutput) <- c(pp * newsize,1)
-   dim(input) <- c(newsize,1)
-
-   z <- .C("Scwt_morlet",
-            as.single(Re(input)),
-            as.single(Im(input)),
-            Rtmp = as.double(Routput),
-            Itmp = as.double(Ioutput),
-            as.integer(noctave),
-            as.integer(nvoice),
-            as.integer(newsize),
-            as.single(w0))
-
-   Routput <- z$Rtmp
-   Ioutput <- z$Itmp
-   dim(Routput) <- c(newsize,pp)
-   dim(Ioutput) <- c(newsize,pp)
-   i <- sqrt(as.complex(-1))
-   if(twoD) {
-     output <- Routput[1:isize,] + Ioutput[1:isize,] * i
-     if(plot) {
-	image(Mod(output), xlab="Time", ylab="log(scale)")
-	title("Wavelet Transform Modulus")
-     }
-     output
-   } 
-   else {
-     Rtmp <- array(0,c(isize,noctave,nvoice))
-     Itmp <- array(0,c(isize,noctave,nvoice))
-     for(i in 1:noctave)
-       for(j in 1:nvoice) {
-         Rtmp[,i,j] <- Routput[1:isize,(i-1)*nvoice+j]
-         Itmp[,i,j] <- Ioutput[1:isize,(i-1)*nvoice+j]
+  oldinput <- input
+  isize <- length(oldinput)
+  
+  tmp <- adjust.length(oldinput)
+  input <- tmp$signal
+  newsize <- length(input)
+  
+  pp <- noctave * nvoice
+  Routput <- matrix(0,newsize,pp)
+  Ioutput <- matrix(0,newsize,pp)
+  output <- matrix(0,newsize,pp)
+  dim(Routput) <- c(pp * newsize,1)
+  dim(Ioutput) <- c(pp * newsize,1)
+  dim(input) <- c(newsize,1)
+  
+  z <- .C("Scwt_morlet",
+          as.single(Re(input)),
+          as.single(Im(input)),
+          Rtmp = as.double(Routput),
+          Itmp = as.double(Ioutput),
+          as.integer(noctave),
+          as.integer(nvoice),
+          as.integer(newsize),
+          as.single(w0))
+  
+  Routput <- z$Rtmp
+  Ioutput <- z$Itmp
+  dim(Routput) <- c(newsize,pp)
+  dim(Ioutput) <- c(newsize,pp)
+  i <- sqrt(as.complex(-1))
+  if(twoD) {
+    output <- Routput[1:isize,] + Ioutput[1:isize,] * i
+    if(plot) {
+      image(Mod(output), xlab="Time", ylab="log(scale)",
+            main="Wavelet Transform Modulus")
+    }
+    output
+  } 
+  else {
+    Rtmp <- array(0,c(isize,noctave,nvoice))
+    Itmp <- array(0,c(isize,noctave,nvoice))
+    for(i in 1:noctave)
+      for(j in 1:nvoice) {
+        Rtmp[,i,j] <- Routput[1:isize,(i-1)*nvoice+j]
+        Itmp[,i,j] <- Ioutput[1:isize,(i-1)*nvoice+j]
       }
-     Rtmp + Itmp * i
-   }
+    Rtmp + Itmp * i
+  }
 }
 
-
-
-
-cwtpolar <- function(cwt,threshold=0.0)
+cwtpolar <- function(cwt, threshold=0.0)
 #########################################################################
 #       cwtpolar:   
 #       --------
@@ -110,33 +107,30 @@ cwtpolar <- function(cwt,threshold=0.0)
 #
 #########################################################################
 {
-   tmp1 <- cwt
-   sigsize <- dim(tmp1)[1] # sig size
-   noctave <- dim(tmp1)[2]
-   nvoice <- dim(tmp1)[3]
-
-   output1 <- array(0,c(sigsize,noctave,nvoice))
-   output2 <- array(0,c(sigsize,noctave,nvoice))
-   for(i in 1:noctave)
-     for(j in 1:nvoice) {
-       output1[,i,j] <- sqrt(Re(tmp1[,i,j])*Re(tmp1[,i,j])+
-          Im(tmp1[,i,j])*Im(tmp1[,i,j]))
-       output2[,i,j] <- atan(Im(tmp1[,i,j]),Re(tmp1[,i,j]))
+  tmp1 <- cwt
+  sigsize <- dim(tmp1)[1] # sig size
+  noctave <- dim(tmp1)[2]
+  nvoice <- dim(tmp1)[3]
+  
+  output1 <- array(0,c(sigsize,noctave,nvoice))
+  output2 <- array(0,c(sigsize,noctave,nvoice))
+  for(i in 1:noctave)
+    for(j in 1:nvoice) {
+      output1[,i,j] <- sqrt(Re(tmp1[,i,j])^2 + Im(tmp1[,i,j])^2)
+      output2[,i,j] <- atan(Im(tmp1[,i,j]), Re(tmp1[,i,j]))
     }
-
-   ma <- max(output1)
-   rel <- threshold * ma
-   dim(output1) <- c(sigsize * noctave * nvoice,1)
-   dim(output2) <- c(sigsize * noctave * nvoice,1)
-   output2[abs(output1) < rel] <- -3.14159
-   dim(output1) <- c(sigsize,noctave,nvoice)
-   dim(output2) <- c(sigsize,noctave,nvoice)
-
-   list(modulus=output1,argument=output2)
+  
+  ma <- max(output1)
+  rel <- threshold * ma
+  dim(output1) <- c(sigsize * noctave * nvoice,1)
+  dim(output2) <- c(sigsize * noctave * nvoice,1)
+  output2[abs(output1) < rel] <- -3.14159
+  dim(output1) <- c(sigsize,noctave,nvoice)
+  dim(output2) <- c(sigsize,noctave,nvoice)
+  
+  list(modulus=output1,argument=output2)
 }
-   
-
-
+ 
 cwtimage <- function(input)
 #########################################################################
 #       cwtimage:   
@@ -161,17 +155,15 @@ cwtimage <- function(input)
   
   output <- matrix(0,sigsize, noctave * nvoice)
   for(i in 1:noctave) {
-     k <- (i-1) * nvoice
-   for(j in 1:nvoice) {
-     output[,k+j] <- input[,i,j]
-   }
+    k <- (i-1) * nvoice
+    for(j in 1:nvoice) {
+      output[,k+j] <- input[,i,j]
+    }
   }
   image(output)
   output
 }
-   
-
-
+ 
 vwt <- function(input, scale, w0 = 2*pi)
 #########################################################################
 #      vwt:   voice Morlet wavelet transform   
@@ -192,35 +184,32 @@ vwt <- function(input, scale, w0 = 2*pi)
 #
 #########################################################################
 {
-   oldinput <- input
-   isize <- length(oldinput)
-
-   tmp <- adjust.length(oldinput)
-   input <- tmp$signal
-   newsize <- length(input)
-
-   Routput <- numeric(newsize)
-   Ioutput <- numeric(newsize)
-   dim(input) <- c(newsize,1)
-
-   z <- .C("Svwt_morlet",
-            as.single(Re(input)),
-            as.single(Im(input)),
-            Rtmp = as.double(Routput),
-            Itmp = as.double(Ioutput),
-            as.single(scale),
-            as.integer(newsize),
-            as.single(w0))
-
-   Routput <- z$Rtmp
-   Ioutput <- z$Itmp
-   i <- sqrt(as.complex(-1))
-
-   Routput[1:isize] + Ioutput[1:isize] * i
+  oldinput <- input
+  isize <- length(oldinput)
+  
+  tmp <- adjust.length(oldinput)
+  input <- tmp$signal
+  newsize <- length(input)
+  
+  Routput <- numeric(newsize)
+  Ioutput <- numeric(newsize)
+  dim(input) <- c(newsize,1)
+  
+  z <- .C("Svwt_morlet",
+          as.single(Re(input)),
+          as.single(Im(input)),
+          Rtmp = as.double(Routput),
+          Itmp = as.double(Ioutput),
+          as.single(scale),
+          as.integer(newsize),
+          as.single(w0))
+  
+  Routput <- z$Rtmp
+  Ioutput <- z$Itmp
+  i <- sqrt(as.complex(-1))
+  
+  Routput[1:isize] + Ioutput[1:isize] * i
 }
-
-
-
 
 morlet <- function(sigsize, location, scale, w0 = 2*pi)
 #########################################################################
@@ -242,23 +231,20 @@ morlet <- function(sigsize, location, scale, w0 = 2*pi)
 #
 #########################################################################
 {
-   wavelet.r <- numeric(sigsize)
-   wavelet.i <- numeric(sigsize)
-
-
-   z <- .C("morlet_time",
-            as.single(w0),
-            as.single(scale),
-            as.integer(location),
-            wavelet.r = as.double(wavelet.r),
-            wavelet.i = as.double(wavelet.i),
-            as.integer(sigsize))
-
-   i <- sqrt(as.complex(-1))
-
-   z$wavelet.r + z$wavelet.i * i
+  wavelet.r <- numeric(sigsize)
+  wavelet.i <- numeric(sigsize)
+  
+  z <- .C("morlet_time",
+          as.single(w0),
+          as.single(scale),
+          as.integer(location),
+          wavelet.r = as.double(wavelet.r),
+          wavelet.i = as.double(wavelet.i),
+          as.integer(sigsize))
+  
+  i <- sqrt(as.complex(-1))
+  z$wavelet.r + z$wavelet.i * i
 }
-
 
 vecmorlet <- function(sigsize, nbnodes, bridge, aridge, w0 = 2*pi)
 #########################################################################
@@ -281,33 +267,18 @@ vecmorlet <- function(sigsize, nbnodes, bridge, aridge, w0 = 2*pi)
 #
 #########################################################################
 {
+  morlet.r <- numeric(nbnodes * sigsize)
+  morlet.i <- numeric(nbnodes * sigsize)
 
-   morlet.r <- numeric(nbnodes * sigsize)
-   morlet.i <- numeric(nbnodes * sigsize)
-
-
-   z <- .C("vmorlet_time",
-            as.single(w0),
-            as.single(aridge),
-            as.integer(bridge),
-            morlet.r = as.double(morlet.r),
-            morlet.i = as.double(morlet.i),
-            as.integer(sigsize),
-            as.integer(nbnodes))
-
-   i <- sqrt(as.complex(-1))
-
-   z$morlet.r + z$morlet.i * i
+  z <- .C("vmorlet_time",
+          as.single(w0),
+          as.single(aridge),
+          as.integer(bridge),
+          morlet.r = as.double(morlet.r),
+          morlet.i = as.double(morlet.i),
+          as.integer(sigsize),
+          as.integer(nbnodes))
+  
+  i <- sqrt(as.complex(-1))
+  z$morlet.r + z$morlet.i * i
 }
-
-
-
-
-
-
-
-
-
-
-
-

@@ -1,1 +1,1 @@
-YN <- scan("Yen")
+YN <- scan("Yen", quiet=TRUE)

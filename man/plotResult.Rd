@@ -1,5 +1,5 @@
-\name{plot.result}
-\alias{plot.result}
+\name{plotResult}
+\alias{plotResult}
 \title{
 Plot Dyadic Wavelet Transform Extrema
 }
@@ -7,7 +7,7 @@ Plot Dyadic Wavelet Transform Extrema
 Plot extrema of dyadic wavelet transform.
 }
 \usage{
-plot.result(result, original, maxresoln, scale=F, yaxtype="s")
+plotResult(result, original, maxresoln, scale=FALSE, yaxtype="s")
 }
 \arguments{
   \item{result}{
@@ -36,5 +36,4 @@ plot.result(result, original, maxresoln, scale=F, yaxtype="s")
 \seealso{
   \code{\link{plotwt}}, \code{\link{epl}}, \code{\link{wpl}}.
 }
-\keyword{ts}
 \keyword{ts}

@@ -1,1 +1,1 @@
-purwave <- scan("pure.dat")
+purwave <- scan("pure.dat", quiet=TRUE)

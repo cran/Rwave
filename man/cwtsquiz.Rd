@@ -20,7 +20,7 @@ number of powers of 2 for the scale variable
 \item{nvoice}{
 number of scales in each octave (i.e. between two consecutive powers of 2).
 }
-\item{w}{
+\item{w0}{
 central frequency of the wavelet.
 }
 \item{twoD}{

@@ -8,7 +8,7 @@
 
 
 
-mrecons <- function(extrema,filtername="Gaussian1",readflag= TRUE)
+mrecons <- function(extrema,filtername="Gaussian1",readflag=TRUE)
 #****************************************************************
 #  mrecons
 #  --------
@@ -63,7 +63,7 @@ mrecons <- function(extrema,filtername="Gaussian1",readflag= TRUE)
   g <- f + mean(pure.data)
   h <- f + extrema$Sf
 
-  lim <- c(min(f, g, h, pure.data), max(f, g, h, pure.data))
+  lim <- range(f, g, h, pure.data)
   par(mfrow=c(3,1))
 
   plot.ts( f, pure.data, bty="n", ylim=lim )
@@ -78,7 +78,7 @@ mrecons <- function(extrema,filtername="Gaussian1",readflag= TRUE)
   par(mfrow=c(1,1))
   par(mar=c(5.1, 4.1, 4.1, 2.1))
 
-  list( f= f, g= g, h = h )
+  list( f=f, g=g, h=h )
 }
 
 

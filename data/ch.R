@@ -1,1 +1,1 @@
-ch <- scan("chirpm5db.dat")
+ch <- scan("chirpm5db.dat", quiet=TRUE)

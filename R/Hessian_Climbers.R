@@ -12,9 +12,10 @@
 
 
 
-hescrc <- function(tfrep, tfspec = numeric(dim(tfrep)[2]), grida = 10, gridb = 20,
-        bstep = 3, iteration = 10000, rate = .001, seed = -7, 
-	nbclimb = 10, flag.int = TRUE, chain= TRUE, flag.temp=FALSE,lineflag=F)
+hescrc <- function(tfrep, tfspec = numeric(dim(tfrep)[2]), grida = 10,
+                   gridb = 20, bstep = 3, iteration = 10000, rate = .001,
+                   seed = -7, nclimb = 10, flag.int = TRUE, chain= TRUE,
+                   flag.temp = FALSE, lineflag = FALSE)
 #########################################################################
 #  hescrc:   Time-frequency multiple ridge estimation (hessian climbers)
 #  ------
@@ -277,7 +278,3 @@ hescrc <- function(tfrep, tfspec = numeric(dim(tfrep)[2]), grida = 10, gridb = 2
    image(beemap)
    list(beemap = beemap, pcamap = pcamap)
 }
-
-   
-
-

@@ -9,8 +9,8 @@ crazy climbers on a gabor transform.
 }
 \usage{
 gcrcrec(siginput, inputgt, beemap, nvoice, freqstep, scale, compr,
-bstep=5, ptile=0.01, epsilon=0, fast=T, para=5, minnbnodes=3,
-hflag=F, real=F, plot=2)
+bstep=5, ptile=0.01, epsilon=0, fast=TRUE, para=5, minnbnodes=3,
+hflag=FALSE, real=FALSE, plot=2)
 }
 \arguments{
 \item{siginput}{
@@ -44,7 +44,7 @@ threshold of ridge
 constant in front of the smoothness term in penalty function.
 }
 \item{fast}{
-if set to T, uses trapezoidal rule to evaluate \eqn{Q_2}.
+if set to TRUE, uses trapezoidal rule to evaluate \eqn{Q_2}.
 }
 \item{para}{
 scale parameter for extrapolating the ridges.
@@ -53,11 +53,11 @@ scale parameter for extrapolating the ridges.
 minimal number of points per ridge.
 }
 \item{hflag}{
-if set to F, uses the identity as first term
+if set to FALSE, uses the identity as first term
 in the kernel. If not, uses \eqn{Q_1} instead.
 }
 \item{real}{
-if set to T, uses only real constraints.
+if set to TRUE, uses only real constraints.
 }
 \item{plot}{
   \item{1}{

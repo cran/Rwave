@@ -19,7 +19,7 @@
 
 pcarec <- function(siginput,inputwt, beemap, orientmap, noct, nvoice, compr,
 	maxchnlng=as.numeric(dim(beemap)[1])+10,minnbnodes = 2, 
-	w0 = 2*pi, nbchain=100,bstep = 1,ptile =.01,para=5,plot=2,check=F)
+	w0 = 2*pi, nbchain=100,bstep = 1,ptile =.01,para=5,plot=2,check=FALSE)
 #########################################################################
 #     pcarec:
 #     -------
@@ -60,7 +60,7 @@ pcarec <- function(siginput,inputwt, beemap, orientmap, noct, nvoice, compr,
    rec <- numeric(sigsize)
    plnb <- 0
 
-   if(plot != F){
+   if(plot != FALSE){
      par(mfrow=c(2,1))
      plot.ts(siginput)
      title("Original signal")
@@ -74,7 +74,7 @@ pcarec <- function(siginput,inputwt, beemap, orientmap, noct, nvoice, compr,
    idx <- numeric(nbchain)	
    p <- 0
 
-   if(check==T) {
+   if(check==TRUE) {
       inputskel <- matrix(0+0i,nbchain,sigsize)
       solskel <- matrix(0+0i, nbchain, sigsize)
    }
@@ -96,7 +96,7 @@ pcarec <- function(siginput,inputwt, beemap, orientmap, noct, nvoice, compr,
           anode,bnode,compr,noct,nvoice, 
           w0 = w0, para = para,minnbnodes = minnbnodes, check=check);
 
-      if(is.list(tmp2)==T) {
+      if(is.list(tmp2)==TRUE) {
         totnbnodes <- totnbnodes + tmp2$nbnodes
         if((sigsize-min(bnode)) > (length(tmp2$sol)-tmp2$bstart)){
           np <- length(tmp2$sol) - tmp2$bstart
@@ -115,7 +115,7 @@ pcarec <- function(siginput,inputwt, beemap, orientmap, noct, nvoice, compr,
           sol[j,(min(bnode)-np):min(bnode)]<-tmp2$sol[1:(tmp2$bstart)]
         }
 
-        if(check==T) {
+        if(check==TRUE) {
            bridge <- tmp2$bnode
            aridge <- tmp2$anode
            wtsol <- cwt(sol[j,],noct,nvoice)
@@ -155,7 +155,7 @@ pcarec <- function(siginput,inputwt, beemap, orientmap, noct, nvoice, compr,
    cat("Total number of ridge samples used: ",totnbnodes,"\n")
 
    par(mfrow=c(1,1))
-   if(check==T) list(rec=rec,ordered=ordered,chain=chain,
+   if(check==TRUE) list(rec=rec,ordered=ordered,chain=chain,
                      comp=tmp,inputskel=inputskel,solskel=solskel,lam=tmp2$lam)
    else list(rec=rec, ordered=ordered,chain=chain,comp=tmp)
 }
@@ -212,7 +212,7 @@ PcaRidgeSampling <- function(anode, bnode, compr)
 
 
 pcaregrec <- function(siginput,cwtinput,anode,bnode,compr,noct,nvoice,
-	w0 = 2*pi, plot = F, para = 5, minnbnodes = 2, check=F)
+	w0 = 2*pi, plot = FALSE, para = 5, minnbnodes = 2, check=FALSE)
 #########################################################################
 #     pcaregrec:
 #     ---------
@@ -301,7 +301,7 @@ pcaregrec <- function(siginput,cwtinput,anode,bnode,compr,noct,nvoice,
     tmp2 <- pcaridrec(cwtinput,bnode,anode,noct,nvoice,
               Qinv,np,w0=w0,check=check)
 
-    if(plot == T){
+    if(plot == TRUE){
        par(mfrow=c(2,1))
        plot.ts(Re(siginput))
        title("Original signal")
@@ -309,7 +309,7 @@ pcaregrec <- function(siginput,cwtinput,anode,bnode,compr,noct,nvoice,
        title("Reconstructed signal")
     }
     lam <- tmp2$lam
-#    if(check==T) {
+#    if(check==TRUE) {
 #      N <- length(lam)/2
 #      mlam <- numeric(N)
 #      for(j in 1:N)
@@ -329,7 +329,7 @@ pcaregrec <- function(siginput,cwtinput,anode,bnode,compr,noct,nvoice,
 
 
 pcaridrec <- function(cwtinput,bnode,anode,noct,voice,
-	Qinv, np, w0 = 2*pi, check = F)
+	Qinv, np, w0 = 2*pi, check = FALSE)
 #########################################################################
 #     pcaridrec:
 #     ---------
@@ -420,7 +420,7 @@ pcazeroskeleton <- function(cwtinput,Qinv,morvelets,bridge,aridge,N)
 
    rskel <- numeric(2*N)
 
-   if(is.vector(cwtinput) == T) {
+   if(is.vector(cwtinput) == TRUE) {
      for(j in 1:N) {
       rskel[j] <- Re(cwtinput[aridge[j]])
       rskel[N+j] <- -Im(cwtinput[aridge[j]])

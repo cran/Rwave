@@ -46,7 +46,7 @@ void signal_W_tilda(float ***W_tilda, float **W, float **K,
   }
 
   for ( j = 1; j <= max_resoln; j++ )    {
-/*    printf("computing W_tilda[%d]\n", j ); */
+    /*  printf("computing W_tilda[%d]\n", j ); */
     for ( t = 0; t < np; t++)
       b[t] = W[j][t];
     choldc(K, np, p );

@@ -14,7 +14,7 @@
 
 
 cgt <- function(input, nvoice, freqstep = (1/nvoice),
-	scale = 1, plot = TRUE)
+                scale = 1, plot = TRUE)
 #########################################################################
 #       cgt:   
 #       ---
@@ -78,7 +78,7 @@ cgt <- function(input, nvoice, freqstep = (1/nvoice),
 
 
 
-vgt <- function(input, frequency, scale, plot = F)
+vgt <- function(input, frequency, scale, plot = FALSE)
 #########################################################################
 #      vgt:   
 #      ---
@@ -122,7 +122,7 @@ vgt <- function(input, frequency, scale, plot = F)
    Routput <- z$Rtmp
    Ioutput <- z$Itmp
    i <- sqrt(as.complex(-1))
-   if(plot==T) {
+   if(plot==TRUE) {
       plot.ts(Re(z$tmp));
       title("Real part of Gabor transform");
    }

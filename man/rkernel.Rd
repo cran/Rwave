@@ -11,7 +11,7 @@ in the case of real constraints. Modification of the function
 }
 \usage{
 rkernel(node, phinode, nvoice, x.inc=1, x.min=node[1],
-x.max=node[length(node)], w0=2 * pi, plot=F)
+x.max=node[length(node)], w0=2 * pi, plot=FALSE)
 }
 \arguments{
 \item{node}{
@@ -45,7 +45,7 @@ matrix of the \eqn{Q_2} kernel
 Uses Romberg's method for computing the kernel.
 }
 \references{
-See discussions in the text of "Time-Frequency Analysis''.
+See discussions in the text of "Time-Frequency Analysis".
 }
 \seealso{
 \code{\link{kernel}}, \code{\link{fastkernel}}, \code{\link{gkernel}},

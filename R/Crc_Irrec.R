@@ -22,12 +22,10 @@
 #
 #########################################################################
 
-
-
-
 crcirrec <- function(siginput, inputwt, beemap, noct, nvoice, compr,
-	minnbnodes = 2, w0 = 2*pi, bstep = 5,ptile = .01, prob = 0.8,
-	epsilon = .5, fast = F, para = 0, real = F, plot=1)
+                     minnbnodes = 2, w0 = 2*pi, bstep = 5, ptile = .01,
+                     prob = 0.8, epsilon = .5, fast = FALSE, para = 0,
+                     real = FALSE, plot=1)
 #########################################################################
 #     crcirrec:
 #     -------
@@ -59,98 +57,90 @@ crcirrec <- function(siginput, inputwt, beemap, noct, nvoice, compr,
 #
 #########################################################################
 {
-
-   tmp <- cfamily(beemap,bstep,ptile=ptile)
-   image(tmp$ordered)
-   chain <- tmp$chain
-   nbchain <- tmp$nbchain
-   ordered <- tmp$ordered
-   sigsize <- length(siginput)
-   rec <- numeric(sigsize)
-   plnb <- 0
-
-   par(mfrow=c(1,1))
-   plot.ts(siginput)
-   title("Original signal")
-
-   tmp <- matrix(0,nbchain,length(siginput))
-
-   totnbnodes <- 0
-   idx <- numeric(nbchain)	
-   p <- 0
-
-   for (j in 1:nbchain){
-      phi.x.min <- 2 * 2^(chain[j,3]/nvoice)
-      if (chain[j,2] > (para*phi.x.min) ){ 
-
-         cat("Chain number",j)
-
-         phi.x.max <- 2 * 2^(chain[j,(2+chain[j,2])]/nvoice)
-         x.min <- chain[j,1]
-         x.max <- chain[j,1] + chain[j,2] - 1
-         x.min <- x.min - round(para * phi.x.min)
-         x.max <- x.max + round(para * phi.x.max)
-
-         tmp2 <- irregrec(siginput[chain[j,1]:(chain[j,1]+chain[j,2]-1)],
-            inputwt[chain[j,1]:(chain[j,1]+chain[j,2]-1),],
-            chain[j,3:(chain[j,2]+2)], compr,noct,nvoice,
-            epsilon, w0 = w0 , prob = prob, fast = fast, para = para,
-            minnbnodes = minnbnodes, real = real);
-
-
-         totnbnodes <- totnbnodes + tmp2$nbnodes
-
-         np <- length(tmp2$sol)
-         start <- max(1,x.min)
-         end <- min(sigsize,x.min+np-1)
-         start1 <- max(1,2-x.min)
-         end1 <- min(np, sigsize +1 - x.min)
-         end <- end1 - start1 + start
-         rec[start:end] <- rec[start:end]+tmp2$sol[start1:end1]
-
-         plnb <- plnb + 1
-         p <- p + 1
-         idx[p] <- j
+  tmp <- cfamily(beemap,bstep,ptile=ptile)
+  image(tmp$ordered)
+  chain <- tmp$chain
+  nbchain <- tmp$nbchain
+  ordered <- tmp$ordered
+  sigsize <- length(siginput)
+  rec <- numeric(sigsize)
+  plnb <- 0
   
-       }
+  par(mfrow=c(1,1))
+  plot.ts(siginput)
+  title("Original signal")
+  
+  tmp <- matrix(0,nbchain,length(siginput))
+  
+  totnbnodes <- 0
+  idx <- numeric(nbchain)	
+  p <- 0
+  
+  for (j in 1:nbchain){
+    phi.x.min <- 2 * 2^(chain[j,3]/nvoice)
+    if (chain[j,2] > (para*phi.x.min) ){ 
+      
+      cat("Chain number",j)
+      
+      phi.x.max <- 2 * 2^(chain[j,(2+chain[j,2])]/nvoice)
+      x.min <- chain[j,1]
+      x.max <- chain[j,1] + chain[j,2] - 1
+      x.min <- x.min - round(para * phi.x.min)
+      x.max <- x.max + round(para * phi.x.max)
+      
+      tmp2 <- irregrec(siginput[chain[j,1]:(chain[j,1]+chain[j,2]-1)],
+                       inputwt[chain[j,1]:(chain[j,1]+chain[j,2]-1),],
+                       chain[j,3:(chain[j,2]+2)], compr,noct,nvoice,
+                       epsilon, w0 = w0 , prob = prob, fast = fast,
+                       para = para, minnbnodes = minnbnodes, real = real);
+
+      totnbnodes <- totnbnodes + tmp2$nbnodes
+      
+      np <- length(tmp2$sol)
+      start <- max(1,x.min)
+      end <- min(sigsize,x.min+np-1)
+      start1 <- max(1,2-x.min)
+      end1 <- min(np, sigsize +1 - x.min)
+      end <- end1 - start1 + start
+      rec[start:end] <- rec[start:end]+tmp2$sol[start1:end1]
+      
+      plnb <- plnb + 1
+      p <- p + 1
+      idx[p] <- j
+    }
+  }
+  
+  if(plot == 1) {
+    par(mfrow=c(2,1))
+    par(cex=1.1)
+    plot.ts(siginput)
+    title("Original signal")
+    title("Reconstructed signal")
+  }
+  else if (plot == 2) {
+    par(mfrow=c(plnb+2,1))
+    par(mar=c(2,4,4,4))
+    par(cex=1.1)
+    par(err=-1)
+    plot.ts(siginput)
+    title("Original signal")
+    
+    for (j in 1:p)
+      plot.ts(tmp[idx[j],])
+    
+    plot.ts(Re(rec))	
+    title("Reconstructed signal")
    }
 
-   if(plot == 1){
-      par(mfrow=c(2,1))
-      par(cex=1.1)
-      plot.ts(siginput)
-      title("Original signal")
-      title("Reconstructed signal")
-   }
-   else if (plot == 2){
-      par(mfrow=c(plnb+2,1))
-      par(mar=c(2,4,4,4))
-      par(cex=1.1)
-      par(err=-1)
-      plot.ts(siginput)
-      title("Original signal")
-
-      for (j in 1:p)
-         plot.ts(tmp[idx[j],]);
-
-      plot.ts(Re(rec))	
-      title("Reconstructed signal")
-
-
-   }
-
-   cat("Total number of ridge samples used: ",totnbnodes,"\n")
-
-   par(mfrow=c(1,1))
-
-   list(rec=rec, ordered=ordered,chain = chain, comp=tmp)
+  cat("Total number of ridge samples used: ",totnbnodes,"\n")
+  par(mfrow=c(1,1))
+  list(rec=rec, ordered=ordered, chain = chain, comp=tmp)
 }
 
-
-
 crcirgrec <- function(siginput, inputgt, beemap, nvoice, freqstep, scale,
-	compr, prob = 0.8, bstep = 5, ptile = .01, epsilon = .5, fast = T, para = 0,
-	minnbnodes=3, hflag = F, plot = 2, real = F)
+                      compr, prob = 0.8, bstep = 5, ptile = 0.01,
+                      epsilon = 0.5, fast = TRUE, para = 0,
+                      minnbnodes = 3, hflag = FALSE, plot = 2, real = FALSE)
 #########################################################################
 #     crcirgrec:
 #     ----------
@@ -190,100 +180,80 @@ crcirgrec <- function(siginput, inputgt, beemap, nvoice, freqstep, scale,
 #
 #########################################################################
 {
-   tmp <- cfamily(beemap,bstep,ptile=ptile)
-   image(tmp$ordered)
-   chain <- tmp$chain
-   nbchain <- tmp$nbchain
-   ordered <- tmp$ordered
-   sigsize <- length(siginput)
-   rec <- numeric(sigsize)
-   plnb <- 0
+  tmp <- cfamily(beemap,bstep,ptile=ptile)
+  image(tmp$ordered)
+  chain <- tmp$chain
+  nbchain <- tmp$nbchain
+  ordered <- tmp$ordered
+  sigsize <- length(siginput)
+  rec <- numeric(sigsize)
+  plnb <- 0
+  
+  par(mfrow=c(1,1))
+  plot.ts(siginput, main="Original signal")
+  
+  totnbnodes <- 0
+  tmp <- matrix(0,nbchain,length(siginput))
+  for (j in 1:nbchain){
+    if (chain[j,2] > scale){
+      nbnodes <- round(chain[j,2]/compr)
+      if(nbnodes < minnbnodes)
+        nbnodes <- minnbnodes
+      
+      totnbnodes <- totnbnodes + nbnodes
+      
+      cat("Chain number", j)
+      
+      phi.x.min <- scale
+      phi.x.max <- scale
+      x.min <- chain[j,1]
+      x.max <- chain[j,1] + chain[j,2] - 1
+      x.min <- x.min - round(para * phi.x.min)
+      x.max <- x.max + round(para * phi.x.max)
+      x.inc <- 1
+      np <- as.integer((x.max-x.min)/x.inc) + 1
+      
+      tmp2 <- girregrec(siginput[chain[j,1]:(chain[j,1]+chain[j,2]-1)],
+                        inputgt[chain[j,1]:(chain[j,1]+chain[j,2]-1),],
+                        chain[j,3:(chain[j,2]+2)], nbnodes, nvoice,
+                        freqstep, scale, epsilon, fast, prob = prob,
+                        para = para, hflag = hflag, real = real)
 
-   par(mfrow=c(1,1))
-   plot.ts(siginput)
-   title("Original signal")
+      start <- max(1,x.min)
+      end <- min(sigsize,x.min+np-1)
+      start1 <- max(1,2-x.min)
+      end1 <- min(np, sigsize +1 - x.min)
+      end <- end1 - start1 + start
+      rec[start:end] <- rec[start:end]+tmp2$sol[start1:end1]
+      tmp[j,start:end] <- tmp2$sol[start1:end1]
+      
+      plnb <- plnb + 1
+      plot.ts(tmp[j,])
+    }
+    
+  }
 
-   totnbnodes <- 0
-   tmp <- matrix(0,nbchain,length(siginput))
-   for (j in 1:nbchain){
-      if (chain[j,2] > scale){
-         nbnodes <- round(chain[j,2]/compr);
-         if(nbnodes < minnbnodes)
-            nbnodes <- minnbnodes
-
-         totnbnodes <- totnbnodes + nbnodes
-
-         cat("Chain number",j)
-
-         phi.x.min <- scale
-         phi.x.max <- scale
-         x.min <- chain[j,1]
-         x.max <- chain[j,1] + chain[j,2] - 1
-         x.min <- x.min - round(para * phi.x.min)
-         x.max <- x.max + round(para * phi.x.max)
-         x.inc <- 1
-         np <- as.integer((x.max-x.min)/x.inc) + 1
-
-         tmp2 <- girregrec(siginput[chain[j,1]:(chain[j,1]+chain[j,2]-1)],
-            inputgt[chain[j,1]:(chain[j,1]+chain[j,2]-1),],
-            chain[j,3:(chain[j,2]+2)], nbnodes,nvoice,freqstep,scale,
-            epsilon,fast,prob=prob,para=para, hflag = hflag, real = real);
-
-
-         start <- max(1,x.min)
-         end <- min(sigsize,x.min+np-1)
-         start1 <- max(1,2-x.min)
-         end1 <- min(np, sigsize +1 - x.min)
-         end <- end1 - start1 + start
-         rec[start:end] <- rec[start:end]+tmp2$sol[start1:end1]
-         tmp[j,start:end] <- tmp2$sol[start1:end1]
-
-         plnb <- plnb + 1
-         plot.ts(tmp[j,]);
-      }
-
+  if(plot == 1){
+    par(mfrow=c(2,1))
+    par(cex=1.1)
+    plot.ts(siginput, main="Original signal")
+    plot.ts(rec, main="Reconstructed signal")
    }
-
-   if(plot == 1){
-      par(mfrow=c(2,1))
-      par(cex=1.1)
-      plot.ts(siginput)
-      title("Original signal")
-      plot.ts(rec)
-      title("Reconstructed signal")
-   }
-   else if (plot == 2){
-      par(mfrow=c(plnb+2,1))
-      par(mar=c(2,4,4,4))
-      par(cex=1.1)
-      par(err=-1)
-      plot.ts(siginput)
-      title("Original signal")
-
-      for (j in 1:nbchain)
-         plot.ts(tmp[j,]);
+  else if (plot == 2) {
+    par(mfrow=c(plnb+2,1))
+    par(mar=c(2,4,4,4))
+    par(cex=1.1)
+    par(err=-1)
+    plot.ts(siginput, main="Original signal")
+    
+    for (j in 1:nbchain)
+      plot.ts(tmp[j,])
         
-      plot.ts(rec)
-      title("Reconstructed signal")
-   }
-
-   cat("Total number of ridge samples used: ",totnbnodes,"\n")
-
-   par(mfrow=c(1,1))
-   list(rec=rec, ordered=ordered,chain = chain, comp=tmp)
+    plot.ts(rec, main="Reconstructed signal")
+  }
+  
+  cat("Total number of ridge samples used: ",totnbnodes,"\n")
+  par(mfrow=c(1,1))
+  list(rec=rec, ordered=ordered,chain = chain, comp = tmp)
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

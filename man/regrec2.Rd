@@ -9,7 +9,7 @@ in the wavelet case, from a precomputed kernel.
 }
 \usage{
 regrec2(siginput, cwtinput, phi, nbnodes, noct, nvoice, Q2,
-epsilon=0.5, w0=2 * pi, plot=F)
+epsilon=0.5, w0=2 * pi, plot=FALSE)
 }
 \arguments{
 \item{siginput}{
@@ -40,7 +40,7 @@ coefficient of the \eqn{Q_2} term in reconstruction kernel
 central frequency of Morlet wavelet
 }
 \item{plot}{
-if set to T, displays original and reconstructed signals
+if set to TRUE, displays original and reconstructed signals
 }}
 \value{
 Returns a list containing:
