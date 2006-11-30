@@ -13,7 +13,7 @@ WV(input, nvoice, freqstep = (1/nvoice), plot = TRUE)
   \item{input}{input signal (possibly complex-valued)}
   \item{nvoice}{number of frequency bands}
   \item{freqstep}{sampling rate for the frequency axis}
-  \item{plot}{if set to TRUE, displays the modulus of cwt on the graphic
+  \item{plot}{if set to TRUE, displays the modulus of CWT on the graphic
     device.}
 }
 \value{

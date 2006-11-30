@@ -25,12 +25,12 @@ number of scales in each octave
 central frequency of the wavelet.
 }
 \item{twoD}{
-logical variable set to \code{T} to organize the output as a 2D array
-(signal size x nb scales), otherwise, the output is a 3D array (signal
-size x noctave x nvoice).
+logical variable set to T to organize the output as a 2D array 
+(signal\_size x nb\_scales), otherwise, the output is a 3D array 
+(signal\_size x noctave x nvoice).
 }
 \item{plot}{
-if set to \code{T}, display the modulus of the
+if set to T, display the modulus of the
 continuous wavelet transform on the graphic device.
 }}
 \value{
@@ -38,12 +38,14 @@ continuous (complex) wavelet transform
 }
 \details{
 The output contains the (complex) values of the wavelet transform of the
-input signal.  The format of the output can be
+input signal. The format of the output can be
 
-2D array (signal size \eqn{\times}{x} nb scales)
+2D array (signal\_size x nb\_scales)
 
-3D array (signal size \eqn{\times}{x} noctave \eqn{\times}{x} nvoice)
+3D array (signal\_size x noctave x nvoice)
 
+Since Morlet's wavelet is not strictly speaking a wavelet (it is not of
+vanishing integral), artifacts may occur for certain signals.
 }
 \references{
 See discussions in the text of ``Practical Time-Frequency Analysis''.
@@ -53,17 +55,3 @@ See discussions in the text of ``Practical Time-Frequency Analysis''.
 \code{\link{gabor}}.
 }
 \keyword{ts}
-\section{Warning}{
-Since Morlet's wavelet is not strictly speaking a wavelet (it is
-not of vanishing integral), artifacts may occur for certain signals.
-}
-\examples{
-# Compute the wavelet transform of a white noise signal.
-gnoise <- rnorm(512)
-par(mfrow=c(3,1))
-plot.ts(gnoise)
-title("White Gaussian noise")
-cwtgnoise <- cwt(gnoise, 5, 12)
-image(Arg(cwtgnoise))
-title("Phase of wavelet transform")
-}

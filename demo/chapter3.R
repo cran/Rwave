@@ -14,7 +14,7 @@ title("Imaginary part")
 ## delta_f = 0.02 and two different values for the scale parameter,
 ## namely scale = 10, 18:
 par(mfrow=c(4,1))
-## data(A0)
+data(A0)
 plot(A0, type="l", xaxs="i")
 title("Transients")
 cgtA0 <- cgt(A0, 50, .02, 10)
@@ -51,8 +51,7 @@ tmp <- cleanph(cgtchirp, .01)
 ## The result is displayed in Figure 3.5
 
 mycgt <- function (input, nvoice, freqstep = (1/nvoice),
-                   scale = 1, plot = TRUE) 
-{
+                   scale = 1, plot = TRUE) {
   oldinput <- input
   isize <- length(oldinput)
   tmp <- adjust.length(oldinput)
@@ -67,7 +66,7 @@ mycgt <- function (input, nvoice, freqstep = (1/nvoice),
   dim(input) <- c(newsize, 1)
   z <- .C("Sgabor", as.single(input), Rtmp = as.double(Routput), 
           Itmp = as.double(Ioutput), as.integer(nvoice), as.single(freqstep), 
-          as.integer(newsize), as.single(scale))
+          as.integer(newsize), as.single(scale), PACKAGE="Rwave")
   Routput <- z$Rtmp
   Ioutput <- z$Itmp
   dim(Routput) <- c(newsize, pp)

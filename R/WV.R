@@ -34,55 +34,43 @@ WV <- function(input, nvoice, freqstep = (1/nvoice), plot = TRUE)
 #
 #########################################################################
 {
-   oldinput <- input
-   isize <- length(oldinput)
-
-   tmp <- adjust.length(oldinput)
-   input <- tmp$signal
-   newsize <- length(input)
-
-#   pp <- nvoice
-   pp <- newsize
-   Routput <- matrix(0,newsize,pp)
-   Ioutput <- matrix(0,newsize,pp)
-   output <- matrix(0,newsize,pp)
-   dim(Routput) <- c(pp * newsize,1)
-   dim(Ioutput) <- c(pp * newsize,1)
-   dim(input) <- c(newsize,1)
-
-
-   z <- .C("WV",
-           as.single(input),
-           Rtmp = as.double(Routput),
-           Itmp = as.double(Ioutput),
-           as.integer(nvoice),
-           as.single(freqstep),
-           as.integer(newsize),
-           PACKAGE="Rwave")
-
-   Routput <- z$Rtmp
-   Ioutput <- z$Itmp
-   dim(Routput) <- c(newsize,pp)
-   dim(Ioutput) <- c(newsize,pp)
-
-       
-   i <- sqrt(as.complex(-1))
-   output <- Routput[1:isize,] + Ioutput[1:isize,] * i
-   if(plot) {
-      image(Mod(output[,1:isize/2]),xlab="Time",ylab="Frequency")
-      title("Wigner-Ville Transform Modulus")
-   }
-   output
+  oldinput <- input
+  isize <- length(oldinput)
+  
+  tmp <- adjust.length(oldinput)
+  input <- tmp$signal
+  newsize <- length(input)
+  
+  ## pp <- nvoice
+  pp <- newsize
+  Routput <- matrix(0, newsize, pp)
+  Ioutput <- matrix(0, newsize, pp)
+  output <- matrix(0, newsize, pp)
+  dim(Routput) <- c(pp * newsize, 1)
+  dim(Ioutput) <- c(pp * newsize, 1)
+  dim(input) <- c(newsize, 1)
+  
+  z <- .C("WV",
+          as.single(input),
+          Rtmp = as.double(Routput),
+          Itmp = as.double(Ioutput),
+          as.integer(nvoice),
+          as.single(freqstep),
+          as.integer(newsize),
+          PACKAGE="Rwave")
+  
+  Routput <- z$Rtmp
+  Ioutput <- z$Itmp
+  dim(Routput) <- c(newsize, pp)
+  dim(Ioutput) <- c(newsize, pp)
+  
+  i <- sqrt(as.complex(-1))
+  output <- Routput[1:isize,] + Ioutput[1:isize,] * i
+  if(plot) {
+    image(Mod(output[,1:(isize/2)]),
+          xlab="Time", ylab="Frequency")
+    title("Wigner-Ville Transform Modulus")
+  }
+  output
 }
-
-
-
-
-
-
-
-
-
-
-
 

@@ -44,34 +44,35 @@ cgt <- function(input, nvoice, freqstep = (1/nvoice),
    newsize <- length(input)
 
    pp <- nvoice
-   Routput <- matrix(0,newsize,pp)
-   Ioutput <- matrix(0,newsize,pp)
-   output <- matrix(0,newsize,pp)
-   dim(Routput) <- c(pp * newsize,1)
-   dim(Ioutput) <- c(pp * newsize,1)
-   dim(input) <- c(newsize,1)
+   Routput <- matrix(0, newsize, pp)
+   Ioutput <- matrix(0, newsize, pp)
+   output <- matrix(0, newsize, pp)
+   dim(Routput) <- c(pp * newsize, 1)
+   dim(Ioutput) <- c(pp * newsize, 1)
+   dim(input) <- c(newsize, 1)
 
 
    z <- .C("Sgabor",
-            as.single(input),
-            Rtmp = as.double(Routput),
-            Itmp = as.double(Ioutput),
-            as.integer(nvoice),
-	    as.single(freqstep),
-            as.integer(newsize),
-            as.single(scale),
+           as.single(input),
+           Rtmp = as.double(Routput),
+           Itmp = as.double(Ioutput),
+           as.integer(nvoice),
+           as.single(freqstep),
+           as.integer(newsize),
+           as.single(scale),
            PACKAGE="Rwave")
 
    Routput <- z$Rtmp
    Ioutput <- z$Itmp
-   dim(Routput) <- c(newsize,pp)
-   dim(Ioutput) <- c(newsize,pp)
+   dim(Routput) <- c(newsize, pp)
+   dim(Ioutput) <- c(newsize, pp)
 
        
    i <- sqrt(as.complex(-1))
    output <- Routput[1:isize,] + Ioutput[1:isize,] * i
    if(plot) {
-      image(Mod(output),xlab="Time",ylab="Frequency")
+      image(1:isize, seq(0, nvoice*freqstep/2, length=nvoice),
+            Mod(output), xlab="Time", ylab="Frequency")
       title("Gabor Transform Modulus")
    }
    output

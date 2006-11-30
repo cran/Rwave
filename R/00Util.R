@@ -77,7 +77,7 @@ smoothts <- function(ts, windowsize)
    stssize <- sigsize
    dim(sts) <- c(sigsize, 1)
    dim(ts) <- c(sigsize, 1)
-   subrate <- 1
+   subrate <- windowsize # subrate <- 1
    
    z <- .C("Smodulus_smoothing",
            as.double(ts),

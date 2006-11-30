@@ -126,16 +126,15 @@ cleanph <- function(tfrep, thresh = .01, plot = TRUE)
 #
 #########################################################################
 {
-
   thrmod1 <- Mod(tfrep)
   thrmod2 <- Mod(tfrep)
-  limit <- range(thrmod1)[2]*thresh
+  limit <- range(thrmod1)[2] * thresh
   thrmod1 <- (Mod(tfrep) > limit)
   thrmod2 <- (Mod(tfrep) <= limit)
 
-  output <- thrmod1*Arg(tfrep) - pi * thrmod2
+  output <- thrmod1 * Arg(tfrep) - pi * thrmod2
 
-  if(plot)image(output)
+  if(plot) image(output)
   output
 }
 
