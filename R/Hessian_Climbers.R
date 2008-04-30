@@ -14,7 +14,7 @@
 
 hescrc <- function(tfrep, tfspec = numeric(dim(tfrep)[2]), grida = 10,
                    gridb = 20, bstep = 3, iteration = 10000, rate = .001,
-                   seed = -7, nclimb = 10, flag.int = TRUE, chain= TRUE,
+                   seed = -7, nbclimb = 10, flag.int = TRUE, chain= TRUE,
                    flag.temp = FALSE, lineflag = FALSE)
 #########################################################################
 #  hescrc:   Time-frequency multiple ridge estimation (hessian climbers)
@@ -145,7 +145,7 @@ hescrc <- function(tfrep, tfspec = numeric(dim(tfrep)[2]), grida = 10,
 
         ## theta of the eigen vector 1; -pi < theta <= pi
 
-        theta <- atan((eigv1[j,])[2],(eigv1[j,])[1])
+        theta <- atan2((eigv1[j,])[2],(eigv1[j,])[1])
 
         ## along x : denote 1 in the hesmap
 

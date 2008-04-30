@@ -42,7 +42,7 @@ showRadar<- function(x, plot=TRUE) {
   ncol <- dim(x)[2]/2
   xr<- x[,-1+2*(1:ncol)]   
   xi<- x[,2*(1:ncol)]       
-  y <- t(Conj(xr + i*xi))
+  y <- t(Conj(complex(real=xr, imag=xi)))
   oy <- t(apply(apply(y,2,fftshift),1,fftshift))
   oy <- apply(oy,2,fft)
   oy <- t(apply(apply(oy,2,fftshift),1,fftshift))
@@ -64,7 +64,7 @@ showRadar<- function(x, plot=TRUE) {
 ##      b727r<- b727[,-1+2*(1:ncol)]   
 ##      b727i<- b727[,2*(1:ncol)]       
 
-##      b727 <- t(Conj(b727r + i*b727i))
+##      b727 <- t(Conj(complex(real=b727r, imag=b727i)))
 ##      B727 <- cgtRadar(b727,gtime,scale,flag=FALSE)
 ##      image(t(apply(Mod(B727$cgtout[,2,]),1,fftshift))) 
 
@@ -75,15 +75,15 @@ cgtRadar <- function(x,gtime,scale,flag=TRUE,plot=TRUE)
     ncol <- dim(x)[2]/2
     xr<- x[,-1+2*(1:ncol)]   
     xi<- x[,2*(1:ncol)]       
-    y <- t(Conj(xr + i*xi))
+    y <- t(Conj(complex(real=xr, imag=xi)))
   }
   nrow <- dim(y)[1]
   ncol <- dim(y)[2]
   cgty <- array(0+0i,c(ncol,nrow,gtime))
   cgtyy <- array(0+0i,c(ncol,nrow,gtime))
   for(k in 1:ncol) cgty[k,,] <-
-    cgt(Re(y[,k]),gtime,2/gtime,scale,plot=FALSE) + i *
-      (cgt(Im(y[,k]),gtime,2/gtime,scale,plot=FALSE))
+    complex(real=cgt(Re(y[,k]),gtime,2/gtime,scale,plot=FALSE), 
+            imag=cgt(Im(y[,k]),gtime,2/gtime,scale,plot=FALSE))
   for(k in 1:nrow)
     cgtyy[,k,] <- t(apply(cgty[,k,],1,fftshift))
   oy <- t(apply(apply(Mod(cgty),c(1,3),mean),1,fftshift))

@@ -7,6 +7,15 @@
 *                 All right reserved                           *
 ****************************************************************/
 
+
+/***************************************************************
+*                                                              *
+*                                                              *
+*         Bug fix by Tom Price 2007, t0mpr1c3@gmail.com        *
+*                                                              *
+*                                                              *
+****************************************************************/
+
 #include "Swave.h"
 #include "denoise.h"
 
@@ -52,7 +61,7 @@ void Scrazy_family(double *ridgemap,float *orderedmap,int *chain,
 
   /* Compute local maxima of modulus (for fixed b)
      -------------------------------------------- */
-  Scwt_mridge(ridgemap,mridge,psigsize,pnscale);  
+  Scwt_mridge(ridgemap,mridge,psigsize,pnscale);
 
 
   id = 0;
@@ -67,7 +76,7 @@ void Scrazy_family(double *ridgemap,float *orderedmap,int *chain,
       if((mridge[k] > 0.000001) && (orderedmap[k] == 0.0)) {
 	found = YES;
 
-	/* backwarding: looking for previous points of the chain 
+	/* backwarding: looking for previous points of the chain
 	   ----------------------------------------------------- */
 	while(found && (b > 0)) {
 	  found = NO;
@@ -144,12 +153,12 @@ void Scrazy_family(double *ridgemap,float *orderedmap,int *chain,
 
   /* Generate the image of the chains
      -------------------------------- */
-  orderedmap_thresholded(orderedmap,sigsize,nscale,chain,nbchain); 
+  orderedmap_thresholded(orderedmap,sigsize,nscale,chain,nbchain);
 
 
   /* Order the output according to the chosen data structure
      ------------------------------------------------------- */
-  reordering(chain, sigsize, nbchain); 
+  reordering(chain, sigsize, nbchain);
 
 
   free((char *)mridge);
@@ -179,7 +188,7 @@ void orderedmap_thresholded(float *orderedmap,int sigsize,int nscale,
 {
   int id, i, j, k;
   int a, b;
-  
+
   for(i = 0; i < sigsize; i++)
     for(j = 0; j < nscale; j++) {
       k = i + j * sigsize;
@@ -200,7 +209,7 @@ void orderedmap_thresholded(float *orderedmap,int sigsize,int nscale,
   }
   return;
 }
-    
+
 
 /****************************************************************
 *   Function: chain_thresholded
@@ -262,8 +271,18 @@ void chain_thresholded(double *mridge,int sigsize,int *chain,int *id,
     k+= nbchain;
     b++;
   }
+  /* This code removed for bug fix */
+  /*
   b--;
   k-= nbchain;
+  */
+  /* end of code removed for bug fix */
+  /* This code inserted for bug fix */
+  if ( b > bstart ) {
+    b--;
+    k-= nbchain;
+  }
+  /* end of code inserted for bug fix */
 
   a=chain[k];
   k1 = b + sigsize * a;
@@ -275,7 +294,7 @@ void chain_thresholded(double *mridge,int sigsize,int *chain,int *id,
     b--;
     k1 = b + sigsize * a;
   }
-  aend=a; 
+  aend=a;
   bend=b;
 
   /* shift */
@@ -324,6 +343,4 @@ void reordering(int *chain,int sigsize,int nbchain)
   }
   return;
 }
-    
-
 

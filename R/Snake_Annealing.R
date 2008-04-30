@@ -130,9 +130,10 @@ snake <- function(tfrep, guessA, guessB, snakesize = length(guessB),
 
    
 snakoid <- function(modulus, guessA, guessB, snakesize = length(guessB),
-	tfspec = numeric(dim(modulus)[2]), subrate = 1, temprate = 3,
-	muA = 1, muB = muA, lambdaB = 2*muB, lambdaA = 2*muA,
-	iteration = 1000000, seed = -7, costsub = 1, stagnant = 20000,plot=TRUE)
+                    tfspec = numeric(dim(modulus)[2]), subrate = 1,
+                    temprate = 3, muA = 1, muB = muA, lambdaB = 2*muB,
+                    lambdaA = 2*muA, iteration = 1000000, seed = -7,
+                    costsub = 1, stagnant = 20000, plot = TRUE)
 #########################################################################
 #     snakoid:   
 #     ----------
@@ -213,10 +214,10 @@ snakoid <- function(modulus, guessA, guessB, snakesize = length(guessB),
         as.double(smodulus),
         phi = as.single(phi),
         rho = as.single(rho),
-        as.single(lambda),
-	as.single(mu),
-        as.single(lambda2),
-	as.single(mu2),
+        as.single(lambdaA),
+	as.single(muA),
+        as.single(lambdaB),
+	as.single(muB),
         as.single(temprate),
 	as.integer(sigsize),
 	as.integer(snakesize),

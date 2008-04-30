@@ -328,8 +328,8 @@ pcaregrec <- function(siginput,cwtinput,anode,bnode,compr,noct,nvoice,
 }
 
 
-pcaridrec <- function(cwtinput,bnode,anode,noct,voice,
-	Qinv, np, w0 = 2*pi, check = FALSE)
+pcaridrec <- function(cwtinput,bnode,anode,noct,nvoice,Qinv,np,
+                      w0 = 2*pi, check = FALSE)
 #########################################################################
 #     pcaridrec:
 #     ---------

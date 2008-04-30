@@ -118,7 +118,7 @@ cwtpolar <- function(cwt, threshold=0.0)
   for(i in 1:noctave)
     for(j in 1:nvoice) {
       output1[,i,j] <- sqrt(Re(tmp1[,i,j])^2 + Im(tmp1[,i,j])^2)
-      output2[,i,j] <- atan(Im(tmp1[,i,j]), Re(tmp1[,i,j]))
+      output2[,i,j] <- atan2(Im(tmp1[,i,j]), Re(tmp1[,i,j]))
     }
   
   ma <- max(output1)

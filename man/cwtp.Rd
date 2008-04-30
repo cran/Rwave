@@ -4,7 +4,7 @@
 Continuous Wavelet Transform with Phase Derivative
 }
 \description{
-Computes the continuous wavelet transform with (complex-valued) 
+Computes the continuous wavelet transform with (complex-valued)
 Morlet wavelet and its phase derivative.
 }
 \usage{
@@ -24,7 +24,7 @@ number of scales in each octave (i.e., between two consecutive powers of 2).
 central frequency of the wavelet.
 }
 \item{twoD}{
-logical variable set to \code{T} to organize the output as a 2D array 
+logical variable set to \code{T} to organize the output as a 2D array
 (signal size \eqn{\times}{x} nb scales), otherwise, the output is a 3D
 array (signal size \eqn{\times}{x} noctave \eqn{\times}{x} nvoice).
 }

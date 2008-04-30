@@ -125,7 +125,7 @@ title("Lambda Profile")
 N <- length(lam)/2
 mlam <- numeric(N)
 for(j in 1:N)
-   mlam[j] <- Mod(lam[j] + i * lam[N + j])
+   mlam[j] <- Mod(complex(real=lam[j], imag=lam[N + j]))
 plot.ts(sort(mlam))
 
    list(sol=tmp2$sol,A=tmp2$A,lam=tmp2$lam,dualwave=tmp2$dualwave,

@@ -12,6 +12,9 @@
 ## HOWord <- cfHOWAREYOU$ordered > 0 
 
 robustrec <- function(x, nvoice, freqstep, scale, db, ptile) {
+  ## HACK!
+  InverseDB <- function(db) 10^(db/10)
+  
   lng <- length(x)
   nx <- x
   wn <- rnorm(lng, 0, sqrt(var(nx)/InverseDB(db))) 
@@ -67,7 +70,7 @@ band <- function(x, r) {
   xx <- x
   lng <- length(xx)
   yy <- logical(lng)
-  x.rts <- as.rts(xx)
+  x.rts <- as.ts(xx)
   for(k in 1:r) {
     y.rts <- lag(x.rts,-k) 
     zz <- as.logical(y.rts)

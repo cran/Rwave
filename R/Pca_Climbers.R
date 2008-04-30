@@ -164,7 +164,7 @@ pcacrc <- function(tfrep, tfspec = numeric(dim(tfrep)[2]), grida = 10,
 
         # theta of the eigen vector 1; -pi < theta <= pi
 
-        theta <- atan((eigv1[j,])[2],(eigv1[j,])[1])
+        theta <- atan2((eigv1[j,])[2],(eigv1[j,])[1])
 
         # along x : denote 1 in the pcamap
 
