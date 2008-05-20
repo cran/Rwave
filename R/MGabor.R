@@ -60,7 +60,6 @@ mcgt <- function(input, nvoice, freqstep = (1/nvoice), nscales = 10,
 
 
    norm <- 1
-   i <- sqrt(as.complex(-1))
    lpoptnorm <- 0
    entoptnorm <- 100000000
 
@@ -126,7 +125,7 @@ mcgt <- function(input, nvoice, freqstep = (1/nvoice), nscales = 10,
          if (z$lpnorm < entoptnorm){
             entoptnorm <- z$lpnorm
             optsca <- sca
-            output <- Routput[1:isize,] + Ioutput[1:isize,] * i
+            output <- Routput[1:isize,] + 1i*Ioutput[1:isize,]
          }
       optnorm <- entoptnorm
       }
@@ -151,7 +150,7 @@ mcgt <- function(input, nvoice, freqstep = (1/nvoice), nscales = 10,
         if(z$lpnorm > lpoptnorm) {
           lpoptnorm <- z$lpnorm
           optsca <- sca
-          output <- Routput[1:isize,] + Ioutput[1:isize,] * i
+          output <- Routput[1:isize,] + 1i*Ioutput[1:isize,]
         }
         optnorm <- lpoptnorm
       }

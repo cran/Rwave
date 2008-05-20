@@ -1,6 +1,6 @@
 Package: Rwave
-Version: 1.24-1
-Date: 2008-04-30
+Version: 1.24-2
+Date: 2008-05-20
 Title: Time-Frequency analysis of 1-D signals
 Author: S original by Rene Carmona <rcarmona@princeton.edu> and
   Bruno Torresani <bruno.torresani@cmi.univ-mrs.fr>;
@@ -20,4 +20,4 @@ Description: Rwave is a library of R functions which provide an
   Torresani, Academic Press, 1998.
 License: GPL (>= 2)
 URL: http://www.orfe.princeton.edu/~rcarmona/
-Packaged: Fri May  2 17:22:23 2008; bjw34032
+Packaged: Tue May 20 17:24:06 2008; bjw34032

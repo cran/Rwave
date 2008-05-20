@@ -194,8 +194,7 @@ SampleGen <- function(spec)
     imag2[b-i+2] <- -imag1[i]
   }	
   imag2[1] <- 0
-  i <- sqrt(as.complex(-1))
-  tmp1 <-  fft(real2 + imag2 * i, inverse=TRUE)
+  tmp1 <-  fft(real2 + 1i*imag2, inverse=TRUE)
   sample <- Re(tmp1)/sqrt((2*size))
   sample
 }

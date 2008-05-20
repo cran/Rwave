@@ -64,8 +64,7 @@ WV <- function(input, nvoice, freqstep = (1/nvoice), plot = TRUE)
   dim(Routput) <- c(newsize, pp)
   dim(Ioutput) <- c(newsize, pp)
   
-  i <- sqrt(as.complex(-1))
-  output <- Routput[1:isize,] + Ioutput[1:isize,] * i
+  output <- Routput[1:isize,] + 1i*Ioutput[1:isize,]
   if(plot) {
     image(Mod(output[,1:(isize/2)]),
           xlab="Time", ylab="Frequency")

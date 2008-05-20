@@ -81,7 +81,7 @@ cwtp <- function(input, noctave, nvoice = 1, w0 = 2*pi,
 
    if(twoD) {
      Ftmp <- Foutput[1:isize,]
-     output <- Routput[1:isize,] + Ioutput[1:isize,] * i
+     output <- Routput[1:isize,] + 1i*Ioutput[1:isize,]
      if(plot) image(Mod(output))
      list(wt=output,f=Ftmp)
    } 
@@ -95,8 +95,7 @@ cwtp <- function(input, noctave, nvoice = 1, w0 = 2*pi,
          Itmp[,i,j] <- Ioutput[1:isize,(i-1)*nvoice+j]
          Ftmp[,i,j] <- Foutput[1:isize,(i-1)*nvoice+j]
          }       
-     i <- sqrt(as.complex(-1))
-     list(wt=Rtmp + Itmp * i,f=Ftmp)
+     list(wt=Rtmp+1i*Itmp, f=Ftmp)
    }
 }
 

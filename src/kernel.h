@@ -25,7 +25,6 @@
 
 #ifndef Macintosh
 #include <sys/time.h>
-#include <malloc.h>
 #endif
 
 #define YES 1

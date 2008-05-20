@@ -66,9 +66,8 @@ cwt <- function(input, noctave, nvoice = 1, w0 = 2*pi, twoD = TRUE,
   Ioutput <- z$Itmp
   dim(Routput) <- c(newsize,pp)
   dim(Ioutput) <- c(newsize,pp)
-  i <- sqrt(as.complex(-1))
   if(twoD) {
-    output <- Routput[1:isize,] + Ioutput[1:isize,] * i
+    output <- Routput[1:isize,] + 1i*Ioutput[1:isize,]
     if(plot) {
       image(Mod(output), xlab="Time", ylab="log(scale)",
             main="Wavelet Transform Modulus")
@@ -83,7 +82,7 @@ cwt <- function(input, noctave, nvoice = 1, w0 = 2*pi, twoD = TRUE,
         Rtmp[,i,j] <- Routput[1:isize,(i-1)*nvoice+j]
         Itmp[,i,j] <- Ioutput[1:isize,(i-1)*nvoice+j]
       }
-    Rtmp + Itmp * i
+    Rtmp + 1i*Itmp
   }
 }
 
@@ -208,9 +207,7 @@ vwt <- function(input, scale, w0 = 2*pi)
   
   Routput <- z$Rtmp
   Ioutput <- z$Itmp
-  i <- sqrt(as.complex(-1))
-  
-  Routput[1:isize] + Ioutput[1:isize] * i
+  Routput[1:isize] + 1i*Ioutput[1:isize]
 }
 
 morlet <- function(sigsize, location, scale, w0 = 2*pi)
@@ -245,8 +242,7 @@ morlet <- function(sigsize, location, scale, w0 = 2*pi)
           as.integer(sigsize),
           PACKAGE="Rwave")
   
-  i <- sqrt(as.complex(-1))
-  z$wavelet.r + z$wavelet.i * i
+  z$wavelet.r + 1i*z$wavelet.i
 }
 
 vecmorlet <- function(sigsize, nbnodes, bridge, aridge, w0 = 2*pi)
@@ -283,6 +279,5 @@ vecmorlet <- function(sigsize, nbnodes, bridge, aridge, w0 = 2*pi)
           as.integer(nbnodes),
           PACKAGE="Rwave")
   
-  i <- sqrt(as.complex(-1))
-  z$morlet.r + z$morlet.i * i
+  z$morlet.r + 1i*z$morlet.i
 }

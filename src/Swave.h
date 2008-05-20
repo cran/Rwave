@@ -19,8 +19,6 @@
 #include <sys/time.h>
 #endif
 
-/* #include <malloc.h> */
-
 #define YES 1
 #define NO 0
 #define ZERO 0.000001

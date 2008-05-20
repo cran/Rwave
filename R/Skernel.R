@@ -88,8 +88,7 @@ cat("x.inc = ",x.inc,"\n")
   dim(ker.r) <- c(lng, lng)
   dim(ker.i) <- c(lng, lng)
   ker <- matrix(0, lng, lng)
-  i <- sqrt(as.complex(-1))
-  ker <- ker.r + i * ker.i  
+  ker <- ker.r + 1i*ker.i
 
   if(plot == TRUE){
      par(mfrow=c(1,1))
@@ -222,8 +221,7 @@ fastkernel <- function(node, phinode, nvoice, x.inc = 1, x.min = node[1],
   dim(ker.r) <- c(lng, lng)
   dim(ker.i) <- c(lng, lng)
   ker <- matrix(0, lng, lng)
-  i <- sqrt(as.complex(-1))
-  ker <- ker.r + i * ker.i  
+  ker <- ker.r + 1i*ker.i
 
   if(plot == TRUE){
      par(mfrow=c(1,1))

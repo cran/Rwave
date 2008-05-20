@@ -65,9 +65,8 @@ DOG <- function(input, noctave, nvoice = 1, moments, twoD = TRUE, plot = TRUE)
   Ioutput <- z$Itmp
   dim(Routput) <- c(newsize,pp)
   dim(Ioutput) <- c(newsize,pp)
-  i <- sqrt(as.complex(-1))
   if(twoD) {
-    output <- Routput[1:isize,] + Ioutput[1:isize,] * i
+    output <- Routput[1:isize,] + 1i*Ioutput[1:isize,]
     if(plot) image(Mod(output))
     output
   } 
@@ -79,7 +78,7 @@ DOG <- function(input, noctave, nvoice = 1, moments, twoD = TRUE, plot = TRUE)
         Rtmp[,i,j] <- Routput[1:isize,(i-1)*nvoice+j]
         Itmp[,i,j] <- Ioutput[1:isize,(i-1)*nvoice+j]
       }
-    Rtmp + Itmp * i
+    Rtmp + 1i * Itmp
   }
 }
 
@@ -126,7 +125,5 @@ vDOG <- function(input, scale, moments)
   
   Routput <- z$Rtmp
   Ioutput <- z$Itmp
-  i <- sqrt(as.complex(-1))
-  
-  Routput[1:isize] + Ioutput[1:isize] * i
+  Routput[1:isize] + 1i*Ioutput[1:isize]
 }

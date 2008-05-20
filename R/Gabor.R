@@ -67,9 +67,7 @@ cgt <- function(input, nvoice, freqstep = (1/nvoice),
    dim(Routput) <- c(newsize, pp)
    dim(Ioutput) <- c(newsize, pp)
 
-       
-   i <- sqrt(as.complex(-1))
-   output <- Routput[1:isize,] + Ioutput[1:isize,] * i
+   output <- Routput[1:isize,] + 1i*Ioutput[1:isize,]
    if(plot) {
       image(1:isize, seq(0, nvoice*freqstep/2, length=nvoice),
             Mod(output), xlab="Time", ylab="Frequency")
@@ -124,13 +122,12 @@ vgt <- function(input, frequency, scale, plot = FALSE)
 
    Routput <- z$Rtmp
    Ioutput <- z$Itmp
-   i <- sqrt(as.complex(-1))
    if(plot==TRUE) {
       plot.ts(Re(z$tmp));
       title("Real part of Gabor transform");
    }
 
-   Routput[1:isize] + Ioutput[1:isize] * i
+   Routput[1:isize] + 1i*Ioutput[1:isize]
 }
 
 
@@ -168,9 +165,7 @@ gabor <- function(sigsize, location, frequency, scale)
             as.integer(sigsize),
            PACKAGE="Rwave")
 
-   i <- sqrt(as.complex(-1))
-
-   z$gabor.r + z$gabor.i * i
+   z$gabor.r + 1i*z$gabor.i
 }
 
 
@@ -212,9 +207,7 @@ vecgabor <- function(sigsize, nbnodes, location, frequency, scale)
            as.integer(nbnodes),
            PACKAGE="Rwave")
 
-   i <- sqrt(as.complex(-1))
-
-   z$gabor.r + z$gabor.i * i
+   z$gabor.r + 1i*z$gabor.i
 }
 
 

@@ -214,7 +214,7 @@ RidgeIrregSampling <- function(phinode, node, lam, prob)
    nbnodes <- length(node)   
    mlam <- numeric(nbnodes)
    for(j in 1:nbnodes) 
-     mlam[j] <- Mod(complex(real=lam[j], imag=lam[nbnodes + j]))
+     mlam[j] <- Mod(lam[j] + 1i*lam[nbnodes + j])
 
    pct <- quantile(mlam,prob)
 

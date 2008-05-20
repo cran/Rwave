@@ -63,7 +63,7 @@ showRadar<- function(x) {
    xr<- x[,-1+2*(1:ncol)]   
    xi<- x[,2*(1:ncol)]       
 
-   y <- t(Conj(complex(real=xr, imag=xi)))
+   y <- t(Conj(xr + 1i*xi))
 
    oy <- t(apply(apply(y,2,fftshift),1,fftshift))
    oy <- apply(oy,2,fft)
@@ -97,15 +97,14 @@ cgtRadar <- function(x,gtime,scale,flag=TRUE) {
      xr<- x[,-1+2*(1:ncol)]   
      xi<- x[,2*(1:ncol)]       
 
-     y <- t(Conj(complex(real=xr, imag=xi)))
+     y <- t(Conj(xr + 1i*xi))
    }
 
    nrow <- dim(y)[1]
    ncol <- dim(y)[2]
    cgty <- array(0+0i,c(ncol,nrow,gtime))
    for(k in 1:ncol) cgty[k,,] <-
-     complex(real=cgt(Re(y[,k]),gtime,2/gtime,scale,plot=FALSE),
-             imag=cgt(Im(y[,k]),gtime,2/gtime,scale,plot=FALSE))
+     cgt(Re(y[,k]),gtime,2/gtime,scale,plot=FALSE) + 1i*cgt(Im(y[,k]),gtime,2/gtime,scale,plot=FALSE)
 
    oy <- apply(apply(Mod(cgty),c(1,3),mean),1,fftshift)
    for(k in 1:nrow) cgty[,k,] <- apply(cgty[,k,],1,fftshift)
