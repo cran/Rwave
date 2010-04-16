@@ -1,3 +1,5 @@
+#include <stdlib.h>
+
 
 /***************************************************************
 *              (c) Copyright  1997                             *
@@ -100,7 +102,7 @@ void smoothwt2(double *wt, double *swt, int sigsize, int nbscale,
 {
   int a,b,k,adr,kmin,kmax;
   double normal;
-  long cnt = 0;
+  int cnt = 0;
   printf("smodsize %d \n",*smodsize);
   printf("number of scales %d \n",nbscale);
   printf("windowlength %d \n",windowlength);

@@ -38,10 +38,9 @@ Returns a list containing the reconstructed signal and the chained ridges.
 \item{ordered}{image of the ridges (with different colors)}
 \item{comp}{2D array containing the signals reconstructed from ridges}
 }
-\details{
-}
+%\details{}
 \references{
-See discussions in the text of ``Practical Time-Frequency Analysis''.
+See discussions in the text of \dQuote{Practical Time-Frequency Analysis}.
 }
 \seealso{
 \code{\link{crc}},\code{\link{cfamily}} for crazy climbers method,

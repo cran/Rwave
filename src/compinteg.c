@@ -1,3 +1,7 @@
+#include <stdlib.h>
+#include "Swave.h"
+
+
 /***************************************************************
 *    $Log: compinteg.c,v $                                     *
 ****************************************************************
@@ -37,7 +41,7 @@ fcomplex qrombmod(int x, int y, double *p2, double *nodes, double *phi_nodes,
   double tmpr[JMAX+1],tmpi[JMAX+1], tmp1, tmp2;
 
 
-  s = (fcomplex *)calloc(JMAXP+1,sizeof(fcomplex));
+  s = (fcomplex *)S_alloc(JMAXP+1,sizeof(fcomplex));
 
   /* Initialisation of tmp arrays */
   for(j = 0; j < JMAX+1; j++)
@@ -65,7 +69,6 @@ fcomplex qrombmod(int x, int y, double *p2, double *nodes, double *phi_nodes,
       if (((fabs(dss.r) < EPS*fabs(ss.r))&&(EPS * fabs(ss.r) > fabs(ss.i))) ||
            ((fabs(dss.i) < EPS*fabs(ss.i))&&(EPS * fabs(ss.i) > fabs(ss.r))) ||
            ((fabs(dss.r) < EPS*fabs(ss.r))&&(fabs(dss.i) < EPS*fabs(ss.i)))) {
-	free((char *)s);
 	return ss;
       }
     }
@@ -74,7 +77,6 @@ fcomplex qrombmod(int x, int y, double *p2, double *nodes, double *phi_nodes,
     h[j+1]=0.25*h[j];
   }
   printf("Too many steps in routine qrombmod (x=%d, y=%d) \n",x,y);
-  free((char *)s);
   return(ss);
 }
 
@@ -103,7 +105,7 @@ double rqrombmod(int x, int y, double *p2, double *nodes, double *phi_nodes,
   double tmpr[JMAX+1], tmp1, tmp2;
 
 
-  s = (double *)calloc(JMAXP+1,sizeof(double));
+  s = (double *)S_alloc(JMAXP+1,sizeof(double));
 
   /* Initialisation of tmp arrays */
   for(j = 0; j < JMAX+1; j++)
@@ -128,7 +130,6 @@ double rqrombmod(int x, int y, double *p2, double *nodes, double *phi_nodes,
 
       /* Test accuracy */
       if (fabs(dss) < EPS*fabs(ss)) {
-	free((char *)s);
 	return ss;
       }
     }
@@ -136,7 +137,6 @@ double rqrombmod(int x, int y, double *p2, double *nodes, double *phi_nodes,
     h[j+1]=0.25*h[j];
   }
   printf("Too many steps in routine rqrombmod (x=%d, y=%d) \n",x,y);
-  free((char *)s);
   return(ss);
 }
 
@@ -164,7 +164,7 @@ double gqrombmod(int x, int y, double *p2, double *nodes, double *phi_nodes,
   double tmpr[JMAX+1], tmp1, tmp2;
 
 
-  s = (double *)calloc(JMAXP+1,sizeof(double));
+  s = (double *)S_alloc(JMAXP+1,sizeof(double));
 
   /* Initialisation of tmp arrays */
   for(j = 0; j < JMAX+1; j++)
@@ -188,7 +188,6 @@ double gqrombmod(int x, int y, double *p2, double *nodes, double *phi_nodes,
 
       /* Test accuracy */
       if (fabs(dss) < EPS*fabs(ss)) {
-	free((char *)s);
 	return ss;
       }
     }
@@ -196,7 +195,6 @@ double gqrombmod(int x, int y, double *p2, double *nodes, double *phi_nodes,
     h[j+1]=0.25*h[j];
   }
   printf("Too many steps in routine gqrombmod (x=%d, y=%d) \n",x,y);
-  free((char *)s);
   return(ss);
 }
 

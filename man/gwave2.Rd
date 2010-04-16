@@ -35,10 +35,9 @@ number of complex constraints
 \value{
 Array of real Gabor functions located on the ridge samples
 }
-\details{
-}
+%\details{}
 \references{
-See discussions in the text of ``Time-Frequency Analysis''.
+See discussions in the text of \dQuote{Time-Frequency Analysis}.
 }
 \seealso{
 \code{\link{gwave}}, \code{\link{morwave}}, \code{\link{morwave2}}.

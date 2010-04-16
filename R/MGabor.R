@@ -78,13 +78,13 @@ mcgt <- function(input, nvoice, freqstep = (1/nvoice), nscales = 10,
 # Compute Gabor transform
 # -----------------------
       z <- .C("Sgabor",
-              as.single(input),
+              as.double(input),
               Rtmp = as.double(Routput),
               Itmp = as.double(Ioutput),
               as.integer(nvoice),
-              as.single(freqstep),
+              as.double(freqstep),
               as.integer(newsize),
-              as.single(sca),
+              as.double(sca),
               PACKAGE="Rwave")
 
       Routput <- z$Rtmp

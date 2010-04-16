@@ -1,7 +1,12 @@
+#include <stdlib.h>
+#include <math.h>
+
 
 /* #include "wavelet.h" */
 #include "dau_wave.h"
 #include "pvalue.h"
+#include "dyadic.h"
+#include "Swave.h"
 
 
 /******************************************************************
@@ -36,7 +41,7 @@ int max_resoln, np;
 {
   int j;
 
-  *d_phi_range = (bound *) malloc( (max_resoln+1) * sizeof(bound) );
+  *d_phi_range = (bound *) R_alloc( (max_resoln+1) , sizeof(bound) );
   for ( j = 0; j <= max_resoln; j++ )
   {
     (*d_phi_range)[j].lb = (int) ceil((1 - 1.0 / twoto[j]) * (1 - 2*NW));
@@ -57,7 +62,7 @@ int np;
 {
   int j;
 
-  *d_psi_range = (bound *) malloc( (max_resoln+1) * sizeof(bound) );
+  *d_psi_range = (bound *) R_alloc( (max_resoln+1) , sizeof(bound) );
   for ( j = 1; j <= max_resoln; j++ )
   {
     (*d_psi_range)[j].lb = (int) ceil( (double) ((d_phi_range[j-1].lb -1) / 2) );
@@ -71,9 +76,9 @@ int np;
 /****************************************************************************/
 
 void compute_d_phi_for_all_resoln( d_phi, d_phi_range, s, max_resoln )
-float **d_phi;
+double **d_phi;
 bound *d_phi_range;
-float *s;
+double *s;
 int max_resoln;
 {
   int j, k, n_min, n_max, n;
@@ -81,7 +86,7 @@ int max_resoln;
 
   for ( j = 0; j <= max_resoln; j++ )
   {
-    d_phi[j] = (float *) malloc( d_phi_range[j].size * sizeof(float) );
+    d_phi[j] = (double *) R_alloc( d_phi_range[j].size , sizeof(double) );
 		
     if ( j == 0 )
       for ( k = d_phi_range[j].lb; k <= d_phi_range[j].ub; k++ )
@@ -95,7 +100,7 @@ int max_resoln;
 	sum = 0.0;
 	for ( n = n_min; n <= n_max; n++ )
 	  sum += c[NW][n - 2*k] * d_phi[j-1][n - d_phi_range[j-1].lb];
-	d_phi[j][k - d_phi_range[j].lb] = (float) sum;
+	d_phi[j][k - d_phi_range[j].lb] = (double) sum;
       }
   }   
 }
@@ -106,9 +111,9 @@ int max_resoln;
 
 void compute_d_psi_for_all_resoln( d_psi, d_psi_range, d_phi, d_phi_range,
 				  max_resoln )
-float **d_psi;
+double **d_psi;
 bound *d_psi_range;
-float **d_phi;
+double **d_phi;
 bound *d_phi_range;
 int max_resoln;
 {
@@ -117,7 +122,7 @@ int max_resoln;
 
   for ( j = 1; j <= max_resoln; j++ )
   {
-    d_psi[j] = (float *) malloc( d_psi_range[j].size * sizeof( float ) );
+    d_psi[j] = (double *) R_alloc( d_psi_range[j].size , sizeof( double ) );
 		
     for ( k = d_psi_range[j].lb; k <= d_psi_range[j].ub; k++ )
     {
@@ -127,7 +132,7 @@ int max_resoln;
       sum = 0.0;
       for ( n = n_min; n <= n_max; n++ )
 	sum += minus1to(n) * c[NW][2*k+1-n] * d_phi[j-1][n - d_phi_range[j-1].lb];
-      d_psi[j][k - d_psi_range[j].lb] = (float) sum;
+      d_psi[j][k - d_psi_range[j].lb] = (double) sum;
     }
   }
 }
@@ -137,17 +142,17 @@ int max_resoln;
 /****************************************************************************/
 
 void phi_reconstruction( phi, d_phi, phi_array, d_phi_range, max_resoln, np )
-float *phi, **d_phi, *phi_array;
+double *phi, **d_phi, *phi_array;
 bound *d_phi_range;
 int max_resoln, np;
 {
   int j, t, k_min, k_max, k;
-  float sum, two_to_j, two_to_j_half, two_to_j_times_t;
+  double sum, two_to_j, two_to_j_half, two_to_j_times_t;
 	
   for ( j = 0; j <= max_resoln; j++ )
   {
-    two_to_j = 1.0 / (float)pow( 2.0, (double) j );	  /* j = -m */
-    two_to_j_half = 1.0 / (float)pow( 2.0, ((double)j)/2 );
+    two_to_j = 1.0 / (double)pow( 2.0, (double) j );	  /* j = -m */
+    two_to_j_half = 1.0 / (double)pow( 2.0, ((double)j)/2 );
 		
     for( t = 0; t < np; t++ )
     {
@@ -171,17 +176,17 @@ int max_resoln, np;
 /****************************************************************************/
 
 void psi_reconstruction( psi, d_psi, psi_array, d_psi_range, max_resoln, np )
-float *psi, **d_psi, *psi_array;
+double *psi, **d_psi, *psi_array;
 bound *d_psi_range;
 int max_resoln, np;
 {
   int j, t, k_min, k_max, k;
-  float sum, two_to_j, two_to_j_half, two_to_j_times_t;
+  double sum, two_to_j, two_to_j_half, two_to_j_times_t;
 	
   for ( j = 1; j <= max_resoln; j++ )
   {
-    two_to_j = 1.0 / (float) pow( 2.0, (float) j );     /* j = -m */
-    two_to_j_half = 1.0 / (float) pow( 2.0, ((float) j)/2 );
+    two_to_j = 1.0 / (double) pow( 2.0, (double) j );     /* j = -m */
+    two_to_j_half = 1.0 / (double) pow( 2.0, ((double) j)/2 );
 		
     for( t = 0; t < np; t++ )
     {
@@ -204,9 +209,9 @@ int max_resoln, np;
 /****************************************************************************/
 
 void daubechies_wt( phi, psi, s, NW_ptr, maxresoln_ptr, np_ptr )
-float *phi;  /* (maxresoln+1) by np, where np is a power of 2 */
-float *psi;  /* maxresoln by np, where np is a power of 2 */
-float *s;
+double *phi;  /* (maxresoln+1) by np, where np is a power of 2 */
+double *psi;  /* maxresoln by np, where np is a power of 2 */
+double *s;
 int *NW_ptr;
 int *maxresoln_ptr;
 int *np_ptr;
@@ -216,7 +221,7 @@ int *np_ptr;
   int num_of_resoln = max_resoln + 1;
 
   bound *d_phi_range, *d_psi_range;
-  float **d_phi, **d_psi, *phi_array, *psi_array;
+  double **d_phi, **d_psi, *phi_array, *psi_array;
   int j;
   
   NW = *NW_ptr;
@@ -224,9 +229,9 @@ int *np_ptr;
   compute_a();
   init_twoto( max_resoln );
 
-  d_psi_range = (bound *) malloc( num_of_resoln * sizeof(bound) );
-  d_phi = (float **) malloc( num_of_resoln * sizeof(float *) );
-  d_psi = (float **) malloc( num_of_resoln * sizeof(float *) );
+  d_psi_range = (bound *) R_alloc( num_of_resoln , sizeof(bound) );
+  d_phi = (double **) R_alloc( num_of_resoln , sizeof(double *) );
+  d_psi = (double **) R_alloc( num_of_resoln , sizeof(double *) );
 
   init_phi_array( &phi_array, max_resoln );
   init_psi_array( &psi_array, max_resoln );
@@ -240,22 +245,6 @@ int *np_ptr;
   phi_reconstruction( phi, d_phi, phi_array, d_phi_range, max_resoln, np );
   psi_reconstruction( psi, d_psi, psi_array, d_psi_range, max_resoln, np );
 
-  free( twoto );
-  free( phi_array );
-  free( psi_array );
-  free( d_phi_range );
-  free( d_psi_range );
-  for ( j = 0; j <= max_resoln; j++ )
-    free( d_phi[j] );
-  free( d_phi );
-  for ( j = 1; j <= max_resoln; j++ )
-    free( d_psi[j] );
-  free( d_psi );
-
-  free( a );
-  for ( j = NMIN; j < NMAX + 1; j++ )
-    free( c[j] );
-  free( c );
 }
 
 /****************************************************************************/
@@ -275,7 +264,7 @@ int max_resoln;
   int j;
   int temp = 2*NW-1;
 
-  *dH_bound = (bound *) malloc( max_resoln * sizeof(bound) );
+  *dH_bound = (bound *) R_alloc( max_resoln , sizeof(bound) );
 
   for ( j = 0; j < max_resoln; j++ )
   {
@@ -301,7 +290,7 @@ int max_resoln;
   int j;
   int temp = 2 - 2*NW;
 
-  *dG_bound = (bound *) malloc( max_resoln * sizeof(bound) );
+  *dG_bound = (bound *) R_alloc( max_resoln , sizeof(bound) );
 
   for ( j = 0; j < max_resoln; j++ )
   {
@@ -321,16 +310,16 @@ int max_resoln;
 /****************************************************************************/
 
 void compute_dH( dH, dH_bound, max_resoln )
-float ***dH;
+double ***dH;
 bound *dH_bound;
 int max_resoln;
 {
   int j, i;
 
-  *dH = (float **) malloc( max_resoln * sizeof(float *) );
+  *dH = (double **) R_alloc( max_resoln , sizeof(double *) );
   for ( j = 0; j < max_resoln; j++ )
   {
-    (*dH)[j] = (float *) malloc( dH_bound[j].size * sizeof(float) );
+    (*dH)[j] = (double *) R_alloc( dH_bound[j].size , sizeof(double) );
     if ( j == 0 )
     {
       for ( i = 0; i < dH_bound[j].size; i++ )
@@ -358,16 +347,16 @@ int max_resoln;
 /****************************************************************************/
 
 void compute_dG( dG, dG_bound, max_resoln )
-float ***dG;
+double ***dG;
 bound *dG_bound;
 int max_resoln;
 {
   int j, i, n;
 
-  *dG = (float **) malloc( max_resoln * sizeof(float *) );
+  *dG = (double **) R_alloc( max_resoln , sizeof(double *) );
   for ( j = 0; j < max_resoln; j++ )
   {
-    (*dG)[j] = (float *) malloc( dG_bound[j].size * sizeof(float) );
+    (*dG)[j] = (double *) R_alloc( dG_bound[j].size , sizeof(double) );
     if ( j == 0 )
     { 
       for ( i = 0, n = 2-2*NW; i < dG_bound[j].size; i++, n++ )
@@ -394,9 +383,9 @@ int max_resoln;
 /****************************************************************************/
 
 void compute_ddwave( phi, psi, s, max_resoln_ptr, np_ptr, NW_ptr )
-float *phi;
-float *psi;
-float *s;
+double *phi;
+double *psi;
+double *s;
 int *max_resoln_ptr;
 int *np_ptr;
 int *NW_ptr;
@@ -405,10 +394,10 @@ int *NW_ptr;
   int np = *np_ptr;
 
   bound *dH_bound, *dG_bound;
-  float **dH, **dG;
-  float *sym = (float *) malloc( 2*np * sizeof(float) );
+  double **dH, **dG;
+  double *sym = (double *) R_alloc( 2*np , sizeof(double) );
   int j, n, k, t;
-  float sum;
+  double sum;
 
   NW = *NW_ptr;
   open_read();
@@ -448,19 +437,5 @@ int *NW_ptr;
     }
   }
 
-  free( twoto );
-  free( sym );
-  free( dH_bound );
-  free( dG_bound );
-  for ( j = 0; j < max_resoln; j++ )
-  {
-    free( dH[j] );
-    free( dG[j] );
-  }
-  free( dH );
-  free( dG );
-  for ( j = NMIN; j < NMAX + 1; j++ )
-    free( c[j] );
-  free( c );
 }
 

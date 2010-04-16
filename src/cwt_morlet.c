@@ -1,3 +1,5 @@
+#include <stdlib.h>
+
 
 /***************************************************************
 *              (c) Copyright  1997                             *
@@ -8,7 +10,7 @@
 ***************************************************************/
 
 #include "Swave.h"
-#include "complex.h"
+#include "denoise.h"
 
 
 /***************************************************************
@@ -50,7 +52,7 @@ void multi(double *Ri1, double *Ii1, double *Ri2, double *Or,
 *   cf: central frequency of the wavelet
 ***************************************************************/
 
-void morlet_frequency(float cf,float scale,double *w,int isize)
+void morlet_frequency(double cf,double scale,double *w,int isize)
 {
   double tmp, tmp1=0;
   int i;
@@ -84,11 +86,11 @@ void morlet_frequency(float cf,float scale,double *w,int isize)
 *         array starting at 1, for compatibility with S. 
 ***************************************************************/
 
-void morlet_time(float *pcf,float *pscale, int *pb, 
+void morlet_time(double *pcf,double *pscale, int *pb, 
 		 double *w_r, double *w_i,int *pisize)
 {
   double tmp, tmp2;
-  float cf = *pcf, scale = *pscale;
+  double cf = *pcf, scale = *pscale;
   int b = *pb, isize = *pisize;
   int i;
 
@@ -121,7 +123,7 @@ void morlet_time(float *pcf,float *pscale, int *pb,
 * remark: unlike the other functions, this one generates an 
 *         array starting at 1, for compatibility with S. 
 ***************************************************************/
-void vmorlet_time(float *pcf,float *pscale, int *b, 
+void vmorlet_time(double *pcf,double *pscale, int *b, 
 		 double *w_r, double *w_i,int *pisize, int *pnbnode)
 {
   double tmp, tmp2;
@@ -161,11 +163,11 @@ void vmorlet_time(float *pcf,float *pscale, int *b,
 *   pcenterfrequency: centralfrequency of Morlet wavelet
 ******************************************************************/
 
-void Scwt_morlet_r(float *input, double *Oreal, double *Oimage,
-   int *pnboctave, int *pnbvoice, int *pinputsize, float *pcenterfrequency)
+void Scwt_morlet_r(double *input, double *Oreal, double *Oimage,
+   int *pnboctave, int *pnbvoice, int *pinputsize, double *pcenterfrequency)
 {	
   int nboctave, nbvoice, i, j, inputsize;
-  float centerfrequency, a;
+  double centerfrequency, a;
   double *Ri2, *Ri1, *Ii1, *Ii, *Ri;
 
 
@@ -173,15 +175,15 @@ void Scwt_morlet_r(float *input, double *Oreal, double *Oimage,
   nboctave = *pnboctave;
   nbvoice = *pnbvoice;
   inputsize = *pinputsize;
-  if(!(Ri2 = (double *)malloc(sizeof(double) * inputsize)))
+  if(!(Ri2 = (double *) R_alloc(inputsize, sizeof(double) )))
     error("Memory allocation failed for Ri2 in cwt_morlet.c \n");
-  if(!(Ri1 = (double *)malloc(sizeof(double) * inputsize)))
+  if(!(Ri1 = (double *) R_alloc(inputsize, sizeof(double) )))
     error("Memory allocation failed for Ri1 in cwt_morlet.c \n");
-  if(!(Ii1 = (double *)malloc(sizeof(double) * inputsize)))
+  if(!(Ii1 = (double *) R_alloc(inputsize, sizeof(double) )))
     error("Memory allocation failed for Ii1 in cwt_morlet.c \n");
-  if(!(Ri = (double *)malloc(sizeof(double) * inputsize)))
+  if(!(Ri = (double *) R_alloc(inputsize, sizeof(double) )))
     error("Memory allocation failed for Ri in cwt_morlet.c \n");
-  if(!(Ii = (double *)malloc(sizeof(double) * inputsize)))
+  if(!(Ii = (double *) R_alloc(inputsize, sizeof(double) )))
     error("Memory allocation failed for Ii in cwt_morlet.c \n");
 
   for(i = 0; i < inputsize; i++) {
@@ -193,7 +195,7 @@ void Scwt_morlet_r(float *input, double *Oreal, double *Oimage,
   
   for(i = 1; i <= nboctave; i++) {
     for(j=0; j < nbvoice; j++) {
-      a = (float)(pow((double)2,(double)(i+j/((double)nbvoice))));
+      a = (double)(pow((double)2,(double)(i+j/((double)nbvoice))));
       morlet_frequency(centerfrequency,a,Ri2,inputsize); 
       multi(Ri1,Ii1,Ri2,Oreal,Oimage,inputsize);
       double_fft(Oreal,Oimage,Oreal,Oimage,inputsize,1); 
@@ -202,12 +204,6 @@ void Scwt_morlet_r(float *input, double *Oreal, double *Oimage,
     }
   }
 
-  free((char *)Ri2);
-  free((char *)Ri1);
-  free((char *)Ii1);
-  free((char *)Ri);
-  free((char *)Ii);
-  return;
 }
 
 
@@ -228,12 +224,12 @@ void Scwt_morlet_r(float *input, double *Oreal, double *Oimage,
 *   pcenterfrequency: centralfrequency of Morlet wavelet
 ******************************************************************/
 
-void Scwt_morlet(float *Rinput,float *Iinput,double *Oreal,
+void Scwt_morlet(double *Rinput,double *Iinput,double *Oreal,
    double *Oimage,int *pnboctave,int *pnbvoice,
-   int *pinputsize,float *pcenterfrequency)
+   int *pinputsize,double *pcenterfrequency)
 {	
   int nboctave, nbvoice, i, j, k, inputsize;
-  float centerfrequency, a;
+  double centerfrequency, a;
   double *Ri2, *Ri1, *Ii1, *Ii, *Ri;
 
 
@@ -241,15 +237,15 @@ void Scwt_morlet(float *Rinput,float *Iinput,double *Oreal,
   nboctave = *pnboctave;
   nbvoice = *pnbvoice;
   inputsize = *pinputsize;
-  if(!(Ri2 = (double *)malloc(sizeof(double) * inputsize)))
+  if(!(Ri2 = (double *) R_alloc(inputsize, sizeof(double) )))
     error("Memory allocation failed for Ri2 in cwt_morlet.c \n");
-  if(!(Ri1 = (double *)malloc(sizeof(double) * inputsize)))
+  if(!(Ri1 = (double *) R_alloc(inputsize, sizeof(double) )))
     error("Memory allocation failed for Ri1 in cwt_morlet.c \n");
-  if(!(Ii1 = (double *)malloc(sizeof(double) * inputsize)))
+  if(!(Ii1 = (double *) R_alloc(inputsize, sizeof(double) )))
     error("Memory allocation failed for Ii1 in cwt_morlet.c \n");
-  if(!(Ri = (double *)malloc(sizeof(double) * inputsize)))
+  if(!(Ri = (double *) R_alloc(inputsize, sizeof(double) )))
     error("Memory allocation failed for Ri in cwt_morlet.c \n");
-  if(!(Ii = (double *)malloc(sizeof(double) * inputsize)))
+  if(!(Ii = (double *) R_alloc(inputsize, sizeof(double) )))
     error("Memory allocation failed for Ii in cwt_morlet.c \n");
 
   for(i = 0; i < inputsize; i++) {
@@ -261,7 +257,7 @@ void Scwt_morlet(float *Rinput,float *Iinput,double *Oreal,
   
   for(i = 1; i <= nboctave; i++) {
     for(j=0; j < nbvoice; j++) {
-      a = (float)(pow((double)2,(double)(i+j/((double)nbvoice))));
+      a = (double)(pow((double)2,(double)(i+j/((double)nbvoice))));
       morlet_frequency(centerfrequency,a,Ri2,inputsize); 
       multi(Ri1,Ii1,Ri2,Oreal,Oimage,inputsize);
       double_fft(Oreal,Oimage,Oreal,Oimage,inputsize,1); 
@@ -270,11 +266,6 @@ void Scwt_morlet(float *Rinput,float *Iinput,double *Oreal,
     }
   }
 
-  free((char *)Ri2);
-  free((char *)Ri1);
-  free((char *)Ii1);
-  free((char *)Ri);
-  free((char *)Ii);
 }
 
 
@@ -289,27 +280,27 @@ void Scwt_morlet(float *Rinput,float *Iinput,double *Oreal,
 *     Oreal, Oimage: real and imaginary parts of the cwt.
 ***************************************************************/
 
-void Svwt_morlet(float *Rinput,float *Iinput,double *Oreal,
-   double *Oimage,float *pa,int *pinputsize,
-   float *pcenterfrequency)
+void Svwt_morlet(double *Rinput,double *Iinput,double *Oreal,
+   double *Oimage,double *pa,int *pinputsize,
+   double *pcenterfrequency)
 {	
   int octave, voice, nbvoice, i, j, k, inputsize;
-  float centerfrequency, a;
+  double centerfrequency, a;
   double *Ri2, *Ri1, *Ii1, *Ii, *Ri;
 
 
   centerfrequency = *pcenterfrequency;
   a = *pa;
   inputsize = *pinputsize;
-  if(!(Ri2 = (double *)malloc(sizeof(double) * inputsize)))
+  if(!(Ri2 = (double *) R_alloc(inputsize, sizeof(double) )))
     error("Memory allocation failed for Ri2 in cwt_morlet.c \n");
-  if(!(Ri1 = (double *)malloc(sizeof(double) * inputsize)))
+  if(!(Ri1 = (double *) R_alloc(inputsize, sizeof(double) )))
     error("Memory allocation failed for Ri1 in cwt_morlet.c \n");
-  if(!(Ii1 = (double *)malloc(sizeof(double) * inputsize)))
+  if(!(Ii1 = (double *) R_alloc(inputsize, sizeof(double) )))
     error("Memory allocation failed for Ii1 in cwt_morlet.c \n");
-  if(!(Ri = (double *)malloc(sizeof(double) * inputsize)))
+  if(!(Ri = (double *) R_alloc(inputsize, sizeof(double) )))
     error("Memory allocation failed for Ri in cwt_morlet.c \n");
-  if(!(Ii = (double *)malloc(sizeof(double) * inputsize)))
+  if(!(Ii = (double *) R_alloc(inputsize, sizeof(double) )))
     error("Memory allocation failed for Ii in cwt_morlet.c \n");
 
   for(i = 0; i < inputsize; i++) {
@@ -323,11 +314,6 @@ void Svwt_morlet(float *Rinput,float *Iinput,double *Oreal,
   multi(Ri1,Ii1,Ri2,Oreal,Oimage,inputsize);
   double_fft(Oreal,Oimage,Oreal,Oimage,inputsize,1); 
   
-  free((char *)Ri2);
-  free((char *)Ri1);
-  free((char *)Ii1);
-  free((char *)Ri);
-  free((char *)Ii);
 }
 
 

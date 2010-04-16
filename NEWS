@@ -1,0 +1,8 @@
+NEWS for Rwave package
+======================
+
+1.25-1  2010-04-20 
+    o   Beginning to move legacy C code to internal R functionality.  
+        Risk of memory leaks should be lower now.
+
+    o   New files in data section.

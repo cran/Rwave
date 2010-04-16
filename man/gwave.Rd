@@ -34,8 +34,7 @@ number of complex constraints
 \value{
 Array of Gabor functions located on the ridge samples
 }
-\details{
-}
+%\details{}
 \references{
 See discussions in the text of "Time-Frequency Analysis''.
 }

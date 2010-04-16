@@ -22,10 +22,9 @@ If set to TRUE, subsample the representation.
 \value{
 2D array containing the smoothed transform.
 }
-\details{
-}
+%\details{}
 \references{
-See discussions in the text of ``Time-Frequency Analysis''.
+See discussions in the text of \dQuote{Time-Frequency Analysis}.
 }
 \seealso{
 \code{\link{corona}}, \code{\link{coronoid}}, \code{\link{snake}},

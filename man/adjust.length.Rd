@@ -19,12 +19,10 @@ data.
 \value{
 Zero-padded 1D array.
 }
-\details{
-}
+%\details{}
 \references{
 See discussions in the text of ``Practical Time-Frequency Analysis''.
 }
-\seealso{
-}
+%\seealso{}
 \keyword{ts}
 \keyword{ts}

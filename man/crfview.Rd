@@ -17,13 +17,10 @@ Family of chained ridges, output of \code{\link{cfamily}}.
 If set to T, displays the ridges as an image. If set to F,
 displays as a series of curves.
 }}
-\value{
-
-}
-\details{
-}
+%\value{}
+%\details{}
 \references{
-See discussions in the text of ``Practical Time-Frequency Analysis''.
+See discussions in the text of \dQuote{Practical Time-Frequency Analysis}.
 }
 \seealso{
 \code{\link{crc}},\code{\link{cfamily}} for crazy climbers and corresponding chaining algorithms.

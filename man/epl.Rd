@@ -13,11 +13,8 @@ epl(dwext)
 \item{dwext}{
 dyadic wavelet transform (output of \code{\link{ext}}).
 }}
-\value{
-
-}
-\details{
-}
+%\value{}
+%\details{}
 \references{
 See discussions in the text of ``Practical Time-Frequency Analysis''.
 }

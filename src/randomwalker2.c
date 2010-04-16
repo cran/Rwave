@@ -1,3 +1,5 @@
+#include <stdlib.h>
+
 /***************************************************************
 *              (c) Copyright  1997                             *
 *                         by                                   *
@@ -36,7 +38,7 @@ double ran1(long *idum)
     long k;
     static long iy=0;
     static long iv[NTAB];
-    float temp;
+    double temp;
     
     if(*idum <= 0 || !iy) {
       if(-(*idum) < 1) *idum = 1;

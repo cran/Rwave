@@ -53,7 +53,7 @@ crc <- function(tfrep, tfspec = numeric(dim(tfrep)[2]), bstep = 3,
   z <- .C("Sbee_annealing",
           as.double(sqmodulus),
           beemap= as.double(beemap),
-          as.single(rate),
+          as.double(rate),
           as.integer(sigsize),
           as.integer(nscale),
           as.integer(iteration),
@@ -111,13 +111,13 @@ cfamily <- function(ccridge, bstep = 1, nbchain = 100, ptile = 0.05)
    
   z <- .C("Scrazy_family",
           as.double(ccridge),
-          orderedmap = as.single(orderedmap),
+          orderedmap = as.double(orderedmap),
           chain = as.integer(chain),
           chainnb = as.integer(nbchain),
           as.integer(sigsize),
           as.integer(nscale),
           as.integer(bstep),
-          as.single(threshold),
+          as.double(threshold),
           PACKAGE="Rwave")
 	
   orderedmap <- z$orderedmap

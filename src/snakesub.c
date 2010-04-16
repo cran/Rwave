@@ -1,3 +1,5 @@
+#include <stdlib.h>
+
 
 /***************************************************************
 *    $Log: snakesub2.c,v $                                     *
@@ -16,14 +18,14 @@
 
 void snakesub(rho,rate,snakesize)
      int rate, snakesize;
-     float *rho;
+     double *rho;
 {
   int i;
 
   for(i=0; i< snakesize;i++){
-    *rho /= (float)rate;
+    *rho /= (double)rate;
     /* *rho = floorf(*rho); */
-    *rho = (float)floor((double)(*rho));
+    *rho = (double)floor((double)(*rho));
 /*    printf("rho=%f\n",*rho);*/
     rho++;
   }
@@ -32,14 +34,14 @@ return;
 
 void snakexpand(rho,rate,snakesize)
      int rate, snakesize;
-     float *rho;
+     double *rho;
 {
   int i;
 
   for(i=0; i< snakesize;i++){
-    *rho *= (float)rate;
+    *rho *= (double)rate;
     /* *rho = floorf(*rho); */
-    *rho = (float)floor((double)(*rho));
+    *rho = (double)floor((double)(*rho));
 /*    printf("rho=%f\n",*rho);*/
     rho++;
   }

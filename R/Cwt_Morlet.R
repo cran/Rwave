@@ -52,14 +52,14 @@ cwt <- function(input, noctave, nvoice = 1, w0 = 2*pi, twoD = TRUE,
   dim(input) <- c(newsize,1)
   
   z <- .C("Scwt_morlet",
-          as.single(Re(input)),
-          as.single(Im(input)),
+          as.double(Re(input)),
+          as.double(Im(input)),
           Rtmp = as.double(Routput),
           Itmp = as.double(Ioutput),
           as.integer(noctave),
           as.integer(nvoice),
           as.integer(newsize),
-          as.single(w0),
+          as.double(w0),
           PACKAGE="Rwave")
   
   Routput <- z$Rtmp
@@ -196,13 +196,13 @@ vwt <- function(input, scale, w0 = 2*pi)
   dim(input) <- c(newsize,1)
   
   z <- .C("Svwt_morlet",
-          as.single(Re(input)),
-          as.single(Im(input)),
+          as.double(Re(input)),
+          as.double(Im(input)),
           Rtmp = as.double(Routput),
           Itmp = as.double(Ioutput),
-          as.single(scale),
+          as.double(scale),
           as.integer(newsize),
-          as.single(w0),
+          as.double(w0),
           PACKAGE="Rwave")
   
   Routput <- z$Rtmp
@@ -234,8 +234,8 @@ morlet <- function(sigsize, location, scale, w0 = 2*pi)
   wavelet.i <- numeric(sigsize)
   
   z <- .C("morlet_time",
-          as.single(w0),
-          as.single(scale),
+          as.double(w0),
+          as.double(scale),
           as.integer(location),
           wavelet.r = as.double(wavelet.r),
           wavelet.i = as.double(wavelet.i),
@@ -270,8 +270,8 @@ vecmorlet <- function(sigsize, nbnodes, bridge, aridge, w0 = 2*pi)
   morlet.i <- numeric(nbnodes * sigsize)
 
   z <- .C("vmorlet_time",
-          as.single(w0),
-          as.single(aridge),
+          as.double(w0),
+          as.double(aridge),
           as.integer(bridge),
           morlet.r = as.double(morlet.r),
           morlet.i = as.double(morlet.i),

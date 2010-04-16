@@ -46,8 +46,6 @@ chirp <- sin(2*pi*(x + 0.002*(x-256)*(x-256))/16)
 par(mfrow=c(3,1))
 plot(ts(chirp), xaxs="i", xlab="", ylab="")
 title('Chirp signal')
-cgtchirp <- mycgt(chirp, 50, .005, 25)
-tmp <- cleanph(cgtchirp, .01)
 ## The result is displayed in Figure 3.5
 
 mycgt <- function (input, nvoice, freqstep = (1/nvoice),
@@ -64,9 +62,9 @@ mycgt <- function (input, nvoice, freqstep = (1/nvoice),
   dim(Routput) <- c(pp * newsize, 1)
   dim(Ioutput) <- c(pp * newsize, 1)
   dim(input) <- c(newsize, 1)
-  z <- .C("Sgabor", as.single(input), Rtmp = as.double(Routput), 
-          Itmp = as.double(Ioutput), as.integer(nvoice), as.single(freqstep), 
-          as.integer(newsize), as.single(scale), PACKAGE="Rwave")
+  z <- .C("Sgabor", as.double(input), Rtmp = as.double(Routput), 
+          Itmp = as.double(Ioutput), as.integer(nvoice), as.double(freqstep), 
+          as.integer(newsize), as.double(scale), PACKAGE="Rwave")
   Routput <- z$Rtmp
   Ioutput <- z$Itmp
   dim(Routput) <- c(newsize, pp)
@@ -80,3 +78,6 @@ mycgt <- function (input, nvoice, freqstep = (1/nvoice),
   }
   output
 }
+
+cgtchirp <- mycgt(chirp, 50, .005, 25)
+tmp <- cleanph(cgtchirp, .01)

@@ -21,8 +21,7 @@ corresponds to those of Mallat and Zhong's wavlet. And
 \value{
 Reconstructed signal
 }
-\details{
-}
+%\details{}
 \references{
 See discussions in the text of ``Practical Time-Frequency Analysis''.
 }

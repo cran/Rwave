@@ -1,3 +1,7 @@
+#include <stdlib.h>
+#include "Swave.h"
+
+
 /***************************************************************
 *    $log: gkernel.c,v $                                       *
 ****************************************************************
@@ -135,7 +139,7 @@ void gkernel(double *ker, int *px_min,int *px_max,
 
 
   /* printf("xmin=%d, xmax=%d\n",x_min,x_max); */
-  p2 = (double *)calloc(nb_nodes,sizeof(double));
+  p2 = (double *)S_alloc(nb_nodes,sizeof(double));
   p_tmp=ker; /* mark the first element of ker */
 
   phimax = scale;
@@ -176,7 +180,6 @@ void gkernel(double *ker, int *px_min,int *px_max,
      ------------------------------------------------ */
   ghermite_sym(ker,lng);
 
-  free(p2);
 }
 
 
@@ -211,7 +214,7 @@ void fastgkernel(double *ker, int *px_min,int *px_max,
   double *p_tmp;
 
 
-  p2 = (double *)calloc(nb_nodes,sizeof(double));
+  p2 = (double *)S_alloc(nb_nodes,sizeof(double));
   p_tmp=ker; /* mark the first element of ker */
 
   phimax = scale;
@@ -257,7 +260,6 @@ void fastgkernel(double *ker, int *px_min,int *px_max,
      -----------------------------------------------*/
   ghermite_sym(ker,lng);
 
-  free(p2);
 }
 
 

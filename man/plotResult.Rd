@@ -26,10 +26,8 @@ plotResult(result, original, maxresoln, scale=FALSE, yaxtype="s")
     y axis type (see \R manual).
   }
 }
-\value{
-}
-\details{
-}
+%\value{}
+%\details{}
 \references{
   See discussions in the text of ``Time-Frequency Analysis''.
 }

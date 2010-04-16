@@ -1,3 +1,5 @@
+#include <stdlib.h>
+
 /****************************************************************
 *               (c) Copyright  1997                             *
 *                          by                                   *
@@ -19,7 +21,7 @@
    Or,Oi: Real and imaginary parts of output signal 
 */
 
-multiply(Ri1,Ii1,Ri2,Ii2,Or,Oi,isize)
+void multiply(Ri1,Ii1,Ri2,Ii2,Or,Oi,isize)
      double *Ri1, *Ri2, *Ii1, *Ii2, *Or, *Oi;
      int isize;
 {
@@ -32,5 +34,5 @@ multiply(Ri1,Ii1,Ri2,Ii2,Or,Oi,isize)
     Ri1++; Ii1++;
     Ri2++; Ii2++;
   }
-  return;
+  //return;
 }

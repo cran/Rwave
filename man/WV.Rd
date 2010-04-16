@@ -19,11 +19,9 @@ WV(input, nvoice, freqstep = (1/nvoice), plot = TRUE)
 \value{
   (complex) Wigner-Ville transform.
 }
-\details{
-}
+%\details{}
 \references{
-  See discussions in the text of ``Practical Time-Frequency Analysis''.
+  See discussions in the text of \dQuote{Practical Time-Frequency Analysis}.
 }
-\seealso{
-}
+%\seealso{}
 \keyword{ts}

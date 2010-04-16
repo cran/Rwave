@@ -51,11 +51,11 @@ WV <- function(input, nvoice, freqstep = (1/nvoice), plot = TRUE)
   dim(input) <- c(newsize, 1)
   
   z <- .C("WV",
-          as.single(input),
+          as.double(input),
           Rtmp = as.double(Routput),
           Itmp = as.double(Ioutput),
           as.integer(nvoice),
-          as.single(freqstep),
+          as.double(freqstep),
           as.integer(newsize),
           PACKAGE="Rwave")
   

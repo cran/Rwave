@@ -76,8 +76,7 @@ Returns a structure containing the following elements:
 When ptile is high, boundary effects may appeare.
 para controls extrapolation of the ridge.
 }
-\references{
-}
+%\references{}
 \seealso{
 \code{\link{crc}}, \code{\link{cfamily}}, \code{\link{scrcrec}}.
 }

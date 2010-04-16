@@ -23,8 +23,8 @@ mnpval <- function(inputdata, maxresoln, wl=128, scale=FALSE)
   dim(pval) <- c(length(pval), 1)
 
   z <- .C("normal_pval_compute",
-          a=as.single(pval),
-          as.single(s),
+          a=as.double(pval),
+          as.double(s),
           as.integer(maxresoln),
           as.integer(np),
           as.integer(num.of.windows),
@@ -54,8 +54,8 @@ mbpval <- function(inputdata, maxresoln, wl=128, scale=FALSE)
   dim(pval) <- c(length(pval), 1)
 
   z <- .C("compute_mallat_bootstrap_pval",
-	a=as.single(pval),
-	as.single(s),
+	a=as.double(pval),
+	as.double(s),
 	as.integer(maxresoln),
 	as.integer(np),
 	as.integer(num.of.windows),
@@ -84,8 +84,8 @@ mntrim <- function(extrema, scale=FALSE, prct=.95)
   # Find the threshold for each resoln
 
   z <- .C("nthresh_compute",
-	a=as.single(nthresh),
-	as.single(s),
+	a=as.double(nthresh),
+	as.double(s),
 	as.integer(maxresoln),
 	as.integer(sample.size),
 	as.double(prct),
@@ -123,8 +123,8 @@ mbtrim <- function(extrema, scale=FALSE, prct=.95)
   # Find the threshold for each resoln
 
   z <- .C("bthresh_compute",
-	a=as.single(bthresh),
-	as.single(s),
+	a=as.double(bthresh),
+	as.double(s),
 	as.integer(maxresoln),
 	as.integer(sample.size),
 	as.double(prct),

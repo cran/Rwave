@@ -81,8 +81,7 @@ Returns a list containing:
 \item{Q2}{
   second part of the reconstruction kernel.
 }}
-\details{
-}
+%\details{}
 \references{
 See discussions in the text of ``Practical Time-Frequency Analysis''.
 }

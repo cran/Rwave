@@ -1,3 +1,5 @@
+#include <stdlib.h>
+
 
 /******************************************************************
 *              (c) Copyright  1997                                *
@@ -26,8 +28,8 @@
 *
 ****************************************************************/
 
-void signal_penalty_function(float *f, float *lambda,
-  float **W_tilda, image_ext *ext, int num_of_extrema, int np)
+void signal_penalty_function(double *f, double *lambda,
+  double **W_tilda, image_ext *ext, int num_of_extrema, int np)
 {
   int s, t;
   
@@ -56,32 +58,32 @@ void signal_penalty_function(float *f, float *lambda,
 *
 ****************************************************************/
 
-void signal_position(char *filtername, float **lambda,
-  image_ext *ext, float **Wtilda, float **W, int num_of_extrema,
+void signal_position(char *filtername, double **lambda,
+  image_ext *ext, double **Wtilda, double **W, int num_of_extrema,
   int max_resoln, int np)
 {
   int s, t, r, i, j, diff;
   bound *psi, *phi;
   bound *H_bound, *G_bound;
   char filename[STRING_SIZE];
-  float **position_matrix, *w, **v;
-  float sum;
+  double **position_matrix, *w, **v;
+  double sum;
   int p, x;
-  float *b;
+  double *b;
 
-  float d;
+  double d;
   int *indx;
 
-  if(!(indx = (int *) malloc(num_of_extrema * sizeof(int))))
+  if(!(indx = (int *) R_alloc(num_of_extrema , sizeof(int))))
     error("Memory allocation failed for indx in signal_position.c \n");
 
   HGfilter_bound(filtername,&H_bound,&G_bound,max_resoln); 
   PsiPhifilter_bound( &psi, &phi, H_bound, G_bound, max_resoln );
 
-  if(!(position_matrix = (float **) malloc(num_of_extrema * sizeof(float *) )))
+  if(!(position_matrix = (double **) R_alloc(num_of_extrema , sizeof(double *) )))
     error("Memory allocation failed for position matrix in image_lambda \n");
   for ( r = 0; r < num_of_extrema; r++ )
-    if(!(position_matrix[r] = (float *) malloc((num_of_extrema) * sizeof(float) )))
+    if(!(position_matrix[r] = (double *) R_alloc((num_of_extrema) , sizeof(double) )))
       error("Memory allocation failed for position_matrix[] in image_lambda \n");
 
   for ( r = 0; r < num_of_extrema; r++ ) {
@@ -104,17 +106,15 @@ void signal_position(char *filtername, float **lambda,
 /*  printf("num_of_extrema = %d \n",num_of_extrema); */
 /*  output_array(position_matrix,num_of_extrema,num_of_extrema,filename); */
 
-  free( phi );
-  free( psi );
 
   /**************************************************/
   /* solve lambda from position_matrix (lambda) = b */
   /**************************************************/
 
-  if(!(*lambda = (float *) malloc(num_of_extrema * sizeof(float) )))
+  if(!(*lambda = (double *) R_alloc(num_of_extrema , sizeof(double) )))
     error("Memory allocation failed for lambda in image_position.c \n");
 
-  if(!(b = (float *) malloc( num_of_extrema * sizeof(float))))
+  if(!(b = (double *) R_alloc( num_of_extrema , sizeof(double))))
     error("Memory allocation failed for b in image_position.c \n");  
 
 
@@ -134,18 +134,6 @@ void signal_position(char *filtername, float **lambda,
 */
   svdecomp_solve(position_matrix,b,*lambda,num_of_extrema,
 		 num_of_extrema,&w,&v);
-
-  for ( i = 0; i < num_of_extrema; i++ ) {
-    free(position_matrix[i] );
-    free(v[i]); 
-  }
-  free(position_matrix); 
-
-  free(v);
-  free(w);
-  free(b);
-
-  return;
 }
 
 
@@ -168,26 +156,26 @@ void signal_position(char *filtername, float **lambda,
 *    
 ****************************************************************/
 
-void extrema_reconst(char *filtername, float *f, float *extrema,
+void extrema_reconst(char *filtername, double *f, double *extrema,
   int *max_resoln_ptr, int *np_ptr, int *preadfile)
 {
-  float **W, **S;
-  float **W_tilda;
-  float **K;
+  double **W, **S;
+  double **W_tilda;
+  double **K;
   int max_resoln = *max_resoln_ptr;
   int np = *np_ptr;
   int readfileflag = *preadfile;
   image_ext *ext;                  
-  float *lambda;
+  double *lambda;
   int num_of_extrema, j;
   
   signal_W_S(&W, &S, max_resoln, np); 
   
   if(!readfileflag) {
     signal_K_compute(&K, W, max_resoln, np); 
-    printf("K "); 
+   // printf("K "); 
     signal_W_tilda(&W_tilda, W, K, max_resoln,np);    
-    printf("W ");
+    //printf("W ");
   }
   else {
     signal_W_tilda_input(&W_tilda, max_resoln, np);   
@@ -199,8 +187,8 @@ void extrema_reconst(char *filtername, float *f, float *extrema,
   
   signal_penalty_function(f,lambda,W_tilda,ext,num_of_extrema,np);    
 
-  free( lambda );
-  free( ext );
+  //free( lambda );
+  //free( ext );
   /*
     for ( j = 0; j <= max_resoln; j++ )  {
     free( W[j] );

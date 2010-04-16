@@ -1,3 +1,5 @@
+#include <stdlib.h>
+
 /***************************************************************
 *    $Log: cholde.c,v $                                        *
 ****************************************************************
@@ -15,7 +17,7 @@
 #ifndef _NR_UTILS_H_
 #define _NR_UTILS_H_
 
-static float sqrarg;
+static double sqrarg;
 #define SQR(a) ((sqrarg=(a)) == 0.0 ? 0.0 : sqrarg*sqrarg)
 
 static double dsqrarg;
@@ -29,11 +31,11 @@ static double dminarg1,dminarg2;
 #define DMIN(a,b) (dminarg1=(a),dminarg2=(b),(dminarg1) < (dminarg2) ?\
         (dminarg1) : (dminarg2))
 
-static float maxarg1,maxarg2;
+static double maxarg1,maxarg2;
 #define FMAX(a,b) (maxarg1=(a),maxarg2=(b),(maxarg1) > (maxarg2) ?\
         (maxarg1) : (maxarg2))
 
-static float minarg1,minarg2;
+static double minarg1,minarg2;
 #define FMIN(a,b) (minarg1=(a),minarg2=(b),(minarg1) < (minarg2) ?\
         (minarg1) : (minarg2))
 
@@ -58,40 +60,40 @@ static int iminarg1,iminarg2;
 #if defined(__STDC__) || defined(ANSI) || defined(NRANSI) /* ANSI */
 
 void nrerror(char error_text[]);
-float *vector(long nl, long nh);
+double *vector(long nl, long nh);
 int *ivector(long nl, long nh);
 unsigned char *cvector(long nl, long nh);
 unsigned long *lvector(long nl, long nh);
 double *dvector(long nl, long nh);
-float **matrix(long nrl, long nrh, long ncl, long nch);
+double **matrix(long nrl, long nrh, long ncl, long nch);
 double **dmatrix(long nrl, long nrh, long ncl, long nch);
 int **imatrix(long nrl, long nrh, long ncl, long nch);
-float **submatrix(float **a, long oldrl, long oldrh, long oldcl, long oldch,
+double **submatrix(double **a, long oldrl, long oldrh, long oldcl, long oldch,
 	long newrl, long newcl);
-float **convert_matrix(float *a, long nrl, long nrh, long ncl, long nch);
-float ***f3tensor(long nrl, long nrh, long ncl, long nch, long ndl, long ndh);
-void free_vector(float *v, long nl, long nh);
+double **convert_matrix(double *a, long nrl, long nrh, long ncl, long nch);
+double ***f3tensor(long nrl, long nrh, long ncl, long nch, long ndl, long ndh);
+void free_vector(double *v, long nl, long nh);
 void free_ivector(int *v, long nl, long nh);
 void free_cvector(unsigned char *v, long nl, long nh);
 void free_lvector(unsigned long *v, long nl, long nh);
 void free_dvector(double *v, long nl, long nh);
-void free_matrix(float **m, long nrl, long nrh, long ncl, long nch);
+void free_matrix(double **m, long nrl, long nrh, long ncl, long nch);
 void free_dmatrix(double **m, long nrl, long nrh, long ncl, long nch);
 void free_imatrix(int **m, long nrl, long nrh, long ncl, long nch);
-void free_submatrix(float **b, long nrl, long nrh, long ncl, long nch);
-void free_convert_matrix(float **b, long nrl, long nrh, long ncl, long nch);
-void free_f3tensor(float ***t, long nrl, long nrh, long ncl, long nch,
+void free_submatrix(double **b, long nrl, long nrh, long ncl, long nch);
+void free_convert_matrix(double **b, long nrl, long nrh, long ncl, long nch);
+void free_f3tensor(double ***t, long nrl, long nrh, long ncl, long nch,
 	long ndl, long ndh);
 
 #else /* ANSI */
 /* traditional - K&R */
 
 void nrerror();
-float *vector();
-float **matrix();
-float **submatrix();
-float **convert_matrix();
-float ***f3tensor();
+double *vector();
+double **matrix();
+double **submatrix();
+double **convert_matrix();
+double ***f3tensor();
 double *dvector();
 double **dmatrix();
 int *ivector();
@@ -119,10 +121,10 @@ void free_f3tensor();
 /* ludcmp, lubksb */
 /*****************************************************************************/
 
-void float_choldc(float **a, int n, float p[])
+void double_choldc(double **a, int n, double p[])
 {
   int i,j,k;
-  float sum;
+  double sum;
   
   for (i=1;i<=n;i++) {
     for (j=i;j<=n;j++) {
@@ -140,45 +142,39 @@ void float_choldc(float **a, int n, float p[])
 /* cholde : double precision with C language array format                    */
 /*****************************************************************************/
 
-void choldc(float **a, int n, float p[])
+void choldc(double **a, int n, double p[])
 {
-  float** A;
-  float *P;
+  double** A;
+  double *P;
   int i,j,k;
 
-/*  if(!(A = (float **)(malloc(sizeof(float *) * (n+1)))))
+/*  if(!(A = (double **)(malloc(sizeof(double *) * (n+1)))))
     error("Memory allocation failed for A in choldc.c \n");
 */
-  if(!(P = (float *)(malloc(sizeof(float) * (n+1)))))
+  if(!(P = (double *)(R_alloc((n+1), sizeof(double) ))))
     error("Memory allocation failed for P in choldc.c \n");
 /*		  
   for(i = 0; i <= n; i++) {
-    if(!(A[i] = (float *)(malloc(sizeof(float) * (n+1)))))
+    if(!(A[i] = (double *)(malloc(sizeof(double) * (n+1)))))
       error("Memory allocation failed for A in choldc.c \n");
   }
 */  
   for(i = 0; i < n; i++) {
-    P[i+1] = (float)(p[i]);
+    P[i+1] = (double)(p[i]);
 /*    for(j = 0; j <n ; j++)
-      A[i+1][j+1] = (float)(a[i][j]); */
+      A[i+1][j+1] = (double)(a[i][j]); */
   }
     
-/*  float_choldc(A,n,P); */
-  float_choldc(a,n,P);
+/*  double_choldc(A,n,P); */
+  double_choldc(a,n,P);
 
 
   for(i = 0; i < n; i++) {
-    p[i] = (float)(P[i+1]);
+    p[i] = (double)(P[i+1]);
 /*    for(j = 0; j <n ; j++)
-      a[i][j] = (float)(A[i+1][j+1]); */
+      a[i][j] = (double)(A[i+1][j+1]); */
   }
   
-/*  for(i = 0; i <= n; i++) {
-    free(A[i]);
-  }
-*/
-  free(P);
-/*  free(A); */
 }
 
 
@@ -186,10 +182,10 @@ void choldc(float **a, int n, float p[])
 /***************************************/
 /* cholsl with C language array format */
 /***************************************/
-void float_cholsl(float **a, int n, float p[], float b[], float x[])
+void double_cholsl(double **a, int n, double p[], double b[], double x[])
 {
   int i,k;
-  float sum;
+  double sum;
   
   for (i=1;i<=n;i++) {
     for (sum=b[i],k=i-1;k>=1;k--) sum -= a[i][k]*x[k];
@@ -201,58 +197,50 @@ void float_cholsl(float **a, int n, float p[], float b[], float x[])
   }
 }
 
-void cholsl(float **a, int n, float p[], float b[], float x[])
+void cholsl(double **a, int n, double p[], double b[], double x[])
 {
-  float** A;
-  float *P;
+  double** A;
+  double *P;
   int i,j,k;
-  float *B, *X;
+  double *B, *X;
   
-/*  if(!(A = (float **)(malloc(sizeof(float *) * (n+1)))))
+/*  if(!(A = (double **)(malloc(sizeof(double *) * (n+1)))))
     error("Memory allocation failed for A in choldc.c \n");
 */
-  if(!(P = (float *)(malloc(sizeof(float) * (n+1)))))
+  if(!(P = (double *)(R_alloc((n+1), sizeof(double) ))))
     error("Memory allocation failed for P in choldc.c \n");
-  if(!(B = (float *)(malloc(sizeof(float) * (n+1)))))
+  if(!(B = (double *)(R_alloc((n+1), sizeof(double) ))))
     error("Memory allocation failed for B in choldc.c \n");
-  if(!(X = (float *)(malloc(sizeof(float) * (n+1)))))
+  if(!(X = (double *)(R_alloc((n+1), sizeof(double) ))))
     error("Memory allocation failed for X in choldc.c \n");
 		  
 /*  for(i = 0; i <= n; i++) {
-    if(!(A[i] = (float *)(malloc(sizeof(float) * (n+1)))))
+    if(!(A[i] = (double *)(malloc(sizeof(double) * (n+1)))))
       error("Memory allocation failed for A in choldc.c \n");
   }
 */
   for(i = 0; i < n; i++) {
-    P[i+1] = (float)(p[i]);
-    X[i+1] = (float)(x[i]);
-    B[i+1] = (float)(b[i]);
+    P[i+1] = (double)(p[i]);
+    X[i+1] = (double)(x[i]);
+    B[i+1] = (double)(b[i]);
 /*    for(j = 0; j <n ; j++)
-      A[i+1][j+1] = (float)(a[i][j]);
+      A[i+1][j+1] = (double)(a[i][j]);
 */
   }  
 
-/*  float_cholsl(A, n, P, B, X); */
-  float_cholsl(a, n, P, B, X);
+/*  double_cholsl(A, n, P, B, X); */
+  double_cholsl(a, n, P, B, X);
 
   for(i = 0; i < n; i++) {
-    p[i] = (float)(P[i+1]);
-    b[i] = (float)(B[i+1]);
-    x[i] = (float)(X[i+1]);
+    p[i] = (double)(P[i+1]);
+    b[i] = (double)(B[i+1]);
+    x[i] = (double)(X[i+1]);
 /*    for(j = 0; j <n ; j++)
-      a[i][j] = (float)(A[i+1][j+1]); 
+      a[i][j] = (double)(A[i+1][j+1]); 
 */
   }  
 
 
-/*  for(i = 0; i <= n; i++) {
-    free(A[i]);
-  }
-*/
-  free(P);
-  free(B);
-  free(X);
-/*  free(A); */
 }
 
 
@@ -263,16 +251,16 @@ void cholsl(float **a, int n, float p[], float b[], float x[])
 #define TINY 1.0e-20;
 
 void ludcmp(a, n, indx, d)
-float **a;
+double **a;
 int n;
 int *indx;
-float *d;
+double *d;
 {
   int i,imax,j,k;
-  float big,dum,sum,temp;
-  float *vv;
+  double big,dum,sum,temp;
+  double *vv;
   
-  if(!(vv=(float *) malloc( (n+1) * sizeof(float) )))
+  if(!(vv=(double *) R_alloc( (n+1) ,  sizeof(double))))
     error("Memory allocation failed for vv in choldc.c \n");
   
   *d=1.0;
@@ -316,17 +304,16 @@ float *d;
       for (i=j+1;i<=n;i++) a[i][j] *= dum;
     }
   }
-  free( vv );
 }
 #undef TINY
 #undef NRANSI
 
 /*****************************************************************************/
 
-void lubksb(float **a, int n, int *indx, float b[])
+void lubksb(double **a, int n, int *indx, double b[])
 {
   int i,ii=0,ip,j;
-  float sum;
+  double sum;
   
   for (i=1;i<=n;i++) {
     ip=indx[i];

@@ -6,7 +6,7 @@
 #              All right reserved
 ########################################################################
 
-mrecons <- function(extrema, filtername="Gaussian1", readflag=TRUE)
+mrecons <- function(extrema, filtername="Gaussian1", readflag=FALSE)
 #****************************************************************
 #  mrecons
 #  --------
@@ -48,8 +48,8 @@ mrecons <- function(extrema, filtername="Gaussian1", readflag=TRUE)
 
   z <- .C("extrema_reconst",
           as.character(filtername),
-          a = as.single(f),	
-          as.single(extrema$extrema),
+          a = as.double(f),	
+          as.double(extrema$extrema),
           as.integer(maxresoln),
           as.integer(np),
           as.integer(readflag),
@@ -101,9 +101,9 @@ dwinverse <- function(wt, filtername="Gaussian1")
   dim(fback) <- c(length(fback), 1)
 
   z <- .C("Sinverse_wavelet_transform",
-          a = as.single(fback),
-          as.single(Sf),
-          as.single(Wf),
+          a = as.double(fback),
+          as.double(Sf),
+          as.double(Wf),
           as.integer(maxresoln),
           as.integer(np), 
           as.character(filtername),

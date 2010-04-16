@@ -14,7 +14,7 @@ fcomplex Cmul(fcomplex a, fcomplex b);
 fcomplex Complex(double re, double im);
 fcomplex Conjg(fcomplex z);
 fcomplex Cdiv(fcomplex a, fcomplex b);
-float Cabs(fcomplex z);
+double Cabs(fcomplex z);
 fcomplex Csqrt(fcomplex z);
 fcomplex RCmul(double x, fcomplex a);
 
@@ -27,7 +27,7 @@ fcomplex Cmul();
 fcomplex Complex();
 fcomplex Conjg();
 fcomplex Cdiv();
-float Cabs();
+double Cabs();
 fcomplex Csqrt();
 fcomplex RCmul();
 

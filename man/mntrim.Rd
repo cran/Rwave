@@ -18,7 +18,7 @@ mntrim(extrema, scale=FALSE, prct=0.95)
     when set, the wavelet transform at each scale will be plotted with the
     same scale.
   }
-  \item{prct}{}
+  \item{prct}{percentage critical value used for thresholding}
 }
 \value{
 Structure containing

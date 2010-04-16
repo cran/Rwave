@@ -13,13 +13,8 @@ npl(nbrow)
 \item{nbrow}{
 number of plots.
 }}
-\value{
-
-}
-\details{
-}
-\references{
-}
-\seealso{
-}
+%\value{}
+%\details{}
+%\references{}
+%\seealso{}
 \keyword{ts}

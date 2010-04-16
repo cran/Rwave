@@ -16,11 +16,8 @@ number of decomposition scales.
 \item{np}{
 signal size.
 }}
-\value{
-
-}
-\details{
-}
+%\value{}
+%\details{}
 \references{
 See discussions in the text of ``Practical Time-Frequency Analysis''.
 }

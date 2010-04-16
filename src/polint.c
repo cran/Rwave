@@ -1,3 +1,7 @@
+#include <stdlib.h>
+#include "Swave.h"
+
+
 
 
 /***************************************************************
@@ -23,8 +27,8 @@ void polint(double xa[], double ya[], int n, double x, double *y, double *dy)
 	double den,dif,dift,ho,hp,w;
 	double *c,*d;
 
-	c=(double *)calloc(n,sizeof(double))-1;
-	d=(double *)calloc(n,sizeof(double))-1; 
+	c=(double *)S_alloc(n,sizeof(double))-1;
+	d=(double *)S_alloc(n,sizeof(double))-1; 
 
 	dif=fabs(x-xa[1]);
 	for (i=1;i<=n;i++) {
@@ -51,7 +55,5 @@ void polint(double xa[], double ya[], int n, double x, double *y, double *dy)
 		}
 		*y += (*dy=(2*ns < (n-m) ? c[ns+1] : d[ns--]));
 	}
-	free(d+1);
-	free(c+1);  
 }
 #undef NRANSI

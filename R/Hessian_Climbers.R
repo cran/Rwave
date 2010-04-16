@@ -93,7 +93,7 @@ hescrc <- function(tfrep, tfspec = numeric(dim(tfrep)[2]), grida = 10,
            ublock = as.integer(nbblock),
            as.integer(gridb),
            as.integer(grida),
-           tst =as.single(tst),
+           tst =as.double(tst),
            PACKAGE="Rwave")
   
    tst <- z$tst
@@ -262,7 +262,7 @@ hescrc <- function(tfrep, tfspec = numeric(dim(tfrep)[2]), grida = 10,
            as.double(sqmodulus),
            beemap= as.double(beemap),
            as.integer(pcamap),
-           as.single(rate),
+           as.double(rate),
            as.integer(sigsize),
            as.integer(nscale),
            as.integer(iteration),

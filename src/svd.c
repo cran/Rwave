@@ -1,3 +1,5 @@
+#include <stdlib.h>
+
 
 /* NUMERICAL RECIPE */
 
@@ -47,7 +49,7 @@ void svdcmp(double **a, int m, int n, double *w, double **v)
   int flag, i, its, j, jj, k, l, nm;
   double anorm, c, f, g, h, s, scale,  x, y, z, *rv1;
   
-  if(!(rv1 = (double *)malloc(sizeof(double) * (n + 1))))
+  if(!(rv1 = (double *)R_alloc((n + 1), sizeof(double) )))
     error("Memory allocation failed for rv1 in svd.c \n");
   g = scale = anorm = 0.0;
   
@@ -145,11 +147,11 @@ void svdcmp(double **a, int m, int n, double *w, double **v)
       flag = 1;
       for(l=k; l >= 1; l--) {
 	nm = l-1;
-	if((float)(fabs(rv1[l]) + anorm) == (float)anorm) {
+	if((double)(fabs(rv1[l]) + anorm) == (double)anorm) {
 	  flag = 0;
 	  break;
 	}
-	if((float)(fabs(w[nm]) + anorm) == (float)anorm) break; 
+	if((double)(fabs(w[nm]) + anorm) == (double)anorm) break; 
       }
       if(flag) {
 	c = 0.0;
@@ -157,7 +159,7 @@ void svdcmp(double **a, int m, int n, double *w, double **v)
 	for(i = l; i <= k; i++) {
 	  f = s * rv1[i];
 	  rv1[i] = c * rv1[i];
-	  if ((float)(fabs(f) + anorm) == (float)anorm) break;
+	  if ((double)(fabs(f) + anorm) == (double)anorm) break;
 	  g = w[i];
 	  h = pythag(f,g);
 	  w[i] = h;
@@ -231,7 +233,6 @@ void svdcmp(double **a, int m, int n, double *w, double **v)
       w[k] = x;
     }
   }
-  free(rv1);
 
 }
 
@@ -250,7 +251,7 @@ void svbksb(double **U, double *W, double **V, int m, int n,
   int jj, j, i;
   double s, *tmp;
   
-  if(!(tmp = (double *)malloc(sizeof(double) * (n+1))))
+  if(!(tmp = (double *)R_alloc((n+1), sizeof(double) )))
     error("Memory allocation failed for tmp in svd.c \n");
   for (j = 1; j <= n; j++) {
     s = 0.0;
@@ -265,41 +266,40 @@ void svbksb(double **U, double *W, double **V, int m, int n,
     for(jj = 1; jj <= n; jj++) s += V[j][jj] * tmp[jj];
     X[j] = s;
   }
-  free(tmp);
 }
   
 /* solve linear Ax = B by single value decomposition */
 	   
-void svdecomp_solve(float **a, float *b, float *x, int m,
-  int n, float **w, float ***v)
+void svdecomp_solve(double **a, double *b, double *x, int m,
+  int n, double **w, double ***v)
 {
   int i, j;
   double **A, *W, **V, *B, *X;
   void double_residue();
 
-  if(!((*w) = (float *)malloc(sizeof(float) * n)))
+  if(!((*w) = (double *) R_alloc(n, sizeof(double) )))
     error("Memory allocation failed for (*w) in svd.c \n");
-  if(!((*v) = (float **)malloc(sizeof(float *) * n)))
+  if(!((*v) = (double **)R_alloc(  n, sizeof(double *))))
     error("Memory allocation failed for (*v) in svd.c \n");
   for(i = 0; i < n; i++) 
-    if(!((*v)[i] = (float *)malloc(sizeof(float) * n)))
+    if(!((*v)[i] = (double *) R_alloc(n, sizeof(double) )))
       error("Memory allocation failed for (*v)[] in svd.c \n");
   
-  if(!(W = (double *)malloc(sizeof(double) * (n+1))))
+  if(!(W = (double *)R_alloc((n+1), sizeof(double) )))
     error("Memory allocation failed for W in svd.c \n");
-  if(!(V = (double **)malloc(sizeof(double *) * (n+1))))
+  if(!(V = (double **)R_alloc( (n+1), sizeof(double *))))
     error("Memory allocation failed for V in svd.c \n");
-  if(!(A = (double **)malloc(sizeof(double *) * (m+1))))
+  if(!(A = (double **)R_alloc( (m+1), sizeof(double *))))
     error("Memory allocation failed for A in svd.c \n");
-  if(!(B = (double *)malloc(sizeof(double) * (m+1))))
+  if(!(B = (double *)R_alloc((m+1), sizeof(double) )))
     error("Memory allocation failed for B in svd.c \n");
-  if(!(X = (double *)malloc(sizeof(double) * (n+1))))
+  if(!(X = (double *)R_alloc((n+1), sizeof(double) )))
     error("Memory allocation failed for X in svd.c \n");
   for(i = 0; i <= n; i++) 
-    if(!(V[i] = (double *)malloc(sizeof(double) * (n+1))))
+    if(!(V[i] = (double *)R_alloc((n+1), sizeof(double) )))
       error("Memory allocation failed for V[] in svd.c \n");
   for(i = 0; i <= m; i++) 
-    if(!(A[i] = (double *)malloc(sizeof(double) * (n+1))))
+    if(!(A[i] = (double *)R_alloc((n+1), sizeof(double) )))
       error("Memory allocation failed for A[] in svd.c \n");
   
   for( i = 0; i < m; i++) {
@@ -314,15 +314,15 @@ void svdecomp_solve(float **a, float *b, float *x, int m,
 
   for( i = 0; i < m; i++) 
     for(j = 0; j < n; j++) 
-      a[i][j] = (float)(A[i+1][j+1]);
+      a[i][j] = (double)(A[i+1][j+1]);
   
   for( i = 0; i < n; i++)
     for(j = 0; j < n; j++) 
-      (*v)[i][j] = (float)(V[i+1][j+1]);
+      (*v)[i][j] = (double)(V[i+1][j+1]);
   
   for(i = 0; i < n; i++) {
-    (*w)[i] = (float)(W[i + 1]);
-    x[i] = (float)(X[i+1]);
+    (*w)[i] = (double)(W[i + 1]);
+    x[i] = (double)(X[i+1]);
   }
   
 /*  residue(a,*w,*v,m,n,b,x);  */
@@ -333,33 +333,23 @@ void svdecomp_solve(float **a, float *b, float *x, int m,
   output_signal(x,n,"X");
   output_signal((*w),n,"W");
 */
-  free(W);
-  for(i = 0; i <= n; i++) 
-    free(V[i]);
-  for(i = 0; i <= m; i++) 
-    free(A[i]);
-  
-  free(V);
-  free(A);
-  free(B);
-  free(X);
 }
     
 /* compute the L2 Norm */
 
-void residue(float **a, float *w, float **v, int m, int n,
-  float *b, float *x)
+void residue(double **a, double *w, double **v, int m, int n,
+  double *b, double *x)
 {
-  float **tmp, *tmp1;
-  float sum;
+  double **tmp, *tmp1;
+  double sum;
   int i, j, k;
 
-  if(!(tmp = (float **)malloc(sizeof(float *) * m)))
+  if(!(tmp = (double **)R_alloc( m, sizeof(double *))))
     error("Memory allocation failed for tmp in svd.c \n");
-  if(!(tmp1 = (float *)malloc(sizeof(float) * m)))
+  if(!(tmp1 = (double *) R_alloc(m, sizeof(double) )))
     error("Memory allocation failed for tmp1 in svd.c \n");
   for(i = 0 ; i < m; i++)
-    if(!(tmp[i] = (float *)malloc(sizeof(float) * n)))
+    if(!(tmp[i] = (double *) R_alloc(n, sizeof(double) )))
       error("Memory allocation failed for tmp[] in svd.c \n");
   
   for(i = 0; i < m; i++)
@@ -385,8 +375,6 @@ void residue(float **a, float *w, float **v, int m, int n,
     sum = sum + tmp1[i] * tmp1[i];
   
 /*  printf("Residule is %g \n",sum); */
-  free(tmp);
-  free(tmp1);
 }
 
 
@@ -397,12 +385,12 @@ void double_residue(double **a, double *w, double **v, int m,
   double sum;
   int i, j, k;
 
-  if(!(tmp = (double **)malloc(sizeof(double *) * (m+1))))
+  if(!(tmp = (double **)R_alloc( (m+1), sizeof(double *))))
     error("Memory allocation failed for tmp in svd.c \n");
-  if(!(tmp1 = (double *)malloc(sizeof(double) * (m+1))))
+  if(!(tmp1 = (double *)R_alloc((m+1), sizeof(double) )))
     error("Memory allocation failed for tmp1 in svd.c \n");
   for(i = 1 ; i <= m; i++)
-    if(!(tmp[i] = (double *)malloc(sizeof(double) * (n+1))))
+    if(!(tmp[i] = (double *)R_alloc((n+1), sizeof(double) )))
       error("Memory allocation failed for tmp[] in svd.c \n");
   
   for(i = 1; i <= m; i++)
@@ -428,23 +416,21 @@ void double_residue(double **a, double *w, double **v, int m,
     sum = sum + tmp1[i] * tmp1[i];
   
 /*   printf("Residule is %g \n",sum); */
-  free(tmp);
-  free(tmp1);
 }
     
 /* compute the L2 Norm */
 /*
-void Sresidue(float *a, float *w, float *v, int m, int n,
-  float *b, float *x)
+void Sresidue(double *a, double *w, double *v, int m, int n,
+  double *b, double *x)
 {
-  float *tmp, *tmp1;
-  float sum;
+  double *tmp, *tmp1;
+  double sum;
   int i, j, k;
   int t;
 
-  if(!(tmp = (float *)malloc(sizeof(float) * m * n)))
+  if(!(tmp = (double *)malloc(sizeof(double) * m * n)))
     error("Memory allocation failed for tmp in svd.c \n");
-  if(!(tmp1 = (float *)malloc(sizeof(float) * m)))
+  if(!(tmp1 = (double *)malloc(sizeof(double) * m)))
     error("Memory allocation failed for tmp1 in svd.c \n");
   
   for(i = 0; i < m; i++)
@@ -488,19 +474,19 @@ void Ssvdecomp(double *a, int *pm, int *pn, double *w, double *v)
   m = *pm;
   n = *pn;
 
-  if(!(A = (double **)malloc(sizeof(double *) * (m+1))))
+  if(!(A = (double **)R_alloc( (m+1), sizeof(double *))))
     error("Memory allocation failed for A in svd.c \n");
-  if(!(V = (double **)malloc(sizeof(double *) * (n+1))))
+  if(!(V = (double **)R_alloc( (n+1), sizeof(double *))))
     error("Memory allocation failed for V in svd.c \n");
-  if(!(W = (double *)malloc(sizeof(double) * (n+1))))
+  if(!(W = (double *)R_alloc((n+1), sizeof(double) )))
     error("Memory allocation failed for W in svd.c \n");
 
   for(i = 0; i <= m; i++) 
-    if(!(A[i] = (double *)malloc(sizeof(double) * (n+1))))
+    if(!(A[i] = (double *)R_alloc((n+1), sizeof(double) )))
       error("Memory allocation failed for A[] in svd.c \n");
 
   for(i = 0; i <= n; i++) 
-    if(!(V[i] = (double *)malloc(sizeof(double) * (n+1))))
+    if(!(V[i] = (double *)R_alloc((n+1), sizeof(double) )))
       error("Memory allocation failed for V[] in svd.c \n");
 
   for(j = 0; j < n; j++)   
@@ -520,13 +506,6 @@ void Ssvdecomp(double *a, int *pm, int *pn, double *w, double *v)
     for(j = 0; j < n; j++, k++) 
       v[k] = V[j+1][i+1];
 
-  free(W);
-  for(i = 0; i <= n; i++) {
-    free(V[i]);
-    free(A[i]);
-  }
-  free(V);
-  free(A);
 }
     
 

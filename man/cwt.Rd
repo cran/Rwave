@@ -54,4 +54,9 @@ See discussions in the text of ``Practical Time-Frequency Analysis''.
 \code{\link{cwtp}}, \code{\link{cwtTh}}, \code{\link{DOG}},
 \code{\link{gabor}}.
 }
+\examples{
+    x <- 1:512
+    chirp <- sin(2*pi * (x + 0.002 * (x-256)^2 ) / 16)
+    retChirp <- cwt(chirp, noctave=5, nvoice=12)
+}
 \keyword{ts}

@@ -24,8 +24,7 @@ to the snake.
 Recall that a snake is a (two components) \R structure.
 }
 \references{
-See discussions in the text of "Time-Frequency Analysis''.
+See discussions in the text of \dQuote{Time-Frequency Analysis}.
 }
-\seealso{
-}
+%\seealso{}
 \keyword{ts}

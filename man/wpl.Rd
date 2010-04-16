@@ -13,13 +13,9 @@ wpl(dwtrans)
 \item{dwtrans}{
 dyadic wavelet transform (output of \code{\link{mw}}).
 }}
-\value{
-
-}
-\details{
-}
-\references{
-}
+%\value{}
+%\details{}
+%\references{}
 \seealso{
 \code{\link{mw}}, \code{\link{ext}},\code{\link{epl}}.
 }

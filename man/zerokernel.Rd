@@ -22,10 +22,8 @@ step unit for the computation of the kernel.
 \value{
 matrix of the \eqn{Q_2} kernel
 }
-\details{
-}
-\references{
-}
+%\details{}
+%\references{}
 \seealso{
 \code{\link{kernel}}, \code{\link{fastkernel}}, \code{\link{gkernel}},
 \code{\link{gkernel}}.

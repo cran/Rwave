@@ -31,9 +31,9 @@ dw <- function(inputdata, maxresoln, scale=FALSE, NW=6, plot=TRUE)
   dim(psi) <- c(length(psi), 1)
   
   z <- .C("daubechies_wt", 
-          phi=as.single(phi),
-          psi=as.single(psi),
-          as.single(s),
+          phi=as.double(phi),
+          psi=as.double(psi),
+          as.double(s),
           as.integer(NW),
           as.integer(maxresoln),
           as.integer(np),
@@ -75,9 +75,9 @@ ddw <- function(inputdata, maxresoln, scale=FALSE, NW=6)
   dim(psi) <- c(length(psi), 1)
   
   z <- .C("compute_ddwave", 
-          phi=as.single(phi),
-          psi=as.single(psi),
-          as.single(s),
+          phi=as.double(phi),
+          psi=as.double(psi),
+          as.double(s),
           as.integer(maxresoln),
           as.integer(np),
           as.integer(NW),

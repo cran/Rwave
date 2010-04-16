@@ -48,8 +48,7 @@ if set to TRUE: constant temperature.
 Returns a 2D array called beemap containing the (weighted or unweighted)
 occupation measure (integrated with respect to time)
 }
-\details{
-}
+%\details{}
 \references{
 See discussion in text of ``Practical Time-Frequency Analysis''.
 }

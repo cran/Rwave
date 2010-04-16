@@ -28,10 +28,8 @@ Center frequency of the wavelet.
 \value{
 2D (complex) array containing wavelets located at the specific points.
 }
-\details{
-}
-\references{
-}
+%\details{}
+%\references{}
 \seealso{
 \code{\link{vecgabor}}.
 }

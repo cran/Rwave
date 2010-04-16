@@ -55,13 +55,13 @@ cwtsquiz <- function(input, noctave, nvoice = 1, w0 = 2*pi,
    dim(input) <- c(newsize,1)
 
    z <- .C("Scwt_squeezed",
-           as.single(input),
+           as.double(input),
            Rtmp = as.double(Routput),
            Itmp = as.double(Ioutput),
            as.integer(noctave),
            as.integer(nvoice),
            as.integer(newsize),
-           as.single(w0),
+           as.double(w0),
            PACKAGE="Rwave")
 
    Routput <- z$Rtmp

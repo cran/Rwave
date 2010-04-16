@@ -38,8 +38,7 @@ sample points of a ridge
   are the Lagrange multipliers \eqn{\lambda}{lambda}'s of the text.}
 \item{dualwave}{array containing the dual wavelets.}
 }
-\details{
-}
+%\details{}
 \references{
 See discussions in the text of ``Practical Time-Frequency Analysis''.
 }

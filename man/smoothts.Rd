@@ -19,11 +19,9 @@ Length of smoothing window.
 \value{
 Smoothed time series (1D array).
 }
-\details{
-}
+%\details{}
 \references{
-See discussions in the text of ``Time-Frequency Analysis''.
+See discussions in the text of \dQuote{Time-Frequency Analysis}.
 }
-\seealso{
-}
+%\seealso{}
 \keyword{ts}

@@ -1,3 +1,7 @@
+#include <stdlib.h>
+#include "Swave.h"
+
+
 #include "kernel.h"
 #define NRANSI
 
@@ -16,7 +20,7 @@ void spline(double x[], double y[], int n, double yp1, double ypn, double y2[])
 	int i,k;
 	double p,qn,sig,un,*u;
        
-	u=(double *)calloc(n,sizeof(double))-1;
+	u=(double *)S_alloc(n,sizeof(double))-1;
 	if (yp1 > 0.99e30)
 		y2[1]=u[1]=0.0;
 	else {
@@ -41,7 +45,6 @@ void spline(double x[], double y[], int n, double yp1, double ypn, double y2[])
 	for (k=n-1;k>=1;k--)
 		y2[k]=y2[k]*y2[k+1]+u[k];
 
-	free((double *)(u+1));
 }
 #undef NRANSI
 

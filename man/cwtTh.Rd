@@ -48,4 +48,9 @@
   \code{\link{cwt}}, \code{\link{cwtp}}, \code{\link{DOG}},
   \code{\link{gabor}}.
 }
+\examples{
+    x <- 1:512
+    chirp <- sin(2*pi * (x + 0.002 * (x-256)^2 ) / 16)
+    retChirp <- cwtTh(chirp, noctave=5, nvoice=12, moments=20)
+}
 \keyword{ts}

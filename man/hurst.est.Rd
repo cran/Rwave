@@ -25,8 +25,7 @@ if set to \code{TRUE}, displays regression line on current plot.
 \value{
 complex 1D array of size sigsize.
 }
-\details{
-}
+%\details{}
 \references{
 See discussions in the text of ``Practical Time-Frequency Analysis''.
 }

@@ -21,14 +21,15 @@ extern int NW;
 extern int *twoto;
 
 /****************************
+// already in dyadic.h
 * Structure Definition      *
-****************************/
 typedef struct
 {
   int lb;
   int ub;
   int size;
 } bound;
+****************************/
 
 /****************************************************************************/
 
@@ -39,6 +40,6 @@ double phi( double x );
 double psi( double x );
 
 void init_twoto( int max_resoln );
-void init_phi_array( float **phi_array, int max_resoln );
-void init_psi_array( float **psi_array, int max_resoln );
+void init_phi_array( double **phi_array, int max_resoln );
+void init_psi_array( double **psi_array, int max_resoln );
 

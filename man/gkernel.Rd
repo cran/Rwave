@@ -39,8 +39,7 @@ if set to TRUE, displays the modulus of the matrix of \eqn{Q_2}.
 \value{
 matrix of the \eqn{Q_2} kernel
 }
-\details{
-}
+%\details{}
 \references{
 See discussions in the text of ``Time-Frequency Analysis''.
 }

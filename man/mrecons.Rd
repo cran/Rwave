@@ -8,7 +8,7 @@ Reconstruct from dyadic wavelet transform modulus extrema.
 The reconstructed signal preserves locations and values at extrema.
 }
 \usage{
-mrecons(extrema, filtername="Gaussian1", readflag=TRUE)
+mrecons(extrema, filtername="Gaussian1", readflag=FALSE)
 }
 \arguments{
 \item{extrema}{

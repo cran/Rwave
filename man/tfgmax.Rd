@@ -22,10 +22,9 @@ a function of the scale.
 \item{output}{values of the maxima (1D array)}
 \item{pos}{positions of the maxima (1D array)}
 }
-\details{
-}
+%\details{}
 \references{
-See discussions in the text of ``Practical Time-Frequency Analysis''.
+See discussions in the text of \dQuote{Practical Time-Frequency Analysis}.
 }
 \seealso{
 \code{\link{tflmax}}.

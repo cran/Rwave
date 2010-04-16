@@ -25,10 +25,9 @@ if set to TRUE, plots the real part of cgt on the graphic device.
 \value{
 1D (complex) array containing Gabor transform at specified frequency.
 }
-\details{
-}
+%\details{}
 \references{
-See discussions in the text of ``Practical Time-Frequency Analysis''.
+See discussions in the text of \dQuote{Practical Time-Frequency Analysis}.
 }
 \seealso{
 \code{\link{vwt}}, \code{\link{vDOG}}.

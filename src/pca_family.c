@@ -1,3 +1,5 @@
+#include <stdlib.h>
+
 
 /***************************************************************
 *              (c) Copyright  1997                             *
@@ -22,14 +24,14 @@
 *  nrow,ncol: parameters of the cwt 
 *****************************************************************/
 
-Stf_pcaridge(input, output, pnrow, pncol, orientmap)
+void Stf_pcaridge(input, output, pnrow, pncol, orientmap)
      double *input, *output;
      int *pnrow, *pncol;
      int *orientmap;
 {
   int nrow, ncol, i, j,k;
   int pos, dir;
-  float tmp;
+  double tmp;
 
   nrow = *pnrow;
   ncol = *pncol;
@@ -81,7 +83,7 @@ Stf_pcaridge(input, output, pnrow, pncol, orientmap)
  *******************************************************************/
 /* Three majors direction of dir going downwards and left */
 
-previous_a_b(int a,int b,int dir,
+void previous_a_b(int a,int b,int dir,
 	     int *a0,int *b0,int *a1,int *b1,int *a2,int *b2) 
 {
   if(dir == 1) {
@@ -119,7 +121,7 @@ previous_a_b(int a,int b,int dir,
 }
 
 /* Three major directions of dir going upwards or right */
-next_a_b(int a,int b,int dir,
+void next_a_b(int a,int b,int dir,
 	     int *a0,int *b0,int *a1,int *b1,int *a2,int *b2) 
 {
   if(dir == 1) {
@@ -181,7 +183,7 @@ next_a_b(int a,int b,int dir,
 *   chain: array containing the ridges
 *****************************************************************/
 
-void pca_orderedmap_thresholded(float *orderedmap,int sigsize,int nscale,
+void pca_orderedmap_thresholded(double *orderedmap,int sigsize,int nscale,
 			    int *chain,int nbchain)
 {
   int id, i, j, k;
@@ -202,7 +204,7 @@ void pca_orderedmap_thresholded(float *orderedmap,int sigsize,int nscale,
     b = chain[k];
     count = 1;
     while((count <= chnlng)) {
-      orderedmap[b + a * sigsize] = (float)(id + 1);
+      orderedmap[b + a * sigsize] = (double)(id + 1);
       k += nbchain;
       a = chain[k];
       k += nbchain;
@@ -234,7 +236,7 @@ void pca_orderedmap_thresholded(float *orderedmap,int sigsize,int nscale,
 *****************************************************************/
 
 void pca_chain_thresholded(double *mridge,int sigsize,int *chain,int *id,
-		       int nbchain,float threshold, int bstep)
+		       int nbchain,double threshold, int bstep)
 {
   int i, j, k, k1, a, b;
   int count, found, lng;
@@ -360,15 +362,15 @@ void pca_chain_thresholded(double *mridge,int sigsize,int *chain,int *id,
 *   maxchnlng: maximal chain length
 *****************************************************************/
 
-void Spca_family(double *ridgemap,int *orientmap, float *orderedmap,int *chain,
+void Spca_family(double *ridgemap,int *orientmap, double *orderedmap,int *chain,
 		   int *pnbchain, int *psigsize,int *pnscale,
-		   int *pbstep,float *pthreshold, int* pmaxchnlng)
+		   int *pbstep,double *pthreshold, int* pmaxchnlng)
 {
   int bstep, nscale, sigsize, nbchain;
   int i, j, k, id, count, a, b, found, k1, maxchnlng;
   int a0,a1,a2,b0,b1,b2;
   double *mridge;
-  float threshold;
+  double threshold;
   int dir;
 
   threshold = *pthreshold;
@@ -378,7 +380,7 @@ void Spca_family(double *ridgemap,int *orientmap, float *orderedmap,int *chain,
   nbchain = *pnbchain;
   maxchnlng = *pmaxchnlng;
 
-  if(!(mridge = (double *)calloc(sigsize * nscale, sizeof(double))))
+  if(!(mridge = (double *)S_alloc(sigsize * nscale, sizeof(double))))
     error("Memory allocation failed for mridge in crazy_family.c \n");
 
 
@@ -460,13 +462,13 @@ void Spca_family(double *ridgemap,int *orientmap, float *orderedmap,int *chain,
 	  k= b + sigsize * a;
 	  dir = orientmap[k];
 	  next_a_b(a,b,dir,&a0,&b0,&a1,&b1,&a2,&b2);
-	  orderedmap[k] =(float)(id);
+	  orderedmap[k] =(double)(id);
 	  found = NO;
           if(inrange(0,a0,nscale-1) && inrange(0,b0,sigsize-1)) {
 	    k1 = b0 + sigsize * a0;
 	    if((mridge[k1]>0.000001)&&(orderedmap[k1]==0.0)) {
 	      found = YES;
-	      orderedmap[k1] =(float)(id);
+	      orderedmap[k1] =(double)(id);
 	      a = a0;
 	      b = b0;
 	    }
@@ -476,7 +478,7 @@ void Spca_family(double *ridgemap,int *orientmap, float *orderedmap,int *chain,
 	      k1 = b1 + sigsize * a1;
 	      if((mridge[k1]>0.000001)&&(orderedmap[k1]==0.0)) {
 		found = YES;
-		orderedmap[k1] =(float)(id);
+		orderedmap[k1] =(double)(id);
 		a = a1;
 		b = b1;
 	      }
@@ -487,7 +489,7 @@ void Spca_family(double *ridgemap,int *orientmap, float *orderedmap,int *chain,
 		k1 = b2 + sigsize * a2;
 		if((mridge[k1]>0.000001)&&(orderedmap[k1]==0.0)) {
 		  found = YES;
-		  orderedmap[k1] =(float)(id);
+		  orderedmap[k1] =(double)(id);
 		  a = a2;
 		  b = b2;
 		}
@@ -509,7 +511,6 @@ void Spca_family(double *ridgemap,int *orientmap, float *orderedmap,int *chain,
   pca_orderedmap_thresholded(orderedmap,sigsize,nscale,chain,nbchain); 
 
 
-  free((char *)mridge);
   printf("There are %d chains. \n", id);
   *pnbchain = id;
 

@@ -1,3 +1,5 @@
+#include <stdlib.h>
+
 
 /***************************************************************
 *              (c) Copyright  1997                             *
@@ -40,8 +42,8 @@
 *    smodsize: the size of subsampled signal
 ****************************************************************/
 
-void Sridge_annealing(float *cost, double *smodulus,
-  float *phi, float *plambda, float *pmu, float *pc, int *psigsize,
+void Sridge_annealing(double *cost, double *smodulus,
+  double *phi, double *plambda, double *pmu, double *pc, int *psigsize,
   int *pnscale, int *piteration, int *pstagnant, int *pseed,
   int *pcount, int *psub, int *pblocksize, int *psmodsize)
 {
@@ -49,8 +51,8 @@ void Sridge_annealing(float *cost, double *smodulus,
   long idum=-9;
   int again, tbox, blocksize,smodsize;
   int nscale, stagnant, recal;
-  float lambda, c, mu;
-  float *bcost, *phi2;
+  double lambda, c, mu;
+  double *bcost, *phi2;
   double ran, gibbs;
   double cost1;
   double temperature, tmp=0.0;
@@ -73,10 +75,10 @@ void Sridge_annealing(float *cost, double *smodulus,
 
   recal = 1000000; /* recompute cost function every 'recal' iterations */
 
-  if(!(bcost = (float *)malloc(sizeof(float) * blocksize)))
+  if(!(bcost = (double *) R_alloc(blocksize, sizeof(double) )))
     error("Memory allocation failed for bcost at ridge_annealing.c \n");
 
-  if(!(phi2 = (float *)calloc((smodsize+1)*sub,sizeof(float))))
+  if(!(phi2 = (double *)S_alloc((smodsize+1)*sub,sizeof(double))))
     error("Memory allocation failed for phi2 at ridge_annealing.c \n");
 
 /*
@@ -141,8 +143,8 @@ void Sridge_annealing(float *cost, double *smodulus,
 /*	cost1 -= (tmp * tmp - noise[a]); */
 	cost1 -= tmp;
 
-	cost[ncount++] = (float)cost1;
-	bcost[0] = (float)cost1;
+	cost[ncount++] = (double)cost1;
+	bcost[0] = (double)cost1;
 	count ++;
 	costcount = 1;
 	if(costcount == blocksize) break;
@@ -230,7 +232,7 @@ void Sridge_annealing(float *cost, double *smodulus,
 	}
 	tbox ++;
 	if(tbox >= stagnant)  {
-	  cost[ncount++] = (float)cost1;
+	  cost[ncount++] = (double)cost1;
 	  *pcount = ncount;
 /*	  if((blocksize != 1)){
 	    for(i = 0; i < costcount+1; i++)
@@ -244,15 +246,14 @@ void Sridge_annealing(float *cost, double *smodulus,
 	  for(i=0;i<sigsize;i++) phi[i]=phi2[i];
 	  /* splridge(1, phi, smodsize, phi2);
 	  for(i=0;i<sigsize;i++) phi[i]=phi2[i];*/
-	  free((char *)bcost);
 	  return;
 	}
       }
-      bcost[costcount] = (float)cost1;
+      bcost[costcount] = (double)cost1;
 
       count ++;
       if(count >=  iteration) 	{
-	cost[ncount++] = (float)cost1;
+	cost[ncount++] = (double)cost1;
 	*pcount = ncount;
 
 	/* Write cost function to a file
@@ -269,14 +270,13 @@ void Sridge_annealing(float *cost, double *smodulus,
 	for(i=0;i<sigsize;i++) phi[i]=phi2[i];
 	/* splridge(1, phi, smodsize, phi2);
 	for(i=0;i<sigsize;i++) phi[i]=phi2[i];*/
-	free((char *)bcost);
-	printf("Done !\n");
+	//printf("Done !\n");
 	return;
       }
       temperature = c/log(1. + (double)count);
     }
 
-    bcost[blocksize-1] = (float)cost1;
+    bcost[blocksize-1] = (double)cost1;
     if((blocksize != 1)){
 /*      for(i = 0; i < blocksize; i++)
 	fprintf(fp, "%f ", bcost[i]); */
@@ -310,7 +310,7 @@ void Sridge_annealing(float *cost, double *smodulus,
 		smodulus[smodsize * a + smodsize-1] -noise[a]); */
       cost1 -= smodulus[smodsize * a + smodsize-1];
     }
-    cost[ncount++] = (float)cost1;
+    cost[ncount++] = (double)cost1;
   }
   /* return; */
 }

@@ -1,3 +1,5 @@
+#include <stdlib.h>
+
 
 
 
@@ -39,15 +41,15 @@
 
 void splsnake(rate, x, y, n, yy)
      int rate,n;
-     float *x, *y, *yy;
+     double *x, *y, *yy;
      
 {
   int i,k, khi, klo, ilo, ihi;
-  float p,qn,sig,un,*u,yp1,ypn,a,b,h;
-  float *y2;
+  double p,qn,sig,un,*u,yp1,ypn,a,b,h;
+  double *y2;
   
-  u=(float *)calloc(n,sizeof(float));
-  y2=(float *)calloc(n+1,sizeof(float));
+  u=(double *)S_alloc(n,sizeof(double));
+  y2=(double *)S_alloc(n+1,sizeof(double));
   yp1 = ypn =0;
   
   if (yp1 > 0.99e30)
@@ -87,7 +89,7 @@ void splsnake(rate, x, y, n, yy)
     
     while (khi-klo > 1) {
       k=(khi+klo) >> 1;
-      if (x[k]*rate > (float)i) khi=k;
+      if (x[k]*rate > (double)i) khi=k;
       else klo=k;
     }
     h=(x[khi]-x[klo])*rate;
@@ -96,8 +98,6 @@ void splsnake(rate, x, y, n, yy)
     b=(i-x[klo]*rate)/h;
     yy[i]=a*y[klo]+b*y[khi]+((a*a*a-a)*y2[klo]+(b*b*b-b)*y2[khi])*(h*h)/6.0;
   }
-  free((float *)u);
-  free((float *)y2);
   return;
 }
 

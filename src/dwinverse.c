@@ -12,6 +12,7 @@
 #include <math.h>
 #include "dau_wave.h"
 #include "Swave.h"
+#include "dyadic.h"
 
 
 /****************************************************************
@@ -32,18 +33,18 @@
 
 
 void inverse_wavelet_transform(f_back,Sf,Wf,max_resoln,np,filtername)
-     float *f_back, *Sf, *Wf;
+     double *f_back, *Sf, *Wf;
      int max_resoln, np;
      char *filtername;
 {
   int i, j, n, k;
-  float sum;
+  double sum;
   bound *K_bound, *S_bound;
-  float **S, **K;
+  double **S, **K;
   int offset;
-  float *tmp;
+  double *tmp;
 
-  if(!(tmp = (float *) malloc(np * sizeof(float))))
+  if(!(tmp = (double *) R_alloc(np , sizeof(double))))
     error("Memory allocation failed for tmp in signal_back.c \n");
 
   KSfilter_bound(filtername,&K_bound,&S_bound,max_resoln);
@@ -73,17 +74,6 @@ void inverse_wavelet_transform(f_back,Sf,Wf,max_resoln,np,filtername)
     }
     signal_copy(tmp,f_back,0,np);
   }
-
-  for ( j = 0; j <= max_resoln; j++ )  {
-    free( S[j] );
-    free( K[j] );
-  }
-  free( S );
-  free( S_bound );
-  free( K );
-  free( K_bound );
-  free(tmp);
-
 }
 
 /****************************************************************
@@ -103,8 +93,8 @@ void inverse_wavelet_transform(f_back,Sf,Wf,max_resoln,np,filtername)
 *
 ****************************************************************/
 
-Sinverse_wavelet_transform(f_back,Sf,Wf,pmax_resoln,pnp,pfiltername)
-     float *f_back, *Sf, *Wf;
+void Sinverse_wavelet_transform(f_back,Sf,Wf,pmax_resoln,pnp,pfiltername)
+     double *f_back, *Sf, *Wf;
      int *pmax_resoln, *pnp;
      char **pfiltername;
 {

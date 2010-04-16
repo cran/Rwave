@@ -28,10 +28,8 @@ size parameter for the Gabor functions.
 \value{
 size parameter for the Gabor functions.
 }
-\details{
-}
-\references{
-}
+%\details{}
+%\references{}
 \seealso{
 \code{\link{vecmorlet}}.
 }

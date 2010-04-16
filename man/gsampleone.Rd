@@ -22,8 +22,7 @@ size of the reconstructed signal.
 \value{
 diagonal of the ``sampled'' \eqn{Q_1} term (1D vector)
 }
-\details{
-}
+%\details{}
 \references{
 See discussions in the text of ``Time-Frequency Analysis''.
 }

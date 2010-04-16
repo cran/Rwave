@@ -1,3 +1,5 @@
+#include <stdlib.h>
+
 
 /***************************************************************
 *              (c) Copyright  1997                             *
@@ -35,11 +37,11 @@
 ****************************************************************/
 
 void Shessianmap(double *sqmodulus, int *psigsize, int *pnscale, int *pnbblock,
-		 int *pgridx, int *pgridy, float *tst)
+		 int *pgridx, int *pgridy, double *tst)
 {
   int a, b, sigsize, nscale, gridx, gridy, nbblock;
   int left, right, down, up;
-  float mxx, mxy, myx, myy;
+  double mxx, mxy, myx, myy;
   int bnumber, k;
 
   sigsize = *psigsize;
@@ -67,10 +69,10 @@ void Shessianmap(double *sqmodulus, int *psigsize, int *pnscale, int *pnbblock,
       /* first four containing the coordinate of left low and right up corner
          --------------------------------------------------------------------*/
 
-      tst[8*bnumber] = (float)(left+1);
-      tst[8*bnumber+1] = (float)(down+1);
-      tst[8*bnumber+2] = (float)(right+1);
-      tst[8*bnumber+3] = (float)(up+1);
+      tst[8*bnumber] = (double)(left+1);
+      tst[8*bnumber+1] = (double)(down+1);
+      tst[8*bnumber+2] = (double)(right+1);
+      tst[8*bnumber+3] = (double)(up+1);
       
       /* negative Hessian as Gaussian 
          ----------------------------*/

@@ -45,4 +45,10 @@ See discussions in the text of ``Practical Time-Frequency Analysis''.
 \seealso{
 \code{\link{cwt}}, \code{\link{DOG}}, \code{\link{cwtimage}}.
 }
+\examples{
+    x <- 1:512
+    chirp <- sin(2*pi * (x + 0.002 * (x-256)^2 ) / 16)
+    retChirp <- cwt(chirp, noctave=5, nvoice=12, twoD=FALSE, plot=FALSE)
+    retPolar <- cwtpolar(retChirp)
+}
 \keyword{ts}

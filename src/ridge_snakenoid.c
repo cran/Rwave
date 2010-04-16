@@ -1,3 +1,5 @@
+#include <stdlib.h>
+
 /***************************************************************
 *	$Log: ridge_snakoid.c,v	$			       *
 ****************************************************************
@@ -44,9 +46,9 @@
 *								*
 ****************************************************************/
 
-void Ssnakenoid_annealing(float *cost, double *smodulus,
-  float *phi, float *rho, float *plambda, float *pmu,
-  float *plambda2, float *pmu2, float *pc, int *psigsize,
+void Ssnakenoid_annealing(double *cost, double *smodulus,
+  double *phi, double *rho, double *plambda, double *pmu,
+  double *plambda2, double *pmu2, double *pc, int *psigsize,
   int *psnakesize, int *pnscale, int *piteration,
   int *pstagnant, int *pseed, int *pcount, int *psub,
   int *pblocksize, int *psmodsize)
@@ -57,8 +59,8 @@ void Ssnakenoid_annealing(float *cost, double *smodulus,
   long idum=-9;
   int again, tbox, blocksize,smodsize;
   int nscale, stagnant, recal;
-  float c, lambda, mu, lambda2, mu2;
-  float *bcost, *phi2;
+  double c, lambda, mu, lambda2, mu2;
+  double *bcost, *phi2;
   double ran, gibbs;
   double cost1;
   double temperature, tmp=0, tmp2;
@@ -87,13 +89,13 @@ void Ssnakenoid_annealing(float *cost, double *smodulus,
 
   recal = 100000; /* recompute cost function every 'recal' iterations */
 
-  if(!(bcost = (float *)calloc(blocksize,sizeof(float))))
+  if(!(bcost = (double *)S_alloc(blocksize,sizeof(double))))
     error("Memory allocation failed for bcost at snake_annealing.c \n");
 
-  if(!(phi2 = (float *)calloc(sigsize,sizeof(float))))
+  if(!(phi2 = (double *)S_alloc(sigsize,sizeof(double))))
     error("Memory allocation failed for phi2 at snake_annealing.c \n");
 
-  if(!(posmap = (int *)calloc(smodsize * nscale,sizeof(int))))
+  if(!(posmap = (int *)S_alloc(smodsize * nscale,sizeof(int))))
     error("Memory allocation failed for posmap at snake_annealing.c \n");
 
   tbox = 0;
@@ -154,8 +156,8 @@ void Ssnakenoid_annealing(float *cost, double *smodulus,
         tmp = smodulus[smodsize * a + b];
 	cost1 -= tmp;
 
-	cost[ncount++] = (float)cost1;
-	bcost[0] = (float)cost1;
+	cost[ncount++] = (double)cost1;
+	bcost[0] = (double)cost1;
 	count ++;
 	costcount = 1;
 
@@ -306,7 +308,7 @@ void Ssnakenoid_annealing(float *cost, double *smodulus,
 	}
 	tbox ++;
 	if(tbox >= stagnant)  {
-	  cost[ncount++] = (float)cost1;
+	  cost[ncount++] = (double)cost1;
 	  *pcount = ncount;
 /*	  if((blocksize != 1)){
 	    for(i = 0; i < costcount+1; i++)
@@ -322,16 +324,14 @@ void Ssnakenoid_annealing(float *cost, double *smodulus,
 	    for(i=0;i<sigsize;i++) phi[i]=phi2[i];
 	  }*/
 	  snakexpand(rho, sub, snakesize);
-	  free((char *)bcost);
-	  free((char *)posmap);
 	  return;
 	}
       }
-      bcost[costcount] = (float)cost1;
+      bcost[costcount] = (double)cost1;
 
       count ++;
       if(count >=  iteration) 	{
-	cost[ncount++] = (float)cost1;
+	cost[ncount++] = (double)cost1;
 	*pcount = ncount;
 
 	/* Write cost function to a file
@@ -350,14 +350,12 @@ void Ssnakenoid_annealing(float *cost, double *smodulus,
 	  for(i=0;i<sigsize;i++) phi[i]=phi2[i];
 	}*/
 	snakexpand(rho, sub, snakesize);
-	free((char *)bcost);
-	free((char *)posmap);
 	return;
       }
       temperature = c/log(1. + (double)count);
     }
 
-    bcost[blocksize-1] = (float)cost1;
+    bcost[blocksize-1] = (double)cost1;
     if((blocksize != 1)){
 /*      for(i = 0; i < blocksize; i++)
 	fprintf(fp, "%f ", bcost[i]); */
@@ -394,7 +392,7 @@ void Ssnakenoid_annealing(float *cost, double *smodulus,
       a = (int)phi[snakesize-1]; b= (int)rho[snakesize-1];
       cost1 -= smodulus[smodsize * a + b];
     }
-    cost[ncount++] = (float)cost1;
+    cost[ncount++] = (double)cost1;
   }
   /* return; */
 }

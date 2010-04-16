@@ -1,3 +1,7 @@
+#include <stdlib.h>
+#include "Swave.h"
+
+
 /***************************************************************
 *    $Log: kernel.c,v $                                        *
 ****************************************************************
@@ -256,8 +260,8 @@ void kernel(double *ker_r, double *ker_i,int *px_min,int *px_max,
   fcomplex tmp;
 
 
-  p2 = (double *)calloc(nb_nodes,sizeof(double));
-  ker = (fcomplex *)calloc(lng*lng,sizeof(fcomplex));
+  p2 = (double *)S_alloc(nb_nodes,sizeof(double));
+  ker = (fcomplex *)S_alloc(lng*lng,sizeof(fcomplex));
   p_tmp=ker; /* mark the first element of ker */
 
   phimax = maxvalue(phi_nodes,nb_nodes);
@@ -323,8 +327,6 @@ void kernel(double *ker_r, double *ker_i,int *px_min,int *px_max,
   ker -= lng2;
   ker_r -= lng2; ker_i -= lng2;
 
-  free((char *)ker);
-  free(p2);
 }
 
 
@@ -357,7 +359,7 @@ void rkernel(double *ker,int *px_min,int *px_max,int *px_inc,
   fcomplex tmp;
 
 
-  p2 = (double *)calloc(nb_nodes,sizeof(double));
+  p2 = (double *)S_alloc(nb_nodes,sizeof(double));
   p_tmp=ker; /* mark the first element of ker */
 
   phimax = maxvalue(phi_nodes,nb_nodes);
@@ -405,7 +407,6 @@ void rkernel(double *ker,int *px_min,int *px_max,int *px_inc,
       printf("%f; ",ker[i+lng*j]); */
 
 
-  free(p2);
 }
 
 
@@ -439,8 +440,8 @@ void fastkernel(double *ker_r, double *ker_i,int *px_min,int *px_max,
   fcomplex tmp;
 
 
-  p2 = (double *)calloc(nb_nodes,sizeof(double));
-  ker = (fcomplex *)calloc(lng*lng,sizeof(fcomplex));
+  p2 = (double *)S_alloc(nb_nodes,sizeof(double));
+  ker = (fcomplex *)S_alloc(lng*lng,sizeof(fcomplex));
   p_tmp=ker; /* mark the first element of ker */
 
   phimax = maxvalue(phi_nodes,nb_nodes);
@@ -508,8 +509,6 @@ void fastkernel(double *ker_r, double *ker_i,int *px_min,int *px_max,
   ker -= lng2;
   ker_r -= lng2; ker_i -= lng2;
 
-  free((char *)ker);
-  free(p2);
 }
 
 

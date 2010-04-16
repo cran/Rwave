@@ -56,8 +56,8 @@ cwtTh <- function(input, noctave, nvoice = 1, moments,
    dim(input) <- c(newsize,1)
 
    z <- .C("Scwt_thierry",
-           as.single(Re(input)),
-           as.single(Im(input)),
+           as.double(Re(input)),
+           as.double(Im(input)),
            Rtmp = as.double(Routput),
            Itmp = as.double(Ioutput),
            as.integer(noctave),
@@ -72,8 +72,10 @@ cwtTh <- function(input, noctave, nvoice = 1, moments,
    dim(Ioutput) <- c(newsize,pp)
    if(twoD) {
      output <- Routput[1:isize,] + 1i*Ioutput[1:isize,]
-     if(plot) image(Mod(output),xlab="Time",ylab="log(scale)")
-     title("Wavelet Transform Modulus")
+     if(plot) { 
+       image(Mod(output),xlab="Time",ylab="log(scale)")
+       title("Wavelet Transform Modulus")
+     }
      output
    } 
    else {
@@ -122,11 +124,11 @@ vwtTh <- function(input, scale, moments)
    dim(input) <- c(newsize,1)
 
    z <- .C("Svwt_Thierry",
-           as.single(Re(input)),
-           as.single(Im(input)),
+           as.double(Re(input)),
+           as.double(Im(input)),
            Rtmp = as.double(Routput),
            Itmp = as.double(Ioutput),
-           as.single(scale),
+           as.double(scale),
            as.integer(newsize),
            as.integer(moments),
            PACKAGE="Rwave")

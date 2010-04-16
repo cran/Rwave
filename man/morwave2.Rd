@@ -34,10 +34,9 @@ Returns the real parts of the Morlet wavelets at the samples of
 the time-scale plane given in the input:
 array of Morlet wavelets located on the ridge samples
 }
-\details{
-}
+%\details{}
 \references{
-See discussions in the text of ``Time-Frequency Analysis''.
+See discussions in the text of \dQuote{Time-Frequency Analysis}.
 }
 \seealso{
 \code{\link{morwave}}, \code{\link{gwave}}, \code{\link{gwave2}}.

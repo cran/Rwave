@@ -31,8 +31,7 @@ To account for the variable sizes of wavelets, the sampling
 rate of a wavelet ridge is not uniform, and is proportional
 to the scale.
 }
-\references{
-}
+%\references{}
 \seealso{
 \code{\link{RidgeSampling}}.
 }

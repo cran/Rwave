@@ -1,3 +1,5 @@
+#include <stdlib.h>
+
 
 /***************************************************************
 *              (c) Copyright  1997                             *
@@ -40,14 +42,14 @@
 *              on a ridge
 *****************************************************************/
 
-void Scrazy_family(double *ridgemap,float *orderedmap,int *chain,
+void Scrazy_family(double *ridgemap,double *orderedmap,int *chain,
 		   int *pnbchain,int *psigsize,int *pnscale,
-		   int *pbstep,float *pthreshold)
+		   int *pbstep,double *pthreshold)
 {
   int bstep, nscale, sigsize, nbchain;
   int i, j, k, id, count, a, b, found, k1;
   double *mridge;
-  float threshold;
+  double threshold;
 
   threshold = *pthreshold;
   bstep = *pbstep;
@@ -55,7 +57,7 @@ void Scrazy_family(double *ridgemap,float *orderedmap,int *chain,
   sigsize = *psigsize;
   nbchain = *pnbchain;
 
-  if(!(mridge = (double *)calloc(sigsize * nscale, sizeof(double))))
+  if(!(mridge = (double *)S_alloc(sigsize * nscale, sizeof(double))))
     error("Memory allocation failed for mridge in crazy_family.c \n");
 
 
@@ -116,7 +118,7 @@ void Scrazy_family(double *ridgemap,float *orderedmap,int *chain,
 	found = YES;
 
 	while(found) {
-	  orderedmap[k] =(float)(id);
+	  orderedmap[k] =(double)(id);
 	  found = NO;
 
 	  b = min(b+1, sigsize-1);
@@ -161,7 +163,6 @@ void Scrazy_family(double *ridgemap,float *orderedmap,int *chain,
   reordering(chain, sigsize, nbchain);
 
 
-  free((char *)mridge);
   printf("There are %d chains. \n", id);
   *pnbchain = id;
 
@@ -183,7 +184,7 @@ void Scrazy_family(double *ridgemap,float *orderedmap,int *chain,
 *   chain: array containing the ridges
 *****************************************************************/
 
-void orderedmap_thresholded(float *orderedmap,int sigsize,int nscale,
+void orderedmap_thresholded(double *orderedmap,int sigsize,int nscale,
 			    int *chain,int nbchain)
 {
   int id, i, j, k;
@@ -201,7 +202,7 @@ void orderedmap_thresholded(float *orderedmap,int sigsize,int nscale,
     k += nbchain;
     a = chain[k];
     while((a != -1)) {
-      orderedmap[b + a * sigsize] = (float)(id + 1);
+      orderedmap[b + a * sigsize] = (double)(id + 1);
       b++;
       k += nbchain;
       a = chain[k];
@@ -231,7 +232,7 @@ void orderedmap_thresholded(float *orderedmap,int sigsize,int nscale,
 *****************************************************************/
 
 void chain_thresholded(double *mridge,int sigsize,int *chain,int *id,
-		       int nbchain,float threshold, int bstep)
+		       int nbchain,double threshold, int bstep)
 {
   int i, j, k, k1, a, b;
   int count, found, lng;

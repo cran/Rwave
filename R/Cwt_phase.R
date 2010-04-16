@@ -62,14 +62,14 @@ cwtp <- function(input, noctave, nvoice = 1, w0 = 2*pi,
    ## dyn.load("/usr/people/whwang/Swave/wave.a")
 
    z <- .C("Scwt_phase",
-           as.single(input),
+           as.double(input),
            Rtmp = as.double(Routput),
            Itmp = as.double(Ioutput),
            Ftmp = as.double(Foutput),
            as.integer(noctave),
            as.integer(nvoice),
            as.integer(newsize),
-           as.single(w0),
+           as.double(w0),
            PACKAGE="Rwave")
 
    Routput <- z$Rtmp

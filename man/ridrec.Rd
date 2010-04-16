@@ -55,10 +55,9 @@ Returns a list containing the reconstructed signal and the chained ridges.
 \item{solskel}{wavelet transform of sol, restricted to the ridge}
 \item{inputskel}{wavelet transform of signal, restricted to the ridge}
 }
-\details{
-}
+%\details{}
 \references{
-See discussions in the text of ``Practical Time-Frequency Analysis''.
+See discussions in the text of \dQuote{Practical Time-Frequency Analysis}.
 }
 \seealso{
 \code{\link{sridrec}}, \code{\link{regrec}}, \code{\link{regrec2}}.

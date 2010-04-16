@@ -53,13 +53,13 @@ cgt <- function(input, nvoice, freqstep = (1/nvoice),
 
 
    z <- .C("Sgabor",
-           as.single(input),
+           as.double(input),
            Rtmp = as.double(Routput),
            Itmp = as.double(Ioutput),
            as.integer(nvoice),
-           as.single(freqstep),
+           as.double(freqstep),
            as.integer(newsize),
-           as.single(scale),
+           as.double(scale),
            PACKAGE="Rwave")
 
    Routput <- z$Rtmp
@@ -112,12 +112,12 @@ vgt <- function(input, frequency, scale, plot = FALSE)
    dim(input) <- c(newsize,1)
 
    z <- .C("Svgabor",
-            as.single(input),
+            as.double(input),
             Rtmp = as.double(Routput),
             Itmp = as.double(Ioutput),
-            as.single(frequency),
+            as.double(frequency),
             as.integer(newsize),
-            as.single(scale),
+            as.double(scale),
            PACKAGE="Rwave")
 
    Routput <- z$Rtmp
@@ -157,8 +157,8 @@ gabor <- function(sigsize, location, frequency, scale)
 
 
    z <- .C("gabor_time",
-            as.single(frequency),
-            as.single(scale),
+            as.double(frequency),
+            as.double(scale),
             as.integer(location),
             gabor.r = as.double(gabor.r),
             gabor.i = as.double(gabor.i),
@@ -198,8 +198,8 @@ vecgabor <- function(sigsize, nbnodes, location, frequency, scale)
 
 
    z <- .C("vgabor_time",
-           as.single(frequency),
-           as.single(scale),
+           as.double(frequency),
+           as.double(scale),
            as.integer(location),
            gabor.r = as.double(gabor.r),
            gabor.i = as.double(gabor.i),

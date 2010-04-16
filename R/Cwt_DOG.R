@@ -51,8 +51,8 @@ DOG <- function(input, noctave, nvoice = 1, moments, twoD = TRUE, plot = TRUE)
   dim(input) <- c(newsize,1)
   
   z <- .C("Scwt_DOG",
-          as.single(Re(input)),
-          as.single(Im(input)),
+          as.double(Re(input)),
+          as.double(Im(input)),
           Rtmp = as.double(Routput),
           Itmp = as.double(Ioutput),
           as.integer(noctave),
@@ -114,11 +114,11 @@ vDOG <- function(input, scale, moments)
   dim(input) <- c(newsize,1)
   
   z <- .C("Svwt_DOG",
-          as.single(Re(input)),
-          as.single(Im(input)),
+          as.double(Re(input)),
+          as.double(Im(input)),
           Rtmp = as.double(Routput),
           Itmp = as.double(Ioutput),
-          as.single(scale),
+          as.double(scale),
           as.integer(newsize),
           as.integer(moments),
            PACKAGE="Rwave")

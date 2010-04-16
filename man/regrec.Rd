@@ -4,7 +4,7 @@
 Reconstruction from a Ridge
 }
 \description{
-Reconstructs signal from a ``regularly sampled'' ridge, in the wavelet
+Reconstructs signal from a \dQuote{regularly sampled} ridge, in the wavelet 
 case.
 }
 \usage{
@@ -87,10 +87,9 @@ Returns a list containing:
 \item{nbnodes}{
   number of nodes used for the reconstruction.
 }}
-\details{
-}
+%\details{}
 \references{
-See discussions in the text of ``Practical Time-Frequency Analysis''.
+See discussions in the text of \dQuote{Practical Time-Frequency Analysis}.
 }
 \seealso{
 \code{\link{regrec2}}, \code{\link{ridrec}}, \code{\link{gregrec}},

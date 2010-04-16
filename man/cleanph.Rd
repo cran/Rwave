@@ -24,11 +24,9 @@ device.
 \value{
 thresholded phase (2D array)
 }
-\details{
-}
+%\details{}
 \references{
 See discussion in text of ``Practical Time-Frequency Analysis''.
 }
-\seealso{
-}
+%\seealso{}
 \keyword{ts}

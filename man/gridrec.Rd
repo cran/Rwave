@@ -69,8 +69,7 @@ Returns a list containing the reconstructed signal and the chained ridges.
 \item{inputskel}{
   Gabor transform of signal, restricted to the ridge.
 }}
-\details{
-}
+%\details{}
 \references{
 See discussions in the text of ``Practical Time-Frequency Analysis''.
 }

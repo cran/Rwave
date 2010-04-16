@@ -1,3 +1,5 @@
+#include <stdlib.h>
+
 
 /*******************************************************************/
 /*              (c) Copyright  1997                                */
@@ -25,11 +27,11 @@
 
 
 void compute_convolution( s, f, g, np )
-     float *s, *f, *g;
+     double *s, *f, *g;
      int np;
 {
   int m, n;
-  float sum;
+  double sum;
 
   for ( m = 0; m < np; m++ )  {
     for ( n = 0, sum = 0.0; n < np; n++ )
@@ -51,17 +53,17 @@ void compute_convolution( s, f, g, np )
 ****************************************************************/
 
 void product( image, f, g, np )
-float ***image, *f, *g;
+double ***image, *f, *g;
 int np;
 {
   int x, y;
 
-  if(!(*image = (float **) malloc( np * sizeof(float *) )))
+  if(!(*image = (double **) R_alloc( np , sizeof(double *) )))
     error("Memory allocation failed for *image in vector_op.c \n");
 
   for ( x = 0; x < np; x++ )
   {
-    if(!((*image)[x] = (float *) malloc( np * sizeof(float) )))
+    if(!((*image)[x] = (double *) R_alloc( np , sizeof(double) )))
       error("Memory allocation failed for *image in vector_op.c \n");
     for ( y = 0; y < np; y++ )
       (*image)[x][y] = f[x] * g[y];
@@ -82,13 +84,13 @@ int np;
 
 
 void complex_product( product, s1, s2, np )
-     float *product;
-     float *s1;  /* length of 2*np */
-     float *s2;  /* length of 2*np */
+     double *product;
+     double *s1;  /* length of 2*np */
+     double *s2;  /* length of 2*np */
      int np;
 {
   int m, x, y;
-  float a, b, c, d;
+  double a, b, c, d;
 
   for ( m = 0; m < np; m++ )  {
     x = 2*m;
@@ -118,9 +120,9 @@ void complex_product( product, s1, s2, np )
 ****************************************************************/
 
 
-signal_copy(input,output,offset,size)
-     float *input;
-     float *output;
+void signal_copy(input,output,offset,size)
+     double *input;
+     double *output;
      int size, offset;
 {
   int i;
@@ -139,8 +141,8 @@ signal_copy(input,output,offset,size)
 *
 ****************************************************************/
 
-signal_zero(input,size)
-     float *input;
+void signal_zero(input,size)
+     double *input;
      int size;
 {
   int i;

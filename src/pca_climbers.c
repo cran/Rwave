@@ -1,3 +1,5 @@
+#include <stdlib.h>
+
 
 /***************************************************************
 *              (c) Copyright  1997                             *
@@ -36,7 +38,7 @@
 
 void Spointmap(double *sqmodulus, int *psigsize, int *pnscale,
 	       int *pgridx, int *pgridy, int *pnbblock, int *pnbpoint, 
-	       int *pointmap, float *tst, int *ptstsize, int *pcount, int *pseed)
+	       int *pointmap, double *tst, int *ptstsize, int *pcount, int *pseed)
 {
   long l;
   int sigsize, nscale, i, j, k, tstsize;
@@ -44,7 +46,7 @@ void Spointmap(double *sqmodulus, int *psigsize, int *pnscale,
   long u1, u2, u3;
   double um, pm, largest;
   long seed;
-  float p1, p2, p3;
+  double p1, p2, p3;
   int a, b, t, up, down, left, right;
   int count1, count2, nbblock, bnumber, lnb;
   int lefto, righto, upo, downo;
@@ -114,25 +116,25 @@ void Spointmap(double *sqmodulus, int *psigsize, int *pnscale,
 
       /* locations of the block; Add 1 to compensate difference between S and c
          ---------------------------------------------------------------------- */
-      tst[tstsize*bnumber] = (float)(left + 1.0);
-      tst[tstsize*bnumber+1] = (float)(down + 1.0);
-      tst[tstsize*bnumber+2] = (float)(right + 1.0);
-      tst[tstsize*bnumber+3] = (float)(up + 1.0);
+      tst[tstsize*bnumber] = (double)(left + 1.0);
+      tst[tstsize*bnumber+1] = (double)(down + 1.0);
+      tst[tstsize*bnumber+2] = (double)(right + 1.0);
+      tst[tstsize*bnumber+3] = (double)(up + 1.0);
 
       for(t = 1; t <= nbpoint; t++) {
 
 	count2 = 0;
 	while(1) {
 /*
-	  p1 = (float)(ran1(&seed));
+	  p1 = (double)(ran1(&seed));
 	  u1 = (long)min((right-left-1) * p1 + left, sigsize-1);
-	  p2 = (float)(ran1(&seed));
+	  p2 = (double)(ran1(&seed));
 	  u2 = (long)min((up-down-1) * p2 + down, nscale-1);
 */
 
-	  p1 = (float)(ran1(&seed));
+	  p1 = (double)(ran1(&seed));
 	  u1 = (long)min((righto-lefto-1) * p1 + lefto, sigsize-1);
-	  p2 = (float)(ran1(&seed));
+	  p2 = (double)(ran1(&seed));
 	  u2 = (long)min((upo-downo-1) * p2 + downo, nscale-1);
 
 	  count1 = 0;
@@ -143,18 +145,18 @@ void Spointmap(double *sqmodulus, int *psigsize, int *pnscale,
                -------------------------- */
 	    if((pointmap[k] == 0) || (count1 > (*pcount))) break;
 /*	    
-	    p1 = (float)(ran1(&seed));
+	    p1 = (double)(ran1(&seed));
 	    u1 = (long)((right-left-1) * p1 + left);
 	    u1 = min(u1, sigsize-1);
-	    p2 = (float)(ran1(&seed));
+	    p2 = (double)(ran1(&seed));
 	    u2 = (long)((up-down-1) * p2 + down);
 	    u2 = min(u2, nscale-1);
 */
 
-	    p1 = (float)(ran1(&seed));
+	    p1 = (double)(ran1(&seed));
 	    u1 = (long)((righto-lefto-1) * p1 + lefto);
 	    u1 = min(u1, sigsize-1);
-	    p2 = (float)(ran1(&seed));
+	    p2 = (double)(ran1(&seed));
 	    u2 = (long)((upo-downo-1) * p2 + downo);
 	    u2 = min(u2, nscale-1);
 
@@ -217,7 +219,7 @@ void Spointmap(double *sqmodulus, int *psigsize, int *pnscale,
 
 void Spca_annealing(double *smodulus, double *beemap,
                int *crazymap,
-	       float *pc,
+	       double *pc,
 	       int *psigsize, int *pnscale, int *piteration,
                int *pseed, int *pbstep, int *pnbbee,
                int *pintegral, int *pchain, int *flag)
@@ -228,7 +230,7 @@ void Spca_annealing(double *smodulus, double *beemap,
   int arest, brest, afree, bfree;
   int seed, nscale, iteration, sigsize, nbbee;
   long idum;
-  float c;
+  double c;
   double ran1();
 
   chain = *pchain;
@@ -242,9 +244,9 @@ void Spca_annealing(double *smodulus, double *beemap,
   seed = *pseed;
   idum = (long)seed;
 
-  if(!(a = (int *)malloc(sizeof(int) * iteration)))
+  if(!(a = (int *) R_alloc(iteration, sizeof(int) )))
     error("Memory allocation failed for a in bee_annealing.c \n");
- if(!(b = (int *)malloc(sizeof(int) * iteration)))
+ if(!(b = (int *) R_alloc(iteration, sizeof(int) )))
     error("Memory allocation failed for b in bee_annealing.c \n");
   
 

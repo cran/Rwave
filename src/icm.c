@@ -1,3 +1,5 @@
+#include <stdlib.h>
+
 
 /***************************************************************
 *              (c) Copyright  1997                             *
@@ -34,15 +36,15 @@
 *
 ****************************************************************/
 
-void Sridge_icm(float *cost, double *smodulus, float *phi,
-  float *plambda, float *pmu, int *psigsize, int *pnscale,
+void Sridge_icm(double *cost, double *smodulus, double *phi,
+  double *plambda, double *pmu, int *psigsize, int *pnscale,
   int *piteration,int *pcount, int *psub, int *psmodsize)
 {
   int i,sigsize,iteration,up, best_up,pos,a,count,sub;
   int smodsize, tbox=0, ttbox=1000;
   int nscale;
-  float lambda, mu;
-  float *phi2;
+  double lambda, mu;
+  double *phi2;
    double cost1;
   double tmp=0.0, best_tmp;
 
@@ -57,7 +59,7 @@ void Sridge_icm(float *cost, double *smodulus, float *phi,
   sub = *psub;
   smodsize = *psmodsize;
 
-  if(!(phi2 = (float *)calloc((smodsize+1)*sub,sizeof(float))))
+  if(!(phi2 = (double *)S_alloc((smodsize+1)*sub,sizeof(double))))
     error("Memory allocation failed for phi2 at icm.c \n");
 
   count = 0; /* total count */
@@ -191,7 +193,7 @@ void Sridge_icm(float *cost, double *smodulus, float *phi,
          ---------*/
       if (best_up != 0) {
         cost1 += best_tmp;
-        phi[pos] += (float)best_up;
+        phi[pos] += (double)best_up;
         tbox++;
       }
     }

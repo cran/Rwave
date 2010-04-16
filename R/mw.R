@@ -72,16 +72,16 @@ mw <- function(inputdata,maxresoln,filtername="Gaussian1",scale=FALSE,
   dim(Wf) <- c(length(Wf),1)
 
   y <- .C("Sf_compute", 
-	Sf=as.single(Sf), 
-	as.single(s), 
+	Sf=as.double(Sf), 
+	as.double(s), 
 	as.integer(maxresoln), 
 	as.integer(np),
 	as.character(filtername),
            PACKAGE="Rwave")
 
   z <- .C("Wf_compute",
-	Wf=as.single(Wf),
-	as.single(y$Sf),
+	Wf=as.double(Wf),
+	as.double(y$Sf),
 	as.integer(maxresoln),
 	as.integer(np),
 	as.character(filtername),

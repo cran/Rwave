@@ -72,10 +72,9 @@ Returns a structure containing:
 \item{cost}{1D array containing the cost function.}
 \item{plot}{when set(default), some results will be displayed.}
 }
-\details{
-}
+%\details{}
 \references{
-See discussions in the text of ``Practical Time-Frequency Analysis''.
+See discussions in the text of \dQuote{Practical Time-Frequency Analysis}.
 }
 \seealso{
 \code{\link{corona}}, \code{\link{coronoid}}, \code{\link{icm}},

@@ -21,8 +21,7 @@ decomposition of the input.
 \R interface for Numerical Recipes singular value decomposition routine.
 }
 \references{
-See discussions in the text of "Time-Frequency Analysis''.
+See discussions in the text of \dQuote{Time-Frequency Analysis}.
 }
-\seealso{
-}
+%\seealso{}
 \keyword{ts}

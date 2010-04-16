@@ -14,12 +14,10 @@
     number of voices.
   }
 }
-\value{
-}
-\details{
-}
+%\value{}
+%\details{}
 \references{
-  See discussions in the text of ``Practical Time-Frequency Analysis''.
+  See discussions in the text of \dQuote{Practical Time-Frequency Analysis}.
 }
 \seealso{\code{\link{hurst.est}}.
 }

@@ -1,3 +1,5 @@
+#include <stdlib.h>
+
 
 
 /****************************************************************/
@@ -41,15 +43,15 @@
 
 #include "Swave.h"
 
-void splridge(int rate, float *y, int n, float *yy)
+void splridge(int rate, double *y, int n, double *yy)
      
 {
   int i,k, x, khi, klo;
-  float p,qn,sig,un,*u,yp1,ypn,a,b,h;
-  float *y2;
+  double p,qn,sig,un,*u,yp1,ypn,a,b,h;
+  double *y2;
   
-  u=(float *)calloc(n-1,sizeof(float));
-  y2=(float *)calloc(n,sizeof(float));
+  u=(double *)S_alloc(n-1,sizeof(double));
+  y2=(double *)S_alloc(n,sizeof(double));
   yp1 = ypn =0;
   
   if (yp1 > 0.99e30)

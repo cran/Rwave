@@ -24,10 +24,9 @@ function of the scale (or frequency).
 \value{
 1D array containing the noise estimate.
 }
-\details{
-}
+%\details{}
 \references{
-See discussions in the text of ``Practical Time-Frequency Analysis''.
+See discussions in the text of \dQuote{Practical Time-Frequency Analysis}.
 }
 \seealso{
 \code{\link{tfmean}},\code{\link{tfvar}}.

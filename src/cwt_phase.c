@@ -1,3 +1,5 @@
+#include <stdlib.h>
+
 /****************************************************************
 *               (c) Copyright  1997                             *
 *                          by                                   *
@@ -22,7 +24,7 @@
 *   isize: signal size
 ******************************************************************/
 
-void morlet_frequencyph(float cf,float scale,double *w,
+void morlet_frequencyph(double cf,double scale,double *w,
   double *wd,int isize)
 {
   double tmp, tmp1, tmp0;
@@ -82,15 +84,15 @@ void normalization(double *Oreal, double *Oimage, double *Odreal,
 ******************************************************************/
 
 void f_function(double *Oreal, double *Oimage, double *Odreal,
-  double *Odimage, double *f, float cf,int inputsize,int nbvoice,
+  double *Odimage, double *f, double cf,int inputsize,int nbvoice,
   int nboctave)
 {
   int i, j, k;
-  float scale;
+  double scale;
   
   for(i = 1; i <= nboctave; i++) {
     for(j=0; j < nbvoice; j++) {
-      scale =(float)(pow((double)2,(double)(i+j/((double)nbvoice))));
+      scale =(double)(pow((double)2,(double)(i+j/((double)nbvoice))));
       for(k=0;k<inputsize;k++){
 	*f = -(*Odreal)*(*Oimage)+ (*Odimage)*(*Oreal);
 	*f -= cf/scale;
@@ -119,17 +121,17 @@ void f_function(double *Oreal, double *Oimage, double *Odreal,
 ******************************************************************/
 
 void w_reassign(double *Oreal, double *Oimage, double *Odreal,
-  double *Odimage, double *squeezed_r, double *squeezed_i, float cf,
+  double *Odimage, double *squeezed_r, double *squeezed_i, double cf,
   int inputsize,int nbvoice,int nboctave)
 {
   int i, j, k, scale2;
-  float scale, tmp;
+  double scale, tmp;
   
   for(i = 1; i <= nboctave; i++) {
     for(j=0; j < nbvoice; j++) {
-      scale =(float)(pow((double)2,(double)(i+j/((double)nbvoice))));
+      scale =(double)(pow((double)2,(double)(i+j/((double)nbvoice))));
       for(k=0;k<inputsize;k++){
-	tmp = (float)(-(*Odreal)*(*Oimage)+ (*Odimage)*(*Oreal));
+	tmp = (double)(-(*Odreal)*(*Oimage)+ (*Odimage)*(*Oreal));
 	scale2 =  (int)(nbvoice*(log(cf/tmp/2.)/log(2.))+.5);
 	if (inrange(0,scale2,nbvoice*nboctave-1)){
 	  squeezed_r[scale2*inputsize + k] += (*Oreal);
@@ -162,12 +164,12 @@ void w_reassign(double *Oreal, double *Oimage, double *Odreal,
 *   pcenterfrequency: centralfrequency of Morlet wavelet
 ******************************************************************/
 
-void Scwt_phase(float *input, double *Oreal, double *Oimage,
+void Scwt_phase(double *input, double *Oreal, double *Oimage,
   double *f, int *pnboctave, int *pnbvoice, int *pinputsize,
-  float *pcenterfrequency)
+  double *pcenterfrequency)
 {
   int nboctave, nbvoice, i, j, inputsize;
-  float centerfrequency, a;
+  double centerfrequency, a;
   double *Ri2, *Ri1, *Ii1, *Ii2, *Rdi2, *Idi2, *Ii, *Ri;
   double *Odreal, *Odimage;
 
@@ -177,31 +179,33 @@ void Scwt_phase(float *input, double *Oreal, double *Oimage,
   nbvoice = *pnbvoice;
   inputsize = *pinputsize;
 
-  /* Memory allocations
+  /* Memory allocations  -- 
+    is the original use of calloc significant?? 
+    Using S_alloc to initialize mem, just in case.  note by xian
      ------------------*/
-  if(!(Odreal = (double *)calloc(inputsize*nbvoice*nboctave, sizeof(double))))
+  if(!(Odreal = (double *) S_alloc(inputsize*nbvoice*nboctave, sizeof(double))))
     error("Memory allocation failed for Ri1 in cwt_phase.c \n");
-  if(!(Odimage = (double *)calloc(inputsize*nbvoice*nboctave, sizeof(double))))
+  if(!(Odimage = (double *) S_alloc(inputsize*nbvoice*nboctave, sizeof(double))))
     error("Memory allocation failed for Ii1 in cwt_phase.c \n");
 
-  if(!(Ri1 = (double *)calloc(inputsize, sizeof(double))))
+  if(!(Ri1 = (double *) S_alloc(inputsize, sizeof(double))))
     error("Memory allocation failed for Ri1 in cwt_phase.c \n");
-  if(!(Ii1 = (double *)calloc(inputsize, sizeof(double))))
+  if(!(Ii1 = (double *) S_alloc(inputsize, sizeof(double))))
     error("Memory allocation failed for Ii1 in cwt_phase.c \n");
 
-  if(!(Ii2 = (double *)calloc(inputsize,sizeof(double))))
+  if(!(Ii2 = (double *) S_alloc(inputsize,sizeof(double))))
     error("Memory allocation failed for Ri2 in cwt_phase.c \n");
-  if(!(Ri2 = (double *)calloc(inputsize,sizeof(double))))
-    error("Memory allocation failed for Ri2 in cwt_phase.c \n");
-
-  if(!(Idi2 = (double *)calloc(inputsize,sizeof(double))))
-    error("Memory allocation failed for Ri2 in cwt_phase.c \n");
-  if(!(Rdi2 = (double *)calloc(inputsize,sizeof(double))))
+  if(!(Ri2 = (double *) S_alloc(inputsize,sizeof(double))))
     error("Memory allocation failed for Ri2 in cwt_phase.c \n");
 
-  if(!(Ri = (double *)calloc(inputsize, sizeof(double))))
+  if(!(Idi2 = (double *) S_alloc(inputsize,sizeof(double))))
+    error("Memory allocation failed for Ri2 in cwt_phase.c \n");
+  if(!(Rdi2 = (double *) S_alloc(inputsize,sizeof(double))))
+    error("Memory allocation failed for Ri2 in cwt_phase.c \n");
+
+  if(!(Ri = (double *) S_alloc(inputsize, sizeof(double))))
     error("Memory allocation failed for Ri in cwt_phase.c \n");
-  if(!(Ii = (double *)calloc(inputsize, sizeof(double))))
+  if(!(Ii = (double *) S_alloc(inputsize, sizeof(double))))
     error("Memory allocation failed for Ii in cwt_phase.c \n");
 
   for(i = 0; i < inputsize; i++){
@@ -219,7 +223,7 @@ void Scwt_phase(float *input, double *Oreal, double *Oimage,
      -------------------------------------------------*/
   for(i = 1; i <= nboctave; i++) {
     for(j=0; j < nbvoice; j++) {
-      a = (float)(pow((double)2,(double)(i+j/((double)nbvoice))));
+      a = (double)(pow((double)2,(double)(i+j/((double)nbvoice))));
       morlet_frequencyph(centerfrequency,a,Ri2,Idi2,inputsize); 
       multiply(Ri1,Ii1,Ri2,Ii2,Oreal,Oimage,inputsize);
       multiply(Ri1,Ii1,Rdi2,Idi2,Odreal,Odimage,inputsize);
@@ -237,12 +241,6 @@ void Scwt_phase(float *input, double *Oreal, double *Oimage,
   Oimage -= inputsize*nbvoice*nboctave;
   Odimage -= inputsize*nbvoice*nboctave;
 
-  free((char *)Ri2);
-  free((char *)Ri1);
-  free((char *)Ii1);
-  free((char *)Ii2);
-  free((char *)Ri);
-  free((char *)Ii);
 
   /* Normalize the cwt and compute the f function
      --------------------------------------------*/
@@ -275,12 +273,12 @@ void Scwt_phase(float *input, double *Oreal, double *Oimage,
 *   pcenterfrequency: centralfrequency of Morlet wavelet
 ******************************************************************/
 
-void Scwt_squeezed(float *input, double *squeezed_r,
+void Scwt_squeezed(double *input, double *squeezed_r,
   double *squeezed_i, int *pnboctave, int *pnbvoice,
-  int *pinputsize, float *pcenterfrequency)
+  int *pinputsize, double *pcenterfrequency)
 {
   int nboctave, nbvoice, i, j, inputsize, bigsize;
-  float centerfrequency, a;
+  double centerfrequency, a;
   double *Ri2, *Ri1, *Ii1, *Ii2, *Rdi2, *Idi2, *Ii, *Ri;
   double *Oreal, *Oimage, *Odreal, *Odimage;
 
@@ -293,34 +291,34 @@ void Scwt_squeezed(float *input, double *squeezed_r,
 
   /* Memory allocations
      ------------------*/
-  if(!(Oreal = (double *)calloc(bigsize, sizeof(double))))
+  if(!(Oreal = (double *) S_alloc(bigsize, sizeof(double))))
     error("Memory allocation failed for Ri1 in cwt_phase.c \n");
-  if(!(Oimage = (double *)calloc(bigsize, sizeof(double))))
+  if(!(Oimage = (double *) S_alloc(bigsize, sizeof(double))))
     error("Memory allocation failed for Ii1 in cwt_phase.c \n");
 
-  if(!(Odreal = (double *)calloc(bigsize, sizeof(double))))
+  if(!(Odreal = (double *) S_alloc(bigsize, sizeof(double))))
     error("Memory allocation failed for Ri1 in cwt_phase.c \n");
-  if(!(Odimage = (double *)calloc(bigsize, sizeof(double))))
+  if(!(Odimage = (double *) S_alloc(bigsize, sizeof(double))))
     error("Memory allocation failed for Ii1 in cwt_phase.c \n");
 
-  if(!(Ri1 = (double *)calloc(inputsize, sizeof(double))))
+  if(!(Ri1 = (double *) S_alloc(inputsize, sizeof(double))))
     error("Memory allocation failed for Ri1 in cwt_phase.c \n");
-  if(!(Ii1 = (double *)calloc(inputsize, sizeof(double))))
+  if(!(Ii1 = (double *) S_alloc(inputsize, sizeof(double))))
     error("Memory allocation failed for Ii1 in cwt_phase.c \n");
 
-  if(!(Ii2 = (double *)calloc(inputsize,sizeof(double))))
+  if(!(Ii2 = (double *) S_alloc(inputsize,sizeof(double))))
     error("Memory allocation failed for Ri2 in cwt_phase.c \n");
-  if(!(Ri2 = (double *)calloc(inputsize,sizeof(double))))
-    error("Memory allocation failed for Ri2 in cwt_phase.c \n");
-
-  if(!(Idi2 = (double *)calloc(inputsize,sizeof(double))))
-    error("Memory allocation failed for Ri2 in cwt_phase.c \n");
-  if(!(Rdi2 = (double *)calloc(inputsize,sizeof(double))))
+  if(!(Ri2 = (double *) S_alloc(inputsize,sizeof(double))))
     error("Memory allocation failed for Ri2 in cwt_phase.c \n");
 
-  if(!(Ri = (double *)calloc(inputsize, sizeof(double))))
+  if(!(Idi2 = (double *) S_alloc(inputsize,sizeof(double))))
+    error("Memory allocation failed for Ri2 in cwt_phase.c \n");
+  if(!(Rdi2 = (double *) S_alloc(inputsize,sizeof(double))))
+    error("Memory allocation failed for Ri2 in cwt_phase.c \n");
+
+  if(!(Ri = (double *) S_alloc(inputsize, sizeof(double))))
     error("Memory allocation failed for Ri in cwt_phase.c \n");
-  if(!(Ii = (double *)calloc(inputsize, sizeof(double))))
+  if(!(Ii = (double *) S_alloc(inputsize, sizeof(double))))
     error("Memory allocation failed for Ii in cwt_phase.c \n");
 
   for(i = 0; i < inputsize; i++){
@@ -338,7 +336,7 @@ void Scwt_squeezed(float *input, double *squeezed_r,
      -------------------------------------------------*/
   for(i = 1; i <= nboctave; i++) {
     for(j=0; j < nbvoice; j++) {
-      a = (float)(pow((double)2,(double)(i+j/((double)nbvoice))));
+      a = (double)(pow((double)2,(double)(i+j/((double)nbvoice))));
       morlet_frequencyph(centerfrequency,a,Ri2,Idi2,inputsize); 
       multiply(Ri1,Ii1,Ri2,Ii2,Oreal,Oimage,inputsize);
       multiply(Ri1,Ii1,Rdi2,Idi2,Odreal,Odimage,inputsize);
@@ -356,12 +354,6 @@ void Scwt_squeezed(float *input, double *squeezed_r,
   Oimage -= bigsize;
   Odimage -= bigsize;
 
-  free((char *)Ri2);
-  free((char *)Ri1);
-  free((char *)Ii1);
-  free((char *)Ii2);
-  free((char *)Ri);
-  free((char *)Ii);
 
   /* Normalize the cwt and compute the squeezed transform
      ----------------------------------------------------*/

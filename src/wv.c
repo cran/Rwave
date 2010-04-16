@@ -1,3 +1,5 @@
+#include <stdlib.h>
+
 /****************************************************************
 *               (c) Copyright  1998                             *
 *                          by                                   *
@@ -19,13 +21,13 @@ void WV_mult(int n, double *Ri,double *Ii,
 *  ---------
 *          Parity transformation
 *
-*   frequency: value of the frequency parameter (float)
+*   frequency: value of the frequency parameter (double)
 *   win: input signal
 *   wout: transformed signal
 *   isize: signal size
 *
 ************************************************************/
-void freq_parity(float frequency,double *win,double *wout,
+void freq_parity(double frequency,double *win,double *wout,
   int isize,int sign)
 {
   int i,itmp;
@@ -44,13 +46,13 @@ void freq_parity(float frequency,double *win,double *wout,
 *  ---------
 *          Fourier domain manipulation for Wigner-Ville
 *
-*   frequency: value of the frequency parameter (float)
+*   frequency: value of the frequency parameter (double)
 *   Ri,Ii: input signal (real and imag. parts)
 *   Ro,Io: output signal (real and imag. parts)
 *   isize: signal size
 *
 ************************************************************/
-void WV_freq_mult(float frequency,double *Ri,double *Ii,
+void WV_freq_mult(double frequency,double *Ri,double *Ii,
   double *Ro, double *Io,int isize)
 {
   int i,itmp,jtmp;
@@ -72,7 +74,7 @@ void WV_freq_mult(float frequency,double *Ri,double *Ii,
 *  ---------
 *          Manipulation for Wigner-Ville
 *
-*   frequency: value of the frequency parameter (float)
+*   frequency: value of the frequency parameter (double)
 *   Ri,Ii: input signal (real and imag. parts)
 *   Ro,Io: output signal (real and imag. parts)
 *   isize: signal size
@@ -112,11 +114,11 @@ void WV_mult(int n, double *Ri,double *Ii,
 *   pfreqstep: frequency step
 *
 ***********************************************************/
-void WV(float *input,double *Oreal,double *Oimage,int *pnbfreq,
-  float *pfreqstep,int *pinputsize)
+void WV(double *input,double *Oreal,double *Oimage,int *pnbfreq,
+  double *pfreqstep,int *pinputsize)
 {
   int nbfreq, i, p, k, ii, inputsize, locsize;
-  float freqstep, frequency;
+  double freqstep, frequency;
   double *Ri1, *Ii1, *Ii, *Ri, *tmpreal, *tmpimage;
 
 
@@ -127,19 +129,19 @@ void WV(float *input,double *Oreal,double *Oimage,int *pnbfreq,
   locsize = 2*inputsize;
 
   /* Memory allocation */
-  if(!(Ri = (double *)calloc(locsize, sizeof(double))))
+  if(!(Ri = (double *)S_alloc(locsize, sizeof(double))))
     error("Memory allocation failed for Ri in WV.c \n");
-  if(!(Ii = (double *)calloc(locsize, sizeof(double))))
+  if(!(Ii = (double *)S_alloc(locsize, sizeof(double))))
     error("Memory allocation failed for Ii in WV.c \n");
 
-  if(!(Ri1 = (double *)calloc(locsize, sizeof(double))))
+  if(!(Ri1 = (double *)S_alloc(locsize, sizeof(double))))
     error("Memory allocation failed for Ri1 in WV.c \n");
-  if(!(Ii1 = (double *)calloc(locsize, sizeof(double))))
+  if(!(Ii1 = (double *)S_alloc(locsize, sizeof(double))))
     error("Memory allocation failed for Ii1 in WV.c \n");
 
-  if(!(tmpreal = (double *)calloc(locsize, sizeof(double))))
+  if(!(tmpreal = (double *)S_alloc(locsize, sizeof(double))))
     error("Memory allocation failed for tmpreal in WV.c \n");
-  if(!(tmpimage = (double *)calloc(locsize, sizeof(double))))
+  if(!(tmpimage = (double *)S_alloc(locsize, sizeof(double))))
     error("Memory allocation failed for tmpimage in WV.c \n");
 
   /* Load signal for FFT */
@@ -183,11 +185,6 @@ void WV(float *input,double *Oreal,double *Oimage,int *pnbfreq,
 
   }
 
-
-  free((char *)Ri1);
-  free((char *)Ii1);
-  free((char *)Ri);
-  free((char *)Ii);
 
   return;
 }

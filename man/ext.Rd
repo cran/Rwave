@@ -38,10 +38,9 @@ Structure containing:
   size of signal.
 }
 }
-\details{
-}
+%\details{}
 \references{
-See discussions in the text of ``Practical Time-Frequency Analysis''.
+See discussions in the text of \dQuote{Practical Time-Frequency Analysis}.
 }
 \seealso{
 \code{\link{mw}}, \code{\link{mrecons}}.
