@@ -16,7 +16,7 @@
 
 
 
-#include "kernel.h"
+#include "rwkernel.h"
 
 
 
@@ -246,7 +246,7 @@ void hermite_sym(fcomplex *ker,int lng)
 ************************************************************/
 
 
-void kernel(double *ker_r, double *ker_i,int *px_min,int *px_max,
+void rwkernel(double *ker_r, double *ker_i,int *px_min,int *px_max,
 	    int *px_inc, int *plng, double *nodes,double *phi_nodes,
 	    int *pnb_nodes,double *pw0,double *pb_start,double *pb_end)
 {

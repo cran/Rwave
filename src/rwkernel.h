@@ -44,7 +44,7 @@ Function declarations:
 fcomplex integrand(double b,int x,int y,double *p2,double *nodes,
 		   double *phi_nodes,int nb_nodes,double w0);
 
-void kernel(double *ker_r, double *ker_i,int *px_min,int *px_max,
+void rwkernel(double *ker_r, double *ker_i,int *px_min,int *px_max,
 	    int *px_inc, int *plng,double *nodes,double *phi_nodes, 
 	    int *pnb_nodes,double *pw0,double *pb_start,double *pb_end);
 

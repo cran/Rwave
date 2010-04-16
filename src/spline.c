@@ -2,7 +2,7 @@
 #include "Swave.h"
 
 
-#include "kernel.h"
+#include "rwkernel.h"
 #define NRANSI
 
 /***************************************************************

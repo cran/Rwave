@@ -13,7 +13,7 @@
 ***************************************************************/
 
 
-#include "kernel.h"
+#include "rwkernel.h"
 #define JMAX 20
 #define JMAXP (JMAX+1)
 #define K 5
