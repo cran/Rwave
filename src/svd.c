@@ -50,7 +50,7 @@ void svdcmp(double **a, int m, int n, double *w, double **v)
   double anorm, c, f, g, h, s, scale,  x, y, z, *rv1;
   
   if(!(rv1 = (double *)R_alloc((n + 1), sizeof(double) )))
-    error("Memory allocation failed for rv1 in svd.c \n");
+    Rf_error("Memory allocation failed for rv1 in svd.c \n");
   g = scale = anorm = 0.0;
   
   /* Householder reduction to bidiagonal form */
@@ -182,7 +182,7 @@ void svdcmp(double **a, int m, int n, double *w, double **v)
 	}
 	break;
       }
-      if(its == 30) error("No convergence in 30 SVDCMP iterations");
+      if(its == 30) Rf_error("No convergence in 30 SVDCMP iterations");
       x = w[l];
       nm = k - 1;
       y = w[nm];
@@ -252,7 +252,7 @@ void svbksb(double **U, double *W, double **V, int m, int n,
   double s, *tmp;
   
   if(!(tmp = (double *)R_alloc((n+1), sizeof(double) )))
-    error("Memory allocation failed for tmp in svd.c \n");
+    Rf_error("Memory allocation failed for tmp in svd.c \n");
   for (j = 1; j <= n; j++) {
     s = 0.0;
     if (W[j]) {
@@ -278,29 +278,29 @@ void svdecomp_solve(double **a, double *b, double *x, int m,
   void double_residue();
 
   if(!((*w) = (double *) R_alloc(n, sizeof(double) )))
-    error("Memory allocation failed for (*w) in svd.c \n");
+    Rf_error("Memory allocation failed for (*w) in svd.c \n");
   if(!((*v) = (double **)R_alloc(  n, sizeof(double *))))
-    error("Memory allocation failed for (*v) in svd.c \n");
+    Rf_error("Memory allocation failed for (*v) in svd.c \n");
   for(i = 0; i < n; i++) 
     if(!((*v)[i] = (double *) R_alloc(n, sizeof(double) )))
-      error("Memory allocation failed for (*v)[] in svd.c \n");
+      Rf_error("Memory allocation failed for (*v)[] in svd.c \n");
   
   if(!(W = (double *)R_alloc((n+1), sizeof(double) )))
-    error("Memory allocation failed for W in svd.c \n");
+    Rf_error("Memory allocation failed for W in svd.c \n");
   if(!(V = (double **)R_alloc( (n+1), sizeof(double *))))
-    error("Memory allocation failed for V in svd.c \n");
+    Rf_error("Memory allocation failed for V in svd.c \n");
   if(!(A = (double **)R_alloc( (m+1), sizeof(double *))))
-    error("Memory allocation failed for A in svd.c \n");
+    Rf_error("Memory allocation failed for A in svd.c \n");
   if(!(B = (double *)R_alloc((m+1), sizeof(double) )))
-    error("Memory allocation failed for B in svd.c \n");
+    Rf_error("Memory allocation failed for B in svd.c \n");
   if(!(X = (double *)R_alloc((n+1), sizeof(double) )))
-    error("Memory allocation failed for X in svd.c \n");
+    Rf_error("Memory allocation failed for X in svd.c \n");
   for(i = 0; i <= n; i++) 
     if(!(V[i] = (double *)R_alloc((n+1), sizeof(double) )))
-      error("Memory allocation failed for V[] in svd.c \n");
+      Rf_error("Memory allocation failed for V[] in svd.c \n");
   for(i = 0; i <= m; i++) 
     if(!(A[i] = (double *)R_alloc((n+1), sizeof(double) )))
-      error("Memory allocation failed for A[] in svd.c \n");
+      Rf_error("Memory allocation failed for A[] in svd.c \n");
   
   for( i = 0; i < m; i++) {
     B[i+1] = (double)(b[i]);
@@ -345,12 +345,12 @@ void residue(double **a, double *w, double **v, int m, int n,
   int i, j, k;
 
   if(!(tmp = (double **)R_alloc( m, sizeof(double *))))
-    error("Memory allocation failed for tmp in svd.c \n");
+    Rf_error("Memory allocation failed for tmp in svd.c \n");
   if(!(tmp1 = (double *) R_alloc(m, sizeof(double) )))
-    error("Memory allocation failed for tmp1 in svd.c \n");
+    Rf_error("Memory allocation failed for tmp1 in svd.c \n");
   for(i = 0 ; i < m; i++)
     if(!(tmp[i] = (double *) R_alloc(n, sizeof(double) )))
-      error("Memory allocation failed for tmp[] in svd.c \n");
+      Rf_error("Memory allocation failed for tmp[] in svd.c \n");
   
   for(i = 0; i < m; i++)
     for(j = 0; j < n; j++) {
@@ -386,12 +386,12 @@ void double_residue(double **a, double *w, double **v, int m,
   int i, j, k;
 
   if(!(tmp = (double **)R_alloc( (m+1), sizeof(double *))))
-    error("Memory allocation failed for tmp in svd.c \n");
+    Rf_error("Memory allocation failed for tmp in svd.c \n");
   if(!(tmp1 = (double *)R_alloc((m+1), sizeof(double) )))
-    error("Memory allocation failed for tmp1 in svd.c \n");
+    Rf_error("Memory allocation failed for tmp1 in svd.c \n");
   for(i = 1 ; i <= m; i++)
     if(!(tmp[i] = (double *)R_alloc((n+1), sizeof(double) )))
-      error("Memory allocation failed for tmp[] in svd.c \n");
+      Rf_error("Memory allocation failed for tmp[] in svd.c \n");
   
   for(i = 1; i <= m; i++)
     for(j = 1; j <= n; j++) {
@@ -429,9 +429,9 @@ void Sresidue(double *a, double *w, double *v, int m, int n,
   int t;
 
   if(!(tmp = (double *)malloc(sizeof(double) * m * n)))
-    error("Memory allocation failed for tmp in svd.c \n");
+    Rf_error("Memory allocation failed for tmp in svd.c \n");
   if(!(tmp1 = (double *)malloc(sizeof(double) * m)))
-    error("Memory allocation failed for tmp1 in svd.c \n");
+    Rf_error("Memory allocation failed for tmp1 in svd.c \n");
   
   for(i = 0; i < m; i++)
     for(j = 0; j < n; j++) {
@@ -475,19 +475,19 @@ void Ssvdecomp(double *a, int *pm, int *pn, double *w, double *v)
   n = *pn;
 
   if(!(A = (double **)R_alloc( (m+1), sizeof(double *))))
-    error("Memory allocation failed for A in svd.c \n");
+    Rf_error("Memory allocation failed for A in svd.c \n");
   if(!(V = (double **)R_alloc( (n+1), sizeof(double *))))
-    error("Memory allocation failed for V in svd.c \n");
+    Rf_error("Memory allocation failed for V in svd.c \n");
   if(!(W = (double *)R_alloc((n+1), sizeof(double) )))
-    error("Memory allocation failed for W in svd.c \n");
+    Rf_error("Memory allocation failed for W in svd.c \n");
 
   for(i = 0; i <= m; i++) 
     if(!(A[i] = (double *)R_alloc((n+1), sizeof(double) )))
-      error("Memory allocation failed for A[] in svd.c \n");
+      Rf_error("Memory allocation failed for A[] in svd.c \n");
 
   for(i = 0; i <= n; i++) 
     if(!(V[i] = (double *)R_alloc((n+1), sizeof(double) )))
-      error("Memory allocation failed for V[] in svd.c \n");
+      Rf_error("Memory allocation failed for V[] in svd.c \n");
 
   for(j = 0; j < n; j++)   
     for( i = 0; i < m; i++)

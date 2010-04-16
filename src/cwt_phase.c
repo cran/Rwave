@@ -184,29 +184,29 @@ void Scwt_phase(double *input, double *Oreal, double *Oimage,
     Using S_alloc to initialize mem, just in case.  note by xian
      ------------------*/
   if(!(Odreal = (double *) S_alloc(inputsize*nbvoice*nboctave, sizeof(double))))
-    error("Memory allocation failed for Ri1 in cwt_phase.c \n");
+    Rf_error("Memory allocation failed for Ri1 in cwt_phase.c \n");
   if(!(Odimage = (double *) S_alloc(inputsize*nbvoice*nboctave, sizeof(double))))
-    error("Memory allocation failed for Ii1 in cwt_phase.c \n");
+    Rf_error("Memory allocation failed for Ii1 in cwt_phase.c \n");
 
   if(!(Ri1 = (double *) S_alloc(inputsize, sizeof(double))))
-    error("Memory allocation failed for Ri1 in cwt_phase.c \n");
+    Rf_error("Memory allocation failed for Ri1 in cwt_phase.c \n");
   if(!(Ii1 = (double *) S_alloc(inputsize, sizeof(double))))
-    error("Memory allocation failed for Ii1 in cwt_phase.c \n");
+    Rf_error("Memory allocation failed for Ii1 in cwt_phase.c \n");
 
   if(!(Ii2 = (double *) S_alloc(inputsize,sizeof(double))))
-    error("Memory allocation failed for Ri2 in cwt_phase.c \n");
+    Rf_error("Memory allocation failed for Ri2 in cwt_phase.c \n");
   if(!(Ri2 = (double *) S_alloc(inputsize,sizeof(double))))
-    error("Memory allocation failed for Ri2 in cwt_phase.c \n");
+    Rf_error("Memory allocation failed for Ri2 in cwt_phase.c \n");
 
   if(!(Idi2 = (double *) S_alloc(inputsize,sizeof(double))))
-    error("Memory allocation failed for Ri2 in cwt_phase.c \n");
+    Rf_error("Memory allocation failed for Ri2 in cwt_phase.c \n");
   if(!(Rdi2 = (double *) S_alloc(inputsize,sizeof(double))))
-    error("Memory allocation failed for Ri2 in cwt_phase.c \n");
+    Rf_error("Memory allocation failed for Ri2 in cwt_phase.c \n");
 
   if(!(Ri = (double *) S_alloc(inputsize, sizeof(double))))
-    error("Memory allocation failed for Ri in cwt_phase.c \n");
+    Rf_error("Memory allocation failed for Ri in cwt_phase.c \n");
   if(!(Ii = (double *) S_alloc(inputsize, sizeof(double))))
-    error("Memory allocation failed for Ii in cwt_phase.c \n");
+    Rf_error("Memory allocation failed for Ii in cwt_phase.c \n");
 
   for(i = 0; i < inputsize; i++){
     *Ri = (double)(*input);
@@ -292,34 +292,34 @@ void Scwt_squeezed(double *input, double *squeezed_r,
   /* Memory allocations
      ------------------*/
   if(!(Oreal = (double *) S_alloc(bigsize, sizeof(double))))
-    error("Memory allocation failed for Ri1 in cwt_phase.c \n");
+    Rf_error("Memory allocation failed for Ri1 in cwt_phase.c \n");
   if(!(Oimage = (double *) S_alloc(bigsize, sizeof(double))))
-    error("Memory allocation failed for Ii1 in cwt_phase.c \n");
+    Rf_error("Memory allocation failed for Ii1 in cwt_phase.c \n");
 
   if(!(Odreal = (double *) S_alloc(bigsize, sizeof(double))))
-    error("Memory allocation failed for Ri1 in cwt_phase.c \n");
+    Rf_error("Memory allocation failed for Ri1 in cwt_phase.c \n");
   if(!(Odimage = (double *) S_alloc(bigsize, sizeof(double))))
-    error("Memory allocation failed for Ii1 in cwt_phase.c \n");
+    Rf_error("Memory allocation failed for Ii1 in cwt_phase.c \n");
 
   if(!(Ri1 = (double *) S_alloc(inputsize, sizeof(double))))
-    error("Memory allocation failed for Ri1 in cwt_phase.c \n");
+    Rf_error("Memory allocation failed for Ri1 in cwt_phase.c \n");
   if(!(Ii1 = (double *) S_alloc(inputsize, sizeof(double))))
-    error("Memory allocation failed for Ii1 in cwt_phase.c \n");
+    Rf_error("Memory allocation failed for Ii1 in cwt_phase.c \n");
 
   if(!(Ii2 = (double *) S_alloc(inputsize,sizeof(double))))
-    error("Memory allocation failed for Ri2 in cwt_phase.c \n");
+    Rf_error("Memory allocation failed for Ri2 in cwt_phase.c \n");
   if(!(Ri2 = (double *) S_alloc(inputsize,sizeof(double))))
-    error("Memory allocation failed for Ri2 in cwt_phase.c \n");
+    Rf_error("Memory allocation failed for Ri2 in cwt_phase.c \n");
 
   if(!(Idi2 = (double *) S_alloc(inputsize,sizeof(double))))
-    error("Memory allocation failed for Ri2 in cwt_phase.c \n");
+    Rf_error("Memory allocation failed for Ri2 in cwt_phase.c \n");
   if(!(Rdi2 = (double *) S_alloc(inputsize,sizeof(double))))
-    error("Memory allocation failed for Ri2 in cwt_phase.c \n");
+    Rf_error("Memory allocation failed for Ri2 in cwt_phase.c \n");
 
   if(!(Ri = (double *) S_alloc(inputsize, sizeof(double))))
-    error("Memory allocation failed for Ri in cwt_phase.c \n");
+    Rf_error("Memory allocation failed for Ri in cwt_phase.c \n");
   if(!(Ii = (double *) S_alloc(inputsize, sizeof(double))))
-    error("Memory allocation failed for Ii in cwt_phase.c \n");
+    Rf_error("Memory allocation failed for Ii in cwt_phase.c \n");
 
   for(i = 0; i < inputsize; i++){
     *Ri = (double)(*input);

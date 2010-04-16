@@ -76,15 +76,15 @@ void Sridge_annealing(double *cost, double *smodulus,
   recal = 1000000; /* recompute cost function every 'recal' iterations */
 
   if(!(bcost = (double *) R_alloc(blocksize, sizeof(double) )))
-    error("Memory allocation failed for bcost at ridge_annealing.c \n");
+    Rf_error("Memory allocation failed for bcost at ridge_annealing.c \n");
 
   if(!(phi2 = (double *)S_alloc((smodsize+1)*sub,sizeof(double))))
-    error("Memory allocation failed for phi2 at ridge_annealing.c \n");
+    Rf_error("Memory allocation failed for phi2 at ridge_annealing.c \n");
 
 /*
   if(blocksize != 1) {
     if((fp = fopen("annealing.cost","w")) == NULL)
-      error("can't open file at ridge_annealing.c \n");
+      Rf_error("can't open file at ridge_annealing.c \n");
   }
 */
   tbox = 0;
@@ -218,7 +218,7 @@ void Sridge_annealing(double *cost, double *smodulus,
 	 -------------------------------------------*/
       if(tmp < (double)0.0) {
 	phi[pos] = phi[pos] + up; /* good move */
-	if(phi[pos] < 0) printf("Error \n");
+	if(phi[pos] < 0) Rprintf("Error \n");
 	cost1 += tmp;
 	tbox = 0;
       }

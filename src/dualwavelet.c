@@ -34,15 +34,15 @@ void signal_W_tilda(double ***W_tilda, double **W, double **K,
   char filename[STRING_SIZE];
   
   if(!(p = (double *) R_alloc( np , sizeof(double) )))
-    error("Memory allocation failed for p in image_W_tilda \n");
+    Rf_error("Memory allocation failed for p in image_W_tilda \n");
   if(!(b = (double *) R_alloc( np , sizeof(double) )))
-    error("Memory allocation failed for b in image_W_tilda \n");
+    Rf_error("Memory allocation failed for b in image_W_tilda \n");
   if(!(*W_tilda = (double **) R_alloc( (max_resoln+1) , sizeof(double *) )))
-    error("Memory allocation failed for *W_tilda in image_W_tilda \n");
+    Rf_error("Memory allocation failed for *W_tilda in image_W_tilda \n");
 
   for(j = 1; j <= max_resoln; j++) {
     if(!((*W_tilda)[j] = (double *) R_alloc( np , sizeof(double) )))
-      error("Memory allocation failed for (*W_tilda)[] in image_W_tilda \n");
+      Rf_error("Memory allocation failed for (*W_tilda)[] in image_W_tilda \n");
   }
 
   for ( j = 1; j <= max_resoln; j++ )    {
@@ -79,7 +79,7 @@ void signal_W_tilda_input(double ***W_tilda, int max_resoln, int np)
   char filename[STRING_SIZE];
 
   if(!(*W_tilda = (double **) R_alloc( (max_resoln+1) , sizeof(double *) )))
-    error("Memory allocation failed for *W_tilda in signal_W_tilda \n");
+    Rf_error("Memory allocation failed for *W_tilda in signal_W_tilda \n");
 
 
 /* please don't write to disk

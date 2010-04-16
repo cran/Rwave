@@ -59,7 +59,7 @@ static int iminarg1,iminarg2;
 
 #if defined(__STDC__) || defined(ANSI) || defined(NRANSI) /* ANSI */
 
-void nrerror(char error_text[]);
+void nrRf_error(char error_text[]);
 double *vector(long nl, long nh);
 int *ivector(long nl, long nh);
 unsigned char *cvector(long nl, long nh);
@@ -88,7 +88,7 @@ void free_f3tensor(double ***t, long nrl, long nrh, long ncl, long nch,
 #else /* ANSI */
 /* traditional - K&R */
 
-void nrerror();
+void nrRf_error();
 double *vector();
 double **matrix();
 double **submatrix();
@@ -131,7 +131,7 @@ void double_choldc(double **a, int n, double p[])
       for (sum=a[i][j],k=i-1;k>=1;k--) sum -= a[i][k]*a[j][k];
       if (i == j) {
 	if (sum <= 0.0)
-	  printf("choldc failed");
+	  Rprintf("choldc failed");
 	p[i]=sqrt(sum);
       } else a[j][i]=sum/p[i];
     }
@@ -149,14 +149,14 @@ void choldc(double **a, int n, double p[])
   int i,j,k;
 
 /*  if(!(A = (double **)(malloc(sizeof(double *) * (n+1)))))
-    error("Memory allocation failed for A in choldc.c \n");
+    Rf_error("Memory allocation failed for A in choldc.c \n");
 */
   if(!(P = (double *)(R_alloc((n+1), sizeof(double) ))))
-    error("Memory allocation failed for P in choldc.c \n");
+    Rf_error("Memory allocation failed for P in choldc.c \n");
 /*		  
   for(i = 0; i <= n; i++) {
     if(!(A[i] = (double *)(malloc(sizeof(double) * (n+1)))))
-      error("Memory allocation failed for A in choldc.c \n");
+      Rf_error("Memory allocation failed for A in choldc.c \n");
   }
 */  
   for(i = 0; i < n; i++) {
@@ -205,18 +205,18 @@ void cholsl(double **a, int n, double p[], double b[], double x[])
   double *B, *X;
   
 /*  if(!(A = (double **)(malloc(sizeof(double *) * (n+1)))))
-    error("Memory allocation failed for A in choldc.c \n");
+    Rf_error("Memory allocation failed for A in choldc.c \n");
 */
   if(!(P = (double *)(R_alloc((n+1), sizeof(double) ))))
-    error("Memory allocation failed for P in choldc.c \n");
+    Rf_error("Memory allocation failed for P in choldc.c \n");
   if(!(B = (double *)(R_alloc((n+1), sizeof(double) ))))
-    error("Memory allocation failed for B in choldc.c \n");
+    Rf_error("Memory allocation failed for B in choldc.c \n");
   if(!(X = (double *)(R_alloc((n+1), sizeof(double) ))))
-    error("Memory allocation failed for X in choldc.c \n");
+    Rf_error("Memory allocation failed for X in choldc.c \n");
 		  
 /*  for(i = 0; i <= n; i++) {
     if(!(A[i] = (double *)(malloc(sizeof(double) * (n+1)))))
-      error("Memory allocation failed for A in choldc.c \n");
+      Rf_error("Memory allocation failed for A in choldc.c \n");
   }
 */
   for(i = 0; i < n; i++) {
@@ -261,14 +261,14 @@ double *d;
   double *vv;
   
   if(!(vv=(double *) R_alloc( (n+1) ,  sizeof(double))))
-    error("Memory allocation failed for vv in choldc.c \n");
+    Rf_error("Memory allocation failed for vv in choldc.c \n");
   
   *d=1.0;
   for (i=1;i<=n;i++) {
     big=0.0;
     for (j=1;j<=n;j++)
       if ((temp=fabs(a[i][j])) > big) big=temp;
-    if (big == 0.0) printf("Singular matrix in routine ludcmp");
+    if (big == 0.0) Rprintf("Singular matrix in routine ludcmp");
     vv[i]=1.0/big;
   }
   for (j=1;j<=n;j++) {

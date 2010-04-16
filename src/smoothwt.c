@@ -43,7 +43,7 @@ void smoothwt(double *wt, double *swt, int sigsize, int nbscale, int windowlengt
       swt++; cnt++;
     }
   }
-  printf("smoothing done\n");
+  Rprintf("smoothing done\n");
   /* printf("%d coefficients computed\n",cnt);*/
   return;
 }
@@ -78,8 +78,8 @@ void smoothwt1(double *wt, double *swt, int sigsize, int nbscale, int windowleng
       swt++;cnt++;
     }
   }
-  printf("smoothing done\n");
-  printf("%d coefficients computed\n",cnt);
+  Rprintf("smoothing done\n");
+  Rprintf("%d coefficients computed\n",cnt);
   return;
 }
 
@@ -103,9 +103,9 @@ void smoothwt2(double *wt, double *swt, int sigsize, int nbscale,
   int a,b,k,adr,kmin,kmax;
   double normal;
   int cnt = 0;
-  printf("smodsize %d \n",*smodsize);
-  printf("number of scales %d \n",nbscale);
-  printf("windowlength %d \n",windowlength);
+  Rprintf("smodsize %d \n",*smodsize);
+  Rprintf("number of scales %d \n",nbscale);
+  Rprintf("windowlength %d \n",windowlength);
   for(a = 0; a < nbscale; a++){
     for(b = 0; b < sigsize; b += windowlength){
       kmin = max(0,1-windowlength+b);
@@ -122,12 +122,13 @@ void smoothwt2(double *wt, double *swt, int sigsize, int nbscale,
     }
   }
   if((cnt%nbscale) != 0){
-    printf("Error in smoothwt2\n");
-    exit(0);
+    Rprintf("Error in smoothwt2\n");
+    /* exit(0); */
+    return(1);
   }
   *smodsize = cnt/nbscale;
-  printf("smoothing done\n");
-  printf("%d coefficients computed\n",cnt);
+  Rprintf("smoothing done\n");
+  Rprintf("%d coefficients computed\n",cnt);
   return;
 }
 

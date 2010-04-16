@@ -381,7 +381,7 @@ void Spca_family(double *ridgemap,int *orientmap, double *orderedmap,int *chain,
   maxchnlng = *pmaxchnlng;
 
   if(!(mridge = (double *)S_alloc(sigsize * nscale, sizeof(double))))
-    error("Memory allocation failed for mridge in crazy_family.c \n");
+    Rf_error("Memory allocation failed for mridge in crazy_family.c \n");
 
 
   /* Compute local maxima of modulus (along minor axis of pca
@@ -446,7 +446,7 @@ void Spca_family(double *ridgemap,int *orientmap, double *orderedmap,int *chain,
 	   ---------- */
 	id ++;
 	if(id >= nbchain) {
-	  printf("Nb of chains > reserved number %d. Returned. \n",nbchain); 
+	  Rprintf("Nb of chains > reserved number %d. Returned. \n",nbchain); 
 	  return;
 	}
 	count = 1;
@@ -455,7 +455,7 @@ void Spca_family(double *ridgemap,int *orientmap, double *orderedmap,int *chain,
 	  chain[(id-1)+count*nbchain] = a;
           count++;
           if(count/2 > maxchnlng) 
-	    error("Longer than max chain length. Returned. \n");
+	    Rf_error("Longer than max chain length. Returned. \n");
 	  chain[(id-1)+count*nbchain]= b;
           count++;
 
@@ -511,7 +511,7 @@ void Spca_family(double *ridgemap,int *orientmap, double *orderedmap,int *chain,
   pca_orderedmap_thresholded(orderedmap,sigsize,nscale,chain,nbchain); 
 
 
-  printf("There are %d chains. \n", id);
+  Rprintf("There are %d chains. \n", id);
   *pnbchain = id;
 
   return;

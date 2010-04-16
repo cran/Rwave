@@ -93,7 +93,7 @@ void splsnake(rate, x, y, n, yy)
       else klo=k;
     }
     h=(x[khi]-x[klo])*rate;
-    if (h == 0.0) error("Impossible interpolation");
+    if (h == 0.0) Rf_error("Impossible interpolation");
     a=(rate*x[khi]-i)/h;
     b=(i-x[klo]*rate)/h;
     yy[i]=a*y[klo]+b*y[khi]+((a*a*a-a)*y2[klo]+(b*b*b-b)*y2[khi])*(h*h)/6.0;

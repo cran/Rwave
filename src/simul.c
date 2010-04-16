@@ -43,7 +43,7 @@ void local_mean(double *mean, double *s, int np )
   double sum;
 
   if(!(s_sym = (double *) R_alloc( 2*np,sizeof(double))))
-    error("Memory allocation failed in s_sym at simul.c \n");
+    Rf_error("Memory allocation failed in s_sym at simul.c \n");
 
   for ( t = 0; t < np; t++ )
     s_sym[t] = s_sym[2*np-t-1] = s[t];
@@ -73,7 +73,7 @@ double variance(double *s, int np )
   int i;
 
   if(!(temp = (double *)R_alloc(np , sizeof(double))))
-    error("Memory allocation failed for temp at simul.c ");
+    Rf_error("Memory allocation failed for temp at simul.c ");
 
   for ( i = 0, mean = 0.0; i < np; i++ )
     mean += s[i];
@@ -122,7 +122,7 @@ void compute_pval_average(double *pval, double **p, int max_resoln, int np,
   int m, i, j, k;
 
   if(!(temp = (double *)R_alloc(num_of_intervals , sizeof(double))))
-    error("Memory allocation failed for temp at simul.c \n");
+    Rf_error("Memory allocation failed for temp at simul.c \n");
 
   for ( j = 1; j <= max_resoln; j++ )
   {
@@ -329,17 +329,17 @@ void normal_pval_compute(double *pval, double *s, int *max_resoln_ptr,
   int w, i, j, t;
 
   if(!(window_data = (double *) R_alloc( window_size , sizeof(double) )))
-    error("Memory allocation failed for window_data in simul.c \n");
+    Rf_error("Memory allocation failed for window_data in simul.c \n");
   if(!(histo = (double **)R_alloc((max_resoln + 1) , sizeof(double *))))
-    error("Memory allocation failed for histo in simul.c \n");
+    Rf_error("Memory allocation failed for histo in simul.c \n");
   //if(!(pfiltername = (char **) R_alloc(1, sizeof(char *))))
-   // error("Memory allocation failed for pfiltername in simul.c \n");
+   // Rf_error("Memory allocation failed for pfiltername in simul.c \n");
   if(!(Sf = (double *) R_alloc((max_resoln+1)* window_size , sizeof(double))))
-    error("Memory allocation failed for *Sf in simul.c \n");
+    Rf_error("Memory allocation failed for *Sf in simul.c \n");
   if(!(Wf = (double *) R_alloc(max_resoln* window_size , sizeof(double))))
-    error("Memory allocation failed for *Wf in simul.c \n");
+    Rf_error("Memory allocation failed for *Wf in simul.c \n");
   if(!(p = (double **) R_alloc( (max_resoln+1) , sizeof(double *) )))
-    error("Memory allocation failed for p in simul.c \n");
+    Rf_error("Memory allocation failed for p in simul.c \n");
 
 
 
@@ -347,7 +347,7 @@ void normal_pval_compute(double *pval, double *s, int *max_resoln_ptr,
   //filename_given(*pfiltername,"Gaussian1");
   for ( j = 1; j <= max_resoln; j++ )
     if(!(p[j] = (double *) R_alloc( num_of_windows , sizeof(double) )))
-      error("Memory failed for p[j] in simul.c ");
+      Rf_error("Memory failed for p[j] in simul.c ");
 
   for ( w = 0; w < num_of_windows; w++ )
   {
@@ -406,23 +406,23 @@ void bootstrap_pval_compute(double *pval, double *s, int *max_resoln_ptr,
   int w, i, j, offset;
 
   if(!(window_data = (double *) R_alloc( window_size , sizeof(double) )))
-    error("Memory allocation failed for window_data in simul.c \n");
+    Rf_error("Memory allocation failed for window_data in simul.c \n");
   if(!(histo = (double **)R_alloc((max_resoln + 1) , sizeof(double *))))
-    error("Memory allocation failed for histo in simul.c \n");
+    Rf_error("Memory allocation failed for histo in simul.c \n");
   //if(!(pfiltername = (char **) R_alloc(1, sizeof(char *))))
-    error("Memory allocation failed for pfiltername in simul.c \n");
+    Rf_error("Memory allocation failed for pfiltername in simul.c \n");
   if(!(Sf = (double *) R_alloc((max_resoln+1)* window_size , sizeof(double))))
-    error("Memory allocation failed for *Sf in simul.c \n");
+    Rf_error("Memory allocation failed for *Sf in simul.c \n");
   if(!(Wf = (double *) R_alloc(max_resoln* window_size , sizeof(double))))
-    error("Memory allocation failed for *Wf in simul.c \n");
+    Rf_error("Memory allocation failed for *Wf in simul.c \n");
   if(!(p = (double **) R_alloc( (max_resoln+1) , sizeof(double *) )))
-    error("Memory allocation failed for p in simul.c \n");
+    Rf_error("Memory allocation failed for p in simul.c \n");
 
   bootstrap_histo( &histo, s, max_resoln, window_size );
 
   for ( j = 1; j <= max_resoln; j++ )
     if(!(p[j] = (double *) R_alloc( num_of_windows , sizeof(double) )))
-      error("Memory allocation failed for p[j] in simul.c \n ");
+      Rf_error("Memory allocation failed for p[j] in simul.c \n ");
 
   //filename_given(*pfiltername,"Gaussian1");
 
@@ -480,17 +480,17 @@ void nthresh_compute(double *nthresh, double *s, int *maxresoln_ptr,
   int j, b, i, t;
 
   if(!(histo = (double **)R_alloc((max_resoln + 1) , sizeof(double *))))
-    error("Memory allocation failed for histo in simul.c \n");
+    Rf_error("Memory allocation failed for histo in simul.c \n");
   //if(!(pfiltername = (char **) R_alloc(1, sizeof(char *))))
-    //error("Memory allocation failed for pfiltername in simul.c \n");
+    //Rf_error("Memory allocation failed for pfiltername in simul.c \n");
   if(!(mean = (double *) R_alloc( sample_size , sizeof(double))))
-    error("Memory allocation failed for *mean in simul.c \n");
+    Rf_error("Memory allocation failed for *mean in simul.c \n");
   if(!(sample = (double *) R_alloc( sample_size , sizeof(double))))
-    error("Memory allocation failed for *sample in simul.c \n");
+    Rf_error("Memory allocation failed for *sample in simul.c \n");
   if(!(Sf = (double *) R_alloc((max_resoln+1)* sample_size , sizeof(double))))
-    error("Memory allocation failed for *Sf in simul.c \n");
+    Rf_error("Memory allocation failed for *Sf in simul.c \n");
   if(!(Wf = (double *) R_alloc(max_resoln* sample_size , sizeof(double))))
-    error("Memory allocation failed for *Wf in simul.c \n");
+    Rf_error("Memory allocation failed for *Wf in simul.c \n");
 
   /*  printf("Idum = %d\n",idum);  */
 
@@ -506,10 +506,10 @@ void nthresh_compute(double *nthresh, double *s, int *maxresoln_ptr,
 
   for ( j = 1; j <= max_resoln; j++ )
     if(!(histo[j] = (double *) R_alloc( HISTO_SIZE , sizeof(double) )))
-      error("Memory allocation failed for histo[i] in simul.c \n");
+      Rf_error("Memory allocation failed for histo[i] in simul.c \n");
 
   //if(!(*pfiltername = (char *)R_alloc(STRING_SIZE , sizeof(char))))
-   // error("Memory allocation failed for *pfilename in simul.c \n");
+   // Rf_error("Memory allocation failed for *pfilename in simul.c \n");
 
 
   //filename_given(*pfiltername,"Gaussian1");
@@ -572,17 +572,17 @@ void bthresh_compute(double *bthresh, double *s, int *maxresoln_ptr,
 
   histo = (double **) R_alloc((max_resoln + 1), sizeof(double *));
   //if(!(pfiltername = (char **) R_alloc(1, sizeof(char *))))
-    //error("Memory allocation failed for pfiltername in simul.c \n");
+    //Rf_error("Memory allocation failed for pfiltername in simul.c \n");
   if(!(mean = (double *) R_alloc( sample_size, sizeof(double))))
-    error("Memory allocation failed for *mean in simul.c \n");
+    Rf_error("Memory allocation failed for *mean in simul.c \n");
   if(!(sample = (double *) R_alloc( sample_size , sizeof(double))))
-    error("Memory allocation failed for *sample in simul.c \n");
+    Rf_error("Memory allocation failed for *sample in simul.c \n");
   if(!(bsample = (double *) R_alloc( sample_size , sizeof(double))))
-    error("Memory allocation failed for *bample in simul.c \n");
+    Rf_error("Memory allocation failed for *bample in simul.c \n");
   if(!(Sf = (double *) R_alloc((max_resoln+1)* sample_size , sizeof(double))))
-    error("Memory allocation failed for *Sf in simul.c \n");
+    Rf_error("Memory allocation failed for *Sf in simul.c \n");
   if(!(Wf = (double *) R_alloc(max_resoln* sample_size , sizeof(double))))
-    error("Memory allocation failed for *Wf in simul.c \n");
+    Rf_error("Memory allocation failed for *Wf in simul.c \n");
 
   for ( i = 0; i < sample_size; i++ )
     bsample[i] = s[i];
@@ -592,7 +592,7 @@ void bthresh_compute(double *bthresh, double *s, int *maxresoln_ptr,
 
   for ( j = 1; j <= max_resoln; j++ )
     if(!(histo[j] = (double *) R_alloc( HISTO_SIZE , sizeof(double) )))
-      error("Memory allocation failed for histo[i] in simul.c \n");
+      Rf_error("Memory allocation failed for histo[i] in simul.c \n");
   //*pfiltername = (char *)R_alloc(STRING_SIZE , sizeof(char));
 
   //filename_given(*pfiltername,"Gaussian1");

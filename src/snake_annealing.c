@@ -87,17 +87,17 @@ void Ssnake_annealing(double *cost, double *smodulus,
   recal = 100000; /* recompute cost function every 'recal' iterations */
 
   if(!(bcost = (double *)S_alloc(blocksize,sizeof(double))))
-    error("Memory allocation failed for bcost at snake_annealing.c \n");
+    Rf_error("Memory allocation failed for bcost at snake_annealing.c \n");
 
   if(!(phi2 = (double *)S_alloc(sigsize,sizeof(double))))
-    error("Memory allocation failed for phi2 at snake_annealing.c \n");
+    Rf_error("Memory allocation failed for phi2 at snake_annealing.c \n");
 
   if(!(posmap = (int *)S_alloc(smodsize * nscale,sizeof(int))))
-    error("Memory allocation failed for posmap at snake_annealing.c \n");
+    Rf_error("Memory allocation failed for posmap at snake_annealing.c \n");
 
 /*  if(blocksize != 1) {
     if((fp = fopen("annealing.cost","w")) == NULL)
-      error("can't open file at snake_annealing.c \n");
+      Rf_error("can't open file at snake_annealing.c \n");
   }
 */  
   tbox = 0;
@@ -172,7 +172,7 @@ void Ssnake_annealing(double *cost, double *smodulus,
 	count ++;
 	costcount = 1;
 
-	printf("Initialisation of cost function done\n");
+	Rprintf("Initialisation of cost function done\n");
 	if(costcount == blocksize) break;
       }
 

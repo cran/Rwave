@@ -60,7 +60,7 @@ void Sridge_icm(double *cost, double *smodulus, double *phi,
   smodsize = *psmodsize;
 
   if(!(phi2 = (double *)S_alloc((smodsize+1)*sub,sizeof(double))))
-    error("Memory allocation failed for phi2 at icm.c \n");
+    Rf_error("Memory allocation failed for phi2 at icm.c \n");
 
   count = 0; /* total count */
   cost1 = 0;

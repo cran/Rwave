@@ -245,9 +245,9 @@ void Spca_annealing(double *smodulus, double *beemap,
   idum = (long)seed;
 
   if(!(a = (int *) R_alloc(iteration, sizeof(int) )))
-    error("Memory allocation failed for a in bee_annealing.c \n");
+    Rf_error("Memory allocation failed for a in bee_annealing.c \n");
  if(!(b = (int *) R_alloc(iteration, sizeof(int) )))
-    error("Memory allocation failed for b in bee_annealing.c \n");
+    Rf_error("Memory allocation failed for b in bee_annealing.c \n");
   
 
   /* generation of the random moves of the climbers

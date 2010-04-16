@@ -59,12 +59,12 @@ int np;
   int x, y;
 
   if(!(*image = (double **) R_alloc( np , sizeof(double *) )))
-    error("Memory allocation failed for *image in vector_op.c \n");
+    Rf_error("Memory allocation failed for *image in vector_op.c \n");
 
   for ( x = 0; x < np; x++ )
   {
     if(!((*image)[x] = (double *) R_alloc( np , sizeof(double) )))
-      error("Memory allocation failed for *image in vector_op.c \n");
+      Rf_error("Memory allocation failed for *image in vector_op.c \n");
     for ( y = 0; y < np; y++ )
       (*image)[x][y] = f[x] * g[y];
   }

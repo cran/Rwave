@@ -56,7 +56,7 @@ fcomplex qrombmod(int x, int y, double *p2, double *nodes, double *phi_nodes,
     /* Trapezoidal rule */
     s[j] = trapzdmod(x,y,p2,nodes,phi_nodes,nb_nodes,cent_freq,b_start,b_end,j);
     tmpr[j] = (s[j]).r;    tmpi[j] = (s[j]).i;
-/*    printf("step=%d ,integral.r=%g12 ,integral.i=%g\n",j,(s[j]).r,(s[j]).i); */
+/*    Rprintf("step=%d ,integral.r=%g12 ,integral.i=%g\n",j,(s[j]).r,(s[j]).i); */
 
     if (j >= K) {
 
@@ -76,7 +76,7 @@ fcomplex qrombmod(int x, int y, double *p2, double *nodes, double *phi_nodes,
     (s[j+1]).i=(s[j]).i;
     h[j+1]=0.25*h[j];
   }
-  printf("Too many steps in routine qrombmod (x=%d, y=%d) \n",x,y);
+  Rprintf("Too many steps in routine qrombmod (x=%d, y=%d) \n",x,y);
   return(ss);
 }
 
@@ -136,7 +136,7 @@ double rqrombmod(int x, int y, double *p2, double *nodes, double *phi_nodes,
     s[j+1]=s[j];
     h[j+1]=0.25*h[j];
   }
-  printf("Too many steps in routine rqrombmod (x=%d, y=%d) \n",x,y);
+  Rprintf("Too many steps in routine rqrombmod (x=%d, y=%d) \n",x,y);
   return(ss);
 }
 
@@ -194,7 +194,7 @@ double gqrombmod(int x, int y, double *p2, double *nodes, double *phi_nodes,
     (s[j+1])=(s[j]);
     h[j+1]=0.25*h[j];
   }
-  printf("Too many steps in routine gqrombmod (x=%d, y=%d) \n",x,y);
+  Rprintf("Too many steps in routine gqrombmod (x=%d, y=%d) \n",x,y);
   return(ss);
 }
 

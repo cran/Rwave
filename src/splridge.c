@@ -89,7 +89,7 @@ void splridge(int rate, double *y, int n, double *yy)
       else klo=k;
     }
     h=(khi-klo)*rate;
-    if (h == 0.0) error("Impossible interpolation");
+    if (h == 0.0) Rf_error("Impossible interpolation");
     a=(rate*khi-x)/h;
     b=(x-klo*rate)/h;
     *yy=a*y[klo]+b*y[khi]+((a*a*a-a)*y2[klo]+(b*b*b-b)*y2[khi])*(h*h)/6.0;

@@ -91,13 +91,13 @@ void signal_K_compute(K,W,max_resoln,np )
   double fexp2();
 
   if(!(grad_W = (double **) R_alloc( (max_resoln+1) , sizeof(double *) )))
-    error("Memory allocation failed for grad_pis in K_compute.c \n");
+    Rf_error("Memory allocation failed for grad_pis in K_compute.c \n");
   if(!(k_tilda = (double *) R_alloc( np , sizeof(double) )))
-    error("Memory allocation failed for k_tilda in K_compute.c \n");
+    Rf_error("Memory allocation failed for k_tilda in K_compute.c \n");
   
   for(i = 1; i <= max_resoln; i++)
     if(!(grad_W[i] = (double *)R_alloc(np , sizeof(double))))
-      error("Memory allocation failed for grad_W[] in K_compute.c \n");
+      Rf_error("Memory allocation failed for grad_W[] in K_compute.c \n");
 
 
   wavelet_transform_gradient( grad_W, W, max_resoln, np );
@@ -121,10 +121,10 @@ void signal_K_compute(K,W,max_resoln,np )
   /**************************************************************/
 
   if(!((*K)=(double **) R_alloc( (np+1) , sizeof(double *))))
-    error("Memory allocation failed for *k in K_compute.c \n");
+    Rf_error("Memory allocation failed for *k in K_compute.c \n");
   for ( t = 0; t <= np; t++ )
     if(!((*K)[t] = (double *) R_alloc( (np+1) , sizeof(double) )))
-      error("Memory allocation failed for (*k)[] in K_compute.c \n");
+      Rf_error("Memory allocation failed for (*k)[] in K_compute.c \n");
   
   for ( t = 0; t < np; t++ )    {
     for ( i = t, z = 0; i < np; i++, z++ )
@@ -163,7 +163,7 @@ void signal_tilda_adjust(tilda,ksize,fname,fsize)
   int rsize, middle, rest;
   
   if(!(*tilda = (double *)malloc(sizeof(double) * ksize)))
-    error("Memory allocation failed for *tilda in K_op.c \n");
+    Rf_error("Memory allocation failed for *tilda in K_op.c \n");
   signal_zero(*tilda, ksize);
 
   input_signal(fname, &tmp, fsize);

@@ -130,19 +130,19 @@ void WV(double *input,double *Oreal,double *Oimage,int *pnbfreq,
 
   /* Memory allocation */
   if(!(Ri = (double *)S_alloc(locsize, sizeof(double))))
-    error("Memory allocation failed for Ri in WV.c \n");
+    Rf_error("Memory allocation failed for Ri in WV.c \n");
   if(!(Ii = (double *)S_alloc(locsize, sizeof(double))))
-    error("Memory allocation failed for Ii in WV.c \n");
+    Rf_error("Memory allocation failed for Ii in WV.c \n");
 
   if(!(Ri1 = (double *)S_alloc(locsize, sizeof(double))))
-    error("Memory allocation failed for Ri1 in WV.c \n");
+    Rf_error("Memory allocation failed for Ri1 in WV.c \n");
   if(!(Ii1 = (double *)S_alloc(locsize, sizeof(double))))
-    error("Memory allocation failed for Ii1 in WV.c \n");
+    Rf_error("Memory allocation failed for Ii1 in WV.c \n");
 
   if(!(tmpreal = (double *)S_alloc(locsize, sizeof(double))))
-    error("Memory allocation failed for tmpreal in WV.c \n");
+    Rf_error("Memory allocation failed for tmpreal in WV.c \n");
   if(!(tmpimage = (double *)S_alloc(locsize, sizeof(double))))
-    error("Memory allocation failed for tmpimage in WV.c \n");
+    Rf_error("Memory allocation failed for tmpimage in WV.c \n");
 
   /* Load signal for FFT */
   for(i = 0; i < inputsize; i++){

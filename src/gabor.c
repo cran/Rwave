@@ -78,20 +78,20 @@ void Sgabor(double *input,double *Oreal,double *Oimage,int *pnbfreq,
 
 
   if(!(Ri1 = (double *)S_alloc(inputsize, sizeof(double))))
-    error("Memory allocation failed for Ri1 in gabor.c \n");
+    Rf_error("Memory allocation failed for Ri1 in gabor.c \n");
   if(!(Ii1 = (double *)S_alloc(inputsize, sizeof(double))))
-    error("Memory allocation failed for Ii1 in gabor.c \n");
+    Rf_error("Memory allocation failed for Ii1 in gabor.c \n");
 
   if(!(Ii2 = (double *)S_alloc(inputsize,sizeof(double))))
-    error("Memory allocation failed for Ri2 in gabor.c \n");
+    Rf_error("Memory allocation failed for Ri2 in gabor.c \n");
   if(!(Ri2 = (double *)S_alloc(inputsize,sizeof(double))))
-    error("Memory allocation failed for Ri2 in gabor.c \n");
+    Rf_error("Memory allocation failed for Ri2 in gabor.c \n");
 
 
   if(!(Ri = (double *)S_alloc(inputsize, sizeof(double))))
-    error("Memory allocation failed for Ri in gabor.c \n");
+    Rf_error("Memory allocation failed for Ri in gabor.c \n");
   if(!(Ii = (double *)S_alloc(inputsize, sizeof(double))))
-    error("Memory allocation failed for Ii in gabor.c \n");
+    Rf_error("Memory allocation failed for Ii in gabor.c \n");
 
   for(i = 0; i < inputsize; i++){
     *Ri = (double)(*input);
@@ -155,20 +155,20 @@ void Svgabor(double *input,double *Oreal,double *Oimage,double *pfreq,
 
 
   if(!(Ri1 = (double *)S_alloc(inputsize, sizeof(double))))
-    error("Memory allocation failed for Ri1 in gabor.c \n");
+    Rf_error("Memory allocation failed for Ri1 in gabor.c \n");
   if(!(Ii1 = (double *)S_alloc(inputsize, sizeof(double))))
-    error("Memory allocation failed for Ii1 in gabor.c \n");
+    Rf_error("Memory allocation failed for Ii1 in gabor.c \n");
 
   if(!(Ii2 = (double *)S_alloc(inputsize,sizeof(double))))
-    error("Memory allocation failed for Ri2 in gabor.c \n");
+    Rf_error("Memory allocation failed for Ri2 in gabor.c \n");
   if(!(Ri2 = (double *)S_alloc(inputsize,sizeof(double))))
-    error("Memory allocation failed for Ri2 in gabor.c \n");
+    Rf_error("Memory allocation failed for Ri2 in gabor.c \n");
 
 
   if(!(Ri = (double *)S_alloc(inputsize, sizeof(double))))
-    error("Memory allocation failed for Ri in gabor.c \n");
+    Rf_error("Memory allocation failed for Ri in gabor.c \n");
   if(!(Ii = (double *)S_alloc(inputsize, sizeof(double))))
-    error("Memory allocation failed for Ii in gabor.c \n");
+    Rf_error("Memory allocation failed for Ii in gabor.c \n");
 
   for(i = 0; i < inputsize; i++){
     *Ri = (double)(*input);

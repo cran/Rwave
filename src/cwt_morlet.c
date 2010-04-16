@@ -176,15 +176,15 @@ void Scwt_morlet_r(double *input, double *Oreal, double *Oimage,
   nbvoice = *pnbvoice;
   inputsize = *pinputsize;
   if(!(Ri2 = (double *) R_alloc(inputsize, sizeof(double) )))
-    error("Memory allocation failed for Ri2 in cwt_morlet.c \n");
+    Rf_error("Memory allocation failed for Ri2 in cwt_morlet.c \n");
   if(!(Ri1 = (double *) R_alloc(inputsize, sizeof(double) )))
-    error("Memory allocation failed for Ri1 in cwt_morlet.c \n");
+    Rf_error("Memory allocation failed for Ri1 in cwt_morlet.c \n");
   if(!(Ii1 = (double *) R_alloc(inputsize, sizeof(double) )))
-    error("Memory allocation failed for Ii1 in cwt_morlet.c \n");
+    Rf_error("Memory allocation failed for Ii1 in cwt_morlet.c \n");
   if(!(Ri = (double *) R_alloc(inputsize, sizeof(double) )))
-    error("Memory allocation failed for Ri in cwt_morlet.c \n");
+    Rf_error("Memory allocation failed for Ri in cwt_morlet.c \n");
   if(!(Ii = (double *) R_alloc(inputsize, sizeof(double) )))
-    error("Memory allocation failed for Ii in cwt_morlet.c \n");
+    Rf_error("Memory allocation failed for Ii in cwt_morlet.c \n");
 
   for(i = 0; i < inputsize; i++) {
     Ri[i] = (double)input[i]; 
@@ -238,15 +238,15 @@ void Scwt_morlet(double *Rinput,double *Iinput,double *Oreal,
   nbvoice = *pnbvoice;
   inputsize = *pinputsize;
   if(!(Ri2 = (double *) R_alloc(inputsize, sizeof(double) )))
-    error("Memory allocation failed for Ri2 in cwt_morlet.c \n");
+    Rf_error("Memory allocation failed for Ri2 in cwt_morlet.c \n");
   if(!(Ri1 = (double *) R_alloc(inputsize, sizeof(double) )))
-    error("Memory allocation failed for Ri1 in cwt_morlet.c \n");
+    Rf_error("Memory allocation failed for Ri1 in cwt_morlet.c \n");
   if(!(Ii1 = (double *) R_alloc(inputsize, sizeof(double) )))
-    error("Memory allocation failed for Ii1 in cwt_morlet.c \n");
+    Rf_error("Memory allocation failed for Ii1 in cwt_morlet.c \n");
   if(!(Ri = (double *) R_alloc(inputsize, sizeof(double) )))
-    error("Memory allocation failed for Ri in cwt_morlet.c \n");
+    Rf_error("Memory allocation failed for Ri in cwt_morlet.c \n");
   if(!(Ii = (double *) R_alloc(inputsize, sizeof(double) )))
-    error("Memory allocation failed for Ii in cwt_morlet.c \n");
+    Rf_error("Memory allocation failed for Ii in cwt_morlet.c \n");
 
   for(i = 0; i < inputsize; i++) {
     Ri[i] = (double)Rinput[i]; 
@@ -293,15 +293,15 @@ void Svwt_morlet(double *Rinput,double *Iinput,double *Oreal,
   a = *pa;
   inputsize = *pinputsize;
   if(!(Ri2 = (double *) R_alloc(inputsize, sizeof(double) )))
-    error("Memory allocation failed for Ri2 in cwt_morlet.c \n");
+    Rf_error("Memory allocation failed for Ri2 in cwt_morlet.c \n");
   if(!(Ri1 = (double *) R_alloc(inputsize, sizeof(double) )))
-    error("Memory allocation failed for Ri1 in cwt_morlet.c \n");
+    Rf_error("Memory allocation failed for Ri1 in cwt_morlet.c \n");
   if(!(Ii1 = (double *) R_alloc(inputsize, sizeof(double) )))
-    error("Memory allocation failed for Ii1 in cwt_morlet.c \n");
+    Rf_error("Memory allocation failed for Ii1 in cwt_morlet.c \n");
   if(!(Ri = (double *) R_alloc(inputsize, sizeof(double) )))
-    error("Memory allocation failed for Ri in cwt_morlet.c \n");
+    Rf_error("Memory allocation failed for Ri in cwt_morlet.c \n");
   if(!(Ii = (double *) R_alloc(inputsize, sizeof(double) )))
-    error("Memory allocation failed for Ii in cwt_morlet.c \n");
+    Rf_error("Memory allocation failed for Ii in cwt_morlet.c \n");
 
   for(i = 0; i < inputsize; i++) {
     Ri[i] = (double)Rinput[i]; 

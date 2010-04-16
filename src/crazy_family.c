@@ -58,7 +58,7 @@ void Scrazy_family(double *ridgemap,double *orderedmap,int *chain,
   nbchain = *pnbchain;
 
   if(!(mridge = (double *)S_alloc(sigsize * nscale, sizeof(double))))
-    error("Memory allocation failed for mridge in crazy_family.c \n");
+    Rf_error("Memory allocation failed for mridge in crazy_family.c \n");
 
 
   /* Compute local maxima of modulus (for fixed b)
@@ -107,7 +107,7 @@ void Scrazy_family(double *ridgemap,double *orderedmap,int *chain,
 	   ---------- */
 	id ++;
 	if(id > nbchain) {
-	  printf("Nb of chains > reserved number. Increase the nbchain. \n");
+	  Rprintf("Nb of chains > reserved number. Increase the nbchain. \n");
 	  return;
 	}
 	b = b+1;
@@ -163,7 +163,7 @@ void Scrazy_family(double *ridgemap,double *orderedmap,int *chain,
   reordering(chain, sigsize, nbchain);
 
 
-  printf("There are %d chains. \n", id);
+  Rprintf("There are %d chains. \n", id);
   *pnbchain = id;
 
   return;

@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <R.h>
 
 /***************************************************************
 *    $Log: splint2.c,v $                                       *
@@ -42,8 +43,9 @@ void splint2(double xa[], double ya[], double y2a[], int n, double x, double *y,
 	}
 	h=xa[khi]-xa[klo];
 	if (h == 0.0) {
-	  printf("Bad xa input to routine splint2 \n");
-	  exit(1);
+	  Rprintf("Bad xa input to routine splint2 \n");
+	  /* exit(1); */
+	  return(1);
 	}
 	a=(xa[khi]-x)/h;
 	b=(x-xa[klo])/h;

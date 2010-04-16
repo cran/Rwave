@@ -79,14 +79,14 @@ void Sridge_coronoid(double *cost, double *smodulus,
   recal = 1000; /* recompute cost function every 'recal' iterations */
 
   if(!(bcost = (double *) R_alloc(blocksize, sizeof(double) )))
-    error("Memory allocation failed for bcost at ridge_annealing.c \n");
+    Rf_error("Memory allocation failed for bcost at ridge_annealing.c \n");
 
   if(!(phi2 = (double *)S_alloc((smodsize+1)*sub,sizeof(double))))
-    error("Memory allocation failed for phi2 at ridge_annealing.c \n");
+    Rf_error("Memory allocation failed for phi2 at ridge_annealing.c \n");
 
 /*  if(blocksize != 1) {
     if((fp = fopen("annealing.cost","w")) == NULL)
-      error("can't open file at ridge_annealing.c \n");
+      Rf_error("can't open file at ridge_annealing.c \n");
   }
 */  
   tbox = 0;
@@ -328,7 +328,7 @@ void Sridge_coronoid(double *cost, double *smodulus,
 	for(i=0;i<sigsize;i++) phi[i]=phi2[i];
 	/* splridge(1, phi, smodsize, phi2);
 	for(i=0;i<sigsize;i++) phi[i]=phi2[i];*/
-	printf("Done !\n");
+	Rprintf("Done !\n");
 	return;
       }
       temperature = c/log(1. + (double)count);

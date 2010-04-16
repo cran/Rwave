@@ -38,7 +38,7 @@ void modulus_maxima(double *extrema, double *wt, int *resoln_ptr,
 
 
   if(!(abs  = (double *) R_alloc( np , sizeof(double) )))
-    error("Memory allocation failed for abs in extrema.c");
+    Rf_error("Memory allocation failed for abs in extrema.c");
 
   for (j = 0; j < resoln; j++)  {
     offset = j * np;
@@ -84,7 +84,7 @@ void extrema_input(double *extrema, int max_resoln, int np,
       (*num_of_extrema)++;
 
   if(!(*ext = (image_ext *) R_alloc( (*num_of_extrema) , sizeof(image_ext) )))
-    error("Memory allocation failed for *ext in point_input.c \n");
+    Rf_error("Memory allocation failed for *ext in point_input.c \n");
 
   k = 0; 
   for ( j = 1; j <= max_resoln; j++ )  {

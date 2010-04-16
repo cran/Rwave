@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <R.h>
 
 
 /****************************************************************
@@ -8,11 +9,6 @@
 *                  Princeton University                         *
 *                  All right reserved                           *
 ****************************************************************/
-
-
-
-
-
 
 int find2power(n)
 int n;
@@ -29,11 +25,5 @@ int n;
 }
 
 /********* edit by xian, Mon 14 Dec 2009 09:43:48 PM MST   ****** 
-***************** using void error(...); from R.h
-void error(char error_text[])
-{
-  printf("%s\n",error_text);
-  exit(0);
-  return;
-}
-******************** edit by xian *****/ 
+***************** using void Rf_error(...); from R.h*/
+

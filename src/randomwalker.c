@@ -65,9 +65,9 @@ double oldran1(long *idum)
     j=1 + ((97*ix3)/M3);
     if (j > 97 || j < 1)
     {
-	fprintf(stderr,"RAN1: This cannot happen.\n");
-	fprintf(stderr,"Exiting now.\n");
-	exit(1);
+	REprintf("RAN1: This cannot happen.\n");
+	REprintf("Exiting now.\n");
+	return(1);
     }	
     temp=r[j];
     r[j]=(ix1+ix2*RM2)*RM1;

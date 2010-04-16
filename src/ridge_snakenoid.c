@@ -90,13 +90,13 @@ void Ssnakenoid_annealing(double *cost, double *smodulus,
   recal = 100000; /* recompute cost function every 'recal' iterations */
 
   if(!(bcost = (double *)S_alloc(blocksize,sizeof(double))))
-    error("Memory allocation failed for bcost at snake_annealing.c \n");
+    Rf_error("Memory allocation failed for bcost at snake_annealing.c \n");
 
   if(!(phi2 = (double *)S_alloc(sigsize,sizeof(double))))
-    error("Memory allocation failed for phi2 at snake_annealing.c \n");
+    Rf_error("Memory allocation failed for phi2 at snake_annealing.c \n");
 
   if(!(posmap = (int *)S_alloc(smodsize * nscale,sizeof(int))))
-    error("Memory allocation failed for posmap at snake_annealing.c \n");
+    Rf_error("Memory allocation failed for posmap at snake_annealing.c \n");
 
   tbox = 0;
   ncount = 0; /* count for cost */
@@ -161,7 +161,7 @@ void Ssnakenoid_annealing(double *cost, double *smodulus,
 	count ++;
 	costcount = 1;
 
-	printf("Initialisation of cost function done\n");
+	Rprintf("Initialisation of cost function done\n");
 	if(costcount == blocksize) break;
       }
 
@@ -312,7 +312,7 @@ void Ssnakenoid_annealing(double *cost, double *smodulus,
 	  *pcount = ncount;
 /*	  if((blocksize != 1)){
 	    for(i = 0; i < costcount+1; i++)
-	      fprintf(fp, "%f ", bcost[i]);
+	      REprintf( "%f ", bcost[i]);
 	    fclose(fp);
 	  }
 */
@@ -320,7 +320,7 @@ void Ssnakenoid_annealing(double *cost, double *smodulus,
 	     --------------------------------*/
 /*	  if(sub != 1){
 	    splsnake(sub, rho-1, phi-1, snakesize, phi2-1);
-	    printf("interpolation done\n");
+	    Rprintf("interpolation done\n");
 	    for(i=0;i<sigsize;i++) phi[i]=phi2[i];
 	  }*/
 	  snakexpand(rho, sub, snakesize);
@@ -338,7 +338,7 @@ void Ssnakenoid_annealing(double *cost, double *smodulus,
 	   -----------------------------*/
 /*	if((blocksize != 1)){
 	  for(i = 0; i < costcount+1; i++)
-	    fprintf(fp, "%f ", bcost[i]);
+	    REprintf( "%f ", bcost[i]);
 	  fclose(fp);
 	}
 */
@@ -346,7 +346,7 @@ void Ssnakenoid_annealing(double *cost, double *smodulus,
 	   ---------------------------------*/
 /*	if(sub !=1){
 	  splsnake(sub, rho-1, phi-1, snakesize, phi2-1);
-	  printf("interpolation done\n");
+	  Rprintf("interpolation done\n");
 	  for(i=0;i<sigsize;i++) phi[i]=phi2[i];
 	}*/
 	snakexpand(rho, sub, snakesize);
@@ -358,7 +358,7 @@ void Ssnakenoid_annealing(double *cost, double *smodulus,
     bcost[blocksize-1] = (double)cost1;
     if((blocksize != 1)){
 /*      for(i = 0; i < blocksize; i++)
-	fprintf(fp, "%f ", bcost[i]); */
+	REprintf( "%f ", bcost[i]); */
       for(i = 0; i < blocksize; i++)
 	bcost[i] = 0.0;
     }

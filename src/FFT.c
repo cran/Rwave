@@ -30,7 +30,7 @@ void double_fft(double *Or,double *Oi,double *Ir,double *Ii,
   newsize = 1 << nt;
 
   if(!(tmp = (double *)R_alloc(newsize * 2, sizeof(double))))
-     error("Memory allocation failed for tmp in cwt_morlet.c \n");
+     Rf_error("Memory allocation failed for tmp in cwt_morlet.c \n");
 
   for(i = 0; i < isize; i++) {
     tmp[2 * i] = Ir[i];

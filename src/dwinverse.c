@@ -45,7 +45,7 @@ void inverse_wavelet_transform(f_back,Sf,Wf,max_resoln,np,filtername)
   double *tmp;
 
   if(!(tmp = (double *) R_alloc(np , sizeof(double))))
-    error("Memory allocation failed for tmp in signal_back.c \n");
+    Rf_error("Memory allocation failed for tmp in signal_back.c \n");
 
   KSfilter_bound(filtername,&K_bound,&S_bound,max_resoln);
   Sfilter_compute(filtername,&S,S_bound,max_resoln);
