@@ -17,10 +17,10 @@
 
 
 
-kernel <- function(node, phinode, nvoice, x.inc = 1, x.min = node[1],
+rwkernel <- function(node, phinode, nvoice, x.inc = 1, x.min = node[1],
 	x.max = node[length(node)], w0 = 2*pi, plot = FALSE)
 #########################################################################
-#     kernel:   
+#     rwkernel:   
 #     ------
 #      Computes the cost from the sample of points on the estimated ridge
 #      and the matrix used in the reconstruction of the original signal

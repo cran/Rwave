@@ -1,5 +1,5 @@
-\name{kernel}
-\alias{kernel}
+\name{rwkernel}
+\alias{rwkernel}
 \title{
 Kernel for Reconstruction from Wavelet Ridges
 }
@@ -8,7 +8,7 @@ Computes the cost from the sample of points on the estimated ridge
 and the matrix used in the reconstruction of the original signal
 }
 \usage{
-kernel(node, phinode, nvoice, x.inc=1, x.min=node[1],
+rwkernel(node, phinode, nvoice, x.inc=1, x.min=node[1],
 x.max=node[length(node)], w0=2 * pi, plot=FALSE)
 }
 \arguments{
