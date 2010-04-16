@@ -74,7 +74,8 @@ void qcksrt(int n, double *arr)
       }
       if (jstack > NSTACK){
         printf("NSTACK too small in QCKSRT");
-         exit(0); 
+          
+             return;
 
       }
     }

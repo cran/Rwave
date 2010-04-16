@@ -124,7 +124,7 @@ void smoothwt2(double *wt, double *swt, int sigsize, int nbscale,
   if((cnt%nbscale) != 0){
     Rprintf("Error in smoothwt2\n");
     /* exit(0); */
-    return(1);
+    return;
   }
   *smodsize = cnt/nbscale;
   Rprintf("smoothing done\n");

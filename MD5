@@ -1,4 +1,4 @@
-00d79d3c54f3c87db1d3ddfa94c40329 *DESCRIPTION
+19e68436a539aeb1c158943b55573c59 *DESCRIPTION
 c23644d31748e837331cb2c799032673 *NAMESPACE
 e7dc480d209d2f8c68401af23370bbeb *NEWS
 22ec47a09dbd6788a5389a28c89cff61 *R/00util.R
@@ -304,9 +304,9 @@ d4ecb0fabdd3382fc508c206d36768f2 *src/mw.c
 b0a8313cd3263416ae3ddfb89dac524e *src/optimize.c
 abaaacb7c026363d6d95fa6cba7301f5 *src/pca_climbers.c
 18e7e3096f0661d7ec040d21b7c6d060 *src/pca_family.c
-8305b5b5b27bde4a56d0924e1bc49a8d *src/polint.c
+c26942fc4a6649b00dee90b496de2f5b *src/polint.c
 422d192788579bc5f6565147a02dcc3f *src/pvalue.h
-29be4a39199ca81bd6b894e9178400e4 *src/qcksrt.c
+6e55f9030bfd41be2e118ebac1f560d7 *src/qcksrt.c
 e2c6901b620e116eb990f9fbee53ba1c *src/random.h
 38e20c1678ea01b9be51cccc5db5c9fe *src/randomwalker.c
 3ebff0da42c9d8cda1bc62895cce1590 *src/randomwalker2.c
@@ -314,11 +314,11 @@ e2c6901b620e116eb990f9fbee53ba1c *src/random.h
 09e0bcaebc3da47ad352ad7b7dbc17b6 *src/ridge_coronoid.c
 91f853021f885574db2d49f1916a7433 *src/ridge_snakenoid.c
 97c14a9ccf0fca61091b06ae2634169c *src/simul.c
-0b72f8fd7108e91036efe5a65fb1081c *src/smoothwt.c
+ebd5bff05564588929c39bd780858abe *src/smoothwt.c
 f5746812232dcc674cb52867d84bdc62 *src/snake_annealing.c
 a318053577138a4aa03dc7c872d92bdb *src/snakesub.c
 18694d646d9fe8c61bdd954676977097 *src/spline.c
-c8e78a5611a4f8765322f85adb5a9d65 *src/splint2.c
+252cd1cbfc21d6405ba961fdf642053c *src/splint2.c
 5d5c426e039fe550439a4ca708f31abd *src/splridge.c
 6c8a83b79d95e1b2cb7a3ac0a688c28e *src/splsnake.c
 5a5f469dd8586f7ba28f835949585d60 *src/svd.c

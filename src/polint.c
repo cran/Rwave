@@ -47,7 +47,7 @@ void polint(double xa[], double ya[], int n, double x, double *y, double *dy)
 			w=c[i+1]-d[i];
 			if ( (den=ho-hp) == 0.0) {
 			  Rprintf("Error in routine polint\n");
-			  return(1);
+			  return;
 			  /* exit(1); */
 			}
 			den=w/den;

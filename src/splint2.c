@@ -45,7 +45,7 @@ void splint2(double xa[], double ya[], double y2a[], int n, double x, double *y,
 	if (h == 0.0) {
 	  Rprintf("Bad xa input to routine splint2 \n");
 	  /* exit(1); */
-	  return(1);
+	  return;
 	}
 	a=(xa[khi]-x)/h;
 	b=(x-xa[klo])/h;
