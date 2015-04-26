@@ -54,7 +54,7 @@ void multi(double *Ri1, double *Ii1, double *Ri2, double *Or,
 
 void morlet_frequency(double cf,double scale,double *w,int isize)
 {
-  double tmp, tmp1=0;
+  double tmp;
   int i;
   double twopi;
 
@@ -228,7 +228,7 @@ void Scwt_morlet(double *Rinput,double *Iinput,double *Oreal,
    double *Oimage,int *pnboctave,int *pnbvoice,
    int *pinputsize,double *pcenterfrequency)
 {	
-  int nboctave, nbvoice, i, j, k, inputsize;
+  int nboctave, nbvoice, i, j, inputsize;
   double centerfrequency, a;
   double *Ri2, *Ri1, *Ii1, *Ii, *Ri;
 
@@ -284,7 +284,7 @@ void Svwt_morlet(double *Rinput,double *Iinput,double *Oreal,
    double *Oimage,double *pa,int *pinputsize,
    double *pcenterfrequency)
 {	
-  int octave, voice, nbvoice, i, j, k, inputsize;
+  int  i,  inputsize;
   double centerfrequency, a;
   double *Ri2, *Ri1, *Ii1, *Ii, *Ri;
 

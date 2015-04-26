@@ -234,8 +234,8 @@ void orderedmap_thresholded(double *orderedmap,int sigsize,int nscale,
 void chain_thresholded(double *mridge,int sigsize,int *chain,int *id,
 		       int nbchain,double threshold, int bstep)
 {
-  int i, j, k, k1, a, b;
-  int count, found, lng;
+  int i,  k, k1, a, b;
+  int count,  lng;
   int bstart, astart, bend, aend, oldbstart;
   int chnlng;
 

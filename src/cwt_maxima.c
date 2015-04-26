@@ -64,8 +64,7 @@ void Scwt_mridge(input, output, pnrow, pncol)
      int *pnrow, *pncol;
 {
   int nrow, ncol, i, j;
-  int pos;
-  double tmp;
+  
 
   nrow = *pnrow;
   ncol = *pncol;

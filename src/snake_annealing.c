@@ -55,7 +55,7 @@ void Ssnake_annealing(double *cost, double *smodulus,
 {
   int sigsize,snakesize,ncount,iteration;
   int i,k,up,right,pos,num,a,b,count,costcount,sub;
-  int count1=0;
+ 
   long idum=-9;
   int again, tbox, blocksize,smodsize;
   int nscale, stagnant, recal;
@@ -64,7 +64,7 @@ void Ssnake_annealing(double *cost, double *smodulus,
   double ran, gibbs;
   double cost1;
   double temperature, tmp=0, tmp2;
-  FILE *fp;
+  /* FILE *fp; */
   int *posmap;
 
   /* Generalities; initializations

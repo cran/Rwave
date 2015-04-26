@@ -35,10 +35,10 @@ fcomplex qrombmod(int x, int y, double *p2, double *nodes, double *phi_nodes,
 		  int nb_nodes,double cent_freq,double b_start, double b_end)
 {
   double h[JMAXP+1];
-  fcomplex ss,dss, tmp3;
+  fcomplex ss,dss;
   fcomplex *s;
   int j;
-  double tmpr[JMAX+1],tmpi[JMAX+1], tmp1, tmp2;
+  double tmpr[JMAX+1],tmpi[JMAX+1];
 
 
   s = (fcomplex *)S_alloc(JMAXP+1,sizeof(fcomplex));
@@ -99,10 +99,10 @@ double rqrombmod(int x, int y, double *p2, double *nodes, double *phi_nodes,
 		  int nb_nodes,double cent_freq,double b_start, double b_end)
 {
   double h[JMAXP+1];
-  double ss,dss, tmp3;
+  double ss,dss;
   double *s;
   int j;
-  double tmpr[JMAX+1], tmp1, tmp2;
+  double tmpr[JMAX+1];
 
 
   s = (double *)S_alloc(JMAXP+1,sizeof(double));
@@ -158,10 +158,10 @@ double gqrombmod(int x, int y, double *p2, double *nodes, double *phi_nodes,
 		  int nb_nodes,double scale,double b_start, double b_end)
 {
   double h[JMAXP+1];
-  double ss,dss, tmp3;
+  double ss,dss;
   double *s;
   int j;
-  double tmpr[JMAX+1], tmp1, tmp2;
+  double tmpr[JMAX+1];
 
 
   s = (double *)S_alloc(JMAXP+1,sizeof(double));

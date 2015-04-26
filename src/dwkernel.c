@@ -85,7 +85,7 @@ void signal_K_compute(K,W,max_resoln,np )
      int max_resoln;
      int np;
 {
-  int j, z, y, x, t, i, offset;
+  int j, z, y, x, t, i;
   double sum;
   double **grad_W, *k_tilda;
   double fexp2();

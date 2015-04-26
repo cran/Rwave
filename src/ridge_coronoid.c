@@ -59,7 +59,7 @@ void Sridge_coronoid(double *cost, double *smodulus,
   double cost1;
   double temperature, tmp=0.0, tmp_cost =0.0, tmp_mod;
   double der_plus,der_minus,der_sec,der_sec_plus,der_sec_minus;
-  FILE *fp;
+  /* FILE *fp; */
 
 
   /* Generalities; initializations

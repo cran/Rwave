@@ -30,8 +30,8 @@ void Stf_pcaridge(input, output, pnrow, pncol, orientmap)
      int *orientmap;
 {
   int nrow, ncol, i, j,k;
-  int pos, dir;
-  double tmp;
+  int  dir;
+  
 
   nrow = *pnrow;
   ncol = *pncol;
@@ -238,8 +238,8 @@ void pca_orderedmap_thresholded(double *orderedmap,int sigsize,int nscale,
 void pca_chain_thresholded(double *mridge,int sigsize,int *chain,int *id,
 		       int nbchain,double threshold, int bstep)
 {
-  int i, j, k, k1, a, b;
-  int count, found, lng;
+  int  k, k1, a, b;
+  int count;
   int kstart, kend;
   int chnlng;
 

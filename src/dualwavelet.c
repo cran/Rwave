@@ -30,8 +30,8 @@ void signal_W_tilda(double ***W_tilda, double **W, double **K,
 		    int max_resoln, int np)
 {
   double *p, *b;
-  int t, i, j;
-  char filename[STRING_SIZE];
+  int t,  j;
+  /* char filename[STRING_SIZE]; */
   
   if(!(p = (double *) R_alloc( np , sizeof(double) )))
     Rf_error("Memory allocation failed for p in image_W_tilda \n");
@@ -75,8 +75,8 @@ void signal_W_tilda(double ***W_tilda, double **W, double **K,
 
 void signal_W_tilda_input(double ***W_tilda, int max_resoln, int np)
 {
-  int j;
-  char filename[STRING_SIZE];
+ 
+  /* char filename[STRING_SIZE]; */
 
   if(!(*W_tilda = (double **) R_alloc( (max_resoln+1) , sizeof(double *) )))
     Rf_error("Memory allocation failed for *W_tilda in signal_W_tilda \n");

@@ -220,7 +220,7 @@ void HG_hat_compute(filtername,H_hat,G_hat,max_resoln,np)
 {
   double temp;
   double arg;
-  int m, j, t;
+  int m, j;
   int iexp2();
 
   if(strcmp(filtername,"Gaussian1") != 0) {
@@ -691,13 +691,13 @@ void signal_W_S(W,S,max_resoln,np)
      double ***W, ***S;
      int max_resoln, np;
 {
-  int j, m, n, t;
-  char filename1[STRING_SIZE],filename2[STRING_SIZE], *filtername = "Gaussian1";
+  int j, m,  t;
+  char  *filtername = "Gaussian1";
   bound *H_bound,*G_bound;
   double **H_filter,**G_filter;
   double **H;
   double **G;
-  double *prev,*curr,*temp,*normalize_factor;
+  double *prev,*curr,*temp;
   
   if(!(H = (double **) R_alloc( max_resoln , sizeof(double *) )))
     Rf_error("Memory allocation failed for H in oneD_filter.c \n");
@@ -814,7 +814,7 @@ void signal_W_hat_S_hat(W_hat,S_hat,max_resoln,np)
      int max_resoln; 
      int np;
 {
-  char filename1[STRING_SIZE],filename2[STRING_SIZE], *filtername = "Gaussian1";
+  char *filtername = "Gaussian1";
   int two_np;
   double *prev, *curr, **H_hat, **G_hat;
   int j, m;

@@ -40,7 +40,7 @@ fcomplex integrand(double b,int x,int y,double *p2,double *nodes,
 		   double *phi_nodes,int nb_nodes,double w0)
 {
   fcomplex ctmp,psi_x,psi_y,psiprime_x,psiprime_y;
-  double xpos,ypos,xpos0,ypos0,phi_b2,tmp,phi,phi_b,phip_b,w02;
+  double xpos,ypos,xpos0,ypos0,phi_b2,tmp,phi_b,phip_b,w02;
   fcomplex integ;
 
   integ.r =0.0; integ.i = 0.0;
@@ -121,7 +121,7 @@ double rintegrand(double b,int x,int y,double *p2,double *nodes,
 		   double *phi_nodes,int nb_nodes,double w0)
 {
   fcomplex psi_x,psi_y,psiprime_x,psiprime_y;
-  double xpos,ypos,xpos0,ypos0,phi_b2,tmp,phi,phi_b,phip_b,w02;
+  double xpos,ypos,xpos0,ypos0,phi_b2,tmp,phi_b,phip_b,w02;
   double integ;
 
   integ =0.0;
@@ -252,12 +252,12 @@ void rwkernel(double *ker_r, double *ker_i,int *px_min,int *px_max,
 {
   double *p2, b_start=*pb_start, b_end=*pb_end, w0=*pw0;
   double phimax, b_lo,b_hi;
-  int x,y,yy;
+  int x,y;
   int x_min=*px_min,x_max=*px_max,x_inc=*px_inc;
   int lng=*plng,nb_nodes=*pnb_nodes;
   int i=0,up_bound,gamma_min,lng2;
   fcomplex *ker,*p_tmp;
-  fcomplex tmp;
+ 
 
 
   p2 = (double *)S_alloc(nb_nodes,sizeof(double));
@@ -352,11 +352,11 @@ void rkernel(double *ker,int *px_min,int *px_max,int *px_inc,
 {
   double *p2, b_start=*pb_start, b_end=*pb_end, w0=*pw0;
   double phimax, b_lo,b_hi;
-  int x,y,yy;
+  int x,y;
   int x_min=*px_min,x_max=*px_max,x_inc=*px_inc,lng=*plng,nb_nodes=*pnb_nodes;
-  int i=0,j,up_bound,gamma_min,lng2;
+  int i=0,up_bound,gamma_min,lng2;
   double *p_tmp;
-  fcomplex tmp;
+  
 
 
   p2 = (double *)S_alloc(nb_nodes,sizeof(double));
@@ -433,11 +433,11 @@ void fastkernel(double *ker_r, double *ker_i,int *px_min,int *px_max,
 {
   double *p2, b_start=*pb_start, b_end=*pb_end, w0=*pw0;
   double phimax, b_lo,b_hi;
-  int x,y,yy,b;
+  int x,y,b;
   int x_min=*px_min,x_max=*px_max,x_inc=*px_inc,lng=*plng,nb_nodes=*pnb_nodes;
   int i=0,up_bound,gamma_min,lng2;
   fcomplex *ker,*p_tmp;
-  fcomplex tmp;
+ 
 
 
   p2 = (double *)S_alloc(nb_nodes,sizeof(double));

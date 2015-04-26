@@ -56,7 +56,7 @@ void Sridge_annealing(double *cost, double *smodulus,
   double ran, gibbs;
   double cost1;
   double temperature, tmp=0.0;
-  FILE *fp;
+  /* FILE *fp; */
 
 
   /* Generalities; initializations

@@ -59,7 +59,7 @@ double gintegrand(double b,int x,int y,double *p2,double *nodes,
 		   double *phi_nodes,int nb_nodes,double scale)
 
 {
-  double xpos,ypos,tmp,tmp2,phi,phi_b,phip_b, u;
+  double xpos,ypos,tmp,tmp2, phi_b,phip_b, u;
   double g_x,g_y,gprime_x,gprime_y;
   double integ=0;
 
@@ -131,11 +131,11 @@ void gkernel(double *ker, int *px_min,int *px_max,
 {
   double *p2, b_start=*pb_start, b_end=*pb_end, scale=*pscale;
   double phimax, b_lo,b_hi;
-  int x,y,yy;
+  int x,y;
   int x_min=*px_min,x_max=*px_max,x_inc=*px_inc,lng=*plng,nb_nodes=*pnb_nodes;
   int i=0,up_bound,gamma_min,lng2;
   double *p_tmp;
-  double tmp;
+  
 
 
   /* printf("xmin=%d, xmax=%d\n",x_min,x_max); */
@@ -208,7 +208,7 @@ void fastgkernel(double *ker, int *px_min,int *px_max,
 {
   double *p2, b_start=*pb_start, b_end=*pb_end, scale=*pscale;
   double phimax, b_lo,b_hi;
-  int x,y,yy,b;
+  int x,y,b;
   int x_min=*px_min,x_max=*px_max,x_inc=*px_inc,lng=*plng,nb_nodes=*pnb_nodes;
   int i=0,up_bound,gamma_min,lng2;
   double *p_tmp;

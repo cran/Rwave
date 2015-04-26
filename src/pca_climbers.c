@@ -40,15 +40,15 @@ void Spointmap(double *sqmodulus, int *psigsize, int *pnscale,
 	       int *pgridx, int *pgridy, int *pnbblock, int *pnbpoint, 
 	       int *pointmap, double *tst, int *ptstsize, int *pcount, int *pseed)
 {
-  long l;
+  
   int sigsize, nscale, i, j, k, tstsize;
   int gridx, gridy, nbpoint;
-  long u1, u2, u3;
+  long u1, u2;
   double um, pm, largest;
   long seed;
-  double p1, p2, p3;
+  double p1, p2;
   int a, b, t, up, down, left, right;
-  int count1, count2, nbblock, bnumber, lnb;
+  int count1, count2, nbblock, bnumber;
   int lefto, righto, upo, downo;
 
   /* seed for random number
@@ -226,7 +226,7 @@ void Spca_annealing(double *smodulus, double *beemap,
 {
   double r, dd, ee;
   int i, bstep, k, k1, k2, bee;
-  int *a, *b, integral, chain, s, count, dir;
+  int *a, *b, integral, chain,  count, dir;
   int arest, brest, afree, bfree;
   int seed, nscale, iteration, sigsize, nbbee;
   long idum;

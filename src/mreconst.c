@@ -62,16 +62,16 @@ void signal_position(char *filtername, double **lambda,
   image_ext *ext, double **Wtilda, double **W, int num_of_extrema,
   int max_resoln, int np)
 {
-  int s, t, r, i, j, diff;
+  int s,  r, i, j, diff;
   bound *psi, *phi;
   bound *H_bound, *G_bound;
-  char filename[STRING_SIZE];
+  /* char filename[STRING_SIZE]; */
   double **position_matrix, *w, **v;
   double sum;
   int p, x;
   double *b;
 
-  double d;
+  
   int *indx;
 
   if(!(indx = (int *) R_alloc(num_of_extrema , sizeof(int))))
@@ -167,7 +167,7 @@ void extrema_reconst(char *filtername, double *f, double *extrema,
   int readfileflag = *preadfile;
   image_ext *ext;                  
   double *lambda;
-  int num_of_extrema, j;
+  int num_of_extrema;
   
   signal_W_S(&W, &S, max_resoln, np); 
   

@@ -3,7 +3,7 @@
 
 
 /****************************************************************/
-/*              (c) Copyright  1997
+/*              (c) Copyright  1997                             */
 /*                         by                                   */
 /*     Author: Rene Carmona, Andrea Wang, Wen-Liang Hwang       */
 /*                 Princeton University                         */

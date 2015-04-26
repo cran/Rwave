@@ -45,7 +45,7 @@ int taille;		/* largest index of a nonzero a */
 int open_read()
 {
   int n;
-  int i,j;
+  
 
   c = (double **)R_alloc(NMAXPLUS1,sizeof(double *));
   for (n=NMIN;n<NMAX+1;n++)

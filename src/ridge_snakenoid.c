@@ -55,7 +55,7 @@ void Ssnakenoid_annealing(double *cost, double *smodulus,
 {
   int sigsize,snakesize,ncount,iteration;
   int i,k,up,right,pos,num,a,b,count,costcount,sub;
-  int count1=0;
+  /* int count1=0; */
   long idum=-9;
   int again, tbox, blocksize,smodsize;
   int nscale, stagnant, recal;
@@ -63,8 +63,8 @@ void Ssnakenoid_annealing(double *cost, double *smodulus,
   double *bcost, *phi2;
   double ran, gibbs;
   double cost1;
-  double temperature, tmp=0, tmp2;
-  FILE *fp;
+  double temperature, tmp=0;
+  /* FILE *fp; */
   int *posmap;
   double tmp_cost;
   double der_plus,der_minus,der_sec,der_sec_plus,der_sec_minus;

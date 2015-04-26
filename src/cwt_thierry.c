@@ -120,7 +120,7 @@ void Scwt_thierry(double *Rinput,double *Iinput,double *Oreal,
    double *Oimage,int *pnboctave,int *pnbvoice,
    int *pinputsize,int *pM)
 {	
-  int nboctave, nbvoice, i, j, k, inputsize, M;
+  int nboctave, nbvoice, i, j,  inputsize, M;
   double a;
   double *Ri2, *Ri1, *Ii1, *Ii, *Ri;
 
@@ -179,7 +179,7 @@ void Svwt_thierry(double *Rinput,double *Iinput,double *Oreal,
    double *Oimage,double *pa,int *pinputsize,
    int *pM)
 {	
-  int octave, voice, nbvoice, i, j, k, inputsize, M;
+  int    i,  inputsize, M;
   double a;
   double *Ri2, *Ri1, *Ii1, *Ii, *Ri;
 

@@ -39,7 +39,7 @@
 void Shessianmap(double *sqmodulus, int *psigsize, int *pnscale, int *pnbblock,
 		 int *pgridx, int *pgridy, double *tst)
 {
-  int a, b, sigsize, nscale, gridx, gridy, nbblock;
+  int a, b, sigsize, nscale, gridx, gridy ;
   int left, right, down, up;
   double mxx, mxy, myx, myy;
   int bnumber, k;

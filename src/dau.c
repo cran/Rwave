@@ -222,7 +222,7 @@ int *np_ptr;
 
   bound *d_phi_range, *d_psi_range;
   double **d_phi, **d_psi, *phi_array, *psi_array;
-  int j;
+ 
   
   NW = *NW_ptr;
   open_read();
@@ -395,7 +395,8 @@ int *NW_ptr;
 
   bound *dH_bound, *dG_bound;
   double **dH, **dG;
-  double *sym = (double *) R_alloc( 2*np , sizeof(double) );
+  /*  double *sym = (double *) R_alloc( 2*np , sizeof(double) ); */
+  
   int j, n, k, t;
   double sum;
 

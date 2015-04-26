@@ -117,8 +117,8 @@ void WV_mult(int n, double *Ri,double *Ii,
 void WV(double *input,double *Oreal,double *Oimage,int *pnbfreq,
   double *pfreqstep,int *pinputsize)
 {
-  int nbfreq, i, p, k, ii, inputsize, locsize;
-  double freqstep, frequency;
+  int nbfreq, i, p, k,  inputsize, locsize;
+  double freqstep;
   double *Ri1, *Ii1, *Ii, *Ri, *tmpreal, *tmpimage;
 
 

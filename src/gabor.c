@@ -27,7 +27,7 @@
 
 void gabor_frequency(double sigma,double frequency,double *w,int isize)
 {
-  double tmp, tmp1;
+  double tmp;
   int i;
   double twopi;
 
@@ -65,7 +65,7 @@ void Sgabor(double *input,double *Oreal,double *Oimage,int *pnbfreq,
 {
 /*  void multiply();
   void FFT();*/
-  int nbfreq, i, j, k, inputsize;
+  int nbfreq, i,  k, inputsize;
   double scale, freqstep, frequency;
   double *Ri2, *Ri1, *Ii1, *Ii2, *Ii, *Ri;
 
@@ -143,8 +143,8 @@ void Svgabor(double *input,double *Oreal,double *Oimage,double *pfreq,
 {
 /*  void multiply();
   void FFT();*/
-  int i, j, k, inputsize;
-  double scale, freqstep, frequency;
+  int i,   inputsize;
+  double scale,  frequency;
   double *Ri2, *Ri1, *Ii1, *Ii2, *Ii, *Ri;
 
 
