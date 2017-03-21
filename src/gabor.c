@@ -65,7 +65,7 @@ void Sgabor(double *input,double *Oreal,double *Oimage,int *pnbfreq,
 {
 /*  void multiply();
   void FFT();*/
-  int nbfreq, i,  k, inputsize;
+  int nbfreq, i,   inputsize;
   double scale, freqstep, frequency;
   double *Ri2, *Ri1, *Ii1, *Ii2, *Ii, *Ri;
 

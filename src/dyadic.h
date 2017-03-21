@@ -171,8 +171,7 @@ void double_residue(double **a, double *w, double **v, int m,
 void Sresidue(double *a, double *w, double *v, int m, int n,
   double *b, double *x);
 
-void Ssvdecomp(double *a, int *pm, int *pn, double *w, double *v,
-  double *b, double *x);
+void Ssvdecomp(double *a, int *pm, int *pn, double *w, double *v);
 
 
 

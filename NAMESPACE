@@ -1,4 +1,7 @@
 # Export all names
 exportPattern(".")
 useDynLib(Rwave)
-
+importFrom("grDevices", "dev.set")
+importFrom("graphics", "abline", "image", "lines", "par", "title")
+importFrom("stats", "as.ts", "fft", "lag", "lsfit", "plot.ts",
+             "quantile", "rnorm", "spec.pgram", "var")
