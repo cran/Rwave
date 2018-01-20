@@ -1,11 +1,11 @@
-\name{pixel_8.7}
-\alias{pixel_8.7}
+\name{amber8}
+\alias{amber8}
 \title{Pixel from Amber Camara}
 \description{Pixel from amber camara.
 }
-\usage{data(pixel_8.7)
+\usage{data(amber8)
 }
-\format{A vector containing observations.
+\format{A vector containing 7000 observations.
 }
 \source{
   See discussions in the text of ``Practical Time-Frequency Analysis''.
@@ -17,9 +17,11 @@
 }
 \examples{
 
-data(pixel_8.7)
-plot.ts(pixel_8.7)
+data(amber8)
+plot.ts(amber8)
 
 }
+
+
 
 \keyword{datasets}

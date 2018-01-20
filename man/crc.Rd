@@ -59,4 +59,14 @@ See discussion in text of ``Practical Time-Frequency Analysis''.
 \code{\link{crcrec}},\code{\link{gcrcrec}},\code{\link{scrcrec}} for
 reconstruction. 
 }
+\examples{
+   data(HOWAREYOU)
+ plot.ts(HOWAREYOU)
+ 
+cgtHOWAREYOU <- cgt(HOWAREYOU,70,0.01,100)
+
+clHOWAREYOU <- crc(Mod(cgtHOWAREYOU),nbclimb=1000)
+
+}
+
 \keyword{ts}

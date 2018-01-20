@@ -53,4 +53,19 @@ relative threshold for the ridges.
   \code{\link{gcrcrec}} and \code{\link{scrcrec}} for corresponding
   reconstruction functions.
 }
+\examples{
+
+\dontrun{
+   data(HOWAREYOU)
+ plot.ts(HOWAREYOU)
+ 
+cgtHOWAREYOU <- cgt(HOWAREYOU,70,0.01,100)
+
+clHOWAREYOU <- crc(Mod(cgtHOWAREYOU),nbclimb=1000)
+
+cfHOWAREYOU <- cfamily(clHOWAREYOU,ptile=0.001)
+image(cfHOWAREYOU$ordered > 0)
+}
+}
+
 \keyword{ts}

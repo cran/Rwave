@@ -42,6 +42,14 @@ See discussion in text of ``Practical Time-Frequency Analysis''.
 \code{\link{cwt}}, \code{\link{cwtp}}, \code{\link{DOG}} for continuous wavelet transforms.
 \code{\link{cwtsquiz}} for synchrosqueezed wavelet transform.
 }
+\examples{
+data(HOWAREYOU)
+   plot.ts(HOWAREYOU)
+ 
+cgtHOWAREYOU <- cgt(HOWAREYOU,70,0.01,100)
+
+}
+
 \keyword{ts}
 \section{Warning}{
 freqstep must be less than 1/nvoice to avoid aliasing. freqstep=1/nvoice

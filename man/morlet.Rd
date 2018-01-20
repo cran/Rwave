@@ -39,4 +39,12 @@ See discussions in the text of ``Practical Time-Frequency Analysis''.
 \seealso{
 \code{\link{gabor}}.
 }
+\examples{
+
+m1 = morlet(1024, 512, 20, w0=2 * pi)
+plot.ts(Re(m1) )
+
+
+}
+
 \keyword{ts}

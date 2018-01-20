@@ -24,4 +24,10 @@ decomposition of the input.
 See discussions in the text of \dQuote{Time-Frequency Analysis}.
 }
 %\seealso{}
+\examples{
+   hilbert <- function(n) { i <- 1:n; 1 / outer(i - 1, i, "+") }
+     X <- hilbert(6)
+     z  = SVD(X)
+     z
+}
 \keyword{ts}

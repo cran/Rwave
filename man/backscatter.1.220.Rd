@@ -11,8 +11,17 @@
   See discussions in the text of ``Practical Time-Frequency Analysis''.
 }
 \references{
-  Carmona, R. A., W. L. Hwang and B Torresani (1998)
+  Carmona, R. A., W. L. Hwang and B Torresani (1998, eBook ISBN:978008053942)
   \emph{Practical Time-Frequency Analysis: Gabor and Wavelet Transforms
     with an Implementation in S}, Academic Press, San Diego.
 }
+\examples{
+
+data(backscatter.1.220)
+plot.ts(backscatter.1.220)
+
+}
+
+
+
 \keyword{datasets}

@@ -26,11 +26,20 @@ size parameter for the Gabor function. See details.
 complex 1D array of size sigsize.
 }
 \details{The size parameter here corresponds to the
-standard deviation for a gaussian.  In the Carmona 1998 book, equation 3.23 has a different scale factor. }
+standard deviation for a gaussian.  In the Carmona (1998, eBook ISBN:978008053942) book, equation 3.23 has a different scale factor. }
 \references{
 See discussions in the text of \dQuote{Practical Time-Frequency Analysis}.
 }
 \seealso{
 \code{\link{morlet}}.
 }
+\examples{
+
+m1 = gabor(1024, 512,  2 * pi, 20 )
+
+plot.ts(Re(m1) )
+
+
+}
+
 \keyword{ts}

@@ -1,18 +1,26 @@
-\name{B0}
-\alias{B0}
-\title{Transient Signal}
-\description{Transient signal.
+\name{ch}
+\alias{ch}
+\title{Chen's Chirp}
+\description{Chen's chirp.
 }
-\usage{data(B0)
+\usage{data(ch)
 }
-\format{A vector containing 1024 observations.
+\format{A vector containing 15,000 observations.
 }
 \source{
   See discussions in the text of ``Practical Time-Frequency Analysis''.
 }
 \references{
-  Carmona, R. A., W. L. Hwang and B Torresani (1998)
+  Carmona, R. A., W. L. Hwang and B Torresani (1998, eBook ISBN:978008053942)
   \emph{Practical Time-Frequency Analysis: Gabor and Wavelet Transforms
     with an Implementation in S}, Academic Press, San Diego.
 }
+\examples{
+
+data(ch)
+plot.ts(ch)
+
+}
+
+
 \keyword{datasets}
