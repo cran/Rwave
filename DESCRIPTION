@@ -1,6 +1,6 @@
 Package: Rwave
-Version: 2.4-8
-Date: 2018-01-17
+Version: 2.5-0
+Date: 2021-07-06
 Title: Time-Frequency Analysis of 1-D Signals
 Authors@R: c(person(given="Rene", family='Carmona', email='rcarmona@princeton.edu', role='aut'),
 	   person(given="Bruno", family='Torresani', email='bruno.torresani@cmi.univ-mrs.fr', role='aut'),
@@ -9,11 +9,11 @@ Authors@R: c(person(given="Rene", family='Carmona', email='rcarmona@princeton.ed
 	   person(given="Wen-Liang", family='Hwang', role='ctb'),
 	   person(given="Jonathan M.", family="Lees", role = c("ctb", "cre"), email = "jonathan.lees@unc.edu"))
 Author: Rene Carmona [aut],
-	Bruno Torresani [aut],
-	Brandon Whitcher [ctb],
-	Andrea Wang [ctb],
-	Wen-Liang Hwang [ctb],
-	Jonathan M. Lees [ctb, cre]
+  Bruno Torresani [aut],
+  Brandon Whitcher [ctb],
+  Andrea Wang [ctb],
+  Wen-Liang Hwang [ctb],
+  Jonathan M. Lees [ctb, cre]
 Maintainer: Jonathan M. Lees <jonathan.lees@unc.edu>
 Depends: R (>= 2.14)
 Description: A set of R functions which provide an
@@ -29,9 +29,9 @@ Description: A set of R functions which provide an
         L. Hwang and Bruno Torresani (1998, eBook ISBN:978008053942), Academic Press.
 License: GPL (>= 2)
 Copyright: University of California
-URL: http://www.orfe.princeton.edu/~rcarmona/TFbook/tfbook.html,
-        http://r-forge.r-project.org/projects/rwave/
-Packaged: 2018-01-19 19:34:48 UTC; lees
+URL: https://carmona.princeton.edu/TFbook/tfbook.html,
+        https://r-forge.r-project.org/projects/rwave/
+Packaged: 2021-07-07 11:54:50 UTC; lees
 Repository: CRAN
-Date/Publication: 2018-01-20 15:36:20 UTC
+Date/Publication: 2021-07-09 12:40:02 UTC
 NeedsCompilation: yes

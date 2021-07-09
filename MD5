@@ -1,4 +1,4 @@
-9f82e3d576225ae4206f7fd28cea841b *DESCRIPTION
+89df02556e95e474fe5768a93ca07404 *DESCRIPTION
 292ecea061715923063eee9b5eb43e23 *NAMESPACE
 4de35661b275d55904ac85a3356d3dcd *NEWS
 22ec47a09dbd6788a5389a28c89cff61 *R/00util.R
@@ -6,7 +6,7 @@ e8128ea36ac2bdf000fa5fc9bc9f32e4 *R/Crazy_Climbers.R
 b825564486586e5a1da76877a028a8ff *R/Crc_Irrec.R
 27539623f1580277bbb6d049d5daae10 *R/Cwt_Morlet.R
 71f59434c61f6f9d5394e4b55ab6e9e8 *R/Cwt_Squeezing.R
-c038483c3778f60b3ad21708c2d6378f *R/Cwt_Thierry.R
+8b878c6c25b324da5d18fff9631ea69a *R/Cwt_Thierry.R
 49454d71f96f67dd264b4758240cef23 *R/Cwt_phase.R
 78d8283e2c71629203db5aa0574ccbe8 *R/Hessian_Climbers.R
 02aa0a6eab267128e1f7b735ebb91da9 *R/Pca_Climbers.R
@@ -32,7 +32,7 @@ c311c43075e0bbb443b46dac73e537f5 *R/plot.R
 e31e0e6688a4c78f65c06ffa4895d2c8 *R/radar.R
 8f8a7bedbf9ef6a4f8fa2893798aa2e1 *R/recon2d.R
 b878fab2fe5d0e94d6f0fc888583554b *R/robust.R
-fc109976db34aa6876d38eebd29701bd *R/simul.R
+703bce05b7fd5e4544413d25e4326413 *R/simul.R
 9c6235b7771e2216decb09d204ed4876 *R/skernel.R
 b7b68fa517a437a7f1e99a081c71d98c *R/svd.R
 b7198a07ca3adca043b78a1782ad09c3 *R/wv.R
@@ -295,7 +295,7 @@ ac4ce717f9401b0d4715b43f44e54911 *src/gabor.c
 81a5be89e8c3503417fa9df9d9f65f4b *src/gkernel.c
 936ad1598749a153f6129acfdde3558e *src/hessian_climbers.c
 5101f363b5643dae19b03b45f18f1538 *src/icm.c
-fcdbba267e55a3282a0e342c10442a74 *src/init.c
+ae8afd8bb9435ba4d854673843b2a164 *src/init.c
 f1584945345b01bf808a34f0a17e2eed *src/mreconst.c
 800a554d684964266e41cc28bb272327 *src/multiply.c
 d4ecb0fabdd3382fc508c206d36768f2 *src/mw.c

@@ -123,7 +123,7 @@ vwtTh <- function(input, scale, moments)
    Ioutput <- numeric(newsize)
    dim(input) <- c(newsize,1)
 
-   z <- .C("Svwt_Thierry",
+   z <- .C("Svwt_thierry",
            as.double(Re(input)),
            as.double(Im(input)),
            Rtmp = as.double(Routput),

@@ -53,7 +53,7 @@ mbpval <- function(inputdata, maxresoln, wl=128, scale=FALSE)
   pval <- t(pval)
   dim(pval) <- c(length(pval), 1)
 
-  z <- .C("compute_mallat_bootstrap_pval",
+  z <- .C("bootstrap_pval_compute",
 	a=as.double(pval),
 	as.double(s),
 	as.integer(maxresoln),

@@ -48,11 +48,57 @@ void Stf_pcaridge(double *input, double *output, int *pnrow, int *pncol, int *or
 void gabor_time(double *pfrequency,double *pscale, int *pb, 
 		double *g_r, double *g_i,int *pisize);
 
+void modulus_maxima(double *extrema, double *wt, int *resoln_ptr,
+		    int *np_ptr );
+
+
+void nthresh_compute(double *nthresh, double *s, int *maxresoln_ptr,
+		     int *sample_size_ptr, double prct );
+
+ void Svwt_thierry(double *Rinput,double *Iinput,double *Oreal,
+   double *Oimage,double *pa,int *pinputsize,
+		   int *pM);
+
+   void normal_pval_compute(double *pval, double *s, int *max_resoln_ptr,
+			    int *np_ptr, int *num_of_windows_ptr, int *window_size_ptr );
+
+void bootstrap_pval_compute(double *pval, double *s, int *max_resoln_ptr,
+			    int *np_ptr, int *num_of_windows_ptr, int *window_size_ptr );
+void bthresh_compute(double *bthresh, double *s, int *maxresoln_ptr,
+		     int *sample_size_ptr, double prct );
+
+void rkernel(double *ker,int *px_min,int *px_max,int *px_inc,
+	    int *plng, double *nodes,double *phi_nodes,int *pnb_nodes,
+	     double *pw0,double *pb_start,double *pb_end);
+
+void fastkernel(double *ker_r, double *ker_i,int *px_min,int *px_max,
+	    int *px_inc, int *plng, double *nodes,double *phi_nodes,
+		int *pnb_nodes,double *pw0,double *pb_start,double *pb_end);
+
+  void gkernel(double *ker, int *px_min,int *px_max,
+	    int *px_inc, int *plng, double *nodes,double *phi_nodes,
+	       int *pnb_nodes,double *pscale,double *pb_start,double *pb_end);
+
+void fastgkernel(double *ker, int *px_min,int *px_max,
+	    int *px_inc, int *plng, double *nodes,double *phi_nodes,
+		 int *pnb_nodes,double *pscale,double *pb_start,double *pb_end);
+ 
+
+
 
 #define CDEF(name, n)  {#name, (DL_FUNC) &name, n}
 
 static const  R_CMethodDef CEntries[] = {
-  CDEF(Ssmoothwt, 6),
+  CDEF(Svwt_thierry , 7),
+  CDEF(normal_pval_compute , 6),
+  CDEF(bootstrap_pval_compute ,6 ),
+  CDEF(bthresh_compute ,5 ),
+  CDEF( rkernel,11 ),
+  CDEF(fastkernel ,12 ),
+  CDEF( gkernel , 11),
+  CDEF(fastgkernel ,11 ),
+  CDEF(nthresh_compute, 5),
+  CDEF(modulus_maxima, 4),
   CDEF(Ssmoothwt,  6),
 CDEF(Smodulus_smoothing,  6),
 CDEF(Sbee_annealing,  12),
