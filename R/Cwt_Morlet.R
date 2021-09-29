@@ -38,6 +38,26 @@ cwt <- function(input, noctave, nvoice = 1, w0 = 2*pi, twoD = TRUE,
 {
   oldinput <- input
   isize <- length(oldinput)
+
+
+  #########################################################
+
+##########  patch submitted by Robert Alberts 9/28/2021 
+  # begin code patch to ensure linear convolution
+
+  # calculate number of zeros required to ensure linear convolution
+  max_scaleFactor <- 2^(noctave - 1/nvoice)
+  morlet_size_to_use <- 26
+  num_zero_choices <-  c(ceiling(morlet_size_to_use * max_scaleFactor)-isize,isize)
+  num_zeros_for_linear_convolution <- max(num_zero_choices)
+
+  # pad the end of the input data vector with num_zeros_for_linear_convolution
+  oldinput <- c(oldinput,as.vector(rep(0,num_zeros_for_linear_convolution)))
+
+  #end of code patch ensuring linear convolution
+
+#########################################################
+
   
   tmp <- adjust.length(oldinput)
   input <- tmp$signal
