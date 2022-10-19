@@ -29,8 +29,8 @@ consecutive powers of 2)
 \item{twoD}{
 logical variable set to T to organize the
 output as a 2D array 
-(signal\_size x nb\_scales), otherwise, the output is a 3D array 
-(signal\_size x noctave x nvoice)
+(signal_size x nb_scales), otherwise, the output is a 3D array 
+(signal_size x noctave x nvoice)
 }
 \item{plot}{
 if set to T, display the modulus of the
@@ -45,10 +45,10 @@ input signal.
 The format of the output can be 
 
 
-2D array (signal\_size x nb\_scales)
+2D array (signal_size x nb_scales)
 
 
-3D array (signal\_size x noctave x nvoice) 
+3D array (signal_size x noctave x nvoice) 
 }
 \references{
   See discussions in the text of ``Practical Time-Frequency Analysis''.

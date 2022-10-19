@@ -16,9 +16,7 @@
 
 #include "Swave.h"
 
-void snakesub(rho,rate,snakesize)
-     int rate, snakesize;
-     double *rho;
+void snakesub(double *rho,int rate,int snakesize)
 {
   int i;
 
@@ -32,9 +30,7 @@ void snakesub(rho,rate,snakesize)
 return;
 }
 
-void snakexpand(rho,rate,snakesize)
-     int rate, snakesize;
-     double *rho;
+void snakexpand(double *rho,int rate,int snakesize)
 {
   int i;
 

@@ -22,9 +22,9 @@ The output contains the (complex) values of the wavelet transform of the
 input signal. The format of the output can be 
 % format of the input??
 
-2D array (signal\_size x nb\_scales)
+2D array (signal_size x nb_scales)
 
-3D array (signal\_size x noctave x nvoice) 
+3D array (signal_size x noctave x nvoice) 
 }
 \references{
 See discussions in the text of ``Practical Time-Frequency Analysis''.

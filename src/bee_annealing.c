@@ -49,11 +49,11 @@ void Sbee_annealing(double *smodulus, double *beemap,
 {
   double r, dd, ee;
   int i, bstep, k, k1, k2, bee;
-  int *a, *b, integral, chain, s, count;
+  int *a, *b, integral, chain,  s, count;
   int seed, nscale, iteration, sigsize, nbbee, tstep;
   long idum;
   double c;
-  double ran1();
+  double ran1(long *idum);
 
   chain = *pchain;
   integral = *pintegral;

@@ -35,9 +35,7 @@ int NW, *twoto;
 /*		COMPUTE WAVELET COEFFICIENT RANGE FOR ALL RESOLUTIONS	    */
 /****************************************************************************/
 
-void compute_d_phi_range_for_all_resoln( d_phi_range, max_resoln, np )
-bound **d_phi_range;
-int max_resoln, np;
+void compute_d_phi_range_for_all_resoln( bound **d_phi_range, int max_resoln, int np )
 {
   int j;
 
@@ -54,11 +52,7 @@ int max_resoln, np;
 /*         COMPUTE WAVELET COEFFICIENT RANGE FOR ALL RESOLUTIONS	    */
 /****************************************************************************/
 
-void compute_d_psi_range_for_all_resoln( d_psi_range, d_phi_range, max_resoln, np )
-bound **d_psi_range;
-bound *d_phi_range;
-int max_resoln;
-int np;
+void compute_d_psi_range_for_all_resoln( bound **d_psi_range, bound *d_phi_range, int max_resoln, int  np )
 {
   int j;
 
@@ -75,11 +69,7 @@ int np;
 /*		COMPUTE PHI COEFFICIENTS FOR ALL RESOLUTIONS                */
 /****************************************************************************/
 
-void compute_d_phi_for_all_resoln( d_phi, d_phi_range, s, max_resoln )
-double **d_phi;
-bound *d_phi_range;
-double *s;
-int max_resoln;
+void compute_d_phi_for_all_resoln( double **d_phi, bound *d_phi_range, double *s, int max_resoln )
 {
   int j, k, n_min, n_max, n;
   double sum;
@@ -109,13 +99,8 @@ int max_resoln;
 /*		COMPUTE PSI COEFFICIENTS FOR ALL RESOLUTIONS       	    */
 /****************************************************************************/
 
-void compute_d_psi_for_all_resoln( d_psi, d_psi_range, d_phi, d_phi_range,
-				  max_resoln )
-double **d_psi;
-bound *d_psi_range;
-double **d_phi;
-bound *d_phi_range;
-int max_resoln;
+void compute_d_psi_for_all_resoln( double **d_psi, bound *d_psi_range, double **d_phi, bound *d_phi_range,
+				  int max_resoln )
 {
   int j, k, n_min, n_max, n;
   double sum;
@@ -141,10 +126,7 @@ int max_resoln;
 /*		PHI RECONSTRUCTION					    */
 /****************************************************************************/
 
-void phi_reconstruction( phi, d_phi, phi_array, d_phi_range, max_resoln, np )
-double *phi, **d_phi, *phi_array;
-bound *d_phi_range;
-int max_resoln, np;
+void phi_reconstruction( double *phi, double **d_phi, double *phi_array, bound *d_phi_range, int max_resoln, int np )
 {
   int j, t, k_min, k_max, k;
   double sum, two_to_j, two_to_j_half, two_to_j_times_t;
@@ -175,10 +157,7 @@ int max_resoln, np;
 /*		PSI RECONSTRUCTION					    */
 /****************************************************************************/
 
-void psi_reconstruction( psi, d_psi, psi_array, d_psi_range, max_resoln, np )
-double *psi, **d_psi, *psi_array;
-bound *d_psi_range;
-int max_resoln, np;
+void psi_reconstruction( double *psi, double **d_psi, double *psi_array, bound  *d_psi_range, int max_resoln, int np )
 {
   int j, t, k_min, k_max, k;
   double sum, two_to_j, two_to_j_half, two_to_j_times_t;
@@ -208,14 +187,17 @@ int max_resoln, np;
 /*  daubechies_reconst, called by Splus                                     */
 /****************************************************************************/
 
-void daubechies_wt( phi, psi, s, NW_ptr, maxresoln_ptr, np_ptr )
-double *phi;  /* (maxresoln+1) by np, where np is a power of 2 */
-double *psi;  /* maxresoln by np, where np is a power of 2 */
+void daubechies_wt( double *phi, double *psi, double *s, int *NW_ptr, int *maxresoln_ptr, int *np_ptr )
+{
+
+  /*
+double *phi;   (maxresoln+1) by np, where np is a power of 2
+double *psi;   maxresoln by np, where np is a power of 2 
 double *s;
 int *NW_ptr;
 int *maxresoln_ptr;
 int *np_ptr;
-{
+   */
   int max_resoln = *maxresoln_ptr;
   int np = *np_ptr;
   int num_of_resoln = max_resoln + 1;
@@ -257,9 +239,7 @@ int *np_ptr;
 /* Compute dH filter */
 /****************************************************************************/
 
-void compute_dH_bound( dH_bound, max_resoln )
-bound **dH_bound;
-int max_resoln;
+void compute_dH_bound( bound **dH_bound, int max_resoln )
 {
   int j;
   int temp = 2*NW-1;
@@ -283,9 +263,7 @@ int max_resoln;
 /* Compute dG filter */
 /****************************************************************************/
 
-void compute_dG_bound( dG_bound, max_resoln )
-bound **dG_bound;
-int max_resoln;
+void compute_dG_bound( bound **dG_bound, int max_resoln )
 {
   int j;
   int temp = 2 - 2*NW;
@@ -309,10 +287,7 @@ int max_resoln;
 /* Compute dH filter for each resolution */
 /****************************************************************************/
 
-void compute_dH( dH, dH_bound, max_resoln )
-double ***dH;
-bound *dH_bound;
-int max_resoln;
+void compute_dH( double ***dH, bound *dH_bound, int max_resoln )
 {
   int j, i;
 
@@ -346,10 +321,7 @@ int max_resoln;
 /* Compute dG filter for each resolution */
 /****************************************************************************/
 
-void compute_dG( dG, dG_bound, max_resoln )
-double ***dG;
-bound *dG_bound;
-int max_resoln;
+void compute_dG( double ***dG, bound *dG_bound, int max_resoln )
 {
   int j, i, n;
 
@@ -382,13 +354,7 @@ int max_resoln;
 /* COMPUTE DDWAVE (Discrete Daubechies wavelet) */
 /****************************************************************************/
 
-void compute_ddwave( phi, psi, s, max_resoln_ptr, np_ptr, NW_ptr )
-double *phi;
-double *psi;
-double *s;
-int *max_resoln_ptr;
-int *np_ptr;
-int *NW_ptr;
+void compute_ddwave( double *phi, double *psi, double *s, int *max_resoln_ptr, int *np_ptr,int *NW_ptr )
 {
   int max_resoln = *max_resoln_ptr;
   int np = *np_ptr;

@@ -35,7 +35,7 @@ Modulus and Argument of the values of the continuous wavelet transform
 The output contains the (complex) values of the wavelet transform of the
 input signal. The format of the output can be 
 
-2D array (signal size \eqn{\times}{x} nb\_scales)
+2D array (signal size \eqn{\times}{x} nb_scales)
 
 3D array (signal size \eqn{\times}{x} noctave \eqn{\times}{x} nvoice) 
 }

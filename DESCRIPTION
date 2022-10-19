@@ -1,6 +1,6 @@
 Package: Rwave
-Version: 2.6-0
-Date: 2021-09-29
+Version: 2.6-4
+Date: 2022-10-18
 Title: Time-Frequency Analysis of 1-D Signals
 Authors@R: c(person(given="Rene", family='Carmona', email='rcarmona@princeton.edu', role='aut'),
 	   person(given="Bruno", family='Torresani', email='bruno.torresani@cmi.univ-mrs.fr', role='aut'),
@@ -33,7 +33,7 @@ License: GPL (>= 2)
 Copyright: University of California
 URL: https://carmona.princeton.edu/TFbook/tfbook.html,
         https://r-forge.r-project.org/projects/rwave/
-Packaged: 2021-09-29 14:56:39 UTC; lees
+Packaged: 2022-10-19 16:46:35 UTC; lees
 Repository: CRAN
-Date/Publication: 2021-09-29 18:20:02 UTC
+Date/Publication: 2022-10-19 17:27:51 UTC
 NeedsCompilation: yes

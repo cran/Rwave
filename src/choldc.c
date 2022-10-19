@@ -250,11 +250,7 @@ void cholsl(double **a, int n, double p[], double b[], double x[])
 #define NRANSI
 #define TINY 1.0e-20;
 
-void ludcmp(a, n, indx, d)
-double **a;
-int n;
-int *indx;
-double *d;
+void ludcmp(double **a, int n, int *indx, double *d)
 {
   int i,imax,j,k;
   double big,dum,sum,temp;

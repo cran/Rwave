@@ -11,11 +11,6 @@
 #include "Swave.h"
 #include "denoise.h"
 
-
-
-
-
-
 /* Fast Fourier transform (from numerical recipes routine)
    -------------------------------------------------------
 */
@@ -24,7 +19,7 @@ void double_fft(double *Or,double *Oi,double *Ir,double *Ii,
   int isize,int isign)
 {
   double *tmp;
-  int nt, find2power(), newsize, i;
+  int nt, find2power(int  n), newsize, i;
 
   nt = find2power(isize);
   newsize = 1 << nt;

@@ -22,8 +22,7 @@
 ****************************************************************/
 
 /* 2^j  (j can be >= 0 or < 0 ) */
-double fexp2(j)
-  int j;
+double fexp2(int j)
 {
   int k;
   double s;
@@ -50,11 +49,7 @@ double fexp2(j)
 *
 ****************************************************************/
 
-void wavelet_transform_gradient( grad, s, max_resoln, np )
-     double **grad;
-     double **s;
-     int max_resoln;
-     int np;
+void wavelet_transform_gradient(double ** grad, double **s, int  max_resoln, int np )
 {
   int j,t;
   int np_minus1 = np - 1;
@@ -79,16 +74,12 @@ void wavelet_transform_gradient( grad, s, max_resoln, np )
 ****************************************************************/
 
 
-void signal_K_compute(K,W,max_resoln,np )
-     double ***K;
-     double **W;
-     int max_resoln;
-     int np;
+void signal_K_compute(double ***K,double **W, int max_resoln,  int np )
 {
   int j, z, y, x, t, i;
   double sum;
   double **grad_W, *k_tilda;
-  double fexp2();
+  double fexp2(int j);
 
   if(!(grad_W = (double **) R_alloc( (max_resoln+1) , sizeof(double *) )))
     Rf_error("Memory allocation failed for grad_pis in K_compute.c \n");

@@ -55,14 +55,15 @@ typedef struct
 } image_ext;
 */
 
-extern double my_exp2();
-extern double my_log2();
-extern int nint();
-extern double log2();
-extern double exp2();
-extern int iexp2();
-extern double fexp2();
-extern int find2power();
+/*   these prototypes have been removed - I do not see them used  Oct.18, 2022 */
+/* extern double my_exp2(); */
+/* extern double my_log2(); */
+/* extern int nint(); */
+/* extern double log2(); */
+/*  extern double exp2(); */
+extern int iexp2(int j);
+extern double fexp2(int j);
+extern int find2power(int  n);
 
 /* uniform random number generator */
-extern double urand_();
+/*extern double urand_();*/

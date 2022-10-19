@@ -48,7 +48,7 @@ void Spointmap(double *sqmodulus, int *psigsize, int *pnscale,
   long seed;
   double p1, p2;
   int a, b, t, up, down, left, right;
-  int count1, count2, nbblock, bnumber;
+  int count1, count2,  nbblock, bnumber;
   int lefto, righto, upo, downo;
 
   /* seed for random number
@@ -231,7 +231,7 @@ void Spca_annealing(double *smodulus, double *beemap,
   int seed, nscale, iteration, sigsize, nbbee;
   long idum;
   double c;
-  double ran1();
+  double ran1(long *idum);
 
   chain = *pchain;
   integral = *pintegral;

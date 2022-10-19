@@ -42,7 +42,7 @@ int taille;		/* largest index of a nonzero a */
 /*	        BEGINNING OF WAVE_COEF.C                                     */
 /*&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&*/
         
-int open_read()
+int open_read(void)
 {
   int n;
   
@@ -107,7 +107,7 @@ int open_read()
 /**              Computation of the coef. of a                **/
 /***************************************************************/
 
-int compute_a()
+int compute_a(void)
 {
   int 	i,j,ii;
   double *tmpa;
@@ -141,8 +141,7 @@ int compute_a()
 /**	Uses the array a computed in the main program	  **/
 /***********************************************************/
 
-double phi(x)
-double x;
+double phi(double x)
 {
   if ( (x < 0.0) || (x >= (taille+1)/TwoToNITER) )
     return 0.0;
@@ -152,8 +151,7 @@ double x;
 
 /***************************************************************/
 
-double Psi(x)
-double x;
+double Psi(double x)
 {
   int  i;
   double tmp, minus;
@@ -175,8 +173,7 @@ double x;
 /*	INITIALIZE TWOTO	                                             */
 /*****************************************************************************/
 
-void init_twoto( max_resoln )
-int max_resoln;
+void init_twoto( int max_resoln )
 {
   int j;
 
@@ -190,9 +187,7 @@ int max_resoln;
 /*	INITIALIZE PHI ARRAY		    			            */
 /****************************************************************************/
 
-void init_phi_array( phi_array, max_resoln )
-double **phi_array;
-int max_resoln;
+void init_phi_array( double **phi_array, int max_resoln )
 {
   double inc = 1.0 / pow( 2.0, (double) max_resoln );
   int array_size = (2*NW-1) * twoto[max_resoln] +1;
@@ -208,9 +203,7 @@ int max_resoln;
 /*	INITIALIZE PSI ARRAY					            */
 /****************************************************************************/
 
-void init_psi_array( psi_array, max_resoln )
-double **psi_array;
-int max_resoln;
+void init_psi_array( double **psi_array, int max_resoln )
 {
   double inc = 1.0 / pow( 2.0, (double) max_resoln );
   int array_size = (2*NW -1) * twoto[max_resoln] +1;

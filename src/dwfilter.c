@@ -21,8 +21,7 @@
 ****************************************************************/
 
 /* 2^j  (j > 0) */
-int iexp2(j)
-  int j;
+int iexp2(  int j )
 {
   if(j == 0) return(1);
 
@@ -41,11 +40,7 @@ int iexp2(j)
 *
 ****************************************************************/
 
-void Hfilter_compute(filtername,H,H_bound,max_resoln )
-     char *filtername;
-     double ***H;
-     bound *H_bound;
-     int max_resoln;
+void Hfilter_compute(char *filtername,double ***H,bound *H_bound,int max_resoln )
 {
   int j, i;
 
@@ -85,11 +80,7 @@ void Hfilter_compute(filtername,H,H_bound,max_resoln )
 *
 ****************************************************************/
 
-void Gfilter_compute(filtername,G,G_bound,max_resoln)
-     char *filtername;
-     double ***G;
-     bound *G_bound;
-     int max_resoln;
+void Gfilter_compute(char *filtername,double ***G,bound *G_bound,int max_resoln)
 {
   int j, i;
 
@@ -133,13 +124,10 @@ void Gfilter_compute(filtername,G,G_bound,max_resoln)
 ****************************************************************/
 
 
-void HGfilter_bound(filtername,H_bound,G_bound,max_resoln )
-     char *filtername;
-     bound **H_bound, **G_bound;
-     int max_resoln;
+void HGfilter_bound(char *filtername,bound **H_bound,bound **G_bound,int max_resoln )
 {
   int j;
-  int iexp2();
+  int iexp2(int j);
 
   if(!(*H_bound = (bound *) R_alloc( (max_resoln+1) , sizeof(bound) )))
     Rf_error("Memory allocation failed for *H_bound in filter.c \n");    
@@ -211,17 +199,12 @@ void HGfilter_bound(filtername,H_bound,G_bound,max_resoln )
 
 #define pi 3.141592653589793
 
-void HG_hat_compute(filtername,H_hat,G_hat,max_resoln,np)
-     double ***H_hat;
-     double ***G_hat;
-     int max_resoln;
-     int np;
-     char *filtername;
+void HG_hat_compute(char *filtername,double ***H_hat,double ***G_hat,int max_resoln,int np)
 {
   double temp;
   double arg;
   int m, j;
-  int iexp2();
+  int iexp2(int j);
 
   if(strcmp(filtername,"Gaussian1") != 0) {
     REprintf("Need Gaussian1 filter \n");
@@ -283,11 +266,7 @@ void HG_hat_compute(filtername,H_hat,G_hat,max_resoln,np)
 *
 ****************************************************************/
 
-void Sfilter_compute(filtername,S,S_bound,max_resoln)
-     char *filtername;
-     double ***S;
-     bound *S_bound;
-     int max_resoln;
+void Sfilter_compute(char *filtername,double ***S,bound *S_bound,int max_resoln)
 {
   int j, i;
 
@@ -346,11 +325,7 @@ void Sfilter_compute(filtername,S,S_bound,max_resoln)
 ****************************************************************/
 
 
-void Kfilter_compute(filtername,K,K_bound,max_resoln)
-  char *filtername;
-  double ***K;
-  bound *K_bound;
-  int max_resoln;
+void Kfilter_compute(char *filtername,double ***K, bound *K_bound,int max_resoln)
 {
   int j, i;
 
@@ -411,11 +386,7 @@ void Kfilter_compute(filtername,K,K_bound,max_resoln)
 *
 ****************************************************************/
 
-void Lfilter_compute(filtername,L,L_bound,max_resoln)
-     char *filtername;
-     double ***L;
-     bound *L_bound;
-     int max_resoln;
+void Lfilter_compute(char *filtername,double ***L,bound *L_bound,int max_resoln)
 {
   int j, i;
 
@@ -478,13 +449,10 @@ void Lfilter_compute(filtername,L,L_bound,max_resoln)
 *
 ****************************************************************/
 
-void KSfilter_bound(filtername,K_bound,S_bound,max_resoln)
-     char *filtername;
-     bound **K_bound, **S_bound;
-     int max_resoln;
+void KSfilter_bound(char *filtername,bound **K_bound,bound **S_bound,int max_resoln)
 {
   int j;
-  int iexp2();
+  int iexp2(int j);
 
   if(!(*K_bound = (bound *) R_alloc( (max_resoln+1) , sizeof(bound) )))
     Rf_error("Memory allocation failed for *K_bound in signal_back.c \n");
@@ -560,13 +528,10 @@ void KSfilter_bound(filtername,K_bound,S_bound,max_resoln)
 *
 ****************************************************************/
 
-void Lfilter_bound(filtername,L_bound,max_resoln)
-     char *filtername;
-     bound **L_bound;
-     int max_resoln;
+void Lfilter_bound(char *filtername,bound **L_bound,int max_resoln)
 {
   int j;
-  int iexp2();
+  int iexp2(int j);
 
   if(!(*L_bound = (bound *) R_alloc( (max_resoln+1) , sizeof(bound) )))
     Rf_error("Memory allocation failed for *L_bound in filter.c \n");
@@ -621,11 +586,7 @@ void Lfilter_bound(filtername,L_bound,max_resoln)
 *
 ****************************************************************/
 
-void PsiPhifilter_bound(psi,phi,H_bound,G_bound,max_resoln)
-     bound **psi, **phi;
-     bound *G_bound;
-     bound *H_bound;
-     int max_resoln;
+void PsiPhifilter_bound(bound **psi,bound **phi,bound *H_bound,bound *G_bound,int max_resoln)
 {
   int j;
 
@@ -687,9 +648,7 @@ void PsiPhifilter_bound(psi,phi,H_bound,G_bound,max_resoln)
 *
 ****************************************************************/
 
-void signal_W_S(W,S,max_resoln,np)
-     double ***W, ***S;
-     int max_resoln, np;
+void signal_W_S(double ***W,double ***S,int max_resoln,int np)
 {
   int j, m,  t;
   char  *filtername = "Gaussian1";
@@ -809,10 +768,7 @@ void signal_W_S(W,S,max_resoln,np)
    W_hat[J] = G_hat[J-1]*H_hat[J-2]*......*H[0]
 */
 
-void signal_W_hat_S_hat(W_hat,S_hat,max_resoln,np)
-     double ***W_hat, ***S_hat;
-     int max_resoln; 
-     int np;
+void signal_W_hat_S_hat(double ***W_hat,double ***S_hat,int max_resoln,int np)
 {
   char *filtername = "Gaussian1";
   int two_np;

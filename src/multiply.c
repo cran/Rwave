@@ -21,9 +21,7 @@
    Or,Oi: Real and imaginary parts of output signal 
 */
 
-void multiply(Ri1,Ii1,Ri2,Ii2,Or,Oi,isize)
-     double *Ri1, *Ri2, *Ii1, *Ii2, *Or, *Oi;
-     int isize;
+void multiply(double *Ri1, double *Ii1,double *Ri2,double *Ii2,double *Or,double *Oi,int isize)
 {
   int i;
 

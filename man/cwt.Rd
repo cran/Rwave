@@ -26,8 +26,8 @@ central frequency of the wavelet.
 }
 \item{twoD}{
 logical variable set to T to organize the output as a 2D array 
-(signal\_size x nb\_scales), otherwise, the output is a 3D array 
-(signal\_size x noctave x nvoice).
+(signal_size x nb_scales), otherwise, the output is a 3D array 
+(signal_size x noctave x nvoice).
 }
 \item{plot}{
 if set to T, display the modulus of the
@@ -37,12 +37,17 @@ continuous wavelet transform on the graphic device.
 continuous (complex) wavelet transform
 }
 \details{
+
+  The time series is padded with zeroes to avoid problems with
+  circular versus linear convolution. This does not affect usage,
+  as the matrix returned has the added columns removed. (JML Sep 29, 2021).
+  
 The output contains the (complex) values of the wavelet transform of the
 input signal. The format of the output can be
 
-2D array (signal\_size x nb\_scales)
+2D array (signal_size x nb_scales)
 
-3D array (signal\_size x noctave x nvoice)
+3D array (signal_size x noctave x nvoice)
 
 Since Morlet's wavelet is not strictly speaking a wavelet (it is not of
 vanishing integral), artifacts may occur for certain signals.

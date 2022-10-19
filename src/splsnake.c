@@ -39,10 +39,7 @@
 *   
 ***************************************************************************/
 
-void splsnake(rate, x, y, n, yy)
-     int rate,n;
-     double *x, *y, *yy;
-     
+void splsnake(int rate, double *x, double *y, int  n, double *yy)     
 {
   int i,k, khi, klo, ilo, ihi;
   double p,qn,sig,un,*u,yp1,ypn,a,b,h;

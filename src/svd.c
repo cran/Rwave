@@ -275,7 +275,7 @@ void svdecomp_solve(double **a, double *b, double *x, int m,
 {
   int i, j;
   double **A, *W, **V, *B, *X;
-  void double_residue();
+  void double_residue(double **a, double *w, double **v, int m,  int n, double *b, double *x);
 
   if(!((*w) = (double *) R_alloc(n, sizeof(double) )))
     Rf_error("Memory allocation failed for (*w) in svd.c \n");

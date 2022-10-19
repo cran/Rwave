@@ -133,7 +133,7 @@ void randomwalker2(int sigsize,int *num, long *seed)
 void randomsnaker(int sigsize,int *num)
 {
   int conf;
-  double tmp;
+   double tmp;
   
   conf = 4 * sigsize;
   tmp = (double)ran1(&idum);

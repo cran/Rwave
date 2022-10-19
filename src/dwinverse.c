@@ -32,10 +32,7 @@
 ****************************************************************/
 
 
-void inverse_wavelet_transform(f_back,Sf,Wf,max_resoln,np,filtername)
-     double *f_back, *Sf, *Wf;
-     int max_resoln, np;
-     char *filtername;
+void inverse_wavelet_transform(double *f_back,double *Sf,double *Wf,int max_resoln,int np, char *filtername)
 {
   int i, j, n, k;
   double sum;
@@ -93,10 +90,7 @@ void inverse_wavelet_transform(f_back,Sf,Wf,max_resoln,np,filtername)
 *
 ****************************************************************/
 
-void Sinverse_wavelet_transform(f_back,Sf,Wf,pmax_resoln,pnp,pfiltername)
-     double *f_back, *Sf, *Wf;
-     int *pmax_resoln, *pnp;
-     char **pfiltername;
+void Sinverse_wavelet_transform(double *f_back,double *Sf,double *Wf,int *pmax_resoln,int *pnp,char **pfiltername)
 {
   int np, max_resoln;
   char *filtername;

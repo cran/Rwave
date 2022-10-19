@@ -10,8 +10,7 @@
 *                  All right reserved                           *
 ****************************************************************/
 
-int find2power(n)
-int n;
+int find2power(int  n)
 {
    long m, m2;
 

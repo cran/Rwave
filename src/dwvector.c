@@ -26,9 +26,7 @@
 /* convolution product s[m] = (f * g)[m] */
 
 
-void compute_convolution( s, f, g, np )
-     double *s, *f, *g;
-     int np;
+void compute_convolution( double *s, double *f, double *g, int np )
 {
   int m, n;
   double sum;
@@ -52,9 +50,7 @@ void compute_convolution( s, f, g, np )
 *
 ****************************************************************/
 
-void product( image, f, g, np )
-double ***image, *f, *g;
-int np;
+void product( double ***image, double *f, double *g, int np )
 {
   int x, y;
 
@@ -83,12 +79,15 @@ int np;
 ****************************************************************/
 
 
-void complex_product( product, s1, s2, np )
-     double *product;
-     double *s1;  /* length of 2*np */
-     double *s2;  /* length of 2*np */
-     int np;
+void complex_product( double *product, double *s1, double *s2, int np )
 {
+  /*
+     double *product;
+     double *s1;   length of 2*np 
+     double *s2;   length of 2*np 
+     int np;
+     */
+  
   int m, x, y;
   double a, b, c, d;
 
@@ -120,10 +119,7 @@ void complex_product( product, s1, s2, np )
 ****************************************************************/
 
 
-void signal_copy(input,output,offset,size)
-     double *input;
-     double *output;
-     int size, offset;
+void signal_copy(double *input,double *output,int offset,int size)
 {
   int i;
 
@@ -141,9 +137,7 @@ void signal_copy(input,output,offset,size)
 *
 ****************************************************************/
 
-void signal_zero(input,size)
-     double *input;
-     int size;
+void signal_zero(double *input,int size)
 {
   int i;
 

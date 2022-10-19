@@ -24,10 +24,7 @@
 *  nrow,ncol: parameters of the cwt 
 *****************************************************************/
 
-void Stf_pcaridge(input, output, pnrow, pncol, orientmap)
-     double *input, *output;
-     int *pnrow, *pncol;
-     int *orientmap;
+void Stf_pcaridge(double *input, double *output, int *pnrow, int *pncol, int *orientmap)
 {
   int nrow, ncol, i, j,k;
   int  dir;

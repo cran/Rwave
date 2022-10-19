@@ -236,7 +236,7 @@ void chain_thresholded(double *mridge,int sigsize,int *chain,int *id,
 {
   int i,  k, k1, a, b;
   int count,  lng;
-  int bstart, astart, bend, aend, oldbstart;
+  int bstart, astart, bend, aend,  oldbstart;
   int chnlng;
 
   /* look for actual beginning of the chain */

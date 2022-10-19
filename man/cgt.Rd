@@ -33,7 +33,7 @@ continuous (complex) gabor transform (2D array).
 \details{
 The output contains the (complex) values of the gabor transform of the
 input signal. The format of the output is
-a 2D array (signal\_size x nb\_scales).
+a 2D array (signal_size x nb_scales).
 }
 \references{
 See discussion in text of ``Practical Time-Frequency Analysis''.

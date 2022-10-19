@@ -125,7 +125,7 @@ void w_reassign(double *Oreal, double *Oimage, double *Odreal,
   int inputsize,int nbvoice,int nboctave)
 {
   int i, j, k, scale2;
-  double scale, tmp;
+  double  scale, tmp;
   
   for(i = 1; i <= nboctave; i++) {
     for(j=0; j < nbvoice; j++) {
