@@ -26,9 +26,7 @@
 *  nrow,ncol: parameters of the cwt 
 *****************************************************************/
 
-void Scwt_gmax(input, output, pnrow, pncol, posvector)
-     double *input, *output;
-     int *pnrow, *pncol, *posvector;
+void Scwt_gmax(double *input, double *output,  int *pnrow,  int *pncol,  int *posvector)
 {
   int nrow, ncol, i, j;
   int pos;
@@ -59,9 +57,7 @@ void Scwt_gmax(input, output, pnrow, pncol, posvector)
 *  nrow,ncol: parameters of the cwt 
 *****************************************************************/
 
-void Scwt_mridge(input, output, pnrow, pncol)
-     double *input, *output;
-     int *pnrow, *pncol;
+void Scwt_mridge(double *input, double *output, int *pnrow, int *pncol)
 {
   int nrow, ncol, i, j;
   

@@ -1,4 +1,4 @@
-9ad0e8123810e8a447f5af31c5410420 *DESCRIPTION
+2c21c4b87cab682bea934cdf604d2f4c *DESCRIPTION
 292ecea061715923063eee9b5eb43e23 *NAMESPACE
 6b5041e029729ade28358970ed45ef95 *NEWS
 22ec47a09dbd6788a5389a28c89cff61 *R/00util.R
@@ -274,7 +274,7 @@ aa3971ec424f1c4b76dfad6c75bfe639 *src/complex.c
 7c15708283c36ecdb2e3d7d67c9f5a18 *src/complex.h
 2e5068a655e26a431707a00635f736ad *src/crazy_family.c
 c489f005b97ff6be329124b052e1f078 *src/cwt_dog.c
-47f64a48b484db614956a55c94e19ff8 *src/cwt_maxima.c
+ec9821fd32226467cdd659017049b2b9 *src/cwt_maxima.c
 a23192b6d277c2b58c2e1eb57a8b57e8 *src/cwt_morlet.c
 1f49a6407b8f04787189b8180b723519 *src/cwt_phase.c
 cfe486520ef34a6c5c4761ceafe151b8 *src/cwt_thierry.c
